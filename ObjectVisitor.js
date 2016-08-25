@@ -65,19 +65,27 @@ ObjectVisitor = (function() {
     'null': 6,
     'exception': 7,
   };
-  // Custom keys used to store metadata.
-  // TODO: We could probably store this metadata elsewhere, rather than risking
-  // key name overlap (however unlikely).
-  ObjectVisitor.prototype.keys = {
-    proto: '^P',
-    invProto: '^I',
-    key: '^K',
-  };
 
   // Never visit/store these object keys.
   ObjectVisitor.prototype.blacklistedKeys = [ '$UID', '$UID__', '__proto__' ];
   // Never visit/store these objects.
   ObjectVisitor.prototype.blacklistedObjects = [];
+
+  ObjectVisitor.prototype.storeObject = function(id) {
+    console.assert( ! this.data[id] , 'Repeated store-id');
+    this.data[id] = {};
+    return this.data[id];
+  };
+
+  ObjectVisitor.prototype.storeKey = function(id, key) {
+    var arr = this.keys[id] = this.keys[id] || [];
+    arr.push(key);
+  };
+
+  ObjectVisitor.prototype.storeProto = function(oId, protoId) {
+    console.assert( ! this.protos[oId] , 'Repeated store-proto');
+    this.protos[oId] = protoId;
+  };
 
   // Return an id associated with o if and only if object[key] traversal of o
   // should be skipped. Otherwise, return null.
@@ -115,22 +123,7 @@ ObjectVisitor = (function() {
   // Visit the prototype of o, given its dataMap, and the key that was used to
   // look it up.
   ObjectVisitor.prototype.visitPrototype = function(o, dataMap, key) {
-    if ( o.hasOwnProperty(this.keys.proto) ) {
-      console.warn('Data loss:', o.$UID, '.', this.keys.proto, 'was',
-                   o[this.keys.proto]);
-      debugger;
-    }
-    var proto = o.__proto__;
-    dataMap[this.keys.proto] = this.visitObject(proto, key + '.__proto__');
-
-    if ( proto === null ) return;
-
-    var invDataMap = this.invData[proto.$UID] = this.invData[proto.$UID] || {};
-    if ( invDataMap[this.keys.invProto] ) {
-      invDataMap[this.keys.invProto].push(o.$UID);
-    } else {
-      invDataMap[this.keys.invProto] = [o.$UID];
-    }
+    this.storeProto(o.$UID, this.visitObject(o.__proto__, key + '.__proto__'));
   };
 
   // Visit the property of o named propertyName, given o's dataMap and the key
@@ -139,22 +132,8 @@ ObjectVisitor = (function() {
                                                    key) {
     var name = this.rewriteName(propertyName);
     try {
-      var value = o[propertyName];
-      var valueId = dataMap[name] = this.visitObject(value, key + '.' +
-                                                     propertyName);
-
-      this.namedData[propertyName] = this.namedData[propertyName] || [];
-      this.namedData[propertyName].push([o.$UID, valueId]);
-
-      if ( value === null || this.types[typeof value] ) return;
-
-      var invDataMap = this.invData[value.$UID] = this.invData[value.$UID] ||
-            {};
-      if ( invDataMap[name] ) {
-        invDataMap[name].push(o.$UID);
-      } else {
-        invDataMap[name] = [o.$UID];
-      }
+      dataMap[name] = this.visitObject(o[propertyName], key + '.' +
+                                       propertyName);
     } catch (e) {
       // console.warn('Error accessing', o.$UID, '.', propertyName);
       dataMap[name] = this.types.exception;
@@ -167,14 +146,17 @@ ObjectVisitor = (function() {
   ObjectVisitor.prototype.visitObject = function(o, key) {
     // Don't process object unless we have to.
     var skip = this.maybeSkip(o);
-    if ( skip !== null ) return skip;
+    if ( skip !== null ) {
+      this.storeKey(skip, key);
+      return skip;
+    }
 
     // Store function-type info in a special place. We visit them like any
     // other object with identity, so their id will not indicate their type.
     if ( typeof o === 'function' ) this.functions.push(o.$UID);
 
-    var dataMap = this.data[o.$UID] = {};
-    dataMap[this.keys.key] = key;
+    var dataMap = this.storeObject(o.$UID);
+    this.storeKey(o.$UID, key);
 
     // Enqueue work: Visit o's prototype.
     this.q.enqueue(this.visitPrototype.bind(this, o, dataMap, key));
@@ -209,11 +191,17 @@ ObjectVisitor = (function() {
 
     this.root = typeof o === 'object' && o !== null ? o.$UID : o;
     this.data = {};
-    this.namedData = {};
-    this.invData = {};
+    this.keys = {};
+    this.protos = {};
     this.functions = [];
 
     this.q.onDone = function() {
+      lazy.memo(this, 'invData',
+                remap['a:b:c=>c:b:[a]'].bind(this, this.data));
+      lazy.memo(this, 'namedData',
+                remap['a:b:c=>b:[(a,c)]'].bind(this, this.data));
+      lazy.memo(this, 'invProtos',
+                remap['a:b=>b:[a]'].bind(this, this.protos));
       prevOnDone(this);
       opts.onDone && opts.onDone(this);
       this.busy = false;
@@ -226,9 +214,8 @@ ObjectVisitor = (function() {
   };
 
   // What to store when invoking toJSON.
-  ObjectVisitor.jsonKeys = [ 'root', 'data', 'namedData', 'invData', 'types',
-                             'keys', 'blacklistedKeys', 'fingerprint',
-                             'functions' ];
+  ObjectVisitor.jsonKeys = [ 'root', 'data', 'types', 'keys', 'blacklistedKeys',
+                             'fingerprint', 'functions' ];
 
   ObjectVisitor.prototype.toJSON = function() {
     var o = {};

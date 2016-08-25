@@ -29,14 +29,17 @@
     <script language="javascript" src="//cdn.jsdelivr.net/fingerprintjs2/1.4.1/fingerprint2.min.js"></script>
     <script language="javascript" src="//cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
     <script language="javascript" src="id.js"></script>
+    <script language="javascript" src="lazy.js"></script>
+    <script language="javascript" src="remap.js"></script>
     <script language="javascript" src="NameRewriter.js"></script>
     <script language="javascript" src="ObjectVisitor.js"></script>
 
     <script language="javascript">
-    Fingerprint2 && ObjectVisitor.blacklistObject(Fingerprint2);
-    Clipboard && ObjectVisitor.blacklistObject(Clipboard);
-    NameRewriter && ObjectVisitor.blacklistObject(NameRewriter);
-    ObjectVisitor && ObjectVisitor.blacklistObject(ObjectVisitor);
+    (function() {
+      for ( var i = 0; i < arguments.length; i++ ) {
+        arguments[i] && ObjectVisitor.blacklistObject(arguments[i]);
+      }
+    })(Fingerprint2, Clipboard, lazy, remap, NameRewriter, ObjectVisitor);
     </script>
 
     <script language="javascript" src="ObjectDiff.js"></script><script language="javascript">ObjectDiff && ObjectVisitor.blacklistObject(ObjectDiff);</script>
