@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>Index.html</title>
+    <style>
+    /* From https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/: */
+    pre {
+
+      /* These are technically the same, but use both */
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+
+      -ms-word-break: break-all;
+      /* This is the dangerous one in WebKit, as it breaks things wherever */
+      word-break: break-all;
+      /* Instead use this non-standard one: */
+      word-break: break-word;
+
+      /* Adds a hyphen where the word breaks, if supported (No Blink) */
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+
+    }
+    pre {
+      white-space: pre-wrap;
+    }
+    </style>
+    <script language="javascript" src="//cdn.jsdelivr.net/fingerprintjs2/1.4.1/fingerprint2.min.js"></script>
+    <script language="javascript" src="//cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
+    <script language="javascript" src="id.js"></script>
+    <script language="javascript" src="NameRewriter.js"></script>
+    <script language="javascript" src="ObjectVisitor.js"></script>
+
+    <script language="javascript">
+    Fingerprint2 && ObjectVisitor.blacklistObject(Fingerprint2);
+    Clipboard && ObjectVisitor.blacklistObject(Clipboard);
+    NameRewriter && ObjectVisitor.blacklistObject(NameRewriter);
+    ObjectVisitor && ObjectVisitor.blacklistObject(ObjectVisitor);
+    </script>
+
+    <script language="javascript" src="ObjectDiff.js"></script><script language="javascript">ObjectDiff && ObjectVisitor.blacklistObject(ObjectDiff);</script>
+  </head>
+  <body>
+    <script language="javascript"  src="main.js"></script>
+  </body>
+</html>
