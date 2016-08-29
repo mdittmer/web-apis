@@ -24,8 +24,8 @@
   ov.visit(window, { key: 'window' });
 
 
-  // var ov1 = new ObjectVisitor();
-  // var ov2 = new ObjectVisitor();
+  // var ov1 = new ObjectVisitor({ maxDequeueSize: 1000 });
+  // var ov2 = new ObjectVisitor({ maxDequeueSize: 1000 });
   // var a = {
   //   'foo': function() {},
   //   'bar': 1,
@@ -36,11 +36,33 @@
   //   'baz': null,
   //   'quz': a.foo,
   // };
-  // ov1.visit(a, { onDone: function() {
-  //   ov2.visit(b, { onDone: function() {
-  //     var od = new ObjectDiff(ov1.toJSON(), ov2.toJSON());
-  //     console.log(od);
-  //   } });
-  // } });
+  // ov1.visit(window, {
+  //   key: 'window',
+  //   onDone: function() {
+  //     console.log('Done ov1');
+  //     ov2.visit(window, {
+  //       key: 'window',
+  //       onDone: function() {
+  //         console.log('Done ov2');
+  //         var od = new ObjectDiff(ov1.toJSON(), ov2.toJSON(), {
+  //           maxDequeueSize: 1000,
+  //           onDone: function(od) {
+  //             console.log(od);
+  //             var badIds = Object.getOwnPropertyNames(od.abConflict).map(function(idStr) {
+  //               return parseInt(idStr);
+  //             });
+  //             ov1; ov2;
+  //             for ( var i = 0; i < badIds.length; i++ ) {
+  //               console.log(badIds[i], od.map[badIds[i]],
+  //                           od.abConflict[badIds[i]],
+  //                           ov1.getKeys(badIds[i]),
+  //                           ov1.getKeys(od.map[badIds[i]]));
+  //             }
+  //           }
+  //         });
+  //       },
+  //     });
+  //   },
+  // });
 
 })();

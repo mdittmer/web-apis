@@ -1,7 +1,11 @@
 ObjectDiff = (function() {
-  var ObjectDiff = function(a, b) {
+  var ObjectDiff = function(a, b, opts) {
+    opts = opts || {};
+    this.q = new TaskQueue(opts);
+
     this.a = a;
     this.b = b;
+    this.bInvTypes = remap['a:b=>b:[a]'](this.b.types);
     // Mapping from a-space-ids to (first found in key-sorted DFS) b-space-id.
     this.map = {};
     this.initMap();
@@ -15,10 +19,18 @@ ObjectDiff = (function() {
     // b-space-id => key-name.
     this.bExtra = {};
 
-    this.computeDiff(a.root, b.root);
+    this.computeDiff(a.root, b.root, '', 0);
+    var prevOnDone = this.q.onDone;
+    this.q.onDone = function() {
+      this.initLazyData();
+      prevOnDone(this);
+    }.bind(this);
+    this.q.flush();
   };
 
-  // Initialize a-id => b-id map with mapping between type ids.
+  // Initialize a-id => b-id map with mapping between type ids. Store -1 on
+  // a-ids with no corresponding b-id to ensure that all a-id types exist with
+  // truthy values in the map.
   ObjectDiff.prototype.initMap = function() {
     var at = this.a.types;
     var bt = this.b.types;
@@ -27,76 +39,121 @@ ObjectDiff = (function() {
       var name = names[i];
       if ( bt[name] ) {
         this.map[at[name]] = bt[name];
+      } else {
+        this.map[at[name]] = -1;
       }
     }
     return this.map;
   };
 
+  ObjectDiff.prototype.allExtra = function(abName) {
+    var extraIds = [];
+    var ab = this[abName].data;
+    var ids = Object.getOwnPropertyNames(ab);
+    for ( var i = 0; i < ids.length; i++ ) {
+      var id = ids[i];
+      var names = Object.getOwnPropertyNames(ab[id]);
+      for ( var j = 0; j < names.length; j++ ) {
+        var name = names[j];
+        extraIds.push(ab[id][name]);
+      }
+    }
+    return extraIds;
+  };
+
+  ObjectDiff.prototype.initLazyData = function() {
+    lazy.memo(this, 'allAExtra', this.allExtra.bind(this, 'a'));
+    lazy.memo(this, 'allBExtra', this.allExtra.bind(this, 'b'));
+  };
+
+  // Store a conflict between a and b's object graphs. We arrived at a-space
+  // node this.a.data[aId][key] and it exists (i.e., this.a.data[aId][key]
+  // contains an id). Following the same path in b-space, we arrive at bId.
+  // However, this.a.data[aId][key] is mapped to a different b-space id (i.e.,
+  // this.map[this.a.data[aId][key]] !== bId).
   ObjectDiff.prototype.storeABConflict = function(aId, key, bId) {
-    console.assert( !! this.map[this.a.data[aId][key]] , 'a-b conflict should have pre-existing mapping');
-    if ( ! this.abConflict[aId] ) this.abConflict[aId] = {};
-    if ( ! this.abConflict[aId][key] )
-      this.abConflict[aId][key] = [ this.map[this.a.data[aId][key]], bId ];
-    else
-      this.abConflict[aId][key].push(bId);
+    // console.assert( !! this.map[this.a.data[aId][key]] , 'a-b conflict should have pre-existing mapping');
+    this.abConflict[aId] = this.abConflict[aId] || {};
+    console.assert( ! this.abConflict[aId][key] , 'duplicate a-b conflict');
+
+    var conflictArr = this.abConflict[aId][key] = this.abConflict[aId][key] ||
+          [];
+    var existingMapping = this.map[this.a.data[aId][key]];
+    if ( existingMapping && conflictArr.indexOf(existingMapping) === -1 )
+      conflictArr.push(existingMapping);
+    if ( conflictArr.indexOf(bId) === -1 )
+      conflictArr.push(bId);
+
+    // if ( ! this.abConflict[aId][key] )
+    //   this.abConflict[aId][key] = [ this.map[this.a.data[aId][key]], bId ];
+    // else
+    //   this.abConflict[aId][key].push(bId);
   };
 
   ObjectDiff.prototype.storeAExtra = function(aId, aKey) {
-    console.assert( ! this.aExtra[aId] , 'Extra a key reported twice');
-    this.aExtra[aId] = aKey;
+    var arr = this.aExtra[aId] = this.aExtra[aId] || [];
+    arr.push(aKey);
   };
 
   ObjectDiff.prototype.storeBExtra = function(bId, bKey) {
-    console.assert( ! this.bExtra[bId] , 'Extra b key reported twice');
-    this.bExtra[bId] = bKey;
+    var arr = this.bExtra[bId] = this.bExtra[bId] || [];
+    arr.push(bKey);
   };
 
-  ObjectDiff.prototype.computeDiff = function(aId, bId) {
-    console.assert( ! this.map[aId] , 'Recomputing diff');
+  ObjectDiff.prototype.computeDiff = function(aId, bId, key, aPrev) {
+    // Early exit (1): We have a mapping for aId, but it's not bId.
+    if ( this.map[aId] ) {
+      if ( this.map[aId] !== bId ) {
+        this.storeABConflict(aPrev, key, bId);
+      }
+      return;
+    }
+    // Early exit (2): We have no mapping for aId, and bId refers to a primitive
+    // type. (Note that a-space primitve types have mappings from .initMap()).
+    // Store the conflict, but not a mapping from non-primitive-aId to
+    // primitive-bId.
+    if ( ! this.map[aId] && this.bInvTypes[bId] ) {
+      this.storeABConflict(aPrev, key, bId);
+      return;
+    }
     this.map[aId] = bId;
 
     var a = this.a.data[aId];
     var b = this.b.data[bId];
+
+    if ( ! a ) {
+      return;
+    }
+
     var aKeys = Object.getOwnPropertyNames(a).sort();
     var bKeys = Object.getOwnPropertyNames(b).sort();
     for ( var i = 0, j = 0; i < aKeys.length || j < bKeys.length; ) {
       var aKey = aKeys[i];
       var bKey = bKeys[j];
+
       if ( aKey === bKey ) {
-        // Both a and b have this key.
-        if ( this.map[a[aKey]] && this.map[a[aKey]] !== b[bKey] ) {
-          // We have a mapping from a[aKey], but it's inconsistent with
-          // b[bKey]; store this conflict.
-          this.storeABConflict(aId, bKey, b[bKey]);
-        } else if ( ! this.map[a[aKey]] &&
-                    ( typeof a[aKey] === 'number' &&
-                      typeof b[bKey] === 'number' ) ) {
-          // No mapping from a-space to b-sapce over a[aKey] yet. Make one to
-          // b[bKey] and compute their difference.
-          this.computeDiff(a[aKey], b[bKey]);
-        } // Else: a[aKey] already mapped to b[bKey]. Do nothing.
+        // Key exists in a-space and b-space. Follow it and keep computing diff.
+        this.q.enqueue(
+          this.computeDiff.bind(this, a[aKey], b[bKey], aKey, aId)
+        );
         i++;
         j++;
-      } else if ( aKey < bKey ) {
-        // Now a has a key that b doesn't.
+      } else if ( aKey < bKey || ( typeof aKey !== 'undefined' && typeof bKey === 'undefined' ) ) {
+        // a has a key that b doesn't.
         this.storeAExtra(aId, aKey);
         i++;
-      } else {
-        // Now b has a key that a doesn't.
+      } else if (  bKey < aKey || typeof bKey !== 'undefined' && typeof aKey === 'undefined' ) {
+        // b has a key that a doesn't.
         this.storeBExtra(bId, bKey);
         j++;
+      } else {
+        console.assert(false, 'Unreachable');
+        debugger;
       }
     }
   };
 
-  var PublicObjectDiff = function(a, b) {
-    this.objectDiff = new ObjectDiff(a, b);
-    this.a = this.objectDiff.a;
-    this.b = this.objectDiff.b;
-    this.abConflict = this.objectDiff.abConflict;
-    this.aExtra = this.objectDiff.aExtra;
-    this.bExtra = this.objectDiff.bExtra;
-  };
-
-  return PublicObjectDiff;
+  return facade(ObjectDiff, {
+    properties: [ 'abConflict', 'aExtra', 'bExtra', 'map' ],
+  });
 })();

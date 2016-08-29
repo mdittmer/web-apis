@@ -31,7 +31,9 @@
     <script language="javascript" src="id.js"></script>
     <script language="javascript" src="lazy.js"></script>
     <script language="javascript" src="remap.js"></script>
+    <script language="javascript" src="facade.js"></script>
     <script language="javascript" src="NameRewriter.js"></script>
+    <script language="javascript" src="TaskQueue.js"></script>
     <script language="javascript" src="ObjectVisitor.js"></script>
 
     <script language="javascript">
@@ -39,7 +41,8 @@
       for ( var i = 0; i < arguments.length; i++ ) {
         arguments[i] && ObjectVisitor.blacklistObject(arguments[i]);
       }
-    })(Fingerprint2, Clipboard, lazy, remap, NameRewriter, ObjectVisitor);
+    })(Fingerprint2, Clipboard, lazy, remap, facade, NameRewriter,
+       TaskQueue, ObjectVisitor);
     </script>
 
     <script language="javascript" src="ObjectDiff.js"></script><script language="javascript">ObjectDiff && ObjectVisitor.blacklistObject(ObjectDiff);</script>

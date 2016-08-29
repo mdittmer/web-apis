@@ -6,44 +6,10 @@ ObjectVisitor = (function() {
     fingerprint.components = components;
   });
 
-  var noop = function() {};
-
-  // Private async task queue implementation; suitable for depth-first-search
-  // over large object graphs without hanging.
-  var Q = function(opts) {
-    opts = opts || {};
-    this.q = [];
-    this.maxDequeueSize = opts.maxDequeueSize || this.maxDequeueSize;
-    this.onTick = opts.onTick || this.onTick;
-    this.onDone = opts.onDone || this.onDone;
-  };
-
-  // Number of queued functions to run before allowing async tick.
-  Q.prototype.maxDequeueSize = 10;
-  // Singleton listeners for queue-fully-flushed and async-tick.
-  Q.prototype.onDone = Q.prototype.onTick = noop;
-  Q.prototype.async = function(f) {
-    window.setTimeout(f, 0);
-  };
-  Q.prototype.enqueue = function(/* fs */) {
-    for ( var i = 0; i < arguments.length; i++ ) {
-      this.q.push(arguments[i]);
-    }
-  };
-  Q.prototype.flush = function() {
-    this.onTick();
-    for ( var i = 0; i < this.maxDequeueSize && this.q.length > 0; i++ ) {
-      var f = this.q.shift();
-      f();
-    }
-    if ( this.q.length > 0 ) this.async(this.flush.bind(this));
-    else                     this.onDone();
-  };
-
   // Object identity and/or primitive type data storage.
   var ObjectVisitor = function(opts) {
     opts = opts || {};
-    this.q = new Q(opts);
+    this.q = new TaskQueue(opts);
     this.busy = false;
     this.blacklistedObjects = this.blacklistedObjects.slice();
     this.nameRewriter = opts.nameRewriter || new NameRewriter();
@@ -71,15 +37,19 @@ ObjectVisitor = (function() {
   // Never visit/store these objects.
   ObjectVisitor.prototype.blacklistedObjects = [];
 
+  ObjectVisitor.prototype.initLazyData = function() {
+    lazy.memo(this, 'invData',
+              remap['a:b:c=>c:b:[a]'].bind(this, this.data));
+    lazy.memo(this, 'namedData',
+              remap['a:b:c=>b:[(a,c)]'].bind(this, this.data));
+    lazy.memo(this, 'invProtos',
+              remap['a:b=>b:[a]'].bind(this, this.protos));
+  };
+
   ObjectVisitor.prototype.storeObject = function(id) {
     console.assert( ! this.data[id] , 'Repeated store-id');
     this.data[id] = {};
     return this.data[id];
-  };
-
-  ObjectVisitor.prototype.storeKey = function(id, key) {
-    var arr = this.keys[id] = this.keys[id] || [];
-    arr.push(key);
   };
 
   ObjectVisitor.prototype.storeProto = function(oId, protoId) {
@@ -98,11 +68,22 @@ ObjectVisitor = (function() {
     var typeOf = typeof o;
     if ( this.types[typeOf] ) return this.types[typeOf];
     if ( this.data[o.$UID] ) return o.$UID;
-    for ( var i = 0; i < this.blacklistedObjects.length; i++ ) {
-      if ( o === this.blacklistedObjects[i] ) return o.$UID;
-    }
 
     return null;
+  };
+
+  // Return true if and only if o[key] is a blacklisted object.
+  ObjectVisitor.prototype.isPropertyBlacklisted = function(o, key) {
+    var value;
+    try {
+      value = o[key];
+    } catch(e) {
+      return false;
+    }
+    for ( var i = 0; i < this.blacklistedObjects.length; i++ ) {
+      if ( value === this.blacklistedObjects[i] ) return true;
+    }
+    return false;
   };
 
   // Return true if and only if name is a blacklisted key.
@@ -120,53 +101,46 @@ ObjectVisitor = (function() {
     return this.nameRewriter.rewriteName(name);
   };
 
-  // Visit the prototype of o, given its dataMap, and the key that was used to
-  // look it up.
-  ObjectVisitor.prototype.visitPrototype = function(o, dataMap, key) {
-    this.storeProto(o.$UID, this.visitObject(o.__proto__, key + '.__proto__'));
+  // Visit the prototype of o, given its dataMap.
+  ObjectVisitor.prototype.visitPrototype = function(o, dataMap) {
+    this.storeProto(o.$UID, this.visitObject(o.__proto__));
   };
 
-  // Visit the property of o named propertyName, given o's dataMap and the key
-  // that was used to look it up.
-  ObjectVisitor.prototype.visitProperty = function(o, propertyName, dataMap,
-                                                   key) {
+  // Visit the property of o named propertyName, given o's dataMap.
+  ObjectVisitor.prototype.visitProperty = function(o, propertyName, dataMap) {
     var name = this.rewriteName(propertyName);
     try {
-      dataMap[name] = this.visitObject(o[propertyName], key + '.' +
-                                       propertyName);
+      dataMap[name] = this.visitObject(o[propertyName]);
     } catch (e) {
       // console.warn('Error accessing', o.$UID, '.', propertyName);
       dataMap[name] = this.types.exception;
     }
   };
 
-  // Visit an object, o, given the key that was used to look it up. Return an id
-  // for the object, which may contain type information (e.g., number, boolean,
-  // null), or indicate the unique identity of the object itself.
-  ObjectVisitor.prototype.visitObject = function(o, key) {
+  // Visit an object, o. Return an id for the object, which may contain type
+  // information (e.g., number, boolean, null), or indicate the unique identity
+  // of the object itself.
+  ObjectVisitor.prototype.visitObject = function(o) {
     // Don't process object unless we have to.
     var skip = this.maybeSkip(o);
-    if ( skip !== null ) {
-      this.storeKey(skip, key);
-      return skip;
-    }
+    if ( skip !== null ) return skip;
 
     // Store function-type info in a special place. We visit them like any
     // other object with identity, so their id will not indicate their type.
     if ( typeof o === 'function' ) this.functions.push(o.$UID);
 
     var dataMap = this.storeObject(o.$UID);
-    this.storeKey(o.$UID, key);
 
     // Enqueue work: Visit o's prototype.
-    this.q.enqueue(this.visitPrototype.bind(this, o, dataMap, key));
+    this.q.enqueue(this.visitPrototype.bind(this, o, dataMap));
 
     // Visit all of o's properties (skipping blacklisted ones).
     var names = Object.getOwnPropertyNames(o);
     for ( var i = 0; i < names.length; i++ ) {
-      if ( this.isKeyBlacklisted(names[i]) ) continue;
+      if ( this.isKeyBlacklisted(names[i]) ||
+           this.isPropertyBlacklisted(o, names[i]) ) continue;
       // Enqueue work: Visit o's property.
-      this.q.enqueue(this.visitProperty.bind(this, o, names[i], dataMap, key));
+      this.q.enqueue(this.visitProperty.bind(this, o, names[i], dataMap));
     }
 
     return o.$UID;
@@ -189,34 +163,114 @@ ObjectVisitor = (function() {
     }
     this.busy = true;
 
+    this.key = opts.key || '';
     this.root = typeof o === 'object' && o !== null ? o.$UID : o;
     this.data = {};
-    this.keys = {};
     this.protos = {};
     this.functions = [];
 
     this.q.onDone = function() {
-      lazy.memo(this, 'invData',
-                remap['a:b:c=>c:b:[a]'].bind(this, this.data));
-      lazy.memo(this, 'namedData',
-                remap['a:b:c=>b:[(a,c)]'].bind(this, this.data));
-      lazy.memo(this, 'invProtos',
-                remap['a:b=>b:[a]'].bind(this, this.protos));
+      this.initLazyData();
       prevOnDone(this);
       opts.onDone && opts.onDone(this);
       this.busy = false;
     }.bind(this);
 
-    this.visitObject(o, opts.key || '');
+    // Edge case: Passed-in object is blacklisted. This is not caught by
+    // .isPropertyBlacklisted().
+    for ( var i = 0; i < this.blacklistedObjects.length; i++ ) {
+      if ( o === this.blacklistedObjects[i] ) {
+        this.q.flush();
+        return this;
+      }
+    }
+
+    this.visitObject(o);
     this.q.flush();
 
     return this;
   };
 
-  // What to store when invoking toJSON.
-  ObjectVisitor.jsonKeys = [ 'root', 'data', 'types', 'keys', 'blacklistedKeys',
-                             'fingerprint', 'functions' ];
+  // Interface method: Get all ids in the system.
+  ObjectVisitor.prototype.getAllIds = function() {
+    return Object.getOwnPropertyNames(this.data).map(function(strId) {
+      return parseInt(strId);
+    }).sort();
+  };
 
+  // Helper method: Get all keys that refer to an object id, tracking which ids
+  // have already been seen.
+  ObjectVisitor.prototype.getKeys_ = function(id, seen) {
+    console.assert( ! seen[id] , 'Revisit object');
+    seen[id] = 1;
+    if ( id === this.root ) return [this.key];
+
+    var allKeys = [];
+    var map = this.invData[id];
+
+    if ( ! map ) {
+      console.warn('Orphaned object', id);
+      return [];
+    }
+
+    // Get all the one-step keys through which other objects point to id.
+    var keys = Object.getOwnPropertyNames(map);
+    for ( var i = 0; i < keys.length; i++ ) {
+      var key = keys[i];
+      var ids = map[key];
+      for ( var j = 0; j < ids.length; j++ ) {
+        var invId = ids[j];
+
+        if ( seen[invId] ) continue;
+        // Recurse: Get all complete keys that refer to invData[id][key]; then
+        // tack .keys[i] onto the end of each and add them to the list.
+        allKeys = allKeys.concat(
+          this.getKeys_(parseInt(invId), seen).map(function(prefix) {
+            return prefix + '.' + key;
+          })
+        );
+      }
+    }
+    return allKeys;
+  };
+
+  // Interface method: Get all keys that refer to an object id.
+  ObjectVisitor.prototype.getKeys = function(id) {
+    return this.getKeys_(id, {});
+  };
+
+  // Interface method: Get all keys for all ids; returns a map of the form:
+  // { id: [keys] }.
+  ObjectVisitor.prototype.getAllKeys = function() {
+    var ids = this.getAllIds();
+    var map = {};
+    for ( var i = 0; i < ids.length; i++ ) {
+      var id = ids[i];
+      map[id] = this.getKeys(id);
+    }
+    return map;
+  };
+
+  ObjectVisitor.prototype.lookup_ = function(path, root) {
+    var id = root;
+    for ( var i = 0; i < path.length; i++ ) {
+      var name = path[i];
+      id = this.data[id][name];
+      if ( ! id ) return null;
+    }
+    return id || null;
+  };
+
+  ObjectVisitor.prototype.lookup = function(key, opt_root) {
+    var root = opt_root || this.root;
+    return this.lookup_(key.split('.'), root);
+  };
+
+  // What to store when invoking toJSON.
+  ObjectVisitor.jsonKeys = [ 'root', 'key', 'data', 'types', 'keys',
+                             'blacklistedKeys', 'fingerprint', 'functions' ];
+
+  // Store minimal data for serialization.
   ObjectVisitor.prototype.toJSON = function() {
     var o = {};
     var keys = ObjectVisitor.jsonKeys;
@@ -226,34 +280,31 @@ ObjectVisitor = (function() {
     return o;
   };
 
+  // Load minimal data from serialization.
   ObjectVisitor.fromJSON = function(o) {
     var ov = new ObjectVisitor();
     var keys =  ObjectVisitor.jsonKeys;
     for ( var i = 0; i < ObjectVisitor.jsonKeys.length; i++ ) {
       ov[keys[i]] = o[keys[i]];
     }
+    ov.initLazyData();
     return ov;
   };
 
-  // Public interface for ObjectVisitor. This wrapper simply emphasizes what
-  // methods are intended to be a part of the interface. (Looking up
-  // this.visitor would, of course, expose all methods, but don't do that.)
-  var PublicObjectVisitor = function(opts) {
-    this.visitor = new ObjectVisitor(opts);
-  };
-  PublicObjectVisitor.blacklistObject = function(o) {
-    ObjectVisitor.prototype.blacklistedObjects.push(o);
-  };
-  [ 'visit', 'toJSON' ].forEach(function(name) {
-    PublicObjectVisitor.prototype[name] = function() {
-      return this.visitor[name].apply(this.visitor, arguments);
-    };
-  });
-  [ 'fromJSON' ].forEach(function(name) {
-    PublicObjectVisitor[name] = function() {
-      return ObjectVisitor[name].apply(ObjectVisitor, arguments);
-    };
-  });
+  return facade(ObjectVisitor, {
+    // No properties: Do not expose data. Access rudimentary data via .toJSON().
 
-  return PublicObjectVisitor;
+    methods: {
+      visit: 1, getAllIds: 1, getKeys: 1, getAllKeys: 1, toJSON: 1,
+      blacklistObject: function(o) {
+        this.blacklistedObjects.push(o);
+      },
+    },
+    classFns: {
+      fromJSON: 1,
+      blacklistObject: function(o) {
+        this.prototype.blacklistedObjects.push(o);
+      },
+    },
+  });
 })();
