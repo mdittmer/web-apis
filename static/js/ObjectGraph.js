@@ -195,6 +195,11 @@ ObjectGraph = (function() {
     return this;
   };
 
+  // Interface method: Get ids of all objects that are functions.
+  ObjectGraph.prototype.getFunctions = function() {
+    return this.functions.slice();
+  };
+
   // Interface method: Get all ids in the system.
   ObjectGraph.prototype.getAllIds = function() {
     return Object.getOwnPropertyNames(this.data).map(function(strId) {
@@ -282,6 +287,8 @@ ObjectGraph = (function() {
     return map;
   };
 
+  // Helper to .lookup() interface method; operates over path array starting
+  // from root.
   ObjectGraph.prototype.lookup_ = function(path, root) {
     var id = root, nextId;
     for ( var i = 0; i < path.length; i++ ) {
@@ -299,6 +306,10 @@ ObjectGraph = (function() {
     return id || null;
   };
 
+  // Interface method: Perform property lookup over a dot-separated key.
+  // E.g., .lookup("foo.bar.baz") will start with the root object, then
+  // perform property lookup for "foo", then "bar", then "baz", falling back on
+  // prototypes as necessary.
   ObjectGraph.prototype.lookup = function(key, opt_root) {
     var root = opt_root || this.root;
     return this.lookup_(key.split('.'), root);
@@ -334,14 +345,14 @@ ObjectGraph = (function() {
     // No properties: Do not expose data. Access rudimentary data via .toJSON().
 
     methods: {
-      capture: 1, getAllIds: 1, getKeys: 1, getShortestKey: 1, getAllKeys: 1,
-      toJSON: 1,
+      capture: 1, getFunctions: 1, getAllIds: 1, getKeys: 1, getShortestKey: 1,
+      getAllKeys: 1, toJSON: 1, lookup: 1,
       blacklistObject: function(o) {
         this.blacklistedObjects.push(o);
       },
     },
     classFns: {
-      fromJSON: 1,
+      fromJSON: 'factory',
       blacklistObject: function(o) {
         this.prototype.blacklistedObjects.push(o);
       },

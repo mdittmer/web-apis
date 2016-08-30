@@ -25,7 +25,7 @@
 
   function diffAPIs(ov1, ov2) {
     var arr = [];
-    var fs = ov1.functions;
+    var fs = ov1.getFunctions();
     for ( var i = 0; i < fs.length; i++ ) {
       var f = fs[i];
       var keys = ov1.getKeys(f);

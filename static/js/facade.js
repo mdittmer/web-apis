@@ -1,6 +1,6 @@
 facade = function(ctor, opts) {
-  var Ctor = function() {
-    this._ = Object.create(ctor.prototype);
+  var factory = function(o) {
+    this._ = o;
 
     if ( opts.properties ) {
       for ( var i = 0; i < opts.properties.length; i++ ) {
@@ -13,6 +13,12 @@ facade = function(ctor, opts) {
         }.bind(this))(opts.properties[i]);
       }
     }
+
+    return this;
+  };
+
+  var Ctor = function() {
+    factory.call(this, Object.create(ctor.prototype));
 
     ctor.apply(this._, arguments);
   };
@@ -40,13 +46,18 @@ facade = function(ctor, opts) {
     keys = Object.getOwnPropertyNames(opts.classFns);
     for ( i = 0; i < keys.length; i++ ) {
       (function(key) {
-        if ( typeof opts.classFns[key] !== 'function' ) {
+        if ( typeof opts.classFns[key] === 'function' ) {
           Ctor[key] = function() {
-            return ctor[key].apply(ctor, arguments);
+            return opts.classFns[key].apply(ctor, arguments);
+          };
+        } else if ( opts.classFns[key] === 'factory' ) {
+          Ctor[key] = function() {
+            return factory.call(Object.create(Ctor.prototype),
+                                ctor[key].apply(ctor, arguments));
           };
         } else {
           Ctor[key] = function() {
-            return opts.classFns[key].apply(ctor, arguments);
+            return ctor[key].apply(ctor, arguments);
           };
         }
       })(keys[i]);
