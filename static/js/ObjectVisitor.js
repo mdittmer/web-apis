@@ -1,4 +1,4 @@
-ObjectVisitor = (function() {
+ObjectGraph = (function() {
   // Attempt to store fingerprint of machine where data is collected.
   var fingerprint = {};
   Fingerprint2 && (new Fingerprint2()).get(function(result, components) {
@@ -7,7 +7,7 @@ ObjectVisitor = (function() {
   });
 
   // Object identity and/or primitive type data storage.
-  var ObjectVisitor = function(opts) {
+  var ObjectGraph = function(opts) {
     opts = opts || {};
     this.q = new TaskQueue(opts);
     this.busy = false;
@@ -19,11 +19,11 @@ ObjectVisitor = (function() {
     this.blacklistedObjects.push(this);
   };
 
-  ObjectVisitor.prototype.fingerprint = fingerprint;
+  ObjectGraph.prototype.fingerprint = fingerprint;
   // Map of primitive types (leaves in object graph).
   // NOTE: It must be impossible for $UIDs of visited objects to take on these
   // values.
-  ObjectVisitor.prototype.types = ObjectVisitor.types = {
+  ObjectGraph.prototype.types = ObjectGraph.types = {
     'undefined': 1,
     'boolean': 2,
     'number': 3,
@@ -34,11 +34,11 @@ ObjectVisitor = (function() {
   };
 
   // Never visit/store these object keys.
-  ObjectVisitor.prototype.blacklistedKeys = [ '$UID', '$UID__', '__proto__' ];
+  ObjectGraph.prototype.blacklistedKeys = [ '$UID', '$UID__', '__proto__' ];
   // Never visit/store these objects.
-  ObjectVisitor.prototype.blacklistedObjects = [];
+  ObjectGraph.prototype.blacklistedObjects = [];
 
-  ObjectVisitor.prototype.initLazyData = function() {
+  ObjectGraph.prototype.initLazyData = function() {
     lazy.memo(this, 'invData',
               remap['a:b:c=>c:b:[a]'].bind(this, this.data));
     lazy.memo(this, 'namedData',
@@ -47,13 +47,13 @@ ObjectVisitor = (function() {
               remap['a:b=>b:[a]'].bind(this, this.protos));
   };
 
-  ObjectVisitor.prototype.storeObject = function(id) {
+  ObjectGraph.prototype.storeObject = function(id) {
     console.assert( ! this.data[id] , 'Repeated store-id');
     this.data[id] = {};
     return this.data[id];
   };
 
-  ObjectVisitor.prototype.storeProto = function(oId, protoId) {
+  ObjectGraph.prototype.storeProto = function(oId, protoId) {
     console.assert( ! this.protos[oId] , 'Repeated store-proto');
     this.protos[oId] = protoId;
   };
@@ -64,7 +64,7 @@ ObjectVisitor = (function() {
   // Example of when object[key] traversal should be skipped include when o is
   // of primitive type (or value; e.g., null), or when o has already been
   // visited.
-  ObjectVisitor.prototype.maybeSkip = function(o) {
+  ObjectGraph.prototype.maybeSkip = function(o) {
     if ( o === null ) return this.types['null'];
     var typeOf = typeof o;
     if ( this.types[typeOf] ) return this.types[typeOf];
@@ -74,7 +74,7 @@ ObjectVisitor = (function() {
   };
 
   // Return true if and only if o[key] is a blacklisted object.
-  ObjectVisitor.prototype.isPropertyBlacklisted = function(o, key) {
+  ObjectGraph.prototype.isPropertyBlacklisted = function(o, key) {
     var value;
     try {
       value = o[key];
@@ -88,7 +88,7 @@ ObjectVisitor = (function() {
   };
 
   // Return true if and only if name is a blacklisted key.
-  ObjectVisitor.prototype.isKeyBlacklisted = function(name) {
+  ObjectGraph.prototype.isKeyBlacklisted = function(name) {
     for ( var i = 0; i < this.blacklistedKeys.length; i++ ) {
       if ( name === this.blacklistedKeys[i] ) return true;
     }
@@ -98,17 +98,17 @@ ObjectVisitor = (function() {
   // Return a string (possibly identical to name) that is safe to store as a
   // Javascript object key without changing the internal behaviour of the
   // object.
-  ObjectVisitor.prototype.rewriteName = function(name) {
+  ObjectGraph.prototype.rewriteName = function(name) {
     return this.nameRewriter.rewriteName(name);
   };
 
   // Visit the prototype of o, given its dataMap.
-  ObjectVisitor.prototype.visitPrototype = function(o, dataMap) {
+  ObjectGraph.prototype.visitPrototype = function(o, dataMap) {
     this.storeProto(o.$UID, this.visitObject(o.__proto__));
   };
 
   // Visit the property of o named propertyName, given o's dataMap.
-  ObjectVisitor.prototype.visitProperty = function(o, propertyName, dataMap) {
+  ObjectGraph.prototype.visitProperty = function(o, propertyName, dataMap) {
     var name = this.rewriteName(propertyName);
     try {
       dataMap[name] = this.visitObject(o[propertyName]);
@@ -121,7 +121,7 @@ ObjectVisitor = (function() {
   // Visit an object, o. Return an id for the object, which may contain type
   // information (e.g., number, boolean, null), or indicate the unique identity
   // of the object itself.
-  ObjectVisitor.prototype.visitObject = function(o) {
+  ObjectGraph.prototype.visitObject = function(o) {
     // Don't process object unless we have to.
     var skip = this.maybeSkip(o);
     if ( skip !== null ) return skip;
@@ -152,7 +152,7 @@ ObjectVisitor = (function() {
   //   onDone: Callback when visiting is finished.
   //           arguments = [this]
   //   key: Initial string key that refers to root object.
-  ObjectVisitor.prototype.visit = function(o, opts) {
+  ObjectGraph.prototype.visit = function(o, opts) {
     opts = opts || {};
     var prevOnDone = this.q.onDone;
     if ( this.busy ) {
@@ -196,7 +196,7 @@ ObjectVisitor = (function() {
   };
 
   // Interface method: Get all ids in the system.
-  ObjectVisitor.prototype.getAllIds = function() {
+  ObjectGraph.prototype.getAllIds = function() {
     return Object.getOwnPropertyNames(this.data).map(function(strId) {
       return parseInt(strId);
     }).sort();
@@ -204,7 +204,7 @@ ObjectVisitor = (function() {
 
   // Helper method: Get all keys that refer to an object id, tracking which ids
   // have already been seen.
-  ObjectVisitor.prototype.getKeys_ = function(id, seen) {
+  ObjectGraph.prototype.getKeys_ = function(id, seen) {
     console.assert( ! seen[id] , 'Revisit object');
     seen[id] = 1;
     if ( id === this.root ) return [this.key];
@@ -256,7 +256,7 @@ ObjectVisitor = (function() {
   };
 
   // Interface method: Get all keys that refer to an object id.
-  ObjectVisitor.prototype.getKeys = function(id) {
+  ObjectGraph.prototype.getKeys = function(id) {
     if ( this.keysCache[id] ) return this.keysCache[id].slice();
     var keys = this.getKeys_(id, {}).sort(function(a, b) {
       return a.length === b.length ? a > b : a.length - b.length;
@@ -266,13 +266,13 @@ ObjectVisitor = (function() {
   };
 
   // Interface method: Get shortest key that refers to an object id.
-  ObjectVisitor.prototype.getShortestKey = function(id) {
+  ObjectGraph.prototype.getShortestKey = function(id) {
     return this.getKeys(id)[0] || null;
   };
 
   // Interface method: Get all keys for all ids; returns a map of the form:
   // { id: [keys] }.
-  ObjectVisitor.prototype.getAllKeys = function() {
+  ObjectGraph.prototype.getAllKeys = function() {
     var ids = this.getAllIds();
     var map = {};
     for ( var i = 0; i < ids.length; i++ ) {
@@ -282,7 +282,7 @@ ObjectVisitor = (function() {
     return map;
   };
 
-  ObjectVisitor.prototype.lookup_ = function(path, root) {
+  ObjectGraph.prototype.lookup_ = function(path, root) {
     var id = root, nextId;
     for ( var i = 0; i < path.length; i++ ) {
       var name = path[i];
@@ -299,38 +299,38 @@ ObjectVisitor = (function() {
     return id || null;
   };
 
-  ObjectVisitor.prototype.lookup = function(key, opt_root) {
+  ObjectGraph.prototype.lookup = function(key, opt_root) {
     var root = opt_root || this.root;
     return this.lookup_(key.split('.'), root);
   };
 
   // What to store when invoking toJSON.
-  ObjectVisitor.jsonKeys = [ 'timestamp', 'root', 'key', 'data', 'protos',
+  ObjectGraph.jsonKeys = [ 'timestamp', 'root', 'key', 'data', 'protos',
                              'types', 'keys', 'blacklistedKeys', 'fingerprint',
                              'functions' ];
 
   // Store minimal data for serialization.
-  ObjectVisitor.prototype.toJSON = function() {
+  ObjectGraph.prototype.toJSON = function() {
     var o = {};
-    var keys = ObjectVisitor.jsonKeys;
-    for ( var i = 0; i < ObjectVisitor.jsonKeys.length; i++ ) {
+    var keys = ObjectGraph.jsonKeys;
+    for ( var i = 0; i < ObjectGraph.jsonKeys.length; i++ ) {
       o[keys[i]] = this[keys[i]];
     }
     return o;
   };
 
   // Load minimal data from serialization.
-  ObjectVisitor.fromJSON = function(o) {
-    var ov = new ObjectVisitor();
-    var keys =  ObjectVisitor.jsonKeys;
-    for ( var i = 0; i < ObjectVisitor.jsonKeys.length; i++ ) {
+  ObjectGraph.fromJSON = function(o) {
+    var ov = new ObjectGraph();
+    var keys =  ObjectGraph.jsonKeys;
+    for ( var i = 0; i < ObjectGraph.jsonKeys.length; i++ ) {
       ov[keys[i]] = o[keys[i]];
     }
     ov.initLazyData();
     return ov;
   };
 
-  return facade(ObjectVisitor, {
+  return facade(ObjectGraph, {
     // No properties: Do not expose data. Access rudimentary data via .toJSON().
 
     methods: {

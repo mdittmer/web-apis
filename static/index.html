@@ -35,18 +35,18 @@
     <script language="javascript" src="js/facade.js"></script>
     <script language="javascript" src="js/NameRewriter.js"></script>
     <script language="javascript" src="js/TaskQueue.js"></script>
-    <script language="javascript" src="js/ObjectVisitor.js"></script>
+    <script language="javascript" src="js/ObjectGraph.js"></script>
 
     <script language="javascript">
     (function() {
       for ( var i = 0; i < arguments.length; i++ ) {
-        arguments[i] && ObjectVisitor.blacklistObject(arguments[i]);
+        arguments[i] && ObjectGraph.blacklistObject(arguments[i]);
       }
     })(Fingerprint2, Clipboard, lazy, remap, facade, NameRewriter,
-       TaskQueue, ObjectVisitor);
+       TaskQueue, ObjectGraph);
     </script>
 
-    <script language="javascript" src="js/ObjectDiff.js"></script><script language="javascript">ObjectDiff && ObjectVisitor.blacklistObject(ObjectDiff);</script>
+    <script language="javascript" src="js/ObjectDiff.js"></script><script language="javascript">ObjectDiff && ObjectGraph.blacklistObject(ObjectDiff);</script>
   </head>
   <body>
     <button id="collect">Collect data</button>

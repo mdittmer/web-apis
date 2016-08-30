@@ -5,7 +5,7 @@
     var count = 0;
     var ret;
     function store(i) {
-      data[i] = ObjectVisitor.fromJSON(this.response);
+      data[i] = ObjectGraph.fromJSON(this.response);
       count++;
       if ( count === len ) ret && ret.apply(this, data);
     }
