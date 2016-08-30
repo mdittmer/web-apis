@@ -13,6 +13,7 @@ ObjectVisitor = (function() {
     this.busy = false;
     this.blacklistedObjects = this.blacklistedObjects.slice();
     this.nameRewriter = opts.nameRewriter || new NameRewriter();
+    this.keysCache = {};
 
     // Try to prevent recursion into internal structures.
     this.blacklistedObjects.push(this);
@@ -169,6 +170,7 @@ ObjectVisitor = (function() {
     this.data = {};
     this.protos = {};
     this.functions = [];
+    this.keysCache = {};
 
     this.q.onDone = function() {
       this.timestamp = (new Date()).getTime();
@@ -216,9 +218,11 @@ ObjectVisitor = (function() {
     }
 
     // Get all the one-step keys through which other objects point to id.
-    var keys = Object.getOwnPropertyNames(map);
-    for ( var i = 0; i < keys.length; i++ ) {
+    var keys = Object.getOwnPropertyNames(map).sort(), i;
+    for ( i = 0; i < keys.length; i++ ) {
       var key = keys[i];
+      if ( this.isKeyBlacklisted(key) ) continue;
+
       var ids = map[key];
       for ( var j = 0; j < ids.length; j++ ) {
         var invId = ids[j];
@@ -233,19 +237,37 @@ ObjectVisitor = (function() {
         );
       }
     }
+
+    // Get prototypical direct descendants of this object.
+    var invProtos = this.invProtos[id];
+    if ( ! invProtos ) return allKeys;
+    for ( i = 0; i < invProtos.length; i++ ) {
+      var invProtoId = invProtos[i];
+      if ( seen[invProtoId] ) continue;
+      // Recurse: As above, except via prototype lookup (not property lookup).
+      allKeys = allKeys.concat(
+        this.getKeys_(parseInt(invProtoId), seen).map(function(prefix) {
+          return prefix + '.__proto__';
+        })
+      );
+    }
+
     return allKeys;
   };
 
   // Interface method: Get all keys that refer to an object id.
   ObjectVisitor.prototype.getKeys = function(id) {
-    return this.getKeys_(id, {}).sort(function(a, b) {
+    if ( this.keysCache[id] ) return this.keysCache[id].slice();
+    var keys = this.getKeys_(id, {}).sort(function(a, b) {
       return a.length === b.length ? a > b : a.length - b.length;
     });
+    this.keysCache[id] = keys;
+    return keys.slice();
   };
 
   // Interface method: Get shortest key that refers to an object id.
   ObjectVisitor.prototype.getShortestKey = function(id) {
-    return this.getKeys[0] || null;
+    return this.getKeys(id)[0] || null;
   };
 
   // Interface method: Get all keys for all ids; returns a map of the form:
@@ -264,9 +286,14 @@ ObjectVisitor = (function() {
     var id = root, nextId;
     for ( var i = 0; i < path.length; i++ ) {
       var name = path[i];
-      while ( id !== this.types['null'] && ! ( nextId = this.data[id][name] ) )
-        id = this.protos[id];
+      if ( name === '__proto__' ) {
+        nextId = this.protos[id];
+      } else {
+        while ( id !== this.types['null'] && ! ( nextId = this.data[id][name] ) )
+          id = this.protos[id];
+      }
       if ( ! nextId ) return null;
+      if ( typeof nextId !== 'number' ) debugger;
       id = nextId;
     }
     return id || null;
