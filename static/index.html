@@ -48,6 +48,13 @@
     <script language="javascript" src="js/ObjectDiff.js"></script><script language="javascript">ObjectDiff && ObjectVisitor.blacklistObject(ObjectDiff);</script>
   </head>
   <body>
+    <button id="collect">Collect data</button>
+    <form action="/save" method="post">
+      <label for="label">Data label:</label> <input name="label" id="label" type="text" value="browser_data">
+      <label for="data">Collected data:</label> <input name="data" id="data" type="input" value="{}">
+      <button id="send">Send data</button>
+    </form>
+
     <script language="javascript"  src="js/main.js"></script>
   </body>
 </html>

@@ -163,6 +163,7 @@ ObjectVisitor = (function() {
     }
     this.busy = true;
 
+    this.timestamp = null;
     this.key = opts.key || '';
     this.root = typeof o === 'object' && o !== null ? o.$UID : o;
     this.data = {};
@@ -170,6 +171,7 @@ ObjectVisitor = (function() {
     this.functions = [];
 
     this.q.onDone = function() {
+      this.timestamp = (new Date()).getTime();
       this.initLazyData();
       prevOnDone(this);
       opts.onDone && opts.onDone(this);
@@ -236,7 +238,14 @@ ObjectVisitor = (function() {
 
   // Interface method: Get all keys that refer to an object id.
   ObjectVisitor.prototype.getKeys = function(id) {
-    return this.getKeys_(id, {});
+    return this.getKeys_(id, {}).sort(function(a, b) {
+      return a.length === b.length ? a > b : a.length - b.length;
+    });
+  };
+
+  // Interface method: Get shortest key that refers to an object id.
+  ObjectVisitor.prototype.getShortestKey = function(id) {
+    return this.getKeys[0] || null;
   };
 
   // Interface method: Get all keys for all ids; returns a map of the form:
@@ -252,11 +261,13 @@ ObjectVisitor = (function() {
   };
 
   ObjectVisitor.prototype.lookup_ = function(path, root) {
-    var id = root;
+    var id = root, nextId;
     for ( var i = 0; i < path.length; i++ ) {
       var name = path[i];
-      id = this.data[id][name];
-      if ( ! id ) return null;
+      while ( id !== this.types['null'] && ! ( nextId = this.data[id][name] ) )
+        id = this.protos[id];
+      if ( ! nextId ) return null;
+      id = nextId;
     }
     return id || null;
   };
@@ -267,8 +278,9 @@ ObjectVisitor = (function() {
   };
 
   // What to store when invoking toJSON.
-  ObjectVisitor.jsonKeys = [ 'root', 'key', 'data', 'types', 'keys',
-                             'blacklistedKeys', 'fingerprint', 'functions' ];
+  ObjectVisitor.jsonKeys = [ 'timestamp', 'root', 'key', 'data', 'protos',
+                             'types', 'keys', 'blacklistedKeys', 'fingerprint',
+                             'functions' ];
 
   // Store minimal data for serialization.
   ObjectVisitor.prototype.toJSON = function() {
@@ -295,7 +307,8 @@ ObjectVisitor = (function() {
     // No properties: Do not expose data. Access rudimentary data via .toJSON().
 
     methods: {
-      visit: 1, getAllIds: 1, getKeys: 1, getAllKeys: 1, toJSON: 1,
+      visit: 1, getAllIds: 1, getKeys: 1, getShortestKey: 1, getAllKeys: 1,
+      toJSON: 1,
       blacklistObject: function(o) {
         this.blacklistedObjects.push(o);
       },
