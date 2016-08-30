@@ -152,13 +152,13 @@ ObjectGraph = (function() {
   //   onDone: Callback when visiting is finished.
   //           arguments = [this]
   //   key: Initial string key that refers to root object.
-  ObjectGraph.prototype.visit = function(o, opts) {
+  ObjectGraph.prototype.capture = function(o, opts) {
     opts = opts || {};
     var prevOnDone = this.q.onDone;
     if ( this.busy ) {
       this.q.onDone = function() {
         prevOnDone.apply(this, arguments);
-        this.visit(o, opts);
+        this.capture(o, opts);
       }.bind(this);
       return this;
     }
@@ -334,7 +334,7 @@ ObjectGraph = (function() {
     // No properties: Do not expose data. Access rudimentary data via .toJSON().
 
     methods: {
-      visit: 1, getAllIds: 1, getKeys: 1, getShortestKey: 1, getAllKeys: 1,
+      capture: 1, getAllIds: 1, getKeys: 1, getShortestKey: 1, getAllKeys: 1,
       toJSON: 1,
       blacklistObject: function(o) {
         this.blacklistedObjects.push(o);

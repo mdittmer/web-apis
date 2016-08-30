@@ -7,6 +7,6 @@
         dataElement.value = JSON.stringify(ov.toJSON());
       },
     });
-    ov.visit(window, { key: 'window' });
+    ov.capture(window, { key: 'window' });
   });
 })();
