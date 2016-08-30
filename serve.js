@@ -8,6 +8,9 @@ app.use(bodyParser.urlencoded({ extended: false, limit: '500mb' }));
 
 app.use(express.static('static'));
 
+var SAVE_HEAD = '<html><head><meta name="viewport" content="width=500, initial-scale=1"></head><body>';
+var SAVE_FOOT = '</body></html>';
+
 app.post('/save', function(req, res) {
   var baseName = req.body.label.replace(/[^A-Za-z0-9-]/g, '_');
   var data = req.body.data;
@@ -18,16 +21,22 @@ app.post('/save', function(req, res) {
   }
 
   function tryWrite(baseName, i) {
-    var path = './data/' + baseName + '_' + i + '.json';
+    var path = './static/data/' + baseName + '_' + i + '.json';
     console.log('Trying to save as', path);
     fs.stat(path, function(err, stats) {
       if ( ! err || err.code !== 'ENOENT' ) {
         tryWrite(baseName, i + 1);
         return;
       }
-      console.log('Saving as', path);
-      fs.writeFileSync(path, data);
-      res.send('Wrote ' + data.length + ' characters as ' + path);
+      var latestPath = './static/data/' + baseName + '_latest.json';
+      console.log('Renaming', latestPath, 'to', path);
+      fs.rename(latestPath, path, function(err) {
+        console.log('Saving', latestPath);
+        fs.writeFileSync(latestPath, data);
+        if ( err ) console.warn('Error renaming latest', err);
+        res.send(SAVE_HEAD + 'Wrote ' + data.length + ' characters as ' +
+                 latestPath + SAVE_FOOT);
+      });
     });
   }
 
