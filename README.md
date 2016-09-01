@@ -4,8 +4,8 @@ Playground for better understanding Web APIs.
 
 ## Serving Locally
 
-  $ npm install
-  $ node serve.js
+    $ npm install
+    $ node serve.js
 
 ## Exploring Data
 
