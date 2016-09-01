@@ -38,10 +38,9 @@ ObjectGraph = (function() {
               remap['a:b:c=>b:[(a,c)]'].bind(this, this.data));
     lazy.memo(this, 'invProtos',
               remap['a:b=>b:[a]'].bind(this, this.protos));
-    lazy.memo(this, 'mobileDetect',
-              function() {
-                return new MobileDetect(this.userAgent);
-              }.bind(this));
+    lazy.memo(this, 'environment', function() {
+      return this.nameRewriter.userAgentAsPlatformInfo(this.userAgent);
+    }.bind(this));
   };
 
   ObjectGraph.prototype.storeObject = function(id) {

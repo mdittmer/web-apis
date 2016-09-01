@@ -40,8 +40,7 @@
       for ( var i = 0; i < arguments.length; i++ ) {
         arguments[i] && ObjectGraph.blacklistObject(arguments[i]);
       }
-    })(lazy, remap, facade, NameRewriter,
-       TaskQueue, ObjectGraph);
+    })(lazy, remap, facade, NameRewriter, TaskQueue, ObjectGraph);
     </script>
 
     <script language="javascript" src="js/ObjectDiff.js"></script><script language="javascript">ObjectDiff && ObjectGraph.blacklistObject(ObjectDiff);</script>

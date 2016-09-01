@@ -1,3 +1,5 @@
+// TODO: This process has largely been abandoned. Possibly replace this with
+// set refinements currently in analyze.js.
 ObjectDiff = (function() {
   var ObjectDiff = function(a, b, opts) {
     opts = opts || {};

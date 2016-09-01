@@ -1,8 +1,12 @@
 (function() {
+  // Get an element from the DOM.
   function e(selector) {
     return document.querySelector(selector);
   }
 
+  // Fetch URLs. Return a function that gets passed a continuation to be called
+  // back when data from all urls have been processed.
+  // E.g., getData('/foo', '/bar')(function(fooData, barData) { ... });
   function getData(/* urls */) {
     var len = arguments.length;
     var data = new Array(len);
@@ -27,19 +31,32 @@
     };
   }
 
-  function refineObjectSet(baseGraph, apis, otherGraph, predicate, exclude) {
+  // Helper for doAnalysis below.
+  //
+  // Refine the object set of baseGraph-based ids. The new set includes only
+  // ids that have/do-not-have corresponding ids in otherGraph that return
+  // true against predicate. The "have" / "do-not-have" is determined by the
+  // value of exclude. When exclude is false, such corresponding ids must
+  // exist in otherGraph, and vice-versa. By "corresponding" is meant "an
+  // otherGraph-based id was found performing key lookup against the keys
+  // associated with the baseGraph-based id".
+  function refineObjectSet(baseGraph, ids, otherGraph, predicate, exclude) {
     var rtn = [];
-    for ( var i = 0; i < apis.length; i++ ) {
-      var keys = baseGraph.getKeys(apis[i]);
+    for ( var i = 0; i < ids.length; i++ ) {
+      var keys = baseGraph.getKeys(ids[i]);
       for ( var j = 0; j < keys.length; j++ ) {
         var id = otherGraph.lookup(keys[j]);
-        if ( predicate(baseGraph, apis[i], otherGraph, id) ) break;
+        if ( predicate(baseGraph, ids[i], otherGraph, id) ) break;
       }
-      if ( exclude ^  ( !! id ) ) rtn.push(apis[i]);
+      if ( exclude ^  ( !! id ) ) rtn.push(ids[i]);
     }
     return rtn;
   }
 
+  // Find the set of objects that are found in all inGraphs and not found
+  // in all outGraphs. Start the refinement using initializer against the first
+  // inGraph. Deem objects in graphs as relevant according to the return value
+  // of predicate.
   function doAnalysis(inGraphs, exGraphs, initializer, predicate) {
     if ( inGraphs.length === 0 ) {
       console.error('Analysis requires at least one included implementation');
@@ -58,6 +75,11 @@
     return os;
   }
 
+  // Perform object graph set refinement by including objects in inGraphs and
+  // excluding objects in exGraphs. Do two refinements:
+  // (1) APIs: Consider only function objects;
+  // (2) Structs: Consider only non-function objects.
+  // Finally, output results to DOM.
   function doAnalyses(inGraphs, exGraphs) {
     var apisE = e('#apis');
     var structsE = e('#structs');
@@ -79,6 +101,7 @@
 
     var graph = inGraphs[0];
 
+    // TODO: Should this be decoupled from data processing?
     apisE.textContent = apis.map(function(id) {
       return graph.getShortestKey(id);
     }).join('\n');
@@ -87,11 +110,16 @@
     }).join('\n');
   }
 
+  // Convert datalist option value to a data retrieval URL. This is tightly
+  // coupled to getData('/list') callback below, and to server's data routing
+  // routing scheme.
   function optValueToURL(label) {
     return '/data/' + label.replace(/ /g, '/');
   }
 
+  // Gather configuration from DOM inputs, perform analyses, and output results.
   function analyze() {
+    // Map input option values to URLs.
     function inputPaths(inputs) {
       var rtn = new Array(inputs.length);
       for ( var i = 0; i < inputs.length; i++ ) {
@@ -103,17 +131,21 @@
     var inPaths = inputPaths(e('#include-inputs').querySelectorAll('input'));
     var exPaths = inputPaths(e('#exclude-inputs').querySelectorAll('input'));
 
+    // Continuation hack: Keep trying until inGraphs and exGraphs are populated,
+    // then do analyses.
     var inGraphs, exGraphs;
     function next(i) {
       if ( inGraphs && exGraphs ) doAnalyses(inGraphs, exGraphs);
     }
 
+    // Map data fetched from URLs to ObjectGraph instances.
     function getObjectGraphs(args) {
       return Array.prototype.slice.call(args).map(
         function(data) { return ObjectGraph.fromJSON(data); }
       );
     }
 
+    // Map URL paths to inGraphs and exGraphs, then do analyses.
     getData.apply(this, inPaths)(function() {
       inGraphs = getObjectGraphs(arguments);
       next();
@@ -126,6 +158,7 @@
 
   var includeExcludeOpts = [];
 
+  // Add <option>s to the given <datalist>.
   function addOpts(datalist) {
     for ( var i = 0; i < includeExcludeOpts.length; i++ ) {
       var opt = document.createElement('option');
@@ -134,6 +167,9 @@
     }
   }
 
+  // Get the full set of nested keys over a Javascript object.
+  // This is used to transform output from the "/list" URL to a collection of
+  // options.
   function getKeys(o, s) {
     if (typeof o !== 'object' || o === null ) return [s];
     var keys = Object.getOwnPropertyNames(o);
@@ -145,11 +181,14 @@
     return rtn;
   }
 
+  // Get a list of environments the server has data for, and add them to a
+  // <datalist>.
   getData('/list')(function(map) {
     includeExcludeOpts = getKeys(map, '');
     addOpts(e('#environments'));
   });
 
+  // Helper function for adding environments to include/exclude lists in DOM.
   function addinputTo(container, datalist) {
     var div = document.createElement('div');
     var input = document.createElement('input');

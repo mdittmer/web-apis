@@ -26,6 +26,8 @@
     pre {
       white-space: pre-wrap;
     }
+    /* Very simple alternating flex layout. ">" selectors are expensive, but
+    ** this page is small enough for it to not matter. */
     * {
       flex-grow: 1;
     }
@@ -63,7 +65,7 @@
       for ( var i = 0; i < arguments.length; i++ ) {
         arguments[i] && ObjectGraph.blacklistObject(arguments[i]);
       }
-    })(lazy, remap, facade, NameRewriter, TaskQueue, ObjectGraph);
+    })<script language="javascript" src=" TaskQueue, ObjectGraph);
     </script>
 
     <script language="javascript" src="js/ObjectDiff.js"></script><script lanuage="javascript">ObjectGraph.blacklistObject(ObjectDiff);</script>
