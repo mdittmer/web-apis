@@ -27,8 +27,6 @@
       white-space: pre-wrap;
     }
     </style>
-    <script language="javascript" src="//cdn.jsdelivr.net/fingerprintjs2/1.4.1/fingerprint2.min.js"></script>
-    <script language="javascript" src="//cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
     <script language="javascript" src="js/id.js"></script>
     <script language="javascript" src="js/lazy.js"></script>
     <script language="javascript" src="js/remap.js"></script>
@@ -42,17 +40,18 @@
       for ( var i = 0; i < arguments.length; i++ ) {
         arguments[i] && ObjectGraph.blacklistObject(arguments[i]);
       }
-    })(Fingerprint2, Clipboard, lazy, remap, facade, NameRewriter,
+    })(lazy, remap, facade, NameRewriter,
        TaskQueue, ObjectGraph);
     </script>
 
     <script language="javascript" src="js/ObjectDiff.js"></script><script language="javascript">ObjectDiff && ObjectGraph.blacklistObject(ObjectDiff);</script>
   </head>
   <body>
+    <pre id="browser"></pre>
+    <pre id="platform"></pre>
     <button id="collect">Collect data</button>
     <form action="/save" method="post">
-      <label for="label">Data label:</label> <input name="label" id="label" type="text" value="browser_data">
-      <label for="data">Collected data:</label> <input name="data" id="data" type="input" value="{}">
+      <label for="data">Collected data:</label> <textarea name="data" id="data" type="input">{}</textarea>
       <button id="send">Send data</button>
     </form>
 

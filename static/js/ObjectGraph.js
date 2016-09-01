@@ -1,11 +1,4 @@
 ObjectGraph = (function() {
-  // Attempt to store fingerprint of machine where data is collected.
-  var fingerprint = {};
-  Fingerprint2 && (new Fingerprint2()).get(function(result, components) {
-    fingerprint.result = result;
-    fingerprint.components = components;
-  });
-
   // Object identity and/or primitive type data storage.
   var ObjectGraph = function(opts) {
     opts = opts || {};
@@ -19,7 +12,7 @@ ObjectGraph = (function() {
     this.blacklistedObjects.push(this);
   };
 
-  ObjectGraph.prototype.fingerprint = fingerprint;
+  ObjectGraph.prototype.userAgent = navigator.userAgent;
   // Map of primitive types (leaves in object graph).
   // NOTE: It must be impossible for $UIDs of visited objects to take on these
   // values.
@@ -45,6 +38,10 @@ ObjectGraph = (function() {
               remap['a:b:c=>b:[(a,c)]'].bind(this, this.data));
     lazy.memo(this, 'invProtos',
               remap['a:b=>b:[a]'].bind(this, this.protos));
+    lazy.memo(this, 'mobileDetect',
+              function() {
+                return new MobileDetect(this.userAgent);
+              }.bind(this));
   };
 
   ObjectGraph.prototype.storeObject = function(id) {
@@ -195,6 +192,18 @@ ObjectGraph = (function() {
     return this;
   };
 
+  // Interface method: Does id refer to a function?
+  ObjectGraph.prototype.isFunction = function(id) {
+    if ( ! id ) return false;
+
+    // TODO: Should we store a lazy map of these to make this faster?
+    for ( var i = 0; i < this.functions.length; i++ ) {
+      if ( id === this.functions[i] ) return true;
+    }
+
+    return false;
+  };
+
   // Interface method: Get ids of all objects that are functions.
   ObjectGraph.prototype.getFunctions = function() {
     return this.functions.slice();
@@ -202,9 +211,13 @@ ObjectGraph = (function() {
 
   // Interface method: Get all ids in the system.
   ObjectGraph.prototype.getAllIds = function() {
-    return Object.getOwnPropertyNames(this.data).map(function(strId) {
-      return parseInt(strId);
-    }).sort();
+    var ids = [];
+    var strIds = Object.getOwnPropertyNames(this.data);
+    for ( var i = 0; i < strIds.length; i++ ) {
+      if ( this.isKeyBlacklisted(strIds[i]) ) continue;
+      ids.push(parseInt(strIds[i]));
+    }
+    return ids.sort();
   };
 
   // Helper method: Get all keys that refer to an object id, tracking which ids
@@ -218,7 +231,7 @@ ObjectGraph = (function() {
     var map = this.invData[id];
 
     if ( ! map ) {
-      console.warn('Orphaned object', id);
+      // console.warn('Orphaned object', id);
       return [];
     }
 
@@ -316,9 +329,9 @@ ObjectGraph = (function() {
   };
 
   // What to store when invoking toJSON.
-  ObjectGraph.jsonKeys = [ 'timestamp', 'root', 'key', 'data', 'protos',
-                             'types', 'keys', 'blacklistedKeys', 'fingerprint',
-                             'functions' ];
+  ObjectGraph.jsonKeys = [ 'timestamp', 'userAgent', 'root', 'key', 'data',
+                           'protos', 'types', 'keys', 'blacklistedKeys',
+                           'functions' ];
 
   // Store minimal data for serialization.
   ObjectGraph.prototype.toJSON = function() {
@@ -342,11 +355,10 @@ ObjectGraph = (function() {
   };
 
   return facade(ObjectGraph, {
-    // No properties: Do not expose data. Access rudimentary data via .toJSON().
-
+    properties: [ 'userAgent' ],
     methods: {
-      capture: 1, getFunctions: 1, getAllIds: 1, getKeys: 1, getShortestKey: 1,
-      getAllKeys: 1, toJSON: 1, lookup: 1,
+      capture: 1, isFunction: 1, getFunctions: 1, getAllIds: 1, getKeys: 1,
+      getShortestKey: 1, getAllKeys: 1, toJSON: 1, lookup: 1,
       blacklistObject: function(o) {
         this.blacklistedObjects.push(o);
       },

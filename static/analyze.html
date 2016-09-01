@@ -26,9 +26,30 @@
     pre {
       white-space: pre-wrap;
     }
+    * {
+      flex-grow: 1;
+    }
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    div > div {
+      flex-direction: column;
+    }
+    div > div > div {
+      flex-direction: row;
+    }
+    div > div > div > div {
+      flex-direction: column;
+    }
+    div > div > div > div > div {
+      flex-direction: row;
+    }
+    div > div > div > div > div > div {
+      flex-direction: column;
+    }
     </style>
-    <script language="javascript" src="//cdn.jsdelivr.net/fingerprintjs2/1.4.1/fingerprint2.min.js"></script>
-    <script language="javascript" src="//cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
     <script language="javascript" src="js/id.js"></script>
     <script language="javascript" src="js/lazy.js"></script>
     <script language="javascript" src="js/remap.js"></script>
@@ -42,18 +63,40 @@
       for ( var i = 0; i < arguments.length; i++ ) {
         arguments[i] && ObjectGraph.blacklistObject(arguments[i]);
       }
-    })(Fingerprint2, Clipboard, lazy, remap, facade, NameRewriter,
-       TaskQueue, ObjectGraph);
+    })(lazy, remap, facade, NameRewriter, TaskQueue, ObjectGraph);
     </script>
 
-    <script language="javascript" src="js/ObjectDiff.js"></script><script language="javascript">ObjectDiff && ObjectGraph.blacklistObject(ObjectDiff);</script>
+    <script language="javascript" src="js/ObjectDiff.js"></script><script lanuage="javascript">ObjectGraph.blacklistObject(ObjectDiff);</script>
   </head>
   <body>
-    <label for="left">Left:</label> <input name="left" id="left" type="text" value="chrome_osx_latest">
-    <label for="right">Right:</label> <input name="right" id="right" type="text" value="chrome_nexus_5x_latest">
-    <button id="analyze">Compare</button>
 
-    <pre id="pre"></pre>
+    <h1>Configuration</h1>
+    <datalist id="environments">
+    </datalist>
+    <div>
+      <div id="include">
+        <h2>Include</h2>
+        <div><div id="include-inputs"></div></div>
+        <button id="include-add">+</button>
+      </div>
+      <div id="exclude">
+        <h2>Exclude</h2>
+        <div><div id="exclude-inputs"></div></div>
+        <button id="exclude-add">+</button>
+      </div>
+    </div>
+
+    <button id="analyze">Analyze</button>
+
+    <h1>Report</h1>
+
+    <h2>APIs</h2>
+
+    <pre id="apis"></pre>
+
+    <h2>Structures</h2>
+
+    <pre id="structs"></pre>
 
     <script language="javascript"  src="js/analyze.js"></script>
   </body>
