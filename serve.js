@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false, limit: '500mb' }));
 
 app.use(express.static('static'));
 
-var DATA_DIR = './static/data';
+var DATA_DIR = './data';
 var HTML_HEAD = '<html><head><meta name="viewport" content="width=500, initial-scale=1"></head><body>';
 var HTML_FOOT = '</body></html>';
 
