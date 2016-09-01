@@ -9,7 +9,7 @@ Playground for better understanding Web APIs.
 
 ## Exploring Data
 
-While serving locally, `localhost:8000/analyze.html`. This tool allows you to select browser environments to include and exclude, and then look at the APIs and structures in the resulting environment.
+While serving locally `localhost:8000/analyze.html`. This tool allows you to select browser environments to include and exclude, and then look at the APIs and structures in the resulting environment.
 
 E.g., What APIs and structures exist...
 
