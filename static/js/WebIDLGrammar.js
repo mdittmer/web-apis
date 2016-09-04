@@ -15,8 +15,209 @@
  * limitations under the License.
  */
 
-var result = WebIDLGrammar.parseString(
-  `[1]	Definitions	→	ExtendedAttributeList Definition Definitions
+(function(define, undefined) {
+  define('WebIDLGrammar', function() {
+    var stdlib = require('stdlib');
+    var parse = require('parse');
+
+    // Expose parsers API locally.
+    var keys = Object.getOwnPropertyNames(parse.parsers);
+    var js = keys.map(function(key) {
+      return 'var ' + key + ' = parse.parsers.' + key + ';';
+    }).join('\n');
+    // TODO: Security?
+    eval(js);
+
+    function True() { return true; }
+    function False() { return false; }
+
+    function IDL() {}
+    IDL.prototype.isLiteral = IDL.prototype.isKeyRef = IDL.prototype.isEpsilon =
+      False;
+    IDL.prototype.toGrammar = function() { return ''; };
+
+    function Literal(value) {
+      this.value = value;
+    }
+    Literal.prototype = Object.create(IDL.prototype);
+    Literal.prototype.isLiteral = True;
+    Literal.prototype.toGrammar = function() {
+      return "'" + this.value + "'";
+    };
+
+    function KeyRef(value) {
+      this.value = value;
+    }
+    KeyRef.prototype = Object.create(IDL.prototype);
+    KeyRef.prototype.isKeyRef = True;
+    KeyRef.prototype.toGrammar = function() {
+      return "sym('" + this.value + "')";
+    };
+
+    function Key(value) {
+      this.value = value;
+    }
+    Key.prototype = Object.create(IDL.prototype);
+    Key.prototype.toGrammar = function() {
+      return this.value;
+    };
+
+    function Epsilon() {}
+    Epsilon.prototype = Object.create(IDL.prototype);
+    Epsilon.prototype.isEpsilon = True;
+
+    function Production(key, value) {
+      this.key = key;
+      this.value = value;
+    }
+    Production.prototype.toGrammar = function() {
+      var str = '';
+      str += this.key.toGrammar() + ': ';
+
+      // TODO: Optional detection doesn't seem to be working.
+      var len = this.value.length;
+      this.value = this.value.filter(function(parts) {
+        return parts[0] && ! parts[0].isEpsilon();
+      });
+      var isOptional = this.value.length !== len;
+
+      if ( isOptional ) str += 'optional(';
+      if ( this.value.length > 1 ) str += 'alt(\n';
+      for ( var i = 0; i < this.value.length; i++ ) {
+        str += 'seqEven(';
+        str += this.value[i].map(function(part) {
+          return part.toGrammar();
+        }).join(", sym('wsc_'),\n") + ",\nsym('wsc_')";
+        str += ')';
+        if ( i < this.value.length - 1 ) str += ',\n';
+      }
+      if ( this.value.length > 1 ) str += ')';
+      if ( isOptional ) str += ')';
+      return str;
+    };
+
+    function ProductionList(productions) {
+      this.productions = productions;
+    }
+    ProductionList.prototype = Object.create(IDL.prototype);
+    ProductionList.prototype.toGrammar = function() {
+      return this.productions.map(function(production) {
+          return production.toGrammar();
+        }).join(',\n');
+    };
+
+    function IDLFragment(productionList) {
+      this.productionList = productionList;
+    }
+    IDLFragment.prototype = Object.create(IDL.prototype);
+    IDLFragment.prototype.PREFIX =
+      stdlib.multiline(function() {/*new parse.Parser(new parse.Grammar({
+  START: sym('Definitions'),
+
+  ws: alt(' ', '\t', '\n', '\r', '\f'),
+  ws_: repeat0(sym('ws')),
+  wsc_: repeat0(alt(sym('ws_'), sym('comment'))),
+  _09: range('0', '9'),
+  r09: repeat(sym('_09')),
+  p09: plus(sym('_09')),
+  om: optional('-'),
+  opm: optional(alt('+', '-')),
+  Ee: alt('E', 'e'),
+  AZ: range('A', 'Z'),
+  az: range('a', 'z'),
+
+  integer: seq(
+    sym('om'),
+    alt(
+      seq(range('1', '9'), sym('r09')),
+      seq('0', alt('X', 'x'), plus(alt(
+        range('0', '9'), range('A', 'F'), range('a', 'f')))),
+      seq('0', repeat(range('0', '7'))))),
+  float: seq(
+    sym('om'),
+    alt(
+      seq(
+        alt(
+          seq(sym('p09'), '.', sym('r09')),
+          seq(sym('r09'), '.', sym('p09'))),
+        optional(
+          seq(sym('Ee'), sym('opm'), sym('p09')))),
+      seq(sym('p09'), sym('Ee'), sym('opm'), sym('p09')))),
+  identifier: str(seq(
+    optional('_'),
+    alt(sym('AZ'), sym('az')),
+    str(repeat(alt(sym('AZ'), sym('az'), sym('_09'), '_', '-'))))),
+  string: seq('"', notChar('"'), '"'),
+  comment: alt(
+    seq('//', repeat0(notChars('\r\n')), alt('\r\n', '\n')),
+    seq('/*', repeat0(not('*\/')), '*\/')),
+  other: not(alt('\t', '\n','\r', ' ', sym('_09'), sym('AZ'), sym('az'))),
+*/});
+    IDLFragment.prototype.POSTFIX = '\n}))';
+    IDLFragment.prototype.toGrammar = function() {
+      return this.PREFIX + this.productionList.toGrammar() + this.POSTFIX;
+    };
+
+    var WebIDLGrammar = new parse.Parser(new parse.Grammar({
+        START: sym('productions'),
+
+        alpha: alt(range('A', 'Z'), range('a', 'z')),
+
+        productions: repeat(sym('production'), '\n'),
+
+        production: seq('[', plus(range('0', '9')), ']	',
+                        sym('key'), '	→	', sym('parts'),
+                        sym('altParts')),
+
+        key: str(plus(sym('alpha'))),
+
+        parts: plus(alt(sym('strLiteral'), sym('keyRef'), sym('epsilon')), ' '),
+
+        strLiteral: seq1(1, '"', str(plus(notChar('"'))), '"'),
+
+        keyRef: str(plus(sym('alpha'))),
+
+        epsilon: literal('ε'),
+
+        altParts: repeat(sym('altPart')),
+
+        altPart: seq1(1, '\n | ', sym('parts')),
+    }));
+    WebIDLGrammar.addActions([
+      // ,
+      //   alt(
+      //     seq('//', repeat0(notChars('\r\n'), anyChar), alt('\r\n', '\n')),
+      //     seq('/*', repeat0(not('*/', anyChar)), '*/'))
+      // ).addActions({
+      function strLiteral(str) {
+        return new Literal(str);
+      },
+      function keyRef(str) {
+        return new KeyRef(str);
+      },
+      function epsilon() {
+        return new Epsilon();
+      },
+      function key(str) {
+        return new Key(str);
+      },
+      function production(parts) {
+        var key = parts[3];
+        var value = [parts[5]].concat(parts[6]);
+        return new Production(key, value);
+      },
+      function productions(productions) {
+        return new ProductionList(productions);
+      },
+      function START(productionList) {
+        return new IDLFragment(productionList);
+      },
+    ]);
+
+    // Web IDL spec modified from http://heycam.github.io/webidl/#idl-grammar.
+    // Modifications:
+    // [67]: Changed to refer to [92-96] as per: http://heycam.github.io/webidl/#idl-extended-attributes.
+    function WEB_IDL_GRAMMAR_F() {/*[1]	Definitions	→	ExtendedAttributeList Definition Definitions
  | ε
 [2]	Definition	→	CallbackOrInterface
  | Namespace
@@ -150,10 +351,11 @@ var result = WebIDLGrammar.parseString(
  | ε
 [66]	ExtendedAttributes	→	"," ExtendedAttribute ExtendedAttributes
  | ε
-[67]	ExtendedAttribute	→	"(" ExtendedAttributeInner ")" ExtendedAttributeRest
- | "[" ExtendedAttributeInner "]" ExtendedAttributeRest
- | "{" ExtendedAttributeInner "}" ExtendedAttributeRest
- | Other ExtendedAttributeRest
+[67]	ExtendedAttribute	→	ExtendedAttributeNoArgs
+ | ExtendedAttributeArgList
+ | ExtendedAttributeNamedArgList
+ | ExtendedAttributeIdent
+ | ExtendedAttributeIdentList
 [68]	ExtendedAttributeRest	→	ExtendedAttribute
  | ε
 [69]	ExtendedAttributeInner	→	"(" ExtendedAttributeInner ")" ExtendedAttributeInner
@@ -293,8 +495,28 @@ var result = WebIDLGrammar.parseString(
 [98]	NamespaceMembers	→	ExtendedAttributeList NamespaceMember NamespaceMembers
  | ε
 [99]	NamespaceMember	→	ReturnType OperationRest
-`,
-  WebIDLGrammar.START
-);
+*/}
 
-console.log(result);
+    var WEB_IDL_GRAMMAR = stdlib.multiline(WEB_IDL_GRAMMAR_F);
+
+    var res = WebIDLGrammar.parseString(WEB_IDL_GRAMMAR);
+    console.assert(res[0], 'Web IDL description parse failed');
+    var webIDLParserJS = res[1].toGrammar();
+
+    eval('var WebIDLGrammar = ' + webIDLParserJS + ';');
+    return WebIDLGrammar;
+  });
+})((function (undefined) {
+    if (typeof module !== 'undefined' && module.exports) {
+      return function(name, factory) { module.exports = factory(); };
+    } else if (typeof define === 'function') {
+      if ( define.amd )
+        return function(name, factory) { return define(factory); };
+      else
+        return define;
+    } else if (typeof window !== 'undefined') {
+      return function(name, factory) { window[name] = factory(); };
+    } else {
+      throw new Error('unknown environment');
+    }
+})());

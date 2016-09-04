@@ -19,7 +19,7 @@
 // fundamental behaviour of the object.
 
 (function(define, undefined) {
-  define(function() {
+  define('NameRewriter', function() {
     var NameRewriter = function(opts) {
       opts = opts || {};
       this.rewrites = opts.rewrites ||
@@ -121,14 +121,16 @@
 
     return NameRewriter;
   });
-})((function (name, undefined) {
-    if (typeof module !== 'undefined' && module.exports) {
-        return function (factory) { module.exports = factory(); };
-    } else if (typeof define === 'function' && define.amd) {
-        return define;
-    } else if (typeof window !== 'undefined') {
-        return function (factory) { window[name] = factory(); };
+})((function(undefined) {
+    if ( typeof module !== 'undefined' && module.exports ) {
+      return function(name, factory) { module.exports = factory(); };
+    } else if ( typeof define === 'function' && define.amd ) {
+      return function(name, factory) { return define(factory); };
+    } else if ( typeof define === 'function' && define.require ) {
+      return define;
+    } else if ( typeof window !== 'undefined' ) {
+      return function(name, factory) { window[name] = factory(); };
     } else {
-        throw new Error('unknown environment');
+      throw new Error('unknown environment');
     }
-})('NameRewriter'));
+})());
