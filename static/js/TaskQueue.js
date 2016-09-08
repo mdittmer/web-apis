@@ -14,46 +14,70 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+'use strict';
 
-TaskQueue = (function() {
-  // Very simple async task queue.
-  var TaskQueue = function(opts) {
-    opts = opts || {};
-    this.q = [];
-    this.maxDequeueSize = opts.maxDequeueSize || this.maxDequeueSize;
-    this.onTick = opts.onTick || this.onTick;
-    this.onDone = opts.onDone || this.onDone;
-  };
+(function(define) {
+  define([ 'facade' ], function(facade) {
+    // Very simple async task queue.
+    var TaskQueue = function(opts) {
+      opts = opts || {};
+      this.q = [];
+      this.maxDequeueSize = opts.maxDequeueSize || this.maxDequeueSize;
+      this.onTick = opts.onTick || this.onTick;
+      this.onDone = opts.onDone || this.onDone;
+    };
 
-  // Number of queued functions to run before allowing async tick.
-  TaskQueue.prototype.maxDequeueSize = 10;
-  // Singleton listeners for queue-fully-flushed and async-tick.
-  TaskQueue.prototype.onDone = TaskQueue.prototype.onTick = function() {};
+    // Number of queued functions to run before allowing async tick.
+    TaskQueue.prototype.maxDequeueSize = 10;
+    // Singleton listeners for queue-fully-flushed and async-tick.
+    TaskQueue.prototype.onDone = TaskQueue.prototype.onTick = function() {};
 
-  TaskQueue.prototype.async = function(f) {
-    window.setTimeout(f, 0);
-  };
+    TaskQueue.prototype.async = function(f) {
+      window.setTimeout(f, 0);
+    };
 
-  // Enqueue a number of tasks.
-  TaskQueue.prototype.enqueue = function(/* fs */) {
-    for ( var i = 0; i < arguments.length; i++ ) {
-      this.q.push(arguments[i]);
-    }
-  };
+    // Enqueue a number of tasks.
+    TaskQueue.prototype.enqueue = function(/* fs */) {
+      for ( var i = 0; i < arguments.length; i++ ) {
+        this.q.push(arguments[i]);
+      }
+    };
 
-  // Flush at most this.maxDequeueSize tasks.
-  TaskQueue.prototype.flush = function() {
-    this.onTick();
-    for ( var i = 0; i < this.maxDequeueSize && this.q.length > 0; i++ ) {
-      var f = this.q.shift();
-      f();
-    }
-    if ( this.q.length > 0 ) this.async(this.flush.bind(this));
-    else                     this.onDone();
-  };
+    // Flush at most this.maxDequeueSize tasks.
+    TaskQueue.prototype.flush = function() {
+      this.onTick();
+      for ( var i = 0; i < this.maxDequeueSize && this.q.length > 0; i++ ) {
+        var f = this.q.shift();
+        f();
+      }
+      if ( this.q.length > 0 ) this.async(this.flush.bind(this));
+      else                     this.onDone();
+    };
 
-  return facade(TaskQueue, {
-    properties: [ 'maxDequeueSize', 'onTick', 'onDone' ],
-    methods: { enqueue: 1, flush: 1 },
+    return facade(TaskQueue, {
+      properties: [ 'maxDequeueSize', 'onTick', 'onDone' ],
+      methods: { enqueue: 1, flush: 1 },
+    });
   });
-})();
+})((function() {
+  if ( typeof module !== 'undefined' && module.exports ) {
+    return function(deps, factory) {
+      if ( ! factory ) module.exports = deps();
+      else             module.exports = factory.apply(this, deps.map(require));
+    };
+  } else if ( typeof define === 'function' && define.amd ) {
+    return define;
+  } else if ( typeof window !== 'undefined' ) {
+    return function(deps, factory) {
+      if ( ! document.currentScript ) throw new Error('Unknown module name');
+
+      window[
+        document.currentScript.getAttribute('src').split('/').pop().split('#')[
+          0].split('?')[0].split('.')[0]
+      ] = (factory || deps).apply(
+        this, factory ? deps.map(function(name) { return window[name]; }) : []);
+    };
+  } else {
+    throw new Error('Unknown environment');
+  }
+})());

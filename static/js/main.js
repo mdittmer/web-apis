@@ -14,28 +14,56 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+'use strict';
 
-(function() {
-  // Provide some browser + platform info in the UI.
-  var browserElement = document.body.querySelector('#browser');
-  var platformElement = document.body.querySelector('#platform');
-  var environmentInfo = new NameRewriter().userAgentAsPlatformInfo(
-    navigator.userAgent
-  );
-  browserElement.textContent = environmentInfo.browser.name + ' ' +
-    environmentInfo.browser.version;
-  platformElement.textContent = environmentInfo.platform.name + ' ' +
-    environmentInfo.platform.version;
+(function(define) {
+  define(
+    [ 'NameRewriter', 'ObjectGraph' ],
+    function(NameRewriter, ObjectGraph) {
+      // Provide some browser + platform info in the UI.
+      var browserElement = document.body.querySelector('#browser');
+      var platformElement = document.body.querySelector('#platform');
+      var environmentInfo = new NameRewriter().userAgentAsPlatformInfo(
+        navigator.userAgent
+      );
+      browserElement.textContent = environmentInfo.browser.name + ' ' +
+        environmentInfo.browser.version;
+      platformElement.textContent = environmentInfo.platform.name + ' ' +
+        environmentInfo.platform.version;
 
-  // Wire up listener for user-initiated data collection.
-  var dataElement = document.body.querySelector('#data');
-  document.body.querySelector('#collect').addEventListener('click', function() {
-    var graph = new ObjectGraph({
-      maxDequeueSize: 1000,
-      onDone: function() {
-        dataElement.value = JSON.stringify(graph.toJSON());
-      },
+      // Wire up listener for user-initiated data collection.
+      var dataElement = document.body.querySelector('#data');
+      document.body.querySelector('#collect').addEventListener('click', function() {
+        var graph = new ObjectGraph({
+          maxDequeueSize: 1000,
+          onDone: function() {
+            dataElement.value = JSON.stringify(graph.toJSON());
+          },
+        });
+        graph.capture(window, { key: 'window' });
+      });
+
+      return null;
     });
-    graph.capture(window, { key: 'window' });
-  });
-})();
+})((function() {
+  if ( typeof module !== 'undefined' && module.exports ) {
+    return function(deps, factory) {
+      if ( ! factory ) module.exports = deps();
+      else             module.exports = factory.apply(this, deps.map(require));
+    };
+  } else if ( typeof define === 'function' && define.amd ) {
+    return define;
+  } else if ( typeof window !== 'undefined' ) {
+    return function(deps, factory) {
+      if ( ! document.currentScript ) throw new Error('Unknown module name');
+
+      window[
+        document.currentScript.getAttribute('src').split('/').pop().split('#')[
+          0].split('?')[0].split('.')[0]
+      ] = (factory || deps).apply(
+        this, factory ? deps.map(function(name) { return window[name]; }) : []);
+    };
+  } else {
+    throw new Error('Unknown environment');
+  }
+})());

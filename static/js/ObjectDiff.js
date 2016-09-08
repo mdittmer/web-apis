@@ -81,8 +81,8 @@ ObjectDiff = (function() {
   };
 
   ObjectDiff.prototype.initLazyData = function() {
-    lazy.memo(this, 'allAExtra', this.allExtra.bind(this, 'a'));
-    lazy.memo(this, 'allBExtra', this.allExtra.bind(this, 'b'));
+    stdlib.memo(this, 'allAExtra', this.allExtra.bind(this, 'a'));
+    stdlib.memo(this, 'allBExtra', this.allExtra.bind(this, 'b'));
   };
 
   // Store a conflict between a and b's object graphs. We arrived at a-space

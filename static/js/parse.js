@@ -14,19 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+'use strict';
 
 // Modified from https://github.com/foam-framework/foam/blob/master/core/parse.js.
-// Most of this file does not conform to conventions found elsewhere in this
-// project.
 
-// TODO: Rewrite this module to conform to project conventions.
+(function(define) {
+  define(['stdlib'], function(stdlib) {
+    var DEBUG_PARSE = 0;
+    var parserVersion_ = 1;
 
-(function(define, undefined) {
-  define('parse', function() {
-    var stdlib = require('stdlib');
+    var parse = { factories_: {} };
 
     //
-    // Main class: A parser stream for strings
+    // A parser stream for strings
     //
     function StringParserStream(str) {
       this.pos = 0;
@@ -73,119 +73,355 @@
       toString: { value: function() {
         return this.str_[0].substring(this.pos);
       } },
+      clone: { value: function() {
+        var ret = Object.create(this.__proto__);
+        var keys = Object.getOwnPropertyNames(this);
+        for ( var i = 0; i < keys.length; i++ ) {
+          ret[keys[i]] = this[keys[i]];
+        }
+        return ret;
+      } },
+    });
+
+    // Parser stream that captures the first time the parser advances by
+    // accessing tail.
+    function TrapParserStream(ps) {
+      this.pos = ps.pos;
+      this.head = ps.head;
+      this.value = ps.value;
+      this.goodChar = false;
+    }
+    TrapParserStream.prototype.getValue = function() { return this.value; };
+    TrapParserStream.prototype.setValue = function(v) {
+      this.value = v;
+      return this;
+    };
+    Object.defineProperty(TrapParserStream.prototype, 'tail', {
+      get: function() {
+        this.goodChar = true;
+        return {
+          pos: this.pos + 1,
+          head: null,
+          value: this.value,
+          getValue: function() { return this.value; },
+          setValue: function(v) {
+            this.value = v;
+            return this;
+          }
+        };
+      },
     });
 
     //
     // Helper functions
     //
 
-    // Literalize string.
-    function prep(arg) {
-      if ( typeof arg === 'string' ) return pp.literal(arg);
-
-      return arg;
-    }
-
-    // Literalize strings.
-    function prepArgs(args) {
-      for ( var i = 0 ; i < args.length ; i++ ) {
-        args[i] = prep(args[i]);
+    function clone(o) {
+      var rtn = {};
+      var keys = Object.getOwnPropertyNames(o);
+      for ( var i = 0; i < keys.length; i++ ) {
+        rtn[keys[i]] = o[keys[i]];
       }
-
-      return args;
+      return rtn;
+    }
+    function toJSON(o) {
+      var type = typeof o;
+      if ( type === 'undefined' ) return undefined;
+      if ( o === null ) return null;
+      if ( typeof o.toJSON === 'function' )
+        return o.toJSON.apply(o, stdlib.argsToArray(arguments).slice(1));
+        // TODO: Do all relevant platforms support Array.isArray?
+      else if ( Array.isArray(o) )
+        return o.map(toJSON);
+      else if ( type === 'function' )
+        return funcToJSON(o);
+      else
+        return o;
+    }
+    function fromJSON(o) {
+      if ( type === 'undefined' ) return undefined;
+      if ( o === null ) return null;
+      if ( typeof o.ctor === 'string' ) {
+        var ctor;
+        eval('ctor = ' + o.ctor);
+        if ( typeof ctor.fromJSON === 'function' ) {
+          delete o.ctor;
+          var rtn = ctor.fromJSON(o);
+          o.ctor = ctor;
+          return rtn;
+        }
+      }
+      return o;
+    }
+    function funcToJSON(f) {
+      var json = {
+        ctor: 'parse.function',
+        __function__: Function.prototype.toString.call(f),
+        label: f.label ? f.label : f.name
+      };
+      json.context = toJSON(f.context || null);
+      json.closure = f.closure ? stdlib.mapMap(f.closure, toJSON) : {};
+      json.args = f.args ? f.args.slice() : [];
+      return json;
+    }
+    function funcFromJSON(_________) {
+      var ret;
+      eval((function() {
+        var json = _________;
+        var str = 'var __function__ = ' + json.__function__ +
+              ';\n';
+        var keys = Object.getOwnPropertyKeys(json.closure);
+        for ( var i = 0; i < keys.length; i++ ) {
+          var key = keys[i];
+          var value = json.closure[key];
+          str += 'var ' + key + ' = fromJSON(' + JSON.stringify(value) + ')';
+        }
+        if ( json.context === null ) {
+          if ( json.args.length > 0 ) {
+            str += 'var __args__ = ' + json.args.map(function(arg) {
+              return 'fromJSON(' + JSON.stringify(arg) + ')';
+            });
+          }
+          str += 'ret = function ' + json.label + '() { ' +
+            'return __function__.apply(this, __args__.concat(' +
+            'stdlib.argsToArray(arguments))); }';
+        } else {
+          str += 'ret = __function__.bind(fromJSON(' +
+            JSON.stringify(json.context) + ')' + json.args.map(function(arg) {
+              return 'fromJSON(' + JSON.stringify(arg) + ')';
+            }) + ');';
+        }
+        return str;
+      })());
+      return ret;
+    }
+    function f_toJSON() {
+      return funcToJSON(this);
+    }
+    function f_toString() {
+      return 'function ' + this.label + '(' + this.args.join(', ') +
+        ') { ... }';
+    }
+    function p_toString() {
+      var str = this.label;
+      var keys = Object.getOwnPropertyNames(this.closure);
+      if ( keys.length === 1 && keys[0] === 'arguments' ) {
+        str += stdlib.toString(this.closure.arguments);
+      } else {
+        var sep = keys.length > 3 ? '\n' : ' ';
+        str += '{' + sep;
+        for ( var i = 0; i < keys.length; i++ ) {
+          str += keys[i] + ': ' + stdlib.toString(this.closure[keys[i]]) +','
+            + sep;
+        }
+        str += '}';
+      }
+      return str;
+    }
+    function decorateFunction(f, opts) {
+      f.label = opts.label || f.name;
+      console.assert(f.label, 'Decorated functions must be labeled');
+      f.context = opts.context || null;
+      f.closure = opts.closure || {};
+      f.args = opts.args || [];
+      f.toJSON = opts.toJSON || f_toJSON;
+      f.toString = opts.toString || f_toString;
+      return f;
     }
 
-    var DEBUG_PARSE = false;
-    var parserVersion_ = 1;
+    parse.function = {
+      fromJSON: funcFromJSON,
+      toJSON: funcToJSON,
+    };
 
     //
-    // Parser combinators
+    // Parser controllers: Parsers call into their controller to invoke other
+    // parsers. This inversion of control allows for additional bookkeeping
+    // independent of parser implementations.
+    //
+    function ParserController(opts) {
+      this.init(opts);
+    }
+    ParserController.prototype.init = function(opts) {
+      this.factories = opts.factories || clone(parse.factories_);
+      this.bindFactories_();
+
+      this.grammar = opts.grammar || { START: parse.grammar.fail };
+      this.grammar.fail = this.grammar.fail || parse.grammar.fail;
+      this.actions = {};
+
+      if ( ! opts.actions ) return;
+
+      this.addActions(opts.actions);
+    };
+    ParserController.prototype.parse = function(parser, pstream) {
+      if ( DEBUG_PARSE !== 0 ) {
+        console.log(pstream.head, '@', pstream.pos);
+        console.log('>>>>', parser.toString());
+        if ( DEBUG_PARSE % 5 === 4 ) debugger;
+        DEBUG_PARSE++;
+      }
+      var ret = parser.call(this, pstream);
+      if ( DEBUG_PARSE !== 0 ) {
+        DEBUG_PARSE--;
+        if ( ret )
+          console.log(parser.toString(), '<<<<', ret.head, '@', ret.pos);
+        else
+          console.log(parser.toString(), '<<<<', ret);
+        if ( DEBUG_PARSE % 3 === 2 ) debugger;
+      }
+      return ret;
+    };
+    ParserController.prototype.parseString = function(str, opt_start) {
+      // TODO: This doesn't re-use a parser stream to save memory. Is such a
+      // measure be necessary?
+      var ps = new StringParserStream(str);
+      var res = this.parse(opt_start || this.grammar.START, ps);
+
+      return [ res && res.pos === str.length, res && res.value, res ];
+    };
+    ParserController.prototype.bindFactories_ = function(sym, action) {
+      var keys = Object.getOwnPropertyNames(this.factories);
+      for ( var i = 0; i < keys.length; i++ ) {
+        this.factories[keys[i]] = this.factories[keys[i]].bind(this);
+      }
+    };
+    ParserController.prototype.wrapInAction_ = function(sym, action) {
+      var f = this.grammar[sym];
+
+      var p2 = decorateFunction(function(ps) {
+        var p = f;
+        var val = ps.value;
+        var ps2 = this.parse(p, ps);
+
+        return ps2 && ps2.setValue(action.call(this, ps2.value, val));
+      }, { label: sym, closure: { f: f, action: action } });
+      this.grammar[sym] = p2;
+    };
+    ParserController.prototype.addAction = function(sym, f) {
+      var action = decorateFunction(f, { label: sym });
+      this.wrapInAction_(sym, action);
+
+      // Store action for re-wrapping against JSON routines.
+      var as = this.actions[sym] = this.actions[sym] || [];
+      as.push(action);
+    };
+    ParserController.prototype.addActions = function() {
+      var actions = arguments;
+      for ( var i = 0; i < actions.length; i++ ) {
+        this.addAction(actions[i].name, actions[i]);
+      }
+    };
+    ParserController.prototype.toJSON = function() {
+      return {
+        ctor: 'parse.ParserController',
+        factories: stdlib.mapMap(this.factories, toJSON),
+        grammar: stdlib.mapMap(this.grammar, toJSON),
+        actions: stdlib.mapMap(this.actions, toJSON),
+      };
+      return rtn;
+    };
+    ParserController.fromJSON = function(json, opt_o) {
+      var o = opt_o || Object.create(ParserController.prototype);
+      o.init();
+
+      // o.factories = json.factories ? stdlib.mapMap(json.factories, funcFromJSON) :
+      //   clone(parse.factories_);
+      // o.bindFactories_();
+
+      // o.grammar = json.grammar ? stdlib.mapMap(json.grammar, funcFromJSON) :
+      //   { START: parse.grammar.fail };
+      // o.grammar.fail = o.grammar.fail || parse.grammar.fail;
+
+      // o.actions = {};
+
+      // if ( json.actions )
+      //   o.addActions(stdlib.mapMap(json.actions, funcFromJSON));
+
+      return o;
+    };
+    parse.prep = ParserController.prototype.prep = function(arg) {
+      if ( typeof arg === 'string' ) return this.factories.literal(arg);
+      return arg;
+    };
+    parse.prepArgs = ParserController.prototype.prepArgs = function(args) {
+      for ( var i = 0 ; i < args.length ; i++ ) {
+        args[i] = this.prep(args[i]);
+      }
+      return args;
+    };
+
+    // TODO: This controller strategy is broken.
+    // E.g., a parser that skips comments parses "A/* comment */B" as "AB".
+    function SkipParserController(opts) {
+      this.skip_ = true;
+      this.init(opts);
+      this.skipParser = opts.skipParser || this.grammar.fail;
+    }
+    SkipParserController.prototype = Object.create(ParserController.prototype);
+    SkipParserController.prototype.parse = function(parser, pstream) {
+      if ( ! this.skip_ )
+        return ParserController.prototype.parse.call(this, parser, pstream);
+
+      this.skip_ = false;
+      var skippstream = pstream;
+      while ( skippstream !== null ) {
+        skippstream = this.skipParser.call(this, skippstream);
+        console.assert(skippstream === null || skippstream.pos > pstream.pos,
+                       'Skip parser neither failed nor advanced');
+        pstream = skippstream || pstream;
+      }
+      this.skip_ = true;
+
+      return ParserController.prototype.parse.call(this, parser, pstream);;
+    };
+    // TODO: Add delegating to/from JSON.
+
+    //
+    // Parser factories
     //
     // These are functions (parser combinators) that return a function (a
-    // parser) of the following form:
+    // parser) of the following type:
     //
-    // (parserStream) => ParserStream|null.
+    // ParserStream => ParserStream|null.
     //
     // A parser returns null if and only if the parser failed against the input
     // stream.
     //
 
-    function decorateFunction(f, data) {
-      var keys = Object.getOwnPropertyNames(data);
-      for ( var i = 0; i < keys.length; i++ ) {
-        if ( ! f.hasOwnProperty(keys[i]) ) f[keys[i]] = data[keys[i]];
-      }
-      return f;
-    }
-    function copyFunctionDecorations(f1, f2) {
-      var keys = Object.getOwnPropertyNames(f1);
-      for ( var i = 0; i < keys.length; i++ ) {
-        if ( ! f2.hasOwnProperty(keys[i]) ) f2[keys[i]] = f1[keys[i]];
-      }
-      return f2;
-    }
-
-    function fromJSON(combinators, json) {
-      if ( json === null || typeof json !== 'object' ) return json;
-      return combinators[json.label].apply(
-        this,
-        json.args.map(fromJSON.bind(this, combinators))
-      );
-    }
-
-    function combinators() {
-      function toJSON() {
-        return {
-          label: this.label,
-          args: this.args.map(function(arg) {
-            if ( arg === null ) return null;
-            // TODO: Should be able to eliminate this
-            if ( typeof arg === 'undefined' ) return undefined;
-            return arg.toJSON ? arg.toJSON() : arg;
-          }),
-        };
-      }
-      function toString() {
-        return this.label + '(' +
-          this.args.map(function(arg) {
-            if ( arg === null ) return 'null';
-            if ( typeof arg === 'undefined' ) return 'undefined';
-            if ( typeof arg === 'string' ) return '"' + arg + '"';
-            if ( Array.isArray(arg) ) return '[' + arg.map(function(subArg) {
-              return toString.call(subArg);
-            }).join(', ') + ']';
-            return arg.toString();
-          }) + ')';
-        };
-
-      function combinator(f) {
-        return function() {
+    function defineParserFactories() {
+      function decorateParserFactory(f) {
+        var argNames = stdlib.getArgNames(f);
+        var f2 = decorateFunction(function() {
           var args = stdlib.argsToArray(arguments);
-          return decorateFunction(f.apply(this, args), {
-            label: f.name,
-            args: args,
-            toJSON: toJSON,
-            toString: toString,
-          });
-        };
+          var closure = {}, i;
+          for ( i = 0; i < argNames.length; i++ ) {
+            closure[argNames[i]] = args[i];
+          }
+          if ( i < args.length ) closure.arguments = args.slice(i);
+          return decorateFunction(
+            f.apply(this, args),
+            {
+              label: f.name + 'Parser',
+              closure: closure,
+              toString: p_toString,
+            }
+          );
+        }, { label: f.name, closure: { f: f } });
+        return f2;
       }
 
       for ( var i = 0; i < arguments.length; i++ ) {
         var f = arguments[i];
-        this[f.name] = combinator(f);
+        this[f.name] = decorateParserFactory(f);
       }
 
       return this;
     }
 
-    var parse = {
-      combinators: combinators,
-      parsers: {},
-    };
-    var pp = parse.parsers;
-    var parserCombinators = combinators.bind(parse.parsers);
+    var addParserFactories = defineParserFactories.bind(parse.factories_);
 
-    parserCombinators(
+    addParserFactories(
       // Unicode range from c1 to c2, inclusive.
       function range(c1, c2) {
         return function(ps) {
@@ -213,7 +449,7 @@
           } else {
             f = function(ps) {
               for ( var i = 0 ; i < str.length ; i++, ps = ps.tail ) {
-                if ( str.charAt(i) !== ps.head ) return undefined;
+                if ( str.charAt(i) !== ps.head ) return null;
               }
 
               return ps.setValue(opt_value || str);
@@ -233,8 +469,8 @@
         str = str.toLowerCase();
         return function(ps) {
           for ( var i = 0 ; i < str.length ; i++, ps = ps.tail ) {
-            if ( ps.head === null || str.charAt(i) !== ps.head.toLowerCase() )
-              return null;
+            if ( ps.head === null ||
+                 str.charAt(i) !== ps.head.toLowerCase() ) return null;
           }
 
           return ps.setValue(opt_value || str);
@@ -244,8 +480,7 @@
       // Single character; any character but c.
       function notChar(c) {
         return function(ps) {
-          return ps.head !== null && ps.head !== c ? ps.tail.setValue(ps.head) :
-            null;
+          return ps.head !== c ? ps.tail.setValue(ps.head) : null;
         };
       },
 
@@ -257,10 +492,11 @@
         };
       },
 
-      // Negate parser p; optionally run opt_else after negation.
+      // Negate parser p; optionally run opt_else after negation (this is useful
+      // for ensuring that input advances when repeating against not(...)).
       function not(p, opt_else) {
-        p = prep(p);
-        opt_else = prep(opt_else);
+        p = this.prep(p);
+        opt_else = this.prep(opt_else);
         return function(ps) {
           return this.parse(p, ps) ? null :
             opt_else ? this.parse(opt_else, ps) : ps;
@@ -269,12 +505,12 @@
 
       // Interpret input parser, p, as optional.
       function optional(p) {
-        p = prep(p);
+        p = this.prep(p);
         return function(ps) { return this.parse(p, ps) || ps.setValue(null); };
       },
 
       function copyInput(p) {
-        p = prep(p);
+        p = this.prep(p);
         return function(ps) {
           var res = this.parse(p, ps);
 
@@ -286,7 +522,7 @@
       // Parses if the p parses, but doesn't advance input as a result of
       // running p.
       function lookahead(p) {
-        p = prep(p);
+        p = this.prep(p);
         return function(ps) { return this.parse(p, ps) && ps; };
       },
 
@@ -294,8 +530,8 @@
       // delimiters between parses using p. Also optional: succeed if and only
       // if number of successful p parses is in the range [opt_min, opt_max].
       function repeat(p, opt_delim, opt_min, opt_max) {
-        p = prep(p);
-        opt_delim = prep(opt_delim);
+        p = this.prep(p);
+        opt_delim = this.prep(opt_delim);
 
         return function(ps) {
           var ret = [];
@@ -318,12 +554,12 @@
 
           return ps.setValue(ret);
         };
-      }
-    );
+      },
 
-    parserCombinators(
       // One or more parses of p, optionally separated by parser, opt_delim.
-      function plus(p, opt_delim) { return pp.repeat(p, opt_delim, 1); },
+      function plus(p, opt_delim) {
+        return this.factories.repeat(p, opt_delim, 1);
+      },
 
       // Forbid activating the "skip parser" in parsing p
       function noskip(p) {
@@ -337,7 +573,7 @@
 
       // Like repeat, except doesn't store results
       function repeat0(p) {
-        p = prep(p);
+        p = this.prep(p);
 
         return function(ps) {
           var res;
@@ -348,9 +584,9 @@
 
       // Like plus, except doesn't store results
       function plus0(p) {
-        p = prep(p);
+        p = this.prep(p);
 
-        var f = function(ps) {
+        return function(ps) {
           var res;
           if ( ! (res = this.parse(p, ps)) ) return null;
           ps = res;
@@ -361,7 +597,7 @@
 
       // Run a sequence of parsers
       function seq(/* vargs */) {
-        var args = prepArgs(arguments);
+        var args = this.prepArgs(arguments);
 
         return function(ps) {
           var ret = [];
@@ -377,13 +613,13 @@
 
       // Like seq, except returns result of n'th parser.
       function seq1(n /*, vargs */) {
-        var args = prepArgs(stdlib.argsToArray(arguments).slice(1));
+        var args = this.prepArgs(stdlib.argsToArray(arguments).slice(1));
 
         return function(ps) {
           var ret;
 
           for ( var i = 0 ; i < args.length ; i++ ) {
-            if ( ! ( ps = this.parse(args[i], ps) ) ) return undefined;
+            if ( ! ( ps = this.parse(args[i], ps) ) ) return null;
             if ( i == n ) ret = ps.value;
           }
 
@@ -393,65 +629,51 @@
 
       // Simplified implementation of alt
       function simpleAlt(/* vargs */) {
-        var args = prepArgs(arguments);
+        var args = this.prepArgs(arguments);
 
         if ( args.length == 1 ) return args[0];
 
         return function(ps) {
+          var res = null, pos = -1;
           for ( var i = 0 ; i < args.length ; i++ ) {
-            var res = this.parse(args[i], ps);
-
-            if ( res ) return res;
+            var resi = this.parse(args[i], ps);
+            if ( resi !== null && (res === null || pos < resi.pos ) ) {
+              res = resi;
+              pos = resi.pos;
+            }
           }
-
-          return undefined;
-        };
-      }
-    );
-
-    // Parser stream that captures the first time the parser advances by
-    // accessing tail.
-    function TrapParserStream(ps) {
-      this.head = ps.head;
-      this.value = ps.value;
-      this.goodChar = false;
-    }
-    TrapParserStream.prototype.getValue = function() { return this.value; };
-    TrapParserStream.prototype.setValue = function(v) {
-      this.value = v;
-      return this;
-    };
-    Object.defineProperty(TrapParserStream.prototype, 'tail', {
-      get: function() {
-        this.goodChar = true;
-        return {
-          value: this.value,
-          getValue: function() { return this.value; },
-          setValue: function(v) { this.value = v; }
+          return res;
         };
       },
-    });
 
-    parserCombinators(
       // Match one of the alternate parsers in arguments; more comprehensive
       // algorithm than simpleAlt
       function alt(/* vargs */) {
-        var SIMPLE_ALT = pp.simpleAlt.apply(null, arguments);
-        var args = prepArgs(arguments);
+        /* var SIMPLE_ALT = parse.factories.simpleAlt.apply(null, arguments); */
+        var args = this.prepArgs(arguments);
         var map  = {};
         var parserVersion = parserVersion_;
 
-        function nullParser() { return null; }
+        var nullParser = this.grammar.fail;
 
         function testParser(p, ps) {
-          var trapPS = new TrapParserStream(ps);
-          this.parse(p, trapPS);
+          var testPS = this.parse(p, ps.clone());
+          return testPS && testPS.pos > ps.pos;
+
+
+          // var trapPS = new TrapParserStream(ps);
+          // var parse = this.parse;
+          // this.parse = ParserController.prototype.parse;
+          // this.parse(p, trapPS);
+          // this.parse = parse;
 
           // console.log('*** TestParser:',p,c,goodChar);
-          return trapPS.goodChar;
+          // return trapPS.goodChar;
         }
 
         function getParserForChar(ps) {
+          if ( ps.head === null ) return nullParser;
+
           var c = ps.head;
           var p = map[c];
 
@@ -460,13 +682,12 @@
 
             for ( var i = 0 ; i < args.length ; i++ ) {
               var parser = args[i];
-
               if ( testParser.call(this, parser, ps) ) alts.push(parser);
             }
 
             p = alts.length == 0 ? nullParser :
               alts.length == 1 ? alts[0] :
-              pp.simpleAlt.apply(null, alts);
+              this.factories.simpleAlt.apply(this, alts);
 
             map[c] = p;
           }
@@ -479,7 +700,10 @@
             map = {};
             parserVersion = parserVersion_;
           }
-          var r1 = this.parse(getParserForChar.call(this, ps), ps);
+          var p1 = getParserForChar.call(this, ps);
+          var r1 = this.parse(
+            p1,
+            ps);
           // If alt and simpleAlt don't return same value then uncomment this
           // section to find out where the problem is occuring.
           /*
@@ -493,7 +717,7 @@
 
       // Concatenate results of a parser tht returns a string-array.
       function str(p) {
-        p = prep(p);
+        p = this.prep(p);
         return function(ps) {
           ps = this.parse(p, ps);
           return ps ? ps.setValue(ps.value.join('')) : null;
@@ -503,39 +727,45 @@
       // Pick array indices out of parser result
       // E.g., pick([0, 2], seq(sym('label'), '=', sym('value')))
       function pick(as, p) {
-        p = prep(p);
-        var f = function(ps) {
-          var ps = this.parse(p, ps);
-          if ( ! ps ) return undefined;
+        p = this.prep(p);
+        return function(ps) {
+          ps = this.parse(p, ps);
+          if ( ! ps ) return null;
           var ret = [];
           for ( var i = 0 ; i < as.length ; i++ ) ret.push(ps.value[as[i]]);
           return ps.setValue(ret);
         };
+      },
 
-        f.toString = function() { return 'pick(' + as + ', ' + p + ')'; };
-
-        return f;
-      }
-    );
-
-    parserCombinators(
       // Like seq, except stores every other parser; useful with interleaving
       // token and separator parsers
       function seqEven(/* vargs */) {
-        var args = prepArgs(arguments);
+        var args = this.prepArgs(arguments);
 
         var indices = [];
         for ( var i = 0; i < arguments.length; i += 2 ) indices.push(i);
 
-        return pp.pick(indices, pp.seq.apply(this, arguments));
+        return this.factories.pick(
+          indices, this.factories.seq.apply(this, arguments));
       },
 
       // Debug parser, p
-      function parsedebug(p) {
+      function debug(p) {
         return function(ps) {
           debugger;
           var old = DEBUG_PARSE;
-          DEBUG_PARSE = true;
+          DEBUG_PARSE = 1;
+          var ret = this.parse(p, ps);
+          DEBUG_PARSE = old;
+          return ret;
+        };
+      },
+
+      // Disabled debugging on parser, p
+      function nodebug(p) {
+        return function(ps) {
+          var old = DEBUG_PARSE;
+          DEBUG_PARSE = 0;
           var ret = this.parse(p, ps);
           DEBUG_PARSE = old;
           return ret;
@@ -546,7 +776,7 @@
       // E.g., { os: plus('o'), boo: seq('b', sym('os')) }
       function sym(name) {
         return function(ps) {
-          var p = this[name];
+          var p = this.grammar[name];
 
           if ( ! p )
             throw new Error('PARSE ERROR: Unknown Symbol <' + name + '>');
@@ -559,268 +789,96 @@
       function anyChar(ps) {
         // TODO: Why is this commented-out?
         return ps.head ? ps.tail/*.setValue(ps.head)*/ : null;
-      },
-
-      // Prevent successful parse
-      function fail(ps) {
-        return null;
       }
+    );
+
+    parse.factories = stdlib.mapMap(
+      parse.factories_,
+      function(factory) { return factory.bind(parse); }
     );
 
     //
     // Convenience parsers
     //
-    pp.alphaChar = pp.alt(pp.range('a','z'), pp.range('A', 'Z'));
-    pp.alphaNumChar = pp.alt(pp.alphaChar, pp.range('0', '9'));
-    pp.wordChar = pp.alt(pp.alphaNumChar, '_');
-
-    //
-    // Grammars-as-objects: Provides interface for parsing against grammar,
-    // JSON'ification, etc.
-    //
-    function Grammar(opt_productions) {
-      var productions = opt_productions || {};
-      var protoKeys = Object.getOwnPropertyNames(this.__proto__);
-      for ( var i = 0; i < protoKeys.length; i++ ) {
-        if ( productions.hasOwnProperty(protoKeys[i]) ) {
-          throw new Error('Use of reserved name in production: "' +
-                          protoKeys[i] + '"');
-        }
-      }
-
-      var keys = Object.getOwnPropertyNames(productions);
-      for ( var i = 0; i < keys.length; i++ ) {
-        this[keys[i]] = productions[keys[i]];
-      }
-    }
-    Grammar.prototype.parse = function(parser, pstream) {
-      //    if ( DEBUG_PARSE ) console.log('parser: ', parser, 'stream: ',pstream);
-      if ( DEBUG_PARSE && pstream.str_ ) {
-        console.log(new Array(pstream.pos).join('.'), pstream.head);
-        console.log(pstream.pos + '> ' + pstream.str_[0].substring(0, pstream.pos) + '(' + pstream.head + ')');
-      }
-      var ret = parser.call(this, pstream);
-      if ( DEBUG_PARSE ) {
-        console.log(parser + ' ==> ' + (!!ret) + '  ' + (ret && ret.value));
-      }
-      return ret;
-    };
-    Grammar.prototype.toJSON = function() {
-      var keys = Object.getOwnPropertyNames(this);
-      var rtn = {};
-      for ( var i = 0; i < keys.length; i++ ) {
-        rtn[keys[i]] = this[keys[i]].toJSON();
-      }
-      return rtn;
-    };
-    Grammar.fromJSON = function(combinators, json) {
-      var o = Object.create(Grammar.prototype);
-      var keys = Object.getOwnPropertyNames(json);
-      for ( var i = 0; i < keys.length; i++ ) {
-        o[keys[i]] = fromJSON(combinators, json[keys[i]]);
-      }
-      return o;
-    };
-
-    //
-    // Parsers-as-objects: Provides interface for parsing strings,
-    // JSON'ification, etc.
-    //
-    function Parser(opt_grammar, opt_actions) {
-      this.grammar = opt_grammar || new Grammar();
-      this.actions = opt_actions || {};
-    }
-    Parser.prototype.parseString = function(str, opt_start) {
-      var ps = this.stringPS;
-      ps.str = str;
-      var res = this.grammar.parse(opt_start || this.grammar.START, ps);
-
-      return [ res && res.pos === str.length, res && res.value ];
-    };
-    Parser.prototype.wrapInAction = function(sym, action) {
-      var p = this.grammar[sym];
-
-      var p2 = function(ps) {
-        var val = ps.value;
-        var ps2 = this.parse(p, ps);
-
-        return ps2 && ps2.setValue(action.call(this, ps2.value, val));
-      };
-      // Parser function preserves metadata.
-      copyFunctionDecorations(p, p2);
-      this.grammar[sym] = p2;
-    };
-    Parser.prototype.addAction = function(sym, action) {
-      this.wrapInAction(sym, action);
-
-      // Store action for re-wrapping against JSON routines.
-      var as = this.actions[sym] = this.actions[sym] || [];
-      as.push(action);
-    };
-    Parser.prototype.addActions = function(actions) {
-      for ( var i = 0; i < actions.length; i++ ) {
-        this.addAction(actions[i].name, actions[i]);
-      }
-    };
-    Parser.prototype.toJSON = function() {
-      var actions = {};
-      var keys = Object.getOwnPropertyNames(this.actions);
-      for ( var i = 0; i < keys.length; i++ ) {
-        actions[keys[i]] = this.actions[keys[i]].map(function(action) {
-          return action.toString();
-        });
-      };
-
-      return {
-        grammar: this.grammar.toJSON(),
-        actions: actions,
-      };
-    };
-    Parser.fromJSON = function(combinators, json) {
-      var o = Object.create(Parser.prototype);
-      o.grammar = Grammar.fromJSON(combinators, json.grammar);
-
-      var actions = {};
-      var keys = Object.getOwnPropertyNames(json.actions);
-      for ( var i = 0; i < keys.length; i++ ) {
-        actions[keys[i]] = json.actions[keys[i]].map(function(actionStr) {
-          var action = eval(actionStr);
-          o.wrapInAction(keys[i], action);
-        });
-      }
-      o.actions = actions;
-
-      return o;
-    };
-
-    // var grammar = {
-    //   parseString: function(str, opt_start) {
-    //     var ps = this.stringPS;
-    //     ps.str = str;
-    //     var res = this.parse(opt_start || this.START, ps);
-
-    //     return [ res && res.pos === str.length, res && res.value ];
-    //   },
-
-    //   parse: function(parser, pstream) {
-    //     //    if ( DEBUG_PARSE ) console.log('parser: ', parser, 'stream: ',pstream);
-    //     if ( DEBUG_PARSE && pstream.str_ ) {
-    //       console.log(new Array(pstream.pos).join('.'), pstream.head);
-    //       console.log(pstream.pos + '> ' + pstream.str_[0].substring(0, pstream.pos) + '(' + pstream.head + ')');
-    //     }
-    //     var ret = parser.call(this, pstream);
-    //     if ( DEBUG_PARSE ) {
-    //       console.log(parser + ' ==> ' + (!!ret) + '  ' + (ret && ret.value));
-    //     }
-    //     return ret;
-    //   },
-
-    //   /** Export a symbol for use in another grammar or stand-alone. **/
-    //   'export': function(str) {
-    //     return this[str].bind(this);
-    //   },
-
-    //   addAction: function(sym, action) {
-    //     var p = this[sym];
-    //     this[sym] = function(ps) {
-    //       var val = ps.value;
-    //       var ps2 = this.parse(p, ps);
-
-    //       return ps2 && ps2.setValue(action.call(this, ps2.value, val));
-    //     };
-
-    //     this[sym].toString = function() { return '<<' + sym + '>>'; };
-    //   },
-
-    //   addActions: function(map) {
-    //     for ( var key in map ) this.addAction(key, map[key]);
-    //     return this;
-    //   }
-    // };
-
-
-    // TODO(kgr): move this somewhere better
-    function defineTTLProperty(obj, name, ttl, f) {
-      obj.__defineGetter__(name, function() {
-        var accessed;
-        var value = undefined;
-        this.__defineGetter__(name, function() {
-          function scheduleTimer() {
-            var ref = setTimeout(function() {
-              if ( accessed ) {
-                scheduleTimer();
-              } else {
-                value = undefined;
-              }
-              accessed = false;
-            }, ttl);
-            if ( ref && ref.unref ) ref.unref();
+    (function($) {
+      // Assign parse.grammar eagerly: other parsers depend on
+      // lookup of parse.grammar.fail.
+      var g = parse.grammar = {
+        fail: decorateFunction(
+          function fail(ps) { return null; },
+          {
+            label: 'failParser',
+            toString: p_toString,
           }
-          if ( ! value ) {
-            accessed = false;
-            value = f();
-            scheduleTimer();
-          } else {
-            accessed = true;
-          }
-
-          return value;
-        });
-
-        return this[name];
-      });
-    }
+        ),
+      };
+      g.alphaChar =  $.alt($.range('a','z'), $.range('A', 'Z'));
+      g.alphaNumChar = $.alt($.alphaChar, $.range('0', '9'));
+      g.wordChar = $.alt($.alphaNumChar, '_');
+      g.whitespace_ = $.plus0($.alt(' ', '\t', '\n', '\r', '\f'));
+      g.multilineComment_ = $.seq1(
+        1,
+        '/*',
+        $.repeat0($.alt($.notChar('*'), $.seq('*', $.notChar('\/')))),
+        '*\/');
+      g.singleLineComment_ = $.seq1(
+        1,
+        '//',
+        $.repeat0($.notChars('\r\n')), $.alt('\r\n', '\n'));
+      g.cStyleComment_ = $.plus0($.alt(g.singleLineComment_,
+                                       g.multilineComment_));
+    })(parse.factories);
 
     function invalidateParsers() {
       parserVersion_++;
     }
 
-    defineTTLProperty(Parser.prototype, 'stringPS', 30000, function() { return new StringParserStream(''); });
-    // defineTTLProperty(grammar, 'stringPS', 30000, function() { return new StringParserStream(''); });
-
-
-    var SkipGrammar = {
-      create: function(gramr, skipp) {
-        return {
-          __proto__: gramr,
-
-          skip_: true,
-
-          parse: function(parser, pstream) {
-            var skippstream = this.skip.call(grammar, pstream);
-            if ( skippstream ) debugger;
-            if (this.skip_) pstream = skippstream || pstream;
-            return this.__proto__.parse.call(this, parser, pstream);
-          },
-
-          skip: skipp
-        };
-      }
+    // Code to expose parser factories and grammar API locally.
+    parse.getFactoryVarsCodeStr = function() {
+      return 'var fs = parse.factories;\n' +
+        Object.getOwnPropertyNames(parse.factories).map(function(key) {
+          return 'var ' + key + ' = fs.' + key + ';';
+        }).sort().join('\n') +
+        'var g = parse.grammar;\n' +
+        Object.getOwnPropertyNames(parse.grammar).map(function(key) {
+          return 'var ' + key + ' = g.' + key + ';';
+        }).sort().join('\n');
     };
+    var fKeys = Object.getOwnPropertyNames(parse.factories);
+    var gKeys = Object.getOwnPropertyNames(parse.grammar);
+    for ( var i = 0; i < fKeys.length; i++ ) {
+      console.assert(gKeys.indexOf(fKeys[i]) === -1,
+                     'Identical parse library factory and grammar key: "' +
+                     fKeys[i] + '"');
+    }
 
     parse.StringParserStream = StringParserStream;
-    parse.prep = prep;
-    parse.prepArgs = prepArgs;
-    parse.invalidateParsers = invalidateParsers;
     parse.TrapParserStream = TrapParserStream;
-    parse.Grammar = Grammar;
-    parse.Parser = Parser;
-    parse.defineTTLProperty = defineTTLProperty;
-    parse.SkipGrammar = SkipGrammar;
+    parse.ParserController = ParserController;
+    parse.SkipParserController = SkipParserController;
+    parse.invalidateParsers = invalidateParsers;
 
     return parse;
   });
-})((function (undefined) {
-    if (typeof module !== 'undefined' && module.exports) {
-      return function(name, factory) { module.exports = factory(); };
-    } else if (typeof define === 'function') {
-      if ( define.amd )
-        return function(name, factory) { return define(factory); };
-      else
-        return define;
-    } else if (typeof window !== 'undefined') {
-      return function(name, factory) { window[name] = factory(); };
-    } else {
-      throw new Error('unknown environment');
-    }
+})((function() {
+  if ( typeof module !== 'undefined' && module.exports ) {
+    return function(deps, factory) {
+      if ( ! factory ) module.exports = deps();
+      else             module.exports = factory.apply(this, deps.map(require));
+    };
+  } else if ( typeof define === 'function' && define.amd ) {
+    return define;
+  } else if ( typeof window !== 'undefined' ) {
+    return function(deps, factory) {
+      if ( ! document.currentScript ) throw new Error('Unknown module name');
+
+      window[
+        document.currentScript.getAttribute('src').split('/').pop().split('#')[
+          0].split('?')[0].split('.')[0]
+      ] = (factory || deps).apply(
+        this, factory ? deps.map(function(name) { return window[name]; }) : []);
+    };
+  } else {
+    throw new Error('Unknown environment');
+  }
 })());

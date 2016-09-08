@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=500, initial-scale=1">
-    <title>Index.html</title>
+    <title>Analyze.html</title>
     <style>
     /* From https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/: */
     pre {
@@ -52,8 +52,9 @@
       flex-direction: column;
     }
     </style>
+    <script language="javascript" src="js/define.js"></script>
     <script language="javascript" src="js/id.js"></script>
-    <script language="javascript" src="js/lazy.js"></script>
+    <script language="javascript" src="js/stdlib.js"></script>
     <script language="javascript" src="js/remap.js"></script>
     <script language="javascript" src="js/facade.js"></script>
     <script language="javascript" src="js/NameRewriter.js"></script>
@@ -61,14 +62,13 @@
     <script language="javascript" src="js/ObjectGraph.js"></script>
 
     <script language="javascript">
-    (function() {
-      for ( var i = 0; i < arguments.length; i++ ) {
-        arguments[i] && ObjectGraph.blacklistObject(arguments[i]);
-      }
-    })(lazy, remap, facade, NameRewriter, TaskQueue, ObjectGraph);
+     typeof require !== 'undefined' && (function(ObjectGraph) {
+         if ( ! ObjectGraph ) return;
+         for ( var i = 1; i < arguments.length; i++ ) {
+             arguments[i] && ObjectGraph.blacklistObject(arguments[i]);
+         }
+     })(require('ObjectGraph'), require, define);
     </script>
-
-    <script language="javascript" src="js/ObjectDiff.js"></script><script lanuage="javascript">ObjectGraph.blacklistObject(ObjectDiff);</script>
   </head>
   <body>
 

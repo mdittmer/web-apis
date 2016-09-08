@@ -14,12 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+'use strict';
 
 // Rewrite names that, if overridden in a Javascript object, may change the
 // fundamental behaviour of the object.
 
-(function(define, undefined) {
-  define('NameRewriter', function() {
+(function(define) {
+  define(function() {
     var NameRewriter = function(opts) {
       opts = opts || {};
       this.rewrites = opts.rewrites ||
@@ -121,16 +122,25 @@
 
     return NameRewriter;
   });
-})((function(undefined) {
-    if ( typeof module !== 'undefined' && module.exports ) {
-      return function(name, factory) { module.exports = factory(); };
-    } else if ( typeof define === 'function' && define.amd ) {
-      return function(name, factory) { return define(factory); };
-    } else if ( typeof define === 'function' && define.require ) {
-      return define;
-    } else if ( typeof window !== 'undefined' ) {
-      return function(name, factory) { window[name] = factory(); };
-    } else {
-      throw new Error('unknown environment');
-    }
+})((function() {
+  if ( typeof module !== 'undefined' && module.exports ) {
+    return function(deps, factory) {
+      if ( ! factory ) module.exports = deps();
+      else             module.exports = factory.apply(this, deps.map(require));
+    };
+  } else if ( typeof define === 'function' && define.amd ) {
+    return define;
+  } else if ( typeof window !== 'undefined' ) {
+    return function(deps, factory) {
+      if ( ! document.currentScript ) throw new Error('Unknown module name');
+
+      window[
+        document.currentScript.getAttribute('src').split('/').pop().split('#')[
+          0].split('?')[0].split('.')[0]
+      ] = (factory || deps).apply(
+        this, factory ? deps.map(function(name) { return window[name]; }) : []);
+    };
+  } else {
+    throw new Error('Unknown environment');
+  }
 })());

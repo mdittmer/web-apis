@@ -14,67 +14,53 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+'use strict';
 
-(function(define, undefined) {
-  define('WebIDLParser', function() {
-    var WebIDLGrammar = require('WebIDLGrammar');
+(function(define) {
+  define(
+    [ 'stdlib', 'parse', 'w3cBNFParser' ],
+    function(stdlib, parse, w3cBNFParser) {
+      function getParser(bnfPath) {
+        var future = stdlib.future();
+        var parser;
 
-    // ExtendedAttribute forms:
-    // A  =  { name: 'A' }.
-    // A(double x, double y)  =  { name: 'A', argList: ... }
-    // A=B(DOMString src)  =  { name: 'A', argName: 'B', argList: ... }
-    // A=b  =  { name: 'A', ident: 'b' }
-    // A=(B,C)  =  { name: 'A', identList: [ 'B', 'C' ] }
-    function ExtendedAttribute(opts) {
-      this.name = opts.name || null;
-      this.argName = opts.argName || null;
-      this.argList = opts.argList || null;
-      this.ident = opts.ident || null;
-      this.identList = opts.identList || null;
-    }
+        stdlib.loadData(bnfPath)(function(bnfStr) {
+          var res = w3cBNFParser.parseString(bnfStr);
+          console.assert(res[0], 'Web IDL description parse failed');
+          var webIDLParserJS = res[1].toGrammar();
 
-    var data = [];
+          eval(
+            parse.getFactoryVarsCodeStr() + // Expose factoiries as vars.
+              webIDLParserJS);              // Assign parser = ...
 
-    WebIDLGrammar.addActions({
-      OptionalOrRequiredArgument: function(parts) {
-        if ( parts.length === 4 ) {
-          // "optional" Type ArgumentName Default.
-          return { optional: true, type: parts[1], name: parts[2],
-                   default: parts[3] };
-        } else {
-          // Type Ellipsis ArgumentName.
-          return { type: parts[0], ellipsis: !! parts[1], name: parts[2] };
-        }
-      },
-      NonAnyType: function(parts) {
-        if ( parts.length !== 2 ) {
-          // <some-type> "<" <some-sub-type> ">" Null
-          return { name: parts[0], sub: parts[2], nullable: parts[4] };
-        } else {
-          // <some-type> Null
-          parts[0].nullable = parts[1];
-          return parts[0];
-        }
-      },
+          future.set(parser);
+        });
 
-      Null: function(parts) { return !! parts; },
+        return future;
+      }
+      getParser.get = getParser;
+
+      return getParser;
     });
+})((function() {
+  if ( typeof module !== 'undefined' && module.exports ) {
+    return function(deps, factory) {
+      if ( ! factory ) module.exports = deps();
+      else             module.exports = factory.apply(this, deps.map(require));
+    };
+  } else if ( typeof define === 'function' && define.amd ) {
+    return define;
+  } else if ( typeof window !== 'undefined' ) {
+    return function(deps, factory) {
+      if ( ! document.currentScript ) throw new Error('Unknown module name');
 
-    console.log(WebIDLGrammar.toJSON());
-
-    return WebIDLGrammar;
-  });
-})((function (undefined) {
-    if (typeof module !== 'undefined' && module.exports) {
-      return function(name, factory) { module.exports = factory(); };
-    } else if (typeof define === 'function') {
-      if ( define.amd )
-        return function(name, factory) { return define(factory); };
-      else
-        return define;
-    } else if (typeof window !== 'undefined') {
-      return function(name, factory) { window[name] = factory(); };
-    } else {
-      throw new Error('unknown environment');
-    }
+      window[
+        document.currentScript.getAttribute('src').split('/').pop().split('#')[
+          0].split('?')[0].split('.')[0]
+      ] = (factory || deps).apply(
+        this, factory ? deps.map(function(name) { return window[name]; }) : []);
+    };
+  } else {
+    throw new Error('Unknown environment');
+  }
 })());

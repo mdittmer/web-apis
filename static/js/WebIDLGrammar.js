@@ -15,104 +15,104 @@
  * limitations under the License.
  */
 
-(function(define, undefined) {
-  define('WebIDLGrammar', function() {
-    var stdlib = require('stdlib');
-    var parse = require('parse');
-
-    // Expose parsers API locally.
-    var keys = Object.getOwnPropertyNames(parse.parsers);
+(function(define) {
+  define([ 'stdlib', 'parse' ], function(stdlib, parse) {
+    // Expose parser factories API locally (non-strict).
+    var keys = Object.getOwnPropertyNames(parse.factories);
     var js = keys.map(function(key) {
-      return 'var ' + key + ' = parse.parsers.' + key + ';';
+      return 'var ' + key + ' = parse.factories.' + key + ';';
     }).join('\n');
     // TODO: Security?
     eval(js);
 
-    function True() { return true; }
-    function False() { return false; }
+    var WebIDLGrammarGrammar = (function getGrammarJSStr() {
+      'use strict';
 
-    function IDL() {}
-    IDL.prototype.isLiteral = IDL.prototype.isKeyRef = IDL.prototype.isEpsilon =
-      False;
-    IDL.prototype.toGrammar = function() { return ''; };
+      function True() { return true; }
+      function False() { return false; }
 
-    function Literal(value) {
-      this.value = value;
-    }
-    Literal.prototype = Object.create(IDL.prototype);
-    Literal.prototype.isLiteral = True;
-    Literal.prototype.toGrammar = function() {
-      return "'" + this.value + "'";
-    };
+      function IDL() {}
+      IDL.prototype.isLiteral = IDL.prototype.isKeyRef = IDL.prototype.isEpsilon =
+        False;
+      IDL.prototype.toGrammar = function() { return ''; };
 
-    function KeyRef(value) {
-      this.value = value;
-    }
-    KeyRef.prototype = Object.create(IDL.prototype);
-    KeyRef.prototype.isKeyRef = True;
-    KeyRef.prototype.toGrammar = function() {
-      return "sym('" + this.value + "')";
-    };
-
-    function Key(value) {
-      this.value = value;
-    }
-    Key.prototype = Object.create(IDL.prototype);
-    Key.prototype.toGrammar = function() {
-      return this.value;
-    };
-
-    function Epsilon() {}
-    Epsilon.prototype = Object.create(IDL.prototype);
-    Epsilon.prototype.isEpsilon = True;
-
-    function Production(key, value) {
-      this.key = key;
-      this.value = value;
-    }
-    Production.prototype.toGrammar = function() {
-      var str = '';
-      str += this.key.toGrammar() + ': ';
-
-      // TODO: Optional detection doesn't seem to be working.
-      var len = this.value.length;
-      this.value = this.value.filter(function(parts) {
-        return parts[0] && ! parts[0].isEpsilon();
-      });
-      var isOptional = this.value.length !== len;
-
-      if ( isOptional ) str += 'optional(';
-      if ( this.value.length > 1 ) str += 'alt(\n';
-      for ( var i = 0; i < this.value.length; i++ ) {
-        str += 'seqEven(';
-        str += this.value[i].map(function(part) {
-          return part.toGrammar();
-        }).join(", sym('wsc_'),\n") + ",\nsym('wsc_')";
-        str += ')';
-        if ( i < this.value.length - 1 ) str += ',\n';
+      function Literal(value) {
+        this.value = value;
       }
-      if ( this.value.length > 1 ) str += ')';
-      if ( isOptional ) str += ')';
-      return str;
-    };
+      Literal.prototype = Object.create(IDL.prototype);
+      Literal.prototype.isLiteral = True;
+      Literal.prototype.toGrammar = function() {
+        return "'" + this.value + "'";
+      };
 
-    function ProductionList(productions) {
-      this.productions = productions;
-    }
-    ProductionList.prototype = Object.create(IDL.prototype);
-    ProductionList.prototype.toGrammar = function() {
-      return this.productions.map(function(production) {
+      function KeyRef(value) {
+        this.value = value;
+      }
+      KeyRef.prototype = Object.create(IDL.prototype);
+      KeyRef.prototype.isKeyRef = True;
+      KeyRef.prototype.toGrammar = function() {
+        return "sym('" + this.value + "')";
+      };
+
+      function Key(value) {
+        this.value = value;
+      }
+      Key.prototype = Object.create(IDL.prototype);
+      Key.prototype.toGrammar = function() {
+        return this.value;
+      };
+
+      function Epsilon() {}
+      Epsilon.prototype = Object.create(IDL.prototype);
+      Epsilon.prototype.isEpsilon = True;
+
+      function Production(key, value) {
+        this.key = key;
+        this.value = value;
+      }
+      Production.prototype.toGrammar = function() {
+        var str = '';
+        str += this.key.toGrammar() + ': ';
+
+        // TODO: Optional detection doesn't seem to be working.
+        var len = this.value.length;
+        this.value = this.value.filter(function(parts) {
+          return parts[0] && ! parts[0].isEpsilon();
+        });
+        var isOptional = this.value.length !== len;
+
+        if ( isOptional ) str += 'optional(';
+        if ( this.value.length > 1 ) str += 'alt(\n';
+        for ( var i = 0; i < this.value.length; i++ ) {
+          str += 'seqEven(';
+          str += this.value[i].map(function(part) {
+            return part.toGrammar();
+          }).join(", sym('wsc_'),\n") + ",\nsym('wsc_')";
+          str += ')';
+          if ( i < this.value.length - 1 ) str += ',\n';
+        }
+        if ( this.value.length > 1 ) str += ')';
+        if ( isOptional ) str += ')';
+        return str;
+      };
+
+      function ProductionList(productions) {
+        this.productions = productions;
+      }
+      ProductionList.prototype = Object.create(IDL.prototype);
+      ProductionList.prototype.toGrammar = function() {
+        return this.productions.map(function(production) {
           return production.toGrammar();
         }).join(',\n');
-    };
+      };
 
-    function IDLFragment(productionList) {
-      this.productionList = productionList;
-    }
-    IDLFragment.prototype = Object.create(IDL.prototype);
-    IDLFragment.prototype.PREFIX =
-      stdlib.multiline(function() {/*new parse.Parser(new parse.Grammar({
-  START: sym('Definitions'),
+      function IDLFragment(productionList) {
+        this.productionList = productionList;
+      }
+      IDLFragment.prototype = Object.create(IDL.prototype);
+      IDLFragment.prototype.PREFIX =
+        stdlib.multiline(function() {/*new parse.ParserController({ grammar: {
+  START: seq1(1, sym('wsc_'), sym('Definitions')),
 
   ws: alt(' ', '\t', '\n', '\r', '\f'),
   ws_: repeat0(sym('ws')),
@@ -150,15 +150,15 @@
   string: seq('"', notChar('"'), '"'),
   comment: alt(
     seq('//', repeat0(notChars('\r\n')), alt('\r\n', '\n')),
-    seq('/*', repeat0(not('*\/')), '*\/')),
+    seq('/*', repeat0(alt(notChar('*'), seq('*', notChar('\/')))), '*\/')),
   other: not(alt('\t', '\n','\r', ' ', sym('_09'), sym('AZ'), sym('az'))),
 */});
-    IDLFragment.prototype.POSTFIX = '\n}))';
-    IDLFragment.prototype.toGrammar = function() {
-      return this.PREFIX + this.productionList.toGrammar() + this.POSTFIX;
-    };
+      IDLFragment.prototype.POSTFIX = '\n} })';
+      IDLFragment.prototype.toGrammar = function() {
+        return this.PREFIX + this.productionList.toGrammar() + this.POSTFIX;
+      };
 
-    var WebIDLGrammar = new parse.Parser(new parse.Grammar({
+      var WebIDLGrammarGrammar = new parse.ParserController({ grammar: {
         START: sym('productions'),
 
         alpha: alt(range('A', 'Z'), range('a', 'z')),
@@ -182,42 +182,56 @@
         altParts: repeat(sym('altPart')),
 
         altPart: seq1(1, '\n | ', sym('parts')),
-    }));
-    WebIDLGrammar.addActions([
-      // ,
-      //   alt(
-      //     seq('//', repeat0(notChars('\r\n'), anyChar), alt('\r\n', '\n')),
-      //     seq('/*', repeat0(not('*/', anyChar)), '*/'))
-      // ).addActions({
-      function strLiteral(str) {
-        return new Literal(str);
-      },
-      function keyRef(str) {
-        return new KeyRef(str);
-      },
-      function epsilon() {
-        return new Epsilon();
-      },
-      function key(str) {
-        return new Key(str);
-      },
-      function production(parts) {
-        var key = parts[3];
-        var value = [parts[5]].concat(parts[6]);
-        return new Production(key, value);
-      },
-      function productions(productions) {
-        return new ProductionList(productions);
-      },
-      function START(productionList) {
-        return new IDLFragment(productionList);
-      },
-    ]);
+      } });
+      WebIDLGrammarGrammar.addActions(
+        // ,
+        //   alt(
+        //     seq('//', repeat0(notChars('\r\n'), anyChar), alt('\r\n', '\n')),
+        //     seq('/*', repeat0(not('*/', anyChar)), '*/'))
+        // ).addActions({
+        function strLiteral(str) {
+          return new Literal(str);
+        },
+        function keyRef(str) {
+          return new KeyRef(str);
+        },
+        function epsilon() {
+          return new Epsilon();
+        },
+        function key(str) {
+          return new Key(str);
+        },
+        function production(parts) {
+          var key = parts[3];
+          var value = [parts[5]].concat(parts[6]);
+          return new Production(key, value);
+        },
+        function productions(productions) {
+          return new ProductionList(productions);
+        },
+        function START(productionList) {
+          return new IDLFragment(productionList);
+        }
+      );
+
+      return WebIDLGrammarGrammar;
+    })();
+
+    function getGrammarJS(grammarStrF) {
+      'use strict';
+      var grammarStr = stdlib.multiline(grammarStrF);
+
+      var res = WebIDLGrammarGrammar.parseString(grammarStr);
+      console.assert(res[0], 'Web IDL description parse failed');
+      var webIDLParserJS = res[1].toGrammar();
+
+      return webIDLParserJS;
+    }
 
     // Web IDL spec modified from http://heycam.github.io/webidl/#idl-grammar.
     // Modifications:
     // [67]: Changed to refer to [92-96] as per: http://heycam.github.io/webidl/#idl-extended-attributes.
-    function WEB_IDL_GRAMMAR_F() {/*[1]	Definitions	→	ExtendedAttributeList Definition Definitions
+    js = getGrammarJS(function() {/*[1]	Definitions	→	ExtendedAttributeList Definition Definitions
  | ε
 [2]	Definition	→	CallbackOrInterface
  | Namespace
@@ -351,11 +365,11 @@
  | ε
 [66]	ExtendedAttributes	→	"," ExtendedAttribute ExtendedAttributes
  | ε
-[67]	ExtendedAttribute	→	ExtendedAttributeNoArgs
- | ExtendedAttributeArgList
- | ExtendedAttributeNamedArgList
- | ExtendedAttributeIdent
+[67]	ExtendedAttribute	→	ExtendedAttributeNamedArgList
  | ExtendedAttributeIdentList
+ | ExtendedAttributeIdent
+ | ExtendedAttributeArgList
+ | ExtendedAttributeNoArgs
 [68]	ExtendedAttributeRest	→	ExtendedAttribute
  | ε
 [69]	ExtendedAttributeInner	→	"(" ExtendedAttributeInner ")" ExtendedAttributeInner
@@ -495,28 +509,249 @@
 [98]	NamespaceMembers	→	ExtendedAttributeList NamespaceMember NamespaceMembers
  | ε
 [99]	NamespaceMember	→	ReturnType OperationRest
-*/}
+*/});
+    var draftParser = eval(js);
 
-    var WEB_IDL_GRAMMAR = stdlib.multiline(WEB_IDL_GRAMMAR_F);
+    // Web IDL spec modified from https://www.w3.org/TR/WebIDL/#idl-grammar.
+    // Modifications:
+    // [51]: Changed to refer to [74-77] as per: https://www.w3.org/TR/WebIDL/#idl-extended-attributes.
+    js = getGrammarJS(function() {/*[1]	Definitions	→	ExtendedAttributeList Definition Definitions
+ | ε
+[2]	Definition	→	CallbackOrInterface
+ | Partial
+ | Dictionary
+ | Exception
+ | Enum
+ | Typedef
+ | ImplementsStatement
+[3]	CallbackOrInterface	→	"callback" CallbackRestOrInterface
+ | Interface
+[4]	CallbackRestOrInterface	→	CallbackRest
+ | Interface
+[5]	Interface	→	"interface" identifier Inheritance "{" InterfaceMembers "}" ";"
+[6]	Partial	→	"partial" PartialDefinition
+[7]	PartialDefinition	→	PartialInterface
+ | PartialDictionary
+[8]	PartialInterface	→	"interface" identifier "{" InterfaceMembers "}" ";"
+[9]	InterfaceMembers	→	ExtendedAttributeList InterfaceMember InterfaceMembers
+ | ε
+[10]	InterfaceMember	→	Const
+ | AttributeOrOperation
+[11]	Dictionary	→	"dictionary" identifier Inheritance "{" DictionaryMembers "}" ";"
+[12]	DictionaryMembers	→	ExtendedAttributeList DictionaryMember DictionaryMembers
+ | ε
+[13]	DictionaryMember	→	Type identifier Default ";"
+[14]	PartialDictionary	→	"dictionary" identifier "{" DictionaryMembers "}" ";"
+[15]	Default	→	"=" DefaultValue
+ | ε
+[16]	DefaultValue	→	ConstValue
+ | string
+[17]	Exception	→	"exception" identifier Inheritance "{" ExceptionMembers "}" ";"
+[18]	ExceptionMembers	→	ExtendedAttributeList ExceptionMember ExceptionMembers
+ | ε
+[19]	Inheritance	→	":" identifier
+ | ε
+[20]	Enum	→	"enum" identifier "{" EnumValueList "}" ";"
+[21]	EnumValueList	→	string EnumValues
+[22]	EnumValues	→	"," string EnumValues
+ | ε
+[23]	CallbackRest	→	identifier "=" ReturnType "(" ArgumentList ")" ";"
+[24]	Typedef	→	"typedef" ExtendedAttributeList Type identifier ";"
+[25]	ImplementsStatement	→	identifier "implements" identifier ";"
+[26]	Const	→	"const" ConstType identifier "=" ConstValue ";"
+[27]	ConstValue	→	BooleanLiteral
+ | FloatLiteral
+ | integer
+ | "null"
+[28]	BooleanLiteral	→	"true"
+ | "false"
+[29]	FloatLiteral	→	float
+ | "-" "Infinity"
+ | "Infinity"
+ | "NaN"
+[30]	AttributeOrOperation	→	"stringifier" StringifierAttributeOrOperation
+ | Attribute
+ | Operation
+[31]	StringifierAttributeOrOperation	→	Attribute
+ | OperationRest
+ | ";"
+[32]	Attribute	→	Inherit ReadOnly "attribute" Type identifier ";"
+[33]	Inherit	→	"inherit"
+ | ε
+[34]	ReadOnly	→	"readonly"
+ | ε
+[35]	Operation	→	Qualifiers OperationRest
+[36]	Qualifiers	→	"static"
+ | Specials
+[37]	Specials	→	Special Specials
+ | ε
+[38]	Special	→	"getter"
+ | "setter"
+ | "creator"
+ | "deleter"
+ | "legacycaller"
+[39]	OperationRest	→	ReturnType OptionalIdentifier "(" ArgumentList ")" ";"
+[40]	OptionalIdentifier	→	identifier
+ | ε
+[41]	ArgumentList	→	Argument Arguments
+ | ε
+[42]	Arguments	→	"," Argument Arguments
+ | ε
+[43]	Argument	→	ExtendedAttributeList OptionalOrRequiredArgument
+[44]	OptionalOrRequiredArgument	→	"optional" Type ArgumentName Default
+ | Type Ellipsis ArgumentName
+[45]	ArgumentName	→	ArgumentNameKeyword
+ | identifier
+[46]	Ellipsis	→	"..."
+ | ε
+[47]	ExceptionMember	→	Const
+ | ExceptionField
+[48]	ExceptionField	→	Type identifier ";"
+[49]	ExtendedAttributeList	→	"[" ExtendedAttribute ExtendedAttributes "]"
+ | ε
+[50]	ExtendedAttributes	→	"," ExtendedAttribute ExtendedAttributes
+ | ε
+[51]	ExtendedAttribute	→	ExtendedAttributeNamedArgList
+ | ExtendedAttributeIdent
+ | ExtendedAttributeArgList
+ | ExtendedAttributeNoArgs
+[52]	ExtendedAttributeRest	→	ExtendedAttribute
+ | ε
+[53]	ExtendedAttributeInner	→	"(" ExtendedAttributeInner ")" ExtendedAttributeInner
+ | "[" ExtendedAttributeInner "]" ExtendedAttributeInner
+ | "{" ExtendedAttributeInner "}" ExtendedAttributeInner
+ | OtherOrComma ExtendedAttributeInner
+ | ε
+[54]	Other	→	integer
+ | float
+ | identifier
+ | string
+ | other
+ | "-"
+ | "."
+ | "..."
+ | ":"
+ | ";"
+ | "<"
+ | "="
+ | ">"
+ | "?"
+ | "Date"
+ | "DOMString"
+ | "Infinity"
+ | "NaN"
+ | "any"
+ | "boolean"
+ | "byte"
+ | "double"
+ | "false"
+ | "float"
+ | "long"
+ | "null"
+ | "object"
+ | "octet"
+ | "or"
+ | "optional"
+ | "sequence"
+ | "short"
+ | "true"
+ | "unsigned"
+ | "void"
+ | ArgumentNameKeyword
+[55]	ArgumentNameKeyword	→	"attribute"
+ | "callback"
+ | "const"
+ | "creator"
+ | "deleter"
+ | "dictionary"
+ | "enum"
+ | "exception"
+ | "getter"
+ | "implements"
+ | "inherit"
+ | "interface"
+ | "legacycaller"
+ | "partial"
+ | "setter"
+ | "static"
+ | "stringifier"
+ | "typedef"
+ | "unrestricted"
+[56]	OtherOrComma	→	Other
+ | ","
+[57]	Type	→	SingleType
+ | UnionType TypeSuffix
+[58]	SingleType	→	NonAnyType
+ | "any" TypeSuffixStartingWithArray
+[59]	UnionType	→	"(" UnionMemberType "or" UnionMemberType UnionMemberTypes ")"
+[60]	UnionMemberType	→	NonAnyType
+ | UnionType TypeSuffix
+ | "any" "[" "]" TypeSuffix
+[61]	UnionMemberTypes	→	"or" UnionMemberType UnionMemberTypes
+ | ε
+[62]	NonAnyType	→	PrimitiveType TypeSuffix
+ | "DOMString" TypeSuffix
+ | identifier TypeSuffix
+ | "sequence" "<" Type ">" Null
+ | "object" TypeSuffix
+ | "Date" TypeSuffix
+[63]	ConstType	→	PrimitiveType Null
+ | identifier Null
+[64]	PrimitiveType	→	UnsignedIntegerType
+ | UnrestrictedFloatType
+ | "boolean"
+ | "byte"
+ | "octet"
+[65]	UnrestrictedFloatType	→	"unrestricted" FloatType
+ | FloatType
+[66]	FloatType	→	"float"
+ | "double"
+[67]	UnsignedIntegerType	→	"unsigned" IntegerType
+ | IntegerType
+[68]	IntegerType	→	"short"
+ | "long" OptionalLong
+[69]	OptionalLong	→	"long"
+ | ε
+[70]	TypeSuffix	→	"[" "]" TypeSuffix
+ | "?" TypeSuffixStartingWithArray
+ | ε
+[71]	TypeSuffixStartingWithArray	→	"[" "]" TypeSuffix
+ | ε
+[72]	Null	→	"?"
+ | ε
+[73]	ReturnType	→	Type
+ | "void"
+[74]	ExtendedAttributeNoArgs	→	identifier
+[75]	ExtendedAttributeArgList	→	identifier "(" ArgumentList ")"
+[76]	ExtendedAttributeIdent	→	identifier "=" identifier
+[77]	ExtendedAttributeNamedArgList	→	identifier "=" identifier "(" ArgumentList ")"
+*/});
+    var specParser = eval(js);
 
-    var res = WebIDLGrammar.parseString(WEB_IDL_GRAMMAR);
-    console.assert(res[0], 'Web IDL description parse failed');
-    var webIDLParserJS = res[1].toGrammar();
-
-    eval('var WebIDLGrammar = ' + webIDLParserJS + ';');
-    return WebIDLGrammar;
+    return {
+      spec: specParser,
+      draft: draftParser,
+    };
   });
-})((function (undefined) {
-    if (typeof module !== 'undefined' && module.exports) {
-      return function(name, factory) { module.exports = factory(); };
-    } else if (typeof define === 'function') {
-      if ( define.amd )
-        return function(name, factory) { return define(factory); };
-      else
-        return define;
-    } else if (typeof window !== 'undefined') {
-      return function(name, factory) { window[name] = factory(); };
-    } else {
-      throw new Error('unknown environment');
-    }
+})((function() {
+  if ( typeof module !== 'undefined' && module.exports ) {
+    return function(deps, factory) {
+      if ( ! factory ) module.exports = deps();
+      else             module.exports = factory.apply(this, deps.map(require));
+    };
+  } else if ( typeof define === 'function' && define.amd ) {
+    return define;
+  } else if ( typeof window !== 'undefined' ) {
+    return function(deps, factory) {
+      if ( ! document.currentScript ) throw new Error('Unknown module name');
+
+      window[
+        document.currentScript.getAttribute('src').split('/').pop().split('#')[
+          0].split('?')[0].split('.')[0]
+      ] = (factory || deps).apply(
+        this, factory ? deps.map(function(name) { return window[name]; }) : []);
+    };
+  } else {
+    throw new Error('Unknown environment');
+  }
 })());
