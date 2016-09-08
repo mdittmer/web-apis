@@ -672,8 +672,11 @@
           // Use a specialized parser to capture whether p can consume one char,
           // but prevent p from parsing beyond one char.
           var trapPS = new TrapParserStream(ps);
-          this.parse(p, trapPS);
-          return trapPS.goodChar;
+          var ret = this.parse(p, trapPS);
+          // This parser is a candidate iff:
+          // (1) it parses successfully (even if it consumes no input), or
+          // (2) it consumed a character.
+          return ( !! ret ) || trapPS.goodChar;
         }
 
         function getParserForChar(ps) {
@@ -762,6 +765,7 @@
           DEBUG_PARSE = 1;
           var ret = this.parse(p, ps);
           DEBUG_PARSE = old;
+          debugger;
           return ret;
         };
       },
