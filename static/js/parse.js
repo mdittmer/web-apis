@@ -20,6 +20,10 @@
 
 (function(define) {
   define(['stdlib'], function(stdlib) {
+    var DEBUG_IN_PARSE = 1;
+    var DEBUG_OUT_PARSE = 1;
+    var DEBUG_IN_BREAK = 1;
+    var DEBUG_OUT_BREAK = 1;
     var DEBUG_PARSE = 0;
     var parserVersion_ = 1;
 
@@ -91,7 +95,6 @@
       this.value = ps.value;
       this.goodChar = false;
     }
-    TrapParserStream.prototype.getValue = function() { return this.value; };
     TrapParserStream.prototype.setValue = function(v) {
       this.value = v;
       return this;
@@ -103,7 +106,6 @@
           pos: this.pos + 1,
           head: null,
           value: this.value,
-          getValue: function() { return this.value; },
           setValue: function(v) {
             this.value = v;
             return this;
@@ -256,20 +258,29 @@
     };
     ParserController.prototype.parse = function(parser, pstream) {
       if ( DEBUG_PARSE !== 0 ) {
-        console.log(pstream.head, '@', pstream.pos);
-        console.log('>>>>', parser.toString());
-        if ( DEBUG_PARSE % 5 === 4 ) debugger;
+        if ( DEBUG_PARSE % DEBUG_IN_PARSE === ( DEBUG_IN_PARSE - 1 ) ) {
+          console.log(pstream.head, '@', pstream.pos);
+          console.log('>>>>', parser.toString());
+        }
+        if ( DEBUG_PARSE % DEBUG_IN_BREAK === ( DEBUG_IN_BREAK - 1 ) )
+          debugger;
         DEBUG_PARSE++;
       }
+
       var ret = parser.call(this, pstream);
+
       if ( DEBUG_PARSE !== 0 ) {
         DEBUG_PARSE--;
-        if ( ret )
-          console.log(parser.toString(), '<<<<', ret.head, '@', ret.pos);
-        else
-          console.log(parser.toString(), '<<<<', ret);
-        if ( DEBUG_PARSE % 3 === 2 ) debugger;
+        if ( DEBUG_PARSE % DEBUG_OUT_PARSE === ( DEBUG_OUT_PARSE - 1 ) ) {
+          if ( ret )
+            console.log(parser.toString(), '<<<<', ret.head, '@', ret.pos);
+          else
+            console.log(parser.toString(), '<<<<', ret);
+        }
+        if ( DEBUG_PARSE % DEBUG_OUT_BREAK === ( DEBUG_OUT_BREAK - 1 ) )
+          debugger;
       }
+
       return ret;
     };
     ParserController.prototype.parseString = function(str, opt_start) {
@@ -480,7 +491,8 @@
       // Single character; any character but c.
       function notChar(c) {
         return function(ps) {
-          return ps.head !== c ? ps.tail.setValue(ps.head) : null;
+          return ps.head !== null && ps.head !== c ? ps.tail.setValue(ps.head) :
+            null;
         };
       },
 
@@ -657,18 +669,11 @@
         var nullParser = this.grammar.fail;
 
         function testParser(p, ps) {
-          var testPS = this.parse(p, ps.clone());
-          return testPS && testPS.pos > ps.pos;
-
-
-          // var trapPS = new TrapParserStream(ps);
-          // var parse = this.parse;
-          // this.parse = ParserController.prototype.parse;
-          // this.parse(p, trapPS);
-          // this.parse = parse;
-
-          // console.log('*** TestParser:',p,c,goodChar);
-          // return trapPS.goodChar;
+          // Use a specialized parser to capture whether p can consume one char,
+          // but prevent p from parsing beyond one char.
+          var trapPS = new TrapParserStream(ps);
+          this.parse(p, trapPS);
+          return trapPS.goodChar;
         }
 
         function getParserForChar(ps) {
