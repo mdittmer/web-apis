@@ -205,7 +205,7 @@
         // Do not clone on setValue.
         setValue: {
           value: function setValue(v) {
-            this.value_ = v;
+            this.value_ = this.value = v;
             return this;
           },
         },
@@ -372,7 +372,7 @@
       this.grammar = opts.grammar || { START: parse.grammar.fail };
       this.grammar.fail = this.grammar.fail || parse.grammar.fail;
       this.actions = {};
-      this.firstFailure = null;
+      this.greatestPos = -1;
 
       if ( ! opts.actions ) return;
 
@@ -390,11 +390,8 @@
       }
 
       var ret = parser.call(this, pstream);
-
-      if ( ret !== null )
-        this.firstFailure = null;
-      else if ( this.firstFailure === null )
-        this.firstFailure = [ parser, pstream ];
+      if ( ret !== null && ret.pos > this.greatestPos )
+        this.greatestPos = ret.pos;
 
       if ( DEBUG_PARSE !== 0 && ! pstream.isSpeculative() ) {
         DEBUG_PARSE--;
@@ -413,8 +410,9 @@
     ParserController.prototype.parseString = function(str, opt_start) {
       // TODO: This doesn't re-use a parser stream to save memory. Is such a
       // measure be necessary?
-      var ps = new StringParserStream(str);
-      var res = this.parse(opt_start || this.grammar.START, ps);
+      this.greatestPos = -1;
+      var res = this.parse(opt_start || this.grammar.START,
+                           new StringParserStream(str));
 
       return [ res && res.pos === str.length, res && res.value, res ];
     };
@@ -529,12 +527,14 @@
         init: {
           value: function init(opts) {
             opts = opts || {};
-            this.separator = opts.separator;
-            if ( ! this.separtor ) {
+            if ( opts.separator ) {
+              this.separator = parse.factories.nodebug(opts.separator);
+            } else {
               var fs = parse.factories;
               var ps = parse.grammar;
-              this.separator =
-                fs.repeat0(fs.alt(ps.whitespace_, ps.cStyleComment_));
+              this.separator = fs.nodebug(
+                fs.repeat0(fs.alt(ps.whitespace_, ps.cStyleComment_))
+              );
             }
 
             var factories = opts.factories =
@@ -948,9 +948,8 @@
         p = this.prep(p);
         return function(ps) {
           ps = this.parse(p, ps);
-          return ps ?
-            ( ps.value !== null ? ps.setValue((ps.value || '').join('')) : '' )
-          : null;
+          return ps ? ps.setValue(ps.value !== null ? ps.value.join('') : '') :
+          null;
         };
       },
 
@@ -1069,8 +1068,7 @@
         '/*',
         $.repeat0($.alt($.notChar('*'), $.seq('*', $.notChar('\/')))),
         '*\/');
-      g.singleLineComment_ = $.seq1(
-        1,
+      g.singleLineComment_ = $.seq(
         '//',
         $.repeat0($.notChars('\r\n')), $.alt('\r\n', '\n'));
       g.cStyleComment_ = $.plus0($.alt(g.singleLineComment_,
