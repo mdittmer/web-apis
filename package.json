@@ -4,7 +4,7 @@
   "description": "Investigate web APIs through various means",
   "main": "serve.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "repl": "NODE_PATH=.:./static/js node"
   },
   "repository": {
     "type": "git",
@@ -24,9 +24,7 @@
   "homepage": "https://github.com/mdittmer/web-apis#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "express": "^4.14.0"
-  },
-  "scripts": {
-    "repl": "NODE_PATH=.:./static/js node"
+    "express": "^4.14.0",
+    "json-stable-stringify": "^1.0.1"
   }
 }

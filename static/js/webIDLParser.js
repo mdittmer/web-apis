@@ -342,10 +342,6 @@
       function identifier(v) {
         return (v[0] || '') + v[1] + v[2];
       },
-      function SemiColon(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
-      },
       function START(v) {
         return v[1];
       },
@@ -357,21 +353,9 @@
           return attrsAndMember[1];
         });
       },
-      function Definition(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
-      },
-      function CallbackOrInterfaceLike(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
-      },
       function Callback(v) {
         v[1].type_ = 'callback';
         return v[1];
-      },
-      function CallbackRestOrInterfaceLike(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
       },
       function InterfaceLike(v) {
         return v[2] === null ?
@@ -379,7 +363,8 @@
         { type_: v[0], inheritsFrom: v[2], name: v[1], members: v[4] };
       },
       function CallbackRest(v) {
-        return { name: v[0], returnType: v[2], args: v[4] };
+        return v[4].length === 0 ? { name: v[0], returnType: v[2] } :
+        { name: v[0], returnType: v[2], args: v[4] };
       },
       function Namespace(v) {
         return { type_: 'namespace', name: v[1], members: v[3] };
@@ -392,17 +377,9 @@
           return attrsAndMember[1];
         });
       },
-      function NamespaceMember(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
-      },
       function Partial(v) {
         v[1].isPartial = true;
         return v[1];
-      },
-      function PartialDefinition(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
       },
       function PartialInterface(v) {
         return { type_: 'partialinterface', name: v[1], members: v[3] };
@@ -429,10 +406,6 @@
         if ( v[3] !== null ) ret.defaultValue = v[3];
         return ret;
       },
-      function Required(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
-      },
       function Enum(v) {
         return { type_: 'enum', name: v[1], value: v[3] };
       },
@@ -450,15 +423,11 @@
           return attrsAndMember[1];
         });
       },
-      function InterfaceMember(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
-      },
       function Const(v) {
         return { isConst: true, type: v[1], name: v[2], value: v[4] };
       },
       function Operation(v) {
-        if ( v[0] !== null ) v[2].specials = v[0];
+        if ( v[0].length > 0 ) v[2].specials = v[0];
         v[2].returnType = v[1];
         return v[2];
       },
@@ -487,24 +456,16 @@
         if ( v[1] !== null ) v[2].isReadOnly = true;
         return v[2];
       },
-      function MemberRest(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
-      },
-      function Inherit(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
-      },
       function ReadOnlyAttributeRest(v) {
         if ( v[0] !== null ) v[1].isReadOnly = true;
         return v[1];
       },
-      function ReadOnly(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
-      },
       function OperationRest(v) {
-        return v[0] === null ? { args: v[2] } : { name: v[0], args: v[2] };
+        var ret = {};
+        if ( v[2].length > 0 ) ret.args = v[2];
+        if ( v[0] === null ) return ret;
+        ret.name = v[0];
+        return ret;
       },
       function SerializerRestOperation(v) {
         if ( v[0] === null ) return v[1];
@@ -517,10 +478,6 @@
       function SerializationPattern(v) {
         if ( v[0] === '{' ) return { mapPattern: v[1] };
         return { arrayPattern: v[1] };
-      },
-      function ReadOnlyAttributeRestOrOperation(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
       },
       function AttributeRest(v) {
         return { type_: 'attribute', type: v[1], name: v[2] };
@@ -535,35 +492,20 @@
         if ( v[0] ) v[1].attrs = v[0];
         return v[1];
       },
-      function OptionalOrRequiredArgument(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
-      },
       function OptionalArgument(v) {
         return v[3] === null ? { type: v[1], name: v[2], optional: true } :
         { type: v[1], name: v[2], optional: true, defaultValue: v[3] };
       },
       function RequiredArgument(v) {
-        return { type: v[0], name: v[2], variadic: !! v[1] };
+        return v[1] === null ? { type: v[0], name: v[2] } :
+        { type: v[0], name: v[2], isVariadic: true };
       },
       function Default(v) {
         if ( v === null ) return null;
         return v[1];
       },
-      function ArgumentName(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
-      },
-      function Ellipsis(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
-      },
       function ConstValueCornerCase(v) {
         return v.join('');
-      },
-      function Type(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
       },
       function UnionType(v) {
         return v[3] === null ? { type_: 'uniontype', types: v } :
@@ -610,13 +552,15 @@
       },
       function ExtendedAttributeNamedArgList(v) {
         // E.g., "a=b(T1 c, T2 d)"
-        return { name: v[0], opName: v[2], args: v[4] };
+        return v[4].length === 0 ? { name: v[0], opName: v[2] } :
+        { name: v[0], opName: v[2], args: v[4] };
       },
-      function ExtendedAttributeIdent(v) {
+      function ExtendedAttributeIdentifierOrString(v) {
         return { name: v[0], value: v[2] };
       },
       function ExtendedAttributeArgList(v) {
-        return { name: v[0], args: v[2] };
+        return v[2].length === 0 ? { name: v[0] } :
+        { name: v[0], args: v[2] };
       },
       function ExtendedAttributeNoArgs(v) {
         return { name: v };
