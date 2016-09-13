@@ -79,14 +79,14 @@
       az: range('a', 'z'),
 
       // Common tokens.
-      integer: str(seq(
+      integer: nodebug(str(seq(
         sym('om'),
         alt(
           str(seq(range('1', '9'), sym('r09'))),
           str(seq('0', alt('X', 'x'), str(plus(alt(
             range('0', '9'), range('A', 'F'), range('a', 'f')))))),
-          str(seq('0', str(repeat(range('0', '7')))))))),
-      float: str(seq(
+          str(seq('0', str(repeat(range('0', '7'))))))))),
+      float: nodebug(str(seq(
         sym('om'),
         alt(
           str(seq(
@@ -95,12 +95,12 @@
               str(seq(sym('r09'), '.', sym('p09')))),
             optional(
               str(seq(sym('Ee'), sym('opm'), sym('p09')))))),
-          str(seq(sym('p09'), sym('Ee'), sym('opm'), sym('p09')))))),
-      identifier: seq(
+          str(seq(sym('p09'), sym('Ee'), sym('opm'), sym('p09'))))))),
+      identifier: nodebug(seq(
         optional('_'),
         alt(sym('AZ'), sym('az')),
-        str(repeat(alt(sym('AZ'), sym('az'), sym('_09'), '_', '-')))),
-      string: seq1(1, '"', str(repeat(notChar('"'))), '"'),
+        str(repeat(alt(sym('AZ'), sym('az'), sym('_09'), '_', '-'))))),
+      string: nodebug(seq1(1, '"', str(repeat(notChar('"'))), '"')),
 
       // NOTE: Trailing ";"s not optional in spec.
       SemiColon: optional(';'),
@@ -112,7 +112,7 @@
       // Definitions.
       Definitions: trepeat(tseq(sym('ExtendedAttributeList'),
                                 sym('Definition'))),
-      Definition: alt(sym('CallbackOrInterface'),
+      Definition: alt(sym('CallbackOrInterfaceLike'),
                       sym('Namespace'),
                       sym('Partial'),
                       sym('Dictionary'),
@@ -121,12 +121,14 @@
                       sym('ImplementsStatement')),
 
       // Callbacks and interfaces.
-      CallbackOrInterface: alt(sym('Callback'), sym('Interface')),
-      Callback: tseq('callback', sym('CallbackRestOrInterface')),
+      CallbackOrInterfaceLike: alt(sym('Callback'), sym('InterfaceLike')),
+      Callback: tseq('callback', sym('CallbackRestOrInterfaceLike')),
       // TODO: Do we have semantic actions that require this production?
-      CallbackRestOrInterface: alt(sym('CallbackRest'), sym('Interface')),
-      Interface: tseq('interface', sym('identifier'), sym('Inheritance'), '{',
-                      sym('InterfaceMembers'), '}', ';'),
+      CallbackRestOrInterfaceLike: alt(sym('CallbackRest'),
+                                       sym('InterfaceLike')),
+      InterfaceLike: tseq(alt('interface', 'exception'),
+                          sym('identifier'), sym('Inheritance'), '{',
+                          sym('InterfaceMembers'), '}', ';'),
       CallbackRest: tseq(sym('identifier'), '=', sym('Type'), '(',
                          sym('ArgumentList'), ')', sym('SemiColon')),
       Inheritance: optional(tseq1(1, ':', sym('identifier'))),
@@ -188,7 +190,7 @@
                   sym('ConstValue'), sym('SemiColon')),
       // NOTE: Type should be constrained "ReturnType" from spec; rely on
       // semtantic actions to check this.
-      Operation: tseq(sym('Type'), sym('OperationRest')),
+      Operation: tseq(sym('Specials'), sym('Type'), sym('OperationRest')),
       Serializer: tseq('serializer', sym('SerializerRest')),
       Stringifier: tseq('stringifier',
                         alt(literal(';'),
@@ -223,12 +225,17 @@
       // ReadWriteSetlike: sym('SetlikeRest'),
 
       // Within interface members.
+      Specials: trepeat(alt('getter', 'setter', 'deleter', 'legacycaller')),
       OperationRest: tseq(optional(sym('identifier')), '(',
                           sym('ArgumentList'), ')', sym('SemiColon')),
-      SerializerRest: alt(sym('OperationRest'),
-                          tseq('=', sym('SerializationPattern'),
-                               sym('SemiColon')),
-                          literal(';')),
+      SerializerRest: alt(sym('SerializerRestOperation'),
+                          sym('SerializerRestPattern'),
+                          sym('SerializerRestEmpty')),
+      SerializerRestOperation: tseq(optional(sym('Type')),
+                                    sym('OperationRest')),
+      SerializerRestPattern: tseq1(1, '=', sym('SerializationPattern'),
+                                   sym('SemiColon')),
+      SerializerRestEmpty: literal(';'),
       SerializationPattern: alt(tseq('{', sym('SerializationPatternInner'),
                                      '}'),
                                 tseq('[', sym('SerializationPatternInner'),
@@ -295,7 +302,7 @@
       // Approximation of multi-token built-in type names.
       // TODO: Parse this correctly.
       BuiltInTypeName: tplus(alt('unsigned', 'short', 'long', 'unrestricted',
-                                 'float', 'byte', 'octet')),
+                                 'float', 'double', 'byte', 'octet')),
       // TODO: Make this production more comprehensible.
       // It allows for a series of "[]" and "?" with no "??"s.
       TypeSuffixes: optional(alt(
@@ -311,19 +318,24 @@
         tseq1(1, '[', trepeat(sym('ExtendedAttribute'), ','), ']')),
       ExtendedAttribute: alt(sym('ExtendedAttributeIdentList'),
                              sym('ExtendedAttributeNamedArgList'),
-                             sym('ExtendedAttributeIdent'),
+                             sym('ExtendedAttributeIdentifierOrString'),
                              sym('ExtendedAttributeArgList'),
                              sym('ExtendedAttributeNoArgs')),
       ExtendedAttributeIdentList: tseq(sym('identifier'), '=', '(',
-                                       sym('IdentifierList'), ')'),
+                                       sym('IdentifierOrStringList'), ')'),
       ExtendedAttributeNamedArgList: tseq(sym('identifier'), '=',
                                           sym('identifier'), '(',
                                           sym('ArgumentList'), ')'),
-      ExtendedAttributeIdent: tseq(sym('identifier'), '=',
-                                   sym('identifier')),
+      ExtendedAttributeIdentifierOrString: tseq(sym('identifier'), '=',
+                                                sym('IdentifierOrString')),
+      ExtendedAttributeStr: tseq(sym('identifier'), '=',
+                                 sym('string')),
       ExtendedAttributeArgList: tseq(sym('identifier'), '(',
                                      sym('ArgumentList'), ')'),
       ExtendedAttributeNoArgs: sym('identifier'),
+
+      IdentifierOrString: alt(sym('identifier'), sym('string')),
+      IdentifierOrStringList: tplus(sym('IdentifierOrString'), ','),
     };
 
     parser.addActions(
@@ -349,7 +361,7 @@
         if ( Array.isArray(v) && v.length > 0 ) debugger;
         return v;
       },
-      function CallbackOrInterface(v) {
+      function CallbackOrInterfaceLike(v) {
         if ( Array.isArray(v) && v.length > 0 ) debugger;
         return v;
       },
@@ -357,14 +369,14 @@
         v[1].type_ = 'callback';
         return v[1];
       },
-      function CallbackRestOrInterface(v) {
+      function CallbackRestOrInterfaceLike(v) {
         if ( Array.isArray(v) && v.length > 0 ) debugger;
         return v;
       },
-      function Interface(v) {
+      function InterfaceLike(v) {
         return v[2] === null ?
-          { type_: 'interface', name: v[1], members: v[4] } :
-        { type_: 'interface', inheritsFrom: v[2], name: v[1], members: v[4] };
+          { type_: v[0], name: v[1], members: v[4] } :
+        { type_: v[0], inheritsFrom: v[2], name: v[1], members: v[4] };
       },
       function CallbackRest(v) {
         return { name: v[0], returnType: v[2], args: v[4] };
@@ -393,8 +405,7 @@
         return v;
       },
       function PartialInterface(v) {
-        if ( Array.isArray(v) && v.length > 0 ) debugger;
-        return v;
+        return { type_: 'partialinterface', name: v[1], members: v[3] };
       },
       function PartialDictionary(v) {
         return { type_: 'dictionary', name: v[1], members: v[3] };
@@ -447,12 +458,15 @@
         return { isConst: true, type: v[1], name: v[2], value: v[4] };
       },
       function Operation(v) {
-        v[1].returnType = v[0];
-        return v[1];
+        if ( v[0] !== null ) v[2].specials = v[0];
+        v[2].returnType = v[1];
+        return v[2];
+      },
+      function Specials(v) {
+        return v;
       },
       function Serializer(v) {
         v[1].type_ = 'serializer';
-        if ( Array.isArray(v[1]) ) debugger;
         return v[1];
       },
       function Stringifier(v) {
@@ -492,10 +506,13 @@
       function OperationRest(v) {
         return v[0] === null ? { args: v[2] } : { name: v[0], args: v[2] };
       },
-      function SerializerRest(v) {
-        if ( Array.isArray(v) ) return v[1]; // ["=", SerializationPattern]
-        else if ( v === ';' )   return {};   //  ";"
-        else                    return v;    // OperationRest
+      function SerializerRestOperation(v) {
+        if ( v[0] === null ) return v[1];
+        v[1].type = v[0];
+        return v[1];
+      },
+      function SerializerRestEmpty(v) {
+        return {};
       },
       function SerializationPattern(v) {
         if ( v[0] === '{' ) return { mapPattern: v[1] };
