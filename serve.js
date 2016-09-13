@@ -29,6 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false, limit: '500mb' }));
 app.use(express.static('static'));
 
 var DATA_DIR = './data';
+var OG_DATA_DIR = './data/og';
 var HTML_HEAD = '<html><head><meta name="viewport" content="width=500, initial-scale=1"></head><body>';
 var HTML_FOOT = '</body></html>';
 
@@ -73,8 +74,8 @@ Environment.prototype.toArray = function() {
 };
 
 Environment.prototype.getJSONFileName = function() {
-  return 'data_' + this.browser.name + '_' + this.browser.version + '_' +
-    this.platform.name + '_' + this.platform.version + '.json';
+  return 'object_graph_' + this.browser.name + '_' + this.browser.version +
+    '_' + this.platform.name + '_' + this.platform.version + '.json';
 };
 
 function declFromJSON(ctor) {
@@ -130,7 +131,7 @@ function updateList(env) {
 }
 
 function getData(info) {
-  return fs.readFileSync(DATA_DIR + '/' + info.getJSONFileName());
+  return fs.readFileSync(OG_DATA_DIR + '/' + info.getJSONFileName());
 }
 
 app.post('/save', function(req, res) {
@@ -142,7 +143,7 @@ app.post('/save', function(req, res) {
   var ua = req.headers['user-agent'];
   var env = new Environment(nameRewriter.userAgentAsPlatformInfo(ua));
   var jsonFileName = env.getJSONFileName();
-  var path = DATA_DIR + '/' + jsonFileName;
+  var path = OG_DATA_DIR + '/' + jsonFileName;
 
   fs.stat(path, function(err, stats) {
     if ( ! err ) {
