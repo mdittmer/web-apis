@@ -13,9 +13,6 @@
               "name": "sequence",
               "params": [
                 {
-                  "params": {
-                    "name": "DOMString"
-                  },
                   "type_": "uniontype",
                   "types": [
                     {
@@ -155,9 +152,6 @@
               "name": "sequence",
               "params": [
                 {
-                  "params": {
-                    "name": "ArrayBuffer"
-                  },
                   "type_": "uniontype",
                   "types": [
                     {
@@ -405,6 +399,9 @@
         "isReadOnly": true,
         "name": "result",
         "type": {
+          "params": [
+            "nullable"
+          ],
           "type_": "uniontype",
           "types": [
             {
@@ -695,6 +692,9 @@
         "defaultValue": "null",
         "name": "keyPath",
         "type": {
+          "params": [
+            "nullable"
+          ],
           "type_": "uniontype",
           "types": [
             {
@@ -789,6 +789,9 @@
         "isReadOnly": true,
         "name": "source",
         "type": {
+          "params": [
+            "nullable"
+          ],
           "type_": "uniontype",
           "types": [
             {
@@ -6561,6 +6564,9 @@
       {
         "name": "doubleOrStringOrNullAttribute",
         "type": {
+          "params": [
+            "nullable"
+          ],
           "type_": "uniontype",
           "types": [
             {
@@ -9069,6 +9075,9 @@
           {
             "name": "arg",
             "type": {
+              "params": [
+                "nullable"
+              ],
               "type_": "uniontype",
               "types": [
                 {
@@ -9895,6 +9904,9 @@
             "name": "defaultNullArg",
             "optional": true,
             "type": {
+              "params": [
+                "nullable"
+              ],
               "type_": "uniontype",
               "types": [
                 {
@@ -14406,6 +14418,9 @@
           {
             "name": "effect",
             "type": {
+              "params": [
+                "nullable"
+              ],
               "type_": "uniontype",
               "types": [
                 {
@@ -14458,6 +14473,9 @@
           {
             "name": "effect",
             "type": {
+              "params": [
+                "nullable"
+              ],
               "type_": "uniontype",
               "types": [
                 {
@@ -14542,6 +14560,9 @@
           {
             "name": "effect",
             "type": {
+              "params": [
+                "nullable"
+              ],
               "type_": "uniontype",
               "types": [
                 {
@@ -14586,6 +14607,9 @@
           {
             "name": "effect",
             "type": {
+              "params": [
+                "nullable"
+              ],
               "type_": "uniontype",
               "types": [
                 {
@@ -36883,9 +36907,6 @@
   {
     "name": "BlobPart",
     "type": {
-      "params": {
-        "name": "USVString"
-      },
       "type_": "uniontype",
       "types": [
         {
@@ -37107,9 +37128,6 @@
   {
     "name": "BlobPart",
     "type": {
-      "params": {
-        "name": "USVString"
-      },
       "type_": "uniontype",
       "types": [
         {
@@ -37586,6 +37604,9 @@
         "isReadOnly": true,
         "name": "result",
         "type": {
+          "params": [
+            "nullable"
+          ],
           "type_": "uniontype",
           "types": [
             {
@@ -41454,6 +41475,9 @@
         ],
         "name": "namedItem",
         "returnType": {
+          "params": [
+            "nullable"
+          ],
           "type_": "uniontype",
           "types": [
             {
@@ -43533,6 +43557,9 @@
         ],
         "name": "namedItem",
         "returnType": {
+          "params": [
+            "nullable"
+          ],
           "type_": "uniontype",
           "types": [
             {
@@ -48391,6 +48418,9 @@
             "name": "before",
             "optional": true,
             "type": {
+              "params": [
+                "nullable"
+              ],
               "type_": "uniontype",
               "types": [
                 {
@@ -48476,6 +48506,9 @@
         ],
         "name": "namedItem",
         "returnType": {
+          "params": [
+            "nullable"
+          ],
           "type_": "uniontype",
           "types": [
             {
@@ -49144,6 +49177,9 @@
             "name": "before",
             "optional": true,
             "type": {
+              "params": [
+                "nullable"
+              ],
               "type_": "uniontype",
               "types": [
                 {
@@ -52344,6 +52380,9 @@
         "isReadOnly": true,
         "name": "track",
         "type": {
+          "params": [
+            "nullable"
+          ],
           "type_": "uniontype",
           "types": [
             {
@@ -52369,6 +52408,9 @@
       {
         "name": "track",
         "type": {
+          "params": [
+            "nullable"
+          ],
           "type_": "uniontype",
           "types": [
             {
@@ -52887,9 +52929,6 @@
   {
     "name": "ImageBitmapSource",
     "type": {
-      "params": {
-        "name": "Blob"
-      },
       "type_": "uniontype",
       "types": [
         {
@@ -69794,6 +69833,9 @@
             "name": "arg",
             "optional": true,
             "type": {
+              "params": [
+                "nullable"
+              ],
               "type_": "uniontype",
               "types": [
                 {
@@ -69823,6 +69865,9 @@
           {
             "name": "arg",
             "type": {
+              "params": [
+                "array"
+              ],
               "type_": "uniontype",
               "types": [
                 {
@@ -69894,6 +69939,9 @@
           {
             "name": "arg",
             "type": {
+              "params": [
+                "nullable"
+              ],
               "type_": "uniontype",
               "types": [
                 {
@@ -69974,6 +70022,9 @@
           {
             "name": "arg",
             "type": {
+              "params": [
+                "nullable"
+              ],
               "type_": "uniontype",
               "types": [
                 {
@@ -70009,6 +70060,9 @@
           {
             "name": "arg",
             "type": {
+              "params": [
+                "nullable"
+              ],
               "type_": "uniontype",
               "types": [
                 {
@@ -72971,9 +73025,9 @@
             "name": "body",
             "optional": true,
             "type": {
-              "params": {
-                "name": "Document"
-              },
+              "params": [
+                "nullable"
+              ],
               "type_": "uniontype",
               "types": [
                 {
@@ -73785,9 +73839,9 @@
             "name": "data",
             "optional": true,
             "type": {
-              "params": {
-                "name": "FormData"
-              },
+              "params": [
+                "nullable"
+              ],
               "type_": "uniontype",
               "types": [
                 {
@@ -75730,9 +75784,6 @@
   {
     "name": "CanvasImageSource",
     "type": {
-      "params": {
-        "name": "ImageBitmap"
-      },
       "type_": "uniontype",
       "types": [
         {
@@ -77308,9 +77359,6 @@
   {
     "name": "RenderingContext",
     "type": {
-      "params": {
-        "name": "ImageBitmapRenderingContext"
-      },
       "type_": "uniontype",
       "types": [
         {
@@ -86853,6 +86901,9 @@
         "defaultValue": "null",
         "name": "keyPath",
         "type": {
+          "params": [
+            "nullable"
+          ],
           "type_": "uniontype",
           "types": [
             {
@@ -97798,6 +97849,9 @@
         "isReadOnly": true,
         "name": "source",
         "type": {
+          "params": [
+            "nullable"
+          ],
           "type_": "uniontype",
           "types": [
             {
@@ -97859,6 +97913,9 @@
       {
         "name": "source",
         "type": {
+          "params": [
+            "nullable"
+          ],
           "type_": "uniontype",
           "types": [
             {
@@ -98720,6 +98777,9 @@
         "isReadOnly": true,
         "name": "source",
         "type": {
+          "params": [
+            "nullable"
+          ],
           "type_": "uniontype",
           "types": [
             {
@@ -98772,6 +98832,9 @@
       {
         "name": "source",
         "type": {
+          "params": [
+            "nullable"
+          ],
           "type_": "uniontype",
           "types": [
             {

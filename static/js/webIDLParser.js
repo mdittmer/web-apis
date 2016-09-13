@@ -290,7 +290,7 @@
       // NOTE: We don't parse the type name "any" specially. This means that we
       // may, for example, parse "any<Foo>" as a type, though it's not allowed.
       Type: alt(sym('UnionType'), sym('NonUnionType')),
-      UnionType: tseq1(1, '(', tplus(sym('UnionMemberType'), 'or'), ')',
+      UnionType: tseq('(', tplus(sym('UnionMemberType'), 'or'), ')',
                        sym('TypeSuffixes')),
       // NOTE: We support nesting of union types, though the standard does not.
       UnionMemberType: sym('Type'),
@@ -508,8 +508,8 @@
         return v.join('');
       },
       function UnionType(v) {
-        return v[3] === null ? { type_: 'uniontype', types: v } :
-        { type_: 'uniontype', types: v, params: v[3] };
+        return v[3] === null ? { type_: 'uniontype', types: v[1] } :
+        { type_: 'uniontype', types: v[1], params: v[3] };
       },
       function ParameterizedType(v) {
         if ( v[0].params ) v[0].params.push(v[2]);
