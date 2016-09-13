@@ -28,6 +28,7 @@
       var res = parser.parseString(str, parser.grammar[name]);
       console.assert(res[0],
                      'Try to parse "' + str +'"');
+      return res && res[1];
     }
     function failParse(str, name) {
       var res = parser.parseString(str, parser.grammar[name]);
@@ -108,6 +109,10 @@
     tryParse('a b();', 'Operation');
     tryParse('a (c d);', 'Operation');
     tryParse('a b(c<d>? e);', 'Operation');
+    tryParse('getter a b(c<d>? e);', 'Operation');
+    tryParse('setter a b(c<d>? e);', 'Operation');
+    tryParse('deleter a b(c<d>? e);', 'Operation');
+    tryParse('getter setter a b(c<d>? e);', 'Operation');
 
     tryParse('serializer ();', 'Serializer');
     tryParse('serializer b();', 'Serializer');
