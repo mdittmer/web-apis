@@ -40,8 +40,101 @@
       return keys.sort();
     }
 
+    // Strip function's own properties from primitive report. Actual function
+    // differences show up in APIs report.
+    var skipFunctionKeys = [ 'length', 'name', 'arguments', 'caller', 'callee' ];
+    function initPrimitiveSet(graph, ids) {
+      var rtn = {};
+      for ( var i = 0; i < ids.length; i++ ) {
+        var keys = graph.getObjectKeys(ids[i], graph.isType);
+        if ( graph.isFunction(ids[i]) ) keys = keys.filter(function(key) {
+          return skipFunctionKeys.indexOf(key) === -1;
+        });
+        if ( keys.length > 0 ) rtn[ids[i]] = keys;
+      }
+      return rtn;
+    }
+    function excludeAllFromPrimitiveSet(primitives, id) {
+      if ( primitives[id] === undefined ) return primitives;
+      delete primitives[id];
+      return primitives;
+    }
+    function excludeFromPrimitiveSet(primitives, id, key) {
+      if ( ! primitives[id] ) return primitives;
+      primitives[id] = primitives[id].filter(function(existingKey) {
+        return existingKey !== key;
+      });
+      if ( primitives[id].length === 0 ) delete primitives[id];
+      return primitives;
+    }
+    function refinePrimitiveSet(baseGraph, primitivePredicate, ids, primitives,
+                                otherGraph) {
+      var i, j, k;
+      for ( i = 0; i < ids.length; i++ ) {
+        var keys = getRelaxedKeys(baseGraph, ids[i]);
 
-    // Helper for doAnalysis below.
+        var id;
+        for ( j = 0; j < keys.length; j++ ) {
+          id = otherGraph.lookup(keys[j]);
+        }
+        console.assert(id);
+
+        var baseKeys = baseGraph.getObjectKeys(ids[i], baseGraph.isType);
+        var otherKeys = otherGraph.getObjectKeys(id, otherGraph.isType);
+        for ( j = k = 0; j < baseKeys.length && k < otherKeys.length; ) {
+          var baseValue = baseGraph.lookup(
+            baseGraph.getShortestKey(ids[i]) + '.' + baseKeys[j]
+          );
+          var otherValue = otherGraph.lookup(
+            otherGraph.getShortestKey(id) + '.' + otherKeys[k]
+          );
+
+          var predicate = primitivePredicate.bind(this, baseGraph, ids[i],
+                                                  baseValue, otherGraph, id,
+                                                  otherValue);
+          if ( baseKeys[j] === otherKeys[k] ) {
+            // base and other both contain key.
+            j++;
+            k++;
+          } else if ( baseKeys[j] < otherKeys[k] ) {
+            // base contains key missing from other.
+            if ( predicate(baseKeys[j]) )
+              excludeFromPrimitiveSet(primitives, ids[i], baseKeys[j]);
+            j++;
+          } else {
+            // other contains key missing from base.
+            k++;
+          }
+        }
+      }
+      return primitives;
+    }
+
+    function doPrimitiveAnalysis(inGraphs, exGraphs, primitivePredicate) {
+      if ( inGraphs.length === 0 ) {
+        console.error('Analysis requires at least one included implementation');
+        return {};
+      }
+
+      var os = doObjectAnalysis(
+        inGraphs, exGraphs,
+        function(graph) {
+          return graph.getAllIds();
+        },
+        function(_, __, graph, id) { return !! id; }
+      ), i;
+      var primitives = initPrimitiveSet(inGraphs[0], os);
+      var refiner = refinePrimitiveSet.bind(
+        this, inGraphs[0], primitivePredicate, os);
+
+      for ( i = 1; i < inGraphs.length; i++ ) {
+        primitives = refiner(primitives, inGraphs[i]);
+      }
+
+      return primitives;
+    }
+
+    // Helper for doObjectAnalysis below.
     //
     // Refine the object set of baseGraph-based ids. The new set includes only
     // ids that have/do-not-have corresponding ids in otherGraph that return
@@ -50,15 +143,17 @@
     // exist in otherGraph, and vice-versa. By "corresponding" is meant "an
     // otherGraph-based id was found performing key lookup against the keys
     // associated with the baseGraph-based id".
-    function refineObjectSet(baseGraph, ids, otherGraph, predicate, exclude) {
+    function refineObjectSet(baseGraph, predicate, ids, otherGraph, exclude) {
       var rtn = [];
       for ( var i = 0; i < ids.length; i++ ) {
         var keys = getRelaxedKeys(baseGraph, ids[i]);
         for ( var j = 0; j < keys.length; j++ ) {
           var id = otherGraph.lookup(keys[j]);
           if ( predicate(baseGraph, ids[i], otherGraph, id) ) break;
+          else                                                id = null;
         }
-        if ( exclude ^  ( !! id ) ) rtn.push(ids[i]);
+        if ( exclude ^  ( !! id ) )
+          rtn.push(ids[i]);
       }
       return rtn;
     }
@@ -67,47 +162,67 @@
     // in all outGraphs. Start the refinement using initializer against the first
     // inGraph. Deem objects in graphs as relevant according to the return value
     // of predicate.
-    function doAnalysis(inGraphs, exGraphs, initializer, predicate) {
+    function doObjectAnalysis(inGraphs, exGraphs, initializer, predicate) {
       if ( inGraphs.length === 0 ) {
         console.error('Analysis requires at least one included implementation');
         return [];
       }
       var os = initializer(inGraphs[0]), i;
+      var refiner = refineObjectSet.bind(this, inGraphs[0], predicate);
 
       for ( i = 1; i < inGraphs.length; i++ ) {
-        os = refineObjectSet(inGraphs[0], os, inGraphs[i], predicate, false);
+        os = refiner(os, inGraphs[i], false);
       }
 
       for ( i = 0; i < exGraphs.length; i++ ) {
-        os = refineObjectSet(inGraphs[0], os, exGraphs[i], predicate, true);
+        os = refiner(os, exGraphs[i], true);
       }
 
       return os;
     }
 
     // Perform object graph set refinement by including objects in inGraphs and
-    // excluding objects in exGraphs. Do two refinements:
+    // excluding objects in exGraphs. Do three refinements:
     // (1) APIs: Consider only function objects;
     // (2) Structs: Consider only non-function objects.
+    // (3) Primitives: Consider object[key] that store primitive values.
     // Finally, output results to DOM.
     function doAnalyses(inGraphs, exGraphs) {
       var apisE = e('#apis');
       var structsE = e('#structs');
+      var primitivesE = e('#primitives');
 
-      apisE.textContent = structsE.textContent = '';
+      apisE.textContent = structsE.textContent = primitivesE.textContent = '';
 
-      var apis = doAnalysis(
+      var apis = doObjectAnalysis(
         inGraphs, exGraphs,
         function(graph) { return graph.getFunctions(); },
-        function(_, __, graph, id) { return graph.isFunction(id); });
-      var structs = doAnalysis(
+        function(_, __, graph, id) { return graph.isFunction(id); }
+      );
+      var structs = doObjectAnalysis(
         inGraphs, exGraphs,
         function(graph) {
           return graph.getAllIds().filter(
             function(id) { return ! graph.isFunction(id); }
           );
         },
-        function(_, __, graph, id) { return id && ! graph.isFunction(id); });
+        function(_, __, graph, id) { return id && ! graph.isFunction(id); }
+      );
+      var primitives = doPrimitiveAnalysis(
+        inGraphs, exGraphs, function() { return true; }
+        // function(graph) { return graph.getAllIds(); },
+        // function(_, __, ___, otherId) { return ( !! otherId ); },
+        // function(g, id, v, g2, id2, v2, k) {
+        //   if ( k === 'webkitFullScreenKeyboardInputAllowed' ) debugger;
+        //   return !! id;
+        // }
+        // function(baseGraph, baseId, _, otherGraph, otherId, __, key) {
+        //   var graph = baseGraph || otherGraph;
+        //   var id = baseGraph ? baseId : otherId;
+        //   return ( ! graph.isFunction(id) ) ||
+        //     [ 'name', 'length' ].indexOf(key) === -1;
+        // }
+      );
 
       var graph = inGraphs[0];
 
@@ -118,6 +233,15 @@
       structsE.textContent = structs.map(function(id) {
         return graph.getShortestKey(id);
       }).join('\n');
+      primitivesE.textContent = Object.getOwnPropertyNames(primitives).map(
+        function(id) {
+          var objectKey = graph.getShortestKey(id);
+          var primitiveKeys = primitives[id];
+          return primitiveKeys.map(function(primitiveKey) {
+            return objectKey + '.' + primitiveKey;
+          }).join('\n');
+        }
+      ).join('\n');
     }
 
     // Convert datalist option value to a data retrieval URL. This is tightly
@@ -143,17 +267,14 @@
 
       // Continuation hack: Keep trying until inGraphs and exGraphs are populated,
       // then do analyses.
-      var inGraphs, exGraphs;
+      var inGraphs = null, exGraphs = exPaths.length === 0 ? [] : null;
       function next(i) {
         if ( inGraphs && exGraphs ) doAnalyses(inGraphs, exGraphs);
       }
 
       // Map data fetched from URLs to ObjectGraph instances.
       function getObjectGraphs(jsons) {
-        return jsons.map(function(data) {
-          debugger;
-          return ObjectGraph.fromJSON(data);
-        });
+        return jsons.map(function(data) { return ObjectGraph.fromJSON(data); });
       }
 
       // Map URL paths to inGraphs and exGraphs, then do analyses.

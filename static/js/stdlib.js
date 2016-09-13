@@ -17,7 +17,6 @@
 'use strict';
 
 (function(define) {
-  var count = 0;
   define(function() {
     var stdlib = {
       argsToArray: (function() {
@@ -62,8 +61,6 @@
         );
       },
       future: function future() {
-        count++;
-        if ( count > 10 ) debugger;
         var value;
         var isSet = false;
         function f(f2) {

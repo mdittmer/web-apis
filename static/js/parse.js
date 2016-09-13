@@ -30,89 +30,209 @@
     var parse = { factories_: {} };
 
     //
-    // A parser stream for strings
+    // The ParserStream interface
     //
-    function StringParserStream(str) {
-      this.pos = 0;
-      // str_ and tail_ are pointers to a value. Use an array for this.
-      this.str_ = [str];
-      this.tail_ = [];
-    }
-    Object.defineProperties(StringParserStream.prototype, {
-      // Complete string parsed by on this stream.
-      str: { set: function(str) { this.str_[0] = str; } },
-      // Next character to be parsed.
-      head: { get: function() {
-        return this.pos >= this.str_[0].length ? null :
-          this.str_[0].charAt(this.pos);
-      } },
-      // The last chunk that was parsed on this this stream.
-      value: { get: function() {
-        return this.hasOwnProperty('value_') ? this.value_ :
-          this.pos > 0 ? this.str_[0].charAt(this.pos - 1) : '';
-      } },
-      // A stream that follows parsing head.
-      tail: { get: function() {
-        if ( ! this.tail_[0] ) {
-          var tail = Object.create(this.__proto__);
-          tail.str_ = this.str_;
-          tail.pos = this.pos + 1;
-          tail.tail_ = [];
-          this.tail_[0] = tail;
-        }
-        return this.tail_[0];
-      } },
-      // Set parsed portion of stream.
-      setValue: { value: function(value) {
-        var ret = Object.create(this.__proto__);
 
-        ret.str_ = this.str_;
-        ret.pos = this.pos;
-        ret.tail_ = this.tail_;
-        ret.value_ = value;
+    function ParserStream() {}
+    ParserStream.prototype = {
+      // This stream's notion of "no character". E.g., empty string for
+      // StringParserStream.
+      nullChar: null,
+      // Character position in stream.
+      pos: 0,
 
-        return ret;
-      } },
-      // Unparsed portion of stream (including head).
-      toString: { value: function() {
-        return this.str_[0].substring(this.pos);
-      } },
-      clone: { value: function() {
-        var ret = Object.create(this.__proto__);
+      init: function init() {
+        this.pos = 0;
+      },
+
+      // Get a character from the stream.
+      getChar: function getChar(pos) { return this.nullChar; },
+      // Shallow copy of a stream. Used internally for advancing stream.
+      clone: function clone(opt_o) {
+        var ret = opt_o || Object.create(this.__proto__);
         var keys = Object.getOwnPropertyNames(this);
         for ( var i = 0; i < keys.length; i++ ) {
           ret[keys[i]] = this[keys[i]];
         }
         return ret;
-      } },
-    });
-
-    // Parser stream that captures the first time the parser advances by
-    // accessing tail.
-    function TrapParserStream(ps) {
-      this.pos = ps.pos;
-      this.head = ps.head;
-      this.value = ps.value;
-      this.goodChar = false;
-    }
-    TrapParserStream.prototype.setValue = function(v) {
-      this.value = v;
-      return this;
+      },
+      // Set the parser output for this specific stream object.
+      setValue: function setValue(v) {
+        var ret = this.clone();
+        ret.value_ = v;
+        return ret;
+      },
+      // Is this stream just used for speculative parsing decisions?
+      // E.g., alt(...) "tries" alternatives before advancing one of them "for
+      // real" after the tries.
+      isSpeculative: function() { return true; },
+      toString: function() {
+        return 'ParserStream' + JSON.stringify({
+          pos: stdlib.toString(this.pos),
+          head: stdlib.toString(this.head),
+          value: stdlib.toString(this.value)
+        }, null, 2);
+      },
     };
-    Object.defineProperty(TrapParserStream.prototype, 'tail', {
-      get: function() {
-        this.goodChar = true;
-        return {
-          pos: this.pos + 1,
-          head: null,
-          value: this.value,
-          setValue: function(v) {
-            this.value = v;
-            return this;
-          }
-        };
+    Object.defineProperties(ParserStream.prototype, {
+      // Parser output value.
+      value: {
+        get: function() {
+          return this.hasOwnProperty('value_') ? this.value_ :
+            this.getChar(this.pos - 1);
+        },
+      },
+      // Next character to be parsed.
+      head: {
+        get: function() {
+          return this.getChar(this.pos);
+        },
+      },
+      // Result of advancing the stream by 1 character.
+      tail: {
+        get: function() {
+          var ret = this.clone();
+          ret.pos++;
+          return ret;
+        },
       },
     });
+
+    //
+    // A parser stream for strings
+    //
+    function StringParserStream(str) { this.init(str); }
+    StringParserStream.prototype = Object.create(ParserStream.prototype, {
+      nullChar: { value: '' },
+      init: {
+        value: function init(str) {
+          StringParserStream.prototype.__proto__.init.call(this);
+          // str_ and tail_ are pointers to a value. Use an array for this.
+          this.str_ = [str];
+          this.tail_ = [];
+        },
+      },
+      getChar: {
+        value: function getchar(pos) {
+          return this.pos >= 0 && this.pos < this.str_[0].length ?
+            this.str_[0].charAt(pos) : this.nullChar;
+        },
+      },
+      // Pointer to complete string parsed by on this stream.
+      str: { set: function(str) { this.str_[0] = str; } },
+      // A stream that follows parsing head.
+      tail: {
+        get: function() {
+          if ( ! this.tail_[0] ) {
+            var tail = this.clone();
+            tail.pos = this.pos + 1;
+            tail.tail_ = [];
+            this.tail_[0] = tail;
+          }
+          return this.tail_[0];
+        },
+      },
+      // Set parsed portion of stream.
+      setValue: {
+        value: function(value) {
+          var ret = Object.create(this.__proto__);
+
+          ret.str_ = this.str_;
+          ret.pos = this.pos;
+          ret.tail_ = this.tail_;
+          ret.value_ = value;
+
+          return ret;
+        },
+      },
+      // StringParserStreams are used to actually advance a concrete parse.
+      isSpeculative: { value: function() { return false; } },
+      toString: {
+        value: function() {
+          return 'StringParserStream' + JSON.stringify({
+            pos:  stdlib.toString(this.pos),
+            next: stdlib.toString(this.str_[0].substr(this.pos, 9)),
+            value: stdlib.toString(this.value),
+          }, null, 2);
+        },
+      },
+    });
+
+    //
+    // A parser stream for speculative parsing
+    //
+    // TODO: Should implement this with a different pattern. It need not operate
+    // over strings.
+    function SpeculativeParserStream(ps) { this.init(ps); };
+    SpeculativeParserStream.prototype = Object.create(
+      StringParserStream.prototype, {
+        init: { value: function init(ps) { ps.clone(this); } },
+        isSpeculative: { value: function isSpeculative() { return true; } },
+        toString: {
+          value: function toString() {
+            return 'SpeculativeParserStream' + JSON.stringify({
+              pos: stdlib.toString(this.pos),
+              head: stdlib.toString(this.head),
+              value: stdlib.toString(this.value),
+            }, null, 2);
+          },
+        },
+      }
+    );
+    SpeculativeParserStream.maybeWrap = function(ps, opt_ctor) {
+      var Ctor = opt_ctor || SpeculativeParserStream;
+      if ( ! ps.isSpeculative() ) return new Ctor(ps);
+      else                        return ps;
+    };
+
+    //
+    // A parser stream for trapping after processing one character
+    //
+    function TrapParserStream(ps) { this.init(ps); }
+    TrapParserStream.prototype = Object.create(
+      SpeculativeParserStream.prototype, {
+        goodChar: { value: false, writable: true },
+        head: { value: null, writable: true },
+        value: { value: null, writable: true },
+
+        init: {
+          value: function init(ps) {
+            TrapParserStream.prototype.__proto__.init.call(this, ps);
+            // Store head as static value.
+            this.head = this.getChar(this.pos);
+          },
+        },
+        // Do not clone on setValue.
+        setValue: {
+          value: function setValue(v) {
+            this.value_ = v;
+            return this;
+          },
+        },
+        tail: {
+          get: function() {
+            // Store info: Successfully parsed one character.
+            this.goodChar = true;
+            this.pos++;
+            // Prevent further parsing by setting head to "no character".
+            this.head = this.nullChar;
+            // Invoke getter in prototype chain.
+            var v = this.value;
+            // Store value on current object.
+            this.value = v;
+            return this;
+          },
+        },
+        toString: {
+          value: function toString() {
+            return 'TrapParserStream' + JSON.stringify({
+              pos: stdlib.toString(this.pos),
+              goodChar: stdlib.toString(this.goodChar),
+            }, null, 2);
+          },
+        },
+      }
+    );
 
     //
     // Helper functions
@@ -221,6 +341,7 @@
       return str;
     }
     function decorateFunction(f, opts) {
+      opts = opts || {};
       f.label = opts.label || f.name;
       console.assert(f.label, 'Decorated functions must be labeled');
       f.context = opts.context || null;
@@ -241,23 +362,24 @@
     // parsers. This inversion of control allows for additional bookkeeping
     // independent of parser implementations.
     //
-    function ParserController(opts) {
-      this.init(opts);
-    }
+
+    function ParserController(opts) { this.init(opts); }
     ParserController.prototype.init = function(opts) {
+      opts = opts || {};
       this.factories = opts.factories || clone(parse.factories_);
       this.bindFactories_();
 
       this.grammar = opts.grammar || { START: parse.grammar.fail };
       this.grammar.fail = this.grammar.fail || parse.grammar.fail;
       this.actions = {};
+      this.firstFailure = null;
 
       if ( ! opts.actions ) return;
 
       this.addActions(opts.actions);
     };
     ParserController.prototype.parse = function(parser, pstream) {
-      if ( DEBUG_PARSE !== 0 ) {
+      if ( DEBUG_PARSE !== 0 && ! pstream.isSpeculative() ) {
         if ( DEBUG_PARSE % DEBUG_IN_PARSE === ( DEBUG_IN_PARSE - 1 ) ) {
           console.log(pstream.head, '@', pstream.pos);
           console.log('>>>>', parser.toString());
@@ -269,7 +391,12 @@
 
       var ret = parser.call(this, pstream);
 
-      if ( DEBUG_PARSE !== 0 ) {
+      if ( ret !== null )
+        this.firstFailure = null;
+      else if ( this.firstFailure === null )
+        this.firstFailure = [ parser, pstream ];
+
+      if ( DEBUG_PARSE !== 0 && ! pstream.isSpeculative() ) {
         DEBUG_PARSE--;
         if ( DEBUG_PARSE % DEBUG_OUT_PARSE === ( DEBUG_OUT_PARSE - 1 ) ) {
           if ( ret )
@@ -365,27 +492,123 @@
     // TODO: This controller strategy is broken.
     // E.g., a parser that skips comments parses "A/* comment */B" as "AB".
     function SkipParserController(opts) {
+      opts = opts || {};
       this.skip_ = true;
       this.init(opts);
       this.skipParser = opts.skipParser || this.grammar.fail;
     }
-    SkipParserController.prototype = Object.create(ParserController.prototype);
-    SkipParserController.prototype.parse = function(parser, pstream) {
-      if ( ! this.skip_ )
-        return ParserController.prototype.parse.call(this, parser, pstream);
+    SkipParserController.prototype = Object.create(
+      ParserController.prototype, {
+        parse: {
+          valuie:  function parse(parser, pstream) {
+            if ( ! this.skip_ )
+              return SkipParserController.prototype.__proto__.parse.call(
+                this, parser, pstream);
 
-      this.skip_ = false;
-      var skippstream = pstream;
-      while ( skippstream !== null ) {
-        skippstream = this.skipParser.call(this, skippstream);
-        console.assert(skippstream === null || skippstream.pos > pstream.pos,
-                       'Skip parser neither failed nor advanced');
-        pstream = skippstream || pstream;
+            this.skip_ = false;
+            var skippstream = pstream;
+            while ( skippstream !== null ) {
+              skippstream = this.skipParser.call(this, skippstream);
+              console.assert(skippstream === null || skippstream.pos > pstream.pos,
+                             'Skip parser neither failed nor advanced');
+              pstream = skippstream || pstream;
+            }
+            this.skip_ = true;
+
+            return SkipParserController.prototype.__proto__.parse.call(
+              this, parser, pstream);
+          },
+        },
       }
-      this.skip_ = true;
+    );
+    // TODO: Add delegating to/from JSON.
 
-      return ParserController.prototype.parse.call(this, parser, pstream);;
-    };
+    function TokenParserController(opts) { this.init(opts); }
+    TokenParserController.prototype = Object.create(
+      ParserController.prototype, {
+        init: {
+          value: function init(opts) {
+            opts = opts || {};
+            this.separator = opts.separator;
+            if ( ! this.separtor ) {
+              var fs = parse.factories;
+              var ps = parse.grammar;
+              this.separator =
+                fs.repeat0(fs.alt(ps.whitespace_, ps.cStyleComment_));
+            }
+
+            var factories = opts.factories =
+                  opts.factories || clone(parse.factories_);
+
+            defineParserFactories.call(
+              factories,
+              function tseq(/* tokens */) {
+                var tokenizedSeq = [];
+                for ( var i = 0; i < arguments.length; i++ ) {
+                  tokenizedSeq.push(arguments[i], this.separator);
+                }
+                var seqParser = this.factories.seq.apply(this, tokenizedSeq);
+                return function(ps) {
+                  var ret = this.parse(seqParser, ps);
+                  if ( ret === null || ret.value === null ) return ret;
+                  var v1 = ret.value, v2 = [];
+                  for ( var i = 0; i < v1.length; i++ ) {
+                    if ( ( i % 2 ) === 0 ) v2.push(v1[i]);
+                  }
+                  return ret.setValue(v2);
+                };
+              },
+              function tseq1(n) {
+                var tseqParser = this.factories.tseq.apply(
+                  this, stdlib.argsToArray(arguments).slice(1));
+                return function(ps) {
+                  var ret = this.parse(tseqParser, ps);
+                  if ( ret === null || ret.value === null ) return ret;
+                  return ret.setValue(ret.value[n]);
+                };
+              },
+              function trepeat(p, opt_delim, opt_min, opt_max) {
+                opt_delim = opt_delim ?
+                  this.factories.seq(opt_delim, this.separator) : opt_delim;
+                var repeatParser = this.factories.repeat(
+                  this.factories.tseq(p), opt_delim, opt_min,
+                  opt_max);
+                return function(ps) {
+                  var ret = this.parse(repeatParser, ps);
+                  if ( ret === null || ret.value === null ) return ret;
+                  return ret.setValue(ret.value.map(function(onePartSeq) {
+                    return onePartSeq[0];
+                  }));
+                };
+              },
+              function tplus(p, opt_delim) {
+                opt_delim = opt_delim ?
+                  this.factories.tseq(opt_delim) : opt_delim;
+                var plusParser = this.factories.plus(
+                  this.factories.tseq(p), opt_delim);
+                return function(ps) {
+                  var ret = this.parse(plusParser, ps);
+                  if ( ret === null || ret.value === null ) return ret;
+                  return ret.setValue(ret.value.map(function(onePartSeq) {
+                    return onePartSeq[0];
+                  }));
+                };
+              }
+            );
+
+            TokenParserController.prototype.__proto__.init.call(this, opts);
+
+            var key = 'START';
+            while ( this.grammar.hasOwnProperty(key) ) key += '_';
+            if ( key !== 'START' ) {
+              this.grammar[key] = this.grammar.START;
+              this.grammar.START = this.factories.seq(this.separator,
+                                                      this.factories.sym(key));
+            }
+          },
+        },
+      }
+    );
     // TODO: Add delegating to/from JSON.
 
     //
@@ -436,7 +659,7 @@
       // Unicode range from c1 to c2, inclusive.
       function range(c1, c2) {
         return function(ps) {
-          if ( ps.head === null ) return null;
+          if ( ps.head === ps.nullChar ) return null;
           if ( ps.head < c1 || ps.head > c2 ) return null;
           return ps.tail.setValue(ps.head);
         };
@@ -480,7 +703,7 @@
         str = str.toLowerCase();
         return function(ps) {
           for ( var i = 0 ; i < str.length ; i++, ps = ps.tail ) {
-            if ( ps.head === null ||
+            if ( ps.head === ps.nullChar ||
                  str.charAt(i) !== ps.head.toLowerCase() ) return null;
           }
 
@@ -491,7 +714,7 @@
       // Single character; any character but c.
       function notChar(c) {
         return function(ps) {
-          return ps.head !== null && ps.head !== c ? ps.tail.setValue(ps.head) :
+          return ps.head !== ps.nullChar && ps.head !== c ? ps.tail.setValue(ps.head) :
             null;
         };
       },
@@ -499,7 +722,7 @@
       // Single character; any character but those listed in s.
       function notChars(s) {
         return function(ps) {
-          return ps.head !== null && s.indexOf(ps.head) === -1 ?
+          return ps.head !== ps.nullChar && s.indexOf(ps.head) === -1 ?
             ps.tail.setValue(ps.head) : null;
         };
       },
@@ -516,6 +739,7 @@
       },
 
       // Interpret input parser, p, as optional.
+      // TODO: In debug mode use a speculative parser, then re-run.
       function optional(p) {
         p = this.prep(p);
         return function(ps) { return this.parse(p, ps) || ps.setValue(null); };
@@ -541,6 +765,7 @@
       // Repeat parser, p, zero or more times. Optionally use opt_delim to parse
       // delimiters between parses using p. Also optional: succeed if and only
       // if number of successful p parses is in the range [opt_min, opt_max].
+      // TODO: In debug mode use a speculative parser, then re-run.
       function repeat(p, opt_delim, opt_min, opt_max) {
         p = this.prep(p);
         opt_delim = this.prep(opt_delim);
@@ -628,14 +853,8 @@
         var args = this.prepArgs(stdlib.argsToArray(arguments).slice(1));
 
         return function(ps) {
-          var ret;
-
-          for ( var i = 0 ; i < args.length ; i++ ) {
-            if ( ! ( ps = this.parse(args[i], ps) ) ) return null;
-            if ( i == n ) ret = ps.value;
-          }
-
-          return ps.setValue(ret);
+          var res = this.factories.seq.apply(this, args).call(this, ps);
+          return res !== null ? res.setValue(res.value[n]) : res;
         };
       },
 
@@ -646,15 +865,16 @@
         if ( args.length == 1 ) return args[0];
 
         return function(ps) {
-          var res = null, pos = -1;
+          var altPS = SpeculativeParserStream.maybeWrap(ps);
+          var res = null, pos = -1, p = null;
           for ( var i = 0 ; i < args.length ; i++ ) {
-            var resi = this.parse(args[i], ps);
-            if ( resi !== null && (res === null || pos < resi.pos ) ) {
-              res = resi;
-              pos = resi.pos;
+            res = this.parse(args[i], altPS);
+            if ( res !== null && pos < res.pos ) {
+              p = args[i];
+              pos = res.pos;
             }
           }
-          return res;
+          return p !== null ? this.parse(p, ps) : null;
         };
       },
 
@@ -680,7 +900,7 @@
         }
 
         function getParserForChar(ps) {
-          if ( ps.head === null ) return nullParser;
+          if ( ps.head === ps.nullChar ) return nullParser;
 
           var c = ps.head;
           var p = map[c];
@@ -728,7 +948,9 @@
         p = this.prep(p);
         return function(ps) {
           ps = this.parse(p, ps);
-          return ps ? ps.setValue(ps.value.join('')) : null;
+          return ps ?
+            ( ps.value !== null ? ps.setValue((ps.value || '').join('')) : '' )
+          : null;
         };
       },
 
@@ -760,12 +982,17 @@
       // Debug parser, p
       function debug(p) {
         return function(ps) {
-          debugger;
+          if ( ! ps.isSpeculative() )
+            debugger;
+
           var old = DEBUG_PARSE;
           DEBUG_PARSE = 1;
           var ret = this.parse(p, ps);
           DEBUG_PARSE = old;
-          debugger;
+
+          if ( ! ps.isSpeculative() )
+            debugger;
+
           return ret;
         };
       },
@@ -777,6 +1004,18 @@
           DEBUG_PARSE = 0;
           var ret = this.parse(p, ps);
           DEBUG_PARSE = old;
+          return ret;
+        };
+      },
+
+      // Log a parser's output
+      function log(p) {
+        return function(ps) {
+          var ret = this.parse(p, ps);
+
+          if ( ret && ! ps.isSpeculative() )
+            console.log(p.label, ret.value);
+
           return ret;
         };
       },
@@ -861,10 +1100,13 @@
                      fKeys[i] + '"');
     }
 
+    parse.ParserStream = ParserStream;
     parse.StringParserStream = StringParserStream;
+    parse.SpeculativeParserStream = SpeculativeParserStream;
     parse.TrapParserStream = TrapParserStream;
     parse.ParserController = ParserController;
     parse.SkipParserController = SkipParserController;
+    parse.TokenParserController = TokenParserController;
     parse.invalidateParsers = invalidateParsers;
 
     return parse;

@@ -21,9 +21,10 @@
     return function(ctor, opts) {
       var factory = function(o) {
         this._ = o;
+        var i;
 
         if ( opts.properties ) {
-          for ( var i = 0; i < opts.properties.length; i++ ) {
+          for ( i = 0; i < opts.properties.length; i++ ) {
             (function(name) {
               Object.defineProperty(this, name, {
                 get: function() { return this._[name]; },
@@ -31,6 +32,12 @@
                 enumerable: true,
               });
             }.bind(this))(opts.properties[i]);
+          }
+        }
+        if ( opts.methods ) {
+          keys = Object.getOwnPropertyNames(opts.methods);
+          for ( i = 0; i < keys.length; i++ ) {
+            this[keys[i]] = this[keys[i]].bind(this);
           }
         }
 

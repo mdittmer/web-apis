@@ -136,7 +136,7 @@
     optional('_'),
     alt(sym('AZ'), sym('az')),
     str(repeat(alt(sym('AZ'), sym('az'), sym('_09'), '_', '-'))))),
-  string: seq('"', notChar('"'), '"'),
+  string: seq('"', repeat(notChar('"')), '"'),
   other: not(alt('\t', '\n','\r', ' ', sym('_09'), sym('AZ'), sym('az'))),
 */});
     IDLFragment.prototype.POSTFIX = '\n} })';

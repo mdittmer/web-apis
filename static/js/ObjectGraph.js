@@ -37,6 +37,8 @@
       // Map of primitive types (leaves in object graph).
       // NOTE: It must be impossible for $UIDs of visited objects to take on these
       // values.
+      ObjectGraph.prototype.FIRST_TYPE = ObjectGraph.FIRST_TYPE = 1;
+      ObjectGraph.prototype.LAST_TYPE = ObjectGraph.LAST_TYPE = 7;
       ObjectGraph.prototype.types = ObjectGraph.types = {
         'undefined': 1,
         'boolean': 2,
@@ -245,6 +247,12 @@
         return this;
       };
 
+      // Interface method: Does this id refer to a type?
+      ObjectGraph.prototype.isType = function(id) {
+        return id >= ( this.FIRST_TYPE || ObjectGraph.FIRST_TYPE ) &&
+          id <= ( this.LAST_TYPE || ObjectGraph.LAST_TYPE );
+      };
+
       // Interface method: Does id refer to a function?
       ObjectGraph.prototype.isFunction = function(id) {
         if ( ! id ) return false;
@@ -324,6 +332,18 @@
         }
 
         return allKeys;
+      };
+
+      // Interface method: Get object's key names, optionally filtered by
+      // opt_predicate.
+      ObjectGraph.prototype.getObjectKeys = function(id, opt_predicate) {
+        if ( ! this.data[id] ) return [];
+        var data = this.data[id];
+        var keys = Object.getOwnPropertyNames(data);
+        if ( ! opt_predicate ) return keys.sort();
+        return keys.filter(function(key) {
+          return opt_predicate(data[key], key);
+        }).sort();
       };
 
       // Interface method: Get all keys that refer to an object id.
@@ -410,8 +430,9 @@
       return facade(ObjectGraph, {
         properties: [ 'userAgent' ],
         methods: {
-          capture: 1, isFunction: 1, getFunctions: 1, getAllIds: 1, getKeys: 1,
-          getShortestKey: 1, getAllKeys: 1, toJSON: 1, lookup: 1,
+          capture: 1, isType: 1, isFunction: 1, getFunctions: 1, getAllIds: 1,
+          getObjectKeys: 1, getKeys: 1, getShortestKey: 1, getAllKeys: 1,
+          toJSON: 1, lookup: 1,
           blacklistObject: function(o) {
             this.blacklistedObjects.push(o);
           },
