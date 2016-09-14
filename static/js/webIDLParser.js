@@ -134,13 +134,18 @@
       Inheritance: optional(tseq1(1, ':', sym('identifier'))),
 
       // Namespaces.
-      Namespace: tseq('namespace', sym('identifier'), '{',
-                      sym('NamespaceMembers'), '}', sym('SemiColon')),
+      Namespace: tseq('namespace', alt(sym('ProperNamespaceName'),
+                                       sym('QualifiedName')),
+                      '{', sym('NamespaceMembers'), '}', sym('SemiColon')),
+      ProperNamespaceName: sym('identifier'),
+      QualifiedName: tseq(sym('identifier'),
+                          trepeat(tseq1(1, '.', sym('identifier')))),
       NamespaceMembers: repeat(tseq(sym('ExtendedAttributeList'),
                                     sym('NamespaceMember'))),
       // NOTE: Spec uses "ReturnType" below, instead of Type. Rely on semantic
       // actions to care about the difference.
-      NamespaceMember: sym('Operation'),
+      NamespaceMember: alt(sym('ProperNamespaceMember'), sym('Definition')),
+      ProperNamespaceMember: sym('Operation'),
 
       // Partials.
       Partial: tseq('partial', sym('PartialDefinition')),
@@ -157,14 +162,17 @@
                        sym('DictionaryMembers'), '}', sym('SemiColon')),
       DictionaryMembers: trepeat(tseq(sym('ExtendedAttributeList'),
                                       sym('DictionaryMember'))),
-      DictionaryMember: tseq(sym('Required'), sym('Type'), sym('identifier'),
-                             sym('Default'), sym('SemiColon')),
+      DictionaryMember: alt(sym('ProperDictionaryMember'), sym('StaticMember')),
+      ProperDictionaryMember: tseq(sym('Required'), sym('Type'),
+                                   sym('identifier'), sym('Default'),
+                                   sym('SemiColon')),
       Required: optional('required'),
 
       // Enums.
       Enum: tseq('enum', sym('identifier'), '{', sym('EnumValueList'), '}',
                  sym('SemiColon')),
-      EnumValueList: tplus(sym('string'), ','),
+      EnumValueList: tplus(alt(sym('ProperEnumValue'), sym('identifier')), ','),
+      ProperEnumValue: sym('string'),
 
       // Typedefs.
       Typedef: tseq('typedef', sym('Type'), sym('identifier'),
@@ -270,8 +278,10 @@
                                       sym('RequiredArgument')),
       OptionalArgument: tseq('optional', sym('Type'), sym('ArgumentName'), sym('Default')),
       RequiredArgument: tseq(sym('Type'), sym('Ellipsis'), sym('ArgumentName')),
-      Default: optional(tseq('=', alt(sym('ConstValue'), sym('string'),
-                                      tseq('[', ']')))),
+      Default: optional(tseq('=', sym('Value'))),
+      Value: alt(sym('ConstValue'), sym('string'), sym('EmptyArray')),
+      EmptyArray: tseq('[', ']'),
+
       // NOTE: Should be (ArgumentNameKeyword|identifier); we leave dealing with
       // keywords to semantic actions.
       ArgumentName: sym('identifier'),
@@ -297,8 +307,11 @@
       NonUnionType: alt(sym('ParameterizedType'), sym('SimpleType')),
       ParameterizedType: tseq(sym('SimpleType'), '<', sym('Type'), '>',
                               sym('TypeSuffixes')),
-      SimpleType: tseq(alt(sym('BuiltInTypeName'), sym('identifier')),
+      SimpleType: tseq(alt(sym('BuiltInTypeName'),
+                           alt(sym('ProperSimpleTypeName'),
+                               sym('QualifiedName'))),
                        sym('TypeSuffixes')),
+      ProperSimpleTypeName: sym('identifier'),
       // Approximation of multi-token built-in type names.
       // TODO: Parse this correctly.
       BuiltInTypeName: tplus(alt('unsigned', 'short', 'long', 'unrestricted',
@@ -318,24 +331,24 @@
         tseq1(1, '[', trepeat(sym('ExtendedAttribute'), ','), ']')),
       ExtendedAttribute: alt(sym('ExtendedAttributeIdentList'),
                              sym('ExtendedAttributeNamedArgList'),
-                             sym('ExtendedAttributeIdentifierOrString'),
+                             sym('ExtendedAttributeIdentifierOrValue'),
                              sym('ExtendedAttributeArgList'),
                              sym('ExtendedAttributeNoArgs')),
       ExtendedAttributeIdentList: tseq(sym('identifier'), '=', '(',
-                                       sym('IdentifierOrStringList'), ')'),
+                                       sym('IdentifierOrValueList'), ')'),
       ExtendedAttributeNamedArgList: tseq(sym('identifier'), '=',
                                           sym('identifier'), '(',
                                           sym('ArgumentList'), ')'),
-      ExtendedAttributeIdentifierOrString: tseq(sym('identifier'), '=',
-                                                sym('IdentifierOrString')),
+      ExtendedAttributeIdentifierOrValue: tseq(sym('identifier'), '=',
+                                               sym('IdentifierOrValue')),
       ExtendedAttributeStr: tseq(sym('identifier'), '=',
                                  sym('string')),
       ExtendedAttributeArgList: tseq(sym('identifier'), '(',
                                      sym('ArgumentList'), ')'),
       ExtendedAttributeNoArgs: sym('identifier'),
 
-      IdentifierOrString: alt(sym('identifier'), sym('string')),
-      IdentifierOrStringList: tplus(sym('IdentifierOrString'), ','),
+      IdentifierOrValue: alt(sym('identifier'), sym('Value')),
+      IdentifierOrValueList: tplus(sym('IdentifierOrValue'), ','),
     };
 
     parser.addActions(
@@ -369,6 +382,9 @@
       function Namespace(v) {
         return { type_: 'namespace', name: v[1], members: v[3] };
       },
+      function QualifiedName(v) {
+        return v[0] + (v[1].length === 0 ? '' : '.' + v[1].join('.'));
+      },
       function NamespaceMembers(v) {
         if ( v === null ) return null;
         return v.map(function(attrsAndMember) {
@@ -400,7 +416,7 @@
           return attrsAndMember[1];
         });
       },
-      function DictionaryMember(v) {
+      function ProperDictionaryMember(v) {
         var ret = { type: v[1], name: v[2] };
         if ( v[0] !== null ) ret.isRequired = true;
         if ( v[3] !== null ) ret.defaultValue = v[3];
@@ -503,6 +519,9 @@
       function Default(v) {
         if ( v === null ) return null;
         return v[1];
+      },
+      function EmptyArray(v) {
+        return "[]";
       },
       function ConstValueCornerCase(v) {
         return v.join('');
