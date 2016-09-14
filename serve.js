@@ -43,6 +43,11 @@ try {
   fs.writeFileSync(DATA_DIR + '/list.json', JSON.stringify(list, null, 2));
 }
 
+/**
+ * Browser product info.
+ * @constructor
+ * @param {(Array|Object)} opts - [nameStr, versionStr] or { name, version }
+ */
 function ProductInfo(opts) {
   opts = opts || {};
   if (Array.isArray(opts)) {
@@ -58,6 +63,14 @@ ProductInfo.prototype.toArray = function() {
   return [this.name, this.version];
 };
 
+/**
+ * Browser environment info.
+ * @constructor
+ * @param {(Array|Object)} opts - [browserNameStr, browserVersionStr,
+ *                                platformNameStr, platformNameStr] or
+ *                                { browser: { name, version },
+ *                                  platform: { name, version } }
+ */
 function Environment(opts) {
   opts = opts || {};
   if (Array.isArray(opts)) {
@@ -106,6 +119,11 @@ function ensurePath(data, keys) {
   return false;
 }
 
+/**
+ * Respond to request with JSON data.
+ * @param {Object} data - The data to send
+ * @param {Response} res - The express response object for server request
+ */
 function sendJSON(data, res) {
   var str = (typeof data === 'string' || data instanceof Buffer) ?
         JSON.stringify(JSON.parse(data)) :
@@ -114,10 +132,20 @@ function sendJSON(data, res) {
   res.send(str);
 }
 
+/**
+ * Respond to request with HTML data.
+ * @param {String} str - The HTML to send
+ * @param {Response} res - The express response object for server request
+ */
 function sendHTML(str, res) {
   res.send(HTML_HEAD + str + HTML_FOOT);
 }
 
+/**
+ * Update internal list of object graph data stored by this server.
+ * @param {Object} env - The environment for which data has been added
+ * @return {Boolean} - Whether or not the list was updated successfully
+ */
 function updateList(env) {
   try {
     var dataExists = ensurePath(list, env.toArray());
@@ -129,6 +157,11 @@ function updateList(env) {
   }
 }
 
+/**
+ * Get object graph data.
+ * @param {Environment} info - The requested browser environment
+ * @return {Buffer} - The requested data in a JSON string buffer
+ */
 function getData(info) {
   return fs.readFileSync(OG_DATA_DIR + '/' + info.getJSONFileName());
 }
