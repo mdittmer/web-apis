@@ -24,13 +24,15 @@ var NameRewriter = require('./static/js/NameRewriter');
 var app = express();
 var nameRewriter = new NameRewriter();
 
-app.use(bodyParser.urlencoded({ extended: false, limit: '500mb' }));
+app.use(bodyParser.urlencoded({extended: false, limit: '500mb'}));
 
 app.use(express.static('static'));
 
 var DATA_DIR = './data';
 var OG_DATA_DIR = './data/og';
-var HTML_HEAD = '<html><head><meta name="viewport" content="width=500, initial-scale=1"></head><body>';
+var HTML_HEAD = '<html><head>' +
+      '<meta name="viewport" content="width=500, initial-scale=1">' +
+      '</head><body>';
 var HTML_FOOT = '</body></html>';
 
 var list;
@@ -41,26 +43,24 @@ try {
   fs.writeFileSync(DATA_DIR + '/list.json', JSON.stringify(list, null, 2));
 }
 
-function self() { return this; }
-
 function ProductInfo(opts) {
   opts = opts || {};
-  if ( Array.isArray(opts) ) {
+  if (Array.isArray(opts)) {
     this.name = opts[0] || '';
     this.version = opts[1] || '';
   } else {
     this.name = opts.name || '';
     this.version = opts.version || '';
   }
-};
+}
 
 ProductInfo.prototype.toArray = function() {
-  return [ this.name, this.version ];
+  return [this.name, this.version];
 };
 
 function Environment(opts) {
   opts = opts || {};
-  if ( Array.isArray(opts) ) {
+  if (Array.isArray(opts)) {
     this.browser = new ProductInfo(opts.slice(0, 2));
     this.platform = new ProductInfo(opts.slice(2));
   } else {
@@ -88,23 +88,22 @@ declFromJSON(ProductInfo);
 declFromJSON(Environment);
 
 function hasPath(data, keys) {
-  for ( var i = 0; i < keys.length - 1; i++ ) {
+  for (var i = 0; i < keys.length - 1; i++) {
     data = data[keys[i]];
-    if ( ! data ) return false;
+    if (!data) return false;
   }
-  return !! data;
+  return Boolean(data);
 }
 
 function ensurePath(data, keys) {
-  for ( var i = 0; i < keys.length - 1; i++ ) {
+  for (var i = 0; i < keys.length - 1; i++) {
     data = data[keys[i]] = data[keys[i]] || {};
   }
-  if  ( data[keys[keys.length - 1]] ) {
+  if (data[keys[keys.length - 1]])
     return true;
-  } else {
-    data[keys[keys.length - 1]] = 1;
-    return false;
-  }
+
+  data[keys[keys.length - 1]] = 1;
+  return false;
 }
 
 function sendJSON(data, res) {
@@ -123,7 +122,7 @@ function updateList(env) {
   try {
     var dataExists = ensurePath(list, env.toArray());
     fs.writeFileSync(DATA_DIR + '/list.json', JSON.stringify(list, null, 2));
-    return ! dataExists;
+    return !dataExists;
   } catch (e) {
     console.error(e);
     return false;
@@ -135,7 +134,7 @@ function getData(info) {
 }
 
 app.post('/save', function(req, res) {
-  if ( ! ( req.body && req.body.data ) ) {
+  if (!(req.body && req.body.data)) {
     sendHTML('No data saved: No data found.', res);
     return;
   }
@@ -145,18 +144,18 @@ app.post('/save', function(req, res) {
   var jsonFileName = env.getJSONFileName();
   var path = OG_DATA_DIR + '/' + jsonFileName;
 
-  fs.stat(path, function(err, stats) {
-    if ( ! err ) {
-      sendHTML('No data saved: Data for this platform already recorded', res);
-    } else if ( err.code !== 'ENOENT' ) {
+  fs.stat(path, function(err) {
+    if (err.code !== 'ENOENT') {
       console.error(err);
       sendHTML('Error: ' + err.toString(), res);
-    } else {
+    } else if (err) {
       var dataStr = JSON.stringify(JSON.parse(req.body.data), null, 2);
       fs.writeFileSync(path, dataStr);
       updateList(env);
       sendHTML('Saved data (' + dataStr.length + ' characters of JSON)',
                res);
+    } else {
+      sendHTML('No data saved: Data for this platform already recorded', res);
     }
   });
 });
@@ -165,14 +164,16 @@ app.get('/list', function(req, res) {
   sendJSON(fs.readFileSync(DATA_DIR + '/list.json'), res);
 });
 
-app.get(/^\/data\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/?$/, function(req, res) {
-  var parts = req.url.split('/').slice(2);
-  if ( ! hasPath(list, parts) )
-    sendJSON(null, res);
-  else
-    sendJSON(getData(new Environment(parts)), res);
-});
+app.get(
+    /^\/data\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/?$/,
+  function(req, res) {
+    var parts = req.url.split('/').slice(2);
+    if (hasPath(list, parts))
+      sendJSON(getData(new Environment(parts)), res);
+    else
+      sendJSON(null, res);
+  });
 
-app.listen(8000, function () {
+app.listen(8000, function() {
   console.log('Listening...');
 });
