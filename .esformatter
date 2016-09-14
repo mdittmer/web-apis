@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    "esformatter-auto-wrap",
+    "esformatter-semicolons",
+    "esformatter-add-trailing-commas"
+  ],
+  "autoWrap": {
+    "maxLineLength": 80
+  }
+}

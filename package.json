@@ -26,5 +26,23 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "json-stable-stringify": "^1.0.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-eslint": "^6.1.2",
+    "babel-preset-es2015": "^6.14.0",
+    "esformatter": "^0.9.6",
+    "esformatter-add-trailing-commas": "^1.1.0",
+    "esformatter-auto-wrap": "^0.2.0",
+    "esformatter-semicolons": "^1.1.2",
+    "eslint": "^3.5.0",
+    "eslint-config-google": "^0.6.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-load-plugins": "^1.3.0",
+    "run-sequence": "^1.2.2"
+  },
+  "eslintConfig": {
+    "extends": "google"
   }
 }
