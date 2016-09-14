@@ -24,16 +24,17 @@ const $ = gulpLoadPlugins();
 
 gulp.task('lint', () => {
   return gulp.src([
-    'static/**/*.js',
+    '*.js',
+    'static/js/**/*.js',
   ])
-    .pipe($.eslint())
+    .pipe(gulp.dest('dist'))
+    .pipe($.eslint({fix: true}))
     .pipe($.eslint.format())
     .pipe($.eslint.failAfterError());
 });
 
-gulp.task('default', ['clean'], cb =>
+gulp.task('default', () =>
   runSequence(
-    'lint',
-    cb
+    'lint'
   )
 );
