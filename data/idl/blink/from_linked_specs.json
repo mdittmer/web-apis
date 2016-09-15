@@ -1,0 +1,514 @@
+[
+  {
+    "url": "https://w3c.github.io/browser-payment-api/",
+    "htmlWebIDL":"         [Constructor(sequence&lt;PaymentMethodData&gt; methodData, PaymentDetails details, optional PaymentOptions options),         SecureContext]         interface PaymentRequest : EventTarget {           Promise&lt;PaymentResponse&gt; show();           Promise&lt;void&gt; abort();            readonly attribute PaymentAddress? shippingAddress;           readonly attribute DOMString? shippingOption;            /* Supports \"shippingaddresschange\" event */           attribute EventHandler onshippingaddresschange;            /* Supports \"shippingoptionchange\" event */           attribute EventHandler onshippingoptionchange;         };       "
+  },
+  {
+    "url": "https://w3c.github.io/browser-payment-api/",
+    "htmlWebIDL":"         dictionary PaymentMethodData {           required sequence&lt;DOMString&gt; supportedMethods;           object data;         };       "
+  },
+  {
+    "url": "https://w3c.github.io/browser-payment-api/",
+    "htmlWebIDL":" dictionary PaymentCurrencyAmount {   required DOMString currency;   required DOMString value; };       "
+  },
+  {
+    "url": "https://w3c.github.io/browser-payment-api/",
+    "htmlWebIDL":" dictionary PaymentDetails {   PaymentItem total;   sequence&lt;PaymentItem&gt; displayItems;   sequence&lt;PaymentShippingOption&gt; shippingOptions;   sequence&lt;PaymentDetailsModifier&gt; modifiers; };       "
+  },
+  {
+    "url": "https://w3c.github.io/browser-payment-api/",
+    "htmlWebIDL":"     dictionary PaymentDetailsModifier {       required sequence&lt;DOMString&gt; supportedMethods;       PaymentItem total;       sequence&lt;PaymentItem&gt; additionalDisplayItems;     };   "
+  },
+  {
+    "url": "https://w3c.github.io/browser-payment-api/",
+    "htmlWebIDL":" dictionary PaymentOptions {   boolean requestPayerEmail = false;   boolean requestPayerPhone = false;   boolean requestShipping = false; };       "
+  },
+  {
+    "url": "https://w3c.github.io/browser-payment-api/",
+    "htmlWebIDL":"         dictionary PaymentItem {           required DOMString label;           required PaymentCurrencyAmount amount;         };       "
+  },
+  {
+    "url": "https://w3c.github.io/browser-payment-api/",
+    "htmlWebIDL":"         interface PaymentAddress {           readonly attribute DOMString country;           readonly attribute FrozenArray&lt;DOMString&gt; addressLine;           readonly attribute DOMString region;           readonly attribute DOMString city;           readonly attribute DOMString dependentLocality;           readonly attribute DOMString postalCode;           readonly attribute DOMString sortingCode;           readonly attribute DOMString languageCode;           readonly attribute DOMString organization;           readonly attribute DOMString recipient;           readonly attribute DOMString careOf;           readonly attribute DOMString phone;         };       "
+  },
+  {
+    "url": "https://w3c.github.io/browser-payment-api/",
+    "htmlWebIDL":"         dictionary PaymentShippingOption {           required DOMString id;           required DOMString label;           required PaymentCurrencyAmount amount;           boolean selected = false;         };       "
+  },
+  {
+    "url": "https://w3c.github.io/browser-payment-api/",
+    "htmlWebIDL":"         enum PaymentComplete { \"success\", \"fail\", \"\" };          interface PaymentResponse {           readonly attribute DOMString methodName;           readonly attribute object details;           readonly attribute PaymentAddress? shippingAddress;           readonly attribute DOMString?      shippingOption;           readonly attribute DOMString? payerEmail;           readonly attribute DOMString? payerPhone;            Promise&lt;void&gt; complete(optional PaymentComplete result = \"\");         };       "
+  },
+  {
+    "url": "https://w3c.github.io/browser-payment-api/",
+    "htmlWebIDL":" [Constructor(DOMString type, optional PaymentRequestUpdateEventInit eventInitDict)] interface PaymentRequestUpdateEvent : Event {   void updateWith(Promise&lt;PaymentDetails&gt; d); };  dictionary PaymentRequestUpdateEventInit : EventInit { };         "
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-image/index",
+    "htmlWebIDL":"        [Constructor(MediaStreamTrack track)]         interface ImageCapture {           readonly        attribute MediaStreamTrack videoStreamTrack;           readonly        attribute MediaStream      previewStream;           Promise&lt;PhotoCapabilities&gt; getPhotoCapabilities ();           Promise&lt;void&gt; setOptions (PhotoSettings? photoSettings);           Promise&lt;Blob&gt;              takePhoto (PhotoSettings? photoSettings);           Promise&lt;ImageBitmap&gt;       grabFrame ();         };       "
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-image/index",
+    "htmlWebIDL":"         [NoInterfaceObject] interface ImageCaptureError {           readonly attribute DOMString? errorDescription;         };       "
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-image/index",
+    "htmlWebIDL":"         interface PhotoCapabilities {           readonly attribute MeteringMode       whiteBalanceMode;           readonly attribute unsigned long      colorTemperature;           readonly attribute MeteringMode       exposureMode;           readonly attribute MediaSettingsRange exposureCompensation;           readonly attribute MediaSettingsRange iso;           readonly attribute boolean            redEyeReduction;           readonly attribute MeteringMode       focusMode;            readonly attribute MediaSettingsRange brightness;           readonly attribute MediaSettingsRange contrast;           readonly attribute MediaSettingsRange saturation;           readonly attribute MediaSettingsRange sharpness;           readonly attribute MediaSettingsRange imageHeight;           readonly attribute MediaSettingsRange imageWidth;           readonly attribute MediaSettingsRange zoom;           readonly attribute FillLightMode      fillLightMode;         };       "
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-image/index",
+    "htmlWebIDL":"         dictionary PhotoSettings {              MeteringMode  whiteBalanceMode;              unsigned long colorTemperature;              MeteringMode  exposureMode;              unsigned long exposureCompensation;              unsigned long iso;              boolean       redEyeReduction;              MeteringMode  focusMode;              sequence&lt;Point2D> pointsOfInterest;               unsigned long brightness;              unsigned long contrast;              unsigned long saturation;              unsigned long sharpness;              unsigned long zoom;              unsigned long imageHeight;              unsigned long imageWidth;              FillLightMode fillLightMode;         };       "
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-image/index",
+    "htmlWebIDL":"         interface MediaSettingsRange {             readonly attribute long max;             readonly attribute long min;             readonly attribute long current;         };       "
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-image/index",
+    "htmlWebIDL":"         enum FillLightMode {             \"unavailable\",             \"auto\",             \"off\",             \"flash\",             \"on\"         };       "
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-image/index",
+    "htmlWebIDL":"         enum MeteringMode {             \"none\",             \"manual\",             \"single-shot\",             \"continuous\"         };       "
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-image/index",
+    "htmlWebIDL":"       dictionary Point2D {         float x = 0.0;         float y = 0.0;       };     "
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"[Exposed=Window,  Constructor,  Constructor (MediaStream stream),  Constructor (sequence&lt;MediaStreamTrack&gt; tracks)] interface MediaStream : EventTarget {     readonly        attribute DOMString    id;     sequence&lt;MediaStreamTrack&gt; getAudioTracks ();     sequence&lt;MediaStreamTrack&gt; getVideoTracks ();     sequence&lt;MediaStreamTrack&gt; getTracks ();     MediaStreamTrack?          getTrackById (DOMString trackId);     void                       addTrack (MediaStreamTrack track);     void                       removeTrack (MediaStreamTrack track);     MediaStream                clone ();     readonly        attribute boolean      active;                     attribute EventHandler onaddtrack;                     attribute EventHandler onremovetrack; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"[Exposed=Window] interface MediaStreamTrack : EventTarget {     readonly        attribute DOMString             kind;     readonly        attribute DOMString             id;     readonly        attribute DOMString             label;                     attribute boolean               enabled;     readonly        attribute boolean               muted;                     attribute EventHandler          onmute;                     attribute EventHandler          onunmute;     readonly        attribute MediaStreamTrackState readyState;                     attribute EventHandler          onended;     MediaStreamTrack       clone ();     void                   stop ();     MediaTrackCapabilities getCapabilities ();     MediaTrackConstraints  getConstraints ();     MediaTrackSettings     getSettings ();     Promise&lt;void&gt;          applyConstraints (optional MediaTrackConstraints constraints);                     attribute EventHandler          onoverconstrained; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"enum MediaStreamTrackState {     \"live\",     \"ended\" };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary MediaTrackSupportedConstraints {              boolean width = true;              boolean height = true;              boolean aspectRatio = true;              boolean frameRate = true;              boolean facingMode = true;              boolean volume = true;              boolean sampleRate = true;              boolean sampleSize = true;              boolean echoCancellation = true;              boolean latency = true;              boolean channelCount = true;              boolean deviceId = true;              boolean groupId = true; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary MediaTrackCapabilities {              (long or LongRange)     width;              (long or LongRange)     height;              (double or DoubleRange) aspectRatio;              (double or DoubleRange) frameRate;              sequence&lt;DOMString&gt;     facingMode;              (double or DoubleRange) volume;              (long or LongRange)     sampleRate;              (long or LongRange)     sampleSize;              sequence&lt;boolean&gt;       echoCancellation;              (double or DoubleRange) latency;              (long or LongRange)     channelCount;              DOMString               deviceId;              DOMString               groupId; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"           dictionary MediaTrackConstraints : MediaTrackConstraintSet {              sequence&lt;MediaTrackConstraintSet&gt; advanced; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary MediaTrackConstraintSet {              ConstrainLong      width;              ConstrainLong      height;              ConstrainDouble    aspectRatio;              ConstrainDouble    frameRate;              ConstrainDOMString facingMode;              ConstrainDouble    volume;              ConstrainLong      sampleRate;              ConstrainLong      sampleSize;              ConstrainBoolean   echoCancellation;              ConstrainDouble    latency;              ConstrainLong      channelCount;              ConstrainDOMString deviceId;              ConstrainDOMString groupId; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary MediaTrackSettings {              long      width;              long      height;              double    aspectRatio;              double    frameRate;              DOMString facingMode;              double    volume;              long      sampleRate;              long      sampleSize;              boolean   echoCancellation;              double    latency;              long      channelCount;              DOMString deviceId;              DOMString groupId; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"enum VideoFacingModeEnum {     \"user\",     \"environment\",     \"left\",     \"right\" };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"[Exposed=Window,  Constructor (DOMString type, MediaStreamTrackEventInit eventInitDict)] interface MediaStreamTrackEvent : Event {     [SameObject]     readonly        attribute MediaStreamTrack track; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary MediaStreamTrackEventInit : EventInit {     required MediaStreamTrack track; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"[Exposed=Window,  Constructor (DOMString type, OverconstrainedErrorEventInit eventInitDict)] interface OverconstrainedErrorEvent : Event {     readonly        attribute OverconstrainedError? error; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary OverconstrainedErrorEventInit : EventInit {              OverconstrainedError? error = null; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"[Exposed=Window, NoInterfaceObject] interface NavigatorUserMedia {     [SameObject]     readonly        attribute MediaDevices mediaDevices; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"Navigator implements NavigatorUserMedia;"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"[Exposed=Window] interface MediaDevices : EventTarget {                     attribute EventHandler ondevicechange;     Promise&lt;sequence&lt;MediaDeviceInfo&gt;&gt; enumerateDevices (); };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"[Exposed=Window] interface MediaDeviceInfo {     readonly        attribute DOMString       deviceId;     readonly        attribute MediaDeviceKind kind;     readonly        attribute DOMString       label;     readonly        attribute DOMString       groupId;     serializer = {attribute}; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"enum MediaDeviceKind {     \"audioinput\",     \"audiooutput\",     \"videoinput\" };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"interface InputDeviceInfo : MediaDeviceInfo {     MediaTrackCapabilities getCapabilities (); };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"partial interface NavigatorUserMedia {     void getUserMedia (MediaStreamConstraints constraints, NavigatorUserMediaSuccessCallback successCallback, NavigatorUserMediaErrorCallback errorCallback); };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"partial interface MediaDevices {     MediaTrackSupportedConstraints getSupportedConstraints ();     Promise&lt;MediaStream&gt;           getUserMedia (optional MediaStreamConstraints constraints); };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary MediaStreamConstraints {              (boolean or MediaTrackConstraints) video = false;              (boolean or MediaTrackConstraints) audio = false; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"         callback NavigatorUserMediaSuccessCallback = void (MediaStream stream);"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"         callback NavigatorUserMediaErrorCallback = void (MediaStreamError error);"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"typedef object MediaStreamError;"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"[NoInterfaceObject] interface ConstrainablePattern {     Capabilities  getCapabilities ();     Constraints   getConstraints ();     Settings      getSettings ();     Promise&lt;void&gt; applyConstraints (optional Constraints constraints);                     attribute EventHandler onoverconstrained; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary DoubleRange {              double max;              double min; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary ConstrainDoubleRange : DoubleRange {              double exact;              double ideal; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary LongRange {              long max;              long min; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary ConstrainLongRange : LongRange {              long exact;              long ideal; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary ConstrainBooleanParameters {              boolean exact;              boolean ideal; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary ConstrainDOMStringParameters {              (DOMString or sequence&lt;DOMString&gt;) exact;              (DOMString or sequence&lt;DOMString&gt;) ideal; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"         typedef (long or ConstrainLongRange) ConstrainLong;"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"         typedef (double or ConstrainDoubleRange) ConstrainDouble;"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"         typedef (boolean or ConstrainBooleanParameters) ConstrainBoolean;"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"         typedef (DOMString or sequence&lt;DOMString&gt; or ConstrainDOMStringParameters) ConstrainDOMString;"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary Capabilities { };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary Settings { };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary ConstraintSet { };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-main/getusermedia",
+    "htmlWebIDL":"dictionary Constraints : ConstraintSet {              sequence&lt;ConstraintSet&gt; advanced; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-record/MediaRecorder",
+    "htmlWebIDL":"       [ Constructor (MediaStream stream, optional MediaRecorderOptions options)] interface MediaRecorder : EventTarget {     readonly        attribute MediaStream    stream;     readonly        attribute DOMString      mimeType;     readonly        attribute RecordingState state;                     attribute EventHandler   onstart;                     attribute EventHandler   onstop;                     attribute EventHandler   ondataavailable;                     attribute EventHandler   onpause;                     attribute EventHandler   onresume;                     attribute EventHandler   onerror;                     attribute boolean        ignoreMutedMedia;     readonly        attribute unsigned long  videoBitsPerSecond;     readonly        attribute unsigned long  audioBitsPerSecond;     void           start (optional long timeslice);     void           stop ();     void           pause ();     void           resume ();     void           requestData ();     static boolean isTypeSupported (DOMString type); };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-record/MediaRecorder",
+    "htmlWebIDL":"dictionary MediaRecorderOptions {              DOMString     mimeType;              unsigned long audioBitsPerSecond;              unsigned long videoBitsPerSecond;              unsigned long bitsPerSecond; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-record/MediaRecorder",
+    "htmlWebIDL":"enum RecordingState {     \"inactive\",     \"recording\",     \"paused\" };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-record/MediaRecorder",
+    "htmlWebIDL":"       [ Constructor (DOMString type, BlobEventInit eventInitDict)] interface BlobEvent : Event {     readonly        attribute Blob data; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-record/MediaRecorder",
+    "htmlWebIDL":"dictionary BlobEventInit {     required Blob data; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-record/MediaRecorder",
+    "htmlWebIDL":"[Exposed=Window,  Constructor (DOMString type, ErrorEventInit eventInitDict)] interface ErrorEvent : Event {     readonly        attribute Error? error; };"
+  },
+  {
+    "url": "https://w3c.github.io/mediacapture-record/MediaRecorder",
+    "htmlWebIDL":"dictionary ErrorEventInit : EventInit {              Error? error = null; };"
+  },
+  {
+    "url": "https://w3c.github.io/performance-timeline/",
+    "htmlWebIDL":"dictionary PerformanceEntryFilterOptions {              DOMString name;              DOMString entryType;              DOMString initiatorType; };"
+  },
+  {
+    "url": "https://w3c.github.io/performance-timeline/",
+    "htmlWebIDL":"partial interface Performance {     PerformanceEntryList getEntries (optional PerformanceEntryFilterOptions filter);     PerformanceEntryList getEntriesByType (DOMString type);     PerformanceEntryList getEntriesByName (DOMString name, optional DOMString type); }; typedef sequence&lt;PerformanceEntry> PerformanceEntryList;"
+  },
+  {
+    "url": "https://w3c.github.io/performance-timeline/",
+    "htmlWebIDL":"dictionary PerformanceObserverInit {   required sequence&lt;DOMString> entryTypes; };  [Exposed=(Window,Worker)] interface PerformanceObserverEntryList {   PerformanceEntryList getEntries (optional PerformanceEntryFilterOptions filter);   PerformanceEntryList getEntriesByType (DOMString type);   PerformanceEntryList getEntriesByName (DOMString name, optional DOMString type); };  callback PerformanceObserverCallback = void (PerformanceObserverEntryList entries,                                              PerformanceObserver observer);  [Constructor(PerformanceObserverCallback callback), Exposed=(Window,Worker)] interface PerformanceObserver {   void observe (PerformanceObserverInit options);   void disconnect (); };"
+  },
+  {
+    "url": "https://w3c.github.io/pointerevents/",
+    "htmlWebIDL":" dictionary PointerEventInit : MouseEventInit {     long        pointerId = 0;     double      width = 1;     double      height = 1;     float       pressure = 0;     float       tangentialPressure = 0;     long        tiltX = 0;     long        tiltY = 0;     long        twist = 0;     DOMString   pointerType = \"\";     boolean     isPrimary = false; };  [Constructor(DOMString type, optional PointerEventInit eventInitDict)] interface PointerEvent : MouseEvent {     readonly        attribute long        pointerId;     readonly        attribute double      width;     readonly        attribute double      height;     readonly        attribute float       pressure;     readonly        attribute float       tangentialPressure;     readonly        attribute long        tiltX;     readonly        attribute long        tiltY;     readonly        attribute long        twist;     readonly        attribute DOMString   pointerType;     readonly        attribute boolean     isPrimary; };               "
+  },
+  {
+    "url": "https://w3c.github.io/pointerevents/",
+    "htmlWebIDL":" partial interface Element {   attribute EventHandler ongotpointercapture;   attribute EventHandler onlostpointercapture;   void setPointerCapture (long pointerId);   void releasePointerCapture (long pointerId);   boolean hasPointerCapture (long pointerId); };             "
+  },
+  {
+    "url": "https://w3c.github.io/pointerevents/",
+    "htmlWebIDL":" partial interface GlobalEventHandlers {     attribute EventHandler onpointerdown;     attribute EventHandler onpointermove;     attribute EventHandler onpointerup;     attribute EventHandler onpointercancel;     attribute EventHandler onpointerover;     attribute EventHandler onpointerout;     attribute EventHandler onpointerenter;     attribute EventHandler onpointerleave; };             "
+  },
+  {
+    "url": "https://w3c.github.io/pointerevents/",
+    "htmlWebIDL":" partial interface Navigator {     readonly  attribute long maxTouchPoints; };             "
+  },
+  {
+    "url": "https://w3c.github.io/presentation-api/",
+    "htmlWebIDL":"           partial interface Navigator {             [SameObject] readonly attribute Presentation? presentation;           };                      interface Presentation {           };          "
+  },
+  {
+    "url": "https://w3c.github.io/presentation-api/",
+    "htmlWebIDL":"           [Constructor(DOMString url),            Constructor(sequence&lt;DOMString&gt; urls)]           interface PresentationRequest : EventTarget {             Promise&lt;PresentationConnection&gt; start();             Promise&lt;PresentationConnection&gt; reconnect(DOMString presentationId);             Promise&lt;PresentationAvailability&gt; getAvailability();              attribute EventHandler onconnectionavailable;           };   "
+  },
+  {
+    "url": "https://w3c.github.io/presentation-api/",
+    "htmlWebIDL":"           interface PresentationAvailability : EventTarget {             readonly attribute boolean value;              attribute EventHandler onchange;           };  "
+  },
+  {
+    "url": "https://w3c.github.io/presentation-api/",
+    "htmlWebIDL":"             [Constructor(DOMString type, PresentationConnectionAvailableEventInit eventInitDict)]             interface PresentationConnectionAvailableEvent : Event {               [SameObject] readonly attribute PresentationConnection connection;             };              dictionary PresentationConnectionAvailableEventInit : EventInit {               required PresentationConnection connection;             };   "
+  },
+  {
+    "url": "https://w3c.github.io/presentation-api/",
+    "htmlWebIDL":"           enum PresentationConnectionState { \"connecting\", \"connected\", \"closed\", \"terminated\" };           enum BinaryType { \"blob\", \"arraybuffer\" };            interface PresentationConnection : EventTarget {             readonly attribute DOMString id;             readonly attribute DOMString url;             readonly attribute PresentationConnectionState state;             void close();             void terminate();             attribute EventHandler onconnect;             attribute EventHandler onclose;             attribute EventHandler onterminate;              // Communication             attribute BinaryType binaryType;             attribute EventHandler onmessage;             void send (DOMString message);             void send (Blob data);             void send (ArrayBuffer data);             void send (ArrayBufferView data);           };  "
+  },
+  {
+    "url": "https://w3c.github.io/presentation-api/",
+    "htmlWebIDL":"             enum PresentationConnectionClosedReason { \"error\", \"closed\", \"wentaway\" };              [Constructor(DOMString type, PresentationConnectionCloseEventInit eventInitDict)]             interface PresentationConnectionCloseEvent : Event {               readonly attribute PresentationConnectionClosedReason reason;               readonly attribute DOMString message;             };              dictionary PresentationConnectionCloseEventInit : EventInit {               required PresentationConnectionClosedReason reason;               DOMString message = \"\";             };   "
+  },
+  {
+    "url": "https://w3c.github.io/presentation-api/",
+    "htmlWebIDL":"           interface PresentationReceiver {             [SameObject] readonly attribute Promise&lt;PresentationConnectionList&gt; connectionList;           };   "
+  },
+  {
+    "url": "https://w3c.github.io/presentation-api/",
+    "htmlWebIDL":"           interface PresentationConnectionList : EventTarget {             readonly attribute FrozenArray&lt;PresentationConnection&gt; connections;             attribute EventHandler onconnectionavailable;           };   "
+  },
+  {
+    "url": "https://w3c.github.io/resource-timing/",
+    "htmlWebIDL":"partial interface Performance {   void clearResourceTimings ();   void setResourceTimingBufferSize (unsigned long maxSize);               attribute EventHandler onresourcetimingbufferfull; };"
+  },
+  {
+    "url": "https://w3c.github.io/touch-events/",
+    "htmlWebIDL":" dictionary TouchInit {     required long        identifier;     required EventTarget target;              double      clientX = 0;              double      clientY = 0;              double      screenX = 0;              double      screenY = 0;              double      pageX = 0;              double      pageY = 0;              float       radiusX = 0;              float       radiusY = 0;              float       rotationAngle = 0;              float       force = 0; };  [Constructor(TouchInit touchInitDict)] interface Touch {     readonly        attribute long        identifier;     readonly        attribute EventTarget target;     readonly        attribute double      screenX;     readonly        attribute double      screenY;     readonly        attribute double      clientX;     readonly        attribute double      clientY;     readonly        attribute double      pageX;     readonly        attribute double      pageY;     readonly        attribute float       radiusX;     readonly        attribute float       radiusY;     readonly        attribute float       rotationAngle;     readonly        attribute float       force; };       "
+  },
+  {
+    "url": "https://w3c.github.io/touch-events/",
+    "htmlWebIDL":" interface TouchList {     readonly        attribute unsigned long length;     getter Touch? item (unsigned long index); };       "
+  },
+  {
+    "url": "https://w3c.github.io/touch-events/",
+    "htmlWebIDL":" dictionary TouchEventInit : EventModifierInit {              sequence&lt;Touch&gt; touches = [];              sequence&lt;Touch&gt; targetTouches = [];              sequence&lt;Touch&gt; changedTouches = []; };  [Constructor(DOMString type, optional TouchEventInit eventInitDict)] interface TouchEvent : UIEvent {     readonly        attribute TouchList touches;     readonly        attribute TouchList targetTouches;     readonly        attribute TouchList changedTouches;     readonly        attribute boolean   altKey;     readonly        attribute boolean   metaKey;     readonly        attribute boolean   ctrlKey;     readonly        attribute boolean   shiftKey; };       "
+  },
+  {
+    "url": "https://w3c.github.io/touch-events/",
+    "htmlWebIDL":" partial interface GlobalEventHandlers {                     attribute EventHandler ontouchstart;                     attribute EventHandler ontouchend;                     attribute EventHandler ontouchmove;                     attribute EventHandler ontouchcancel; };       "
+  },
+  {
+    "url": "https://w3c.github.io/touch-events/",
+    "htmlWebIDL":"           partial interface Document {             // Deprecated in this specification             Touch createTouch (WindowProxy view, EventTarget target, long identifier, double pageX, double pageY, double screenX, double screenY);             // Deprecated in this specification             TouchList createTouchList (Touch... touches);           };         "
+  },
+  {
+    "url": "https://w3c.github.io/user-timing/",
+    "htmlWebIDL":" partial interface Performance {     void mark(DOMString markName);     void clearMarks(optional DOMString markName);      void measure(DOMString measureName, optional DOMString startMark, optional DOMString endMark);     void clearMeasures(optional DOMString measureName); }; "
+  },
+  {
+    "url": "https://w3c.github.io/user-timing/",
+    "htmlWebIDL":"   [Exposed=(Window,Worker)]   interface PerformanceMark : PerformanceEntry {   };     "
+  },
+  {
+    "url": "https://w3c.github.io/user-timing/",
+    "htmlWebIDL":"   [Exposed=(Window,Worker)]   interface PerformanceMeasure : PerformanceEntry {   };     "
+  },
+  {
+    "url": "https://w3c.github.io/webcomponents/spec/imports/",
+    "htmlWebIDL":" partial interface HTMLLinkElement {     readonly attribute Document? import; }; "
+  },
+  {
+    "url": "https://w3c.github.io/web-nfc/",
+    "htmlWebIDL":"       enum NFCRecordType {         \"empty\",         \"text\",         \"url\",         \"json\",         \"opaque\"       };        typedef (DOMString or unrestricted double or ArrayBuffer or Dictionary) NFCRecordData;        dictionary NFCRecord {         NFCRecordType recordType;         USVString mediaType;         NFCRecordData data;       };     "
+  },
+  {
+    "url": "https://w3c.github.io/web-nfc/",
+    "htmlWebIDL":"       dictionary NFCMessage {         sequence&lt;NFCRecord&gt; data;         USVString url;       };     "
+  },
+  {
+    "url": "https://w3c.github.io/web-nfc/",
+    "htmlWebIDL":"     partial interface Navigator {       readonly attribute NFC nfc;     };   "
+  },
+  {
+    "url": "https://w3c.github.io/web-nfc/",
+    "htmlWebIDL":"     typedef (DOMString or ArrayBuffer or NFCMessage) NFCPushMessage;      interface NFC {       Promise&lt;void&gt; push(NFCPushMessage message, optional NFCPushOptions options);       Promise&lt;void&gt; cancelPush(optional NFCPushTarget target=\"any\");       Promise&lt;long&gt; watch(MessageCallback callback, optional NFCWatchOptions options);       Promise&lt;void&gt; cancelWatch(optional long id);     };      callback MessageCallback = void (NFCMessage message);   "
+  },
+  {
+    "url": "https://w3c.github.io/web-nfc/",
+    "htmlWebIDL":"       enum NFCPushTarget {         \"tag\",         \"peer\",         \"any\"       };        dictionary NFCPushOptions {         NFCPushTarget target = \"any\";         unrestricted double timeout = Infinity;         boolean ignoreRead = true;       };     "
+  },
+  {
+    "url": "https://w3c.github.io/web-nfc/",
+    "htmlWebIDL":"         enum NFCWatchMode {           \"web-nfc-only\",           \"any\"         };          dictionary NFCWatchOptions {           USVString url = \"\";           NFCRecordType? recordType;           USVString mediaType = \"\";           NFCWatchMode mode = \"web-nfc-only\";         };       "
+  },
+  {
+    "url": "https://webbluetoothchrome.github.io/web-bluetooth/",
+    "htmlWebIDL":"         dictionary BluetoothScanFilter {           sequence&lt;BluetoothServiceUUID> services;         };          dictionary RequestDeviceOptions {           required sequence&lt;BluetoothScanFilter> filters;           sequence&lt;BluetoothServiceUUID> optionalServices = [];         };          [NoInterfaceObject]         interface Bluetooth {           Promise&lt;BluetoothDevice> requestDevice(RequestDeviceOptions options);         };       "
+  },
+  {
+    "url": "https://webbluetoothchrome.github.io/web-bluetooth/",
+    "htmlWebIDL":"           // Allocation authorities for Vendor IDs:           enum VendorIDSource {             \"bluetooth\",             \"usb\"           };            interface BluetoothDevice : ServiceEventHandlers {             readonly attribute DOMString instanceID;             readonly attribute DOMString? name;             readonly attribute BluetoothAdvertisingData adData;             readonly attribute unsigned long? deviceClass;             readonly attribute VendorIDSource? vendorIDSource;             readonly attribute unsigned long? vendorID;             readonly attribute unsigned long? productID;             readonly attribute unsigned long? productVersion;             readonly attribute boolean paired;             readonly attribute BluetoothGATTRemoteServer? gattServer;             readonly attribute UUID[] uuids;             Promise&lt;BluetoothGATTRemoteServer> connectGATT();           };         "
+  },
+  {
+    "url": "https://webbluetoothchrome.github.io/web-bluetooth/",
+    "htmlWebIDL":"             [NoInterfaceObject]             interface BluetoothAdvertisingData {               readonly attribute unsigned short? appearance;               readonly attribute byte? txPower;               readonly attribute byte? rssi;               readonly attribute Map manufacturerData;               readonly attribute Map serviceData;             };           "
+  },
+  {
+    "url": "https://webbluetoothchrome.github.io/web-bluetooth/",
+    "htmlWebIDL":"           interface BluetoothGATTRemoteServer : ServiceEventHandlers {             readonly attribute BluetoothDevice device;             readonly attribute boolean connected;             void disconnect();             Promise&lt;BluetoothGATTService> getPrimaryService(BluetoothServiceUUID service);             Promise&lt;sequence&lt;BluetoothGATTService>>               getPrimaryServices(optional BluetoothServiceUUID service);           };         "
+  },
+  {
+    "url": "https://webbluetoothchrome.github.io/web-bluetooth/",
+    "htmlWebIDL":"           interface BluetoothGATTService : ServiceEventHandlers {             readonly attribute UUID uuid;             readonly attribute boolean isPrimary;             readonly attribute BluetoothDevice device;             Promise&lt;BluetoothGATTCharacteristic>               getCharacteristic(BluetoothCharacteristicUUID characteristic);             Promise&lt;sequence&lt;BluetoothGATTCharacteristic>>               getCharacteristics(optional BluetoothCharacteristicUUID characteristic);             Promise&lt;BluetoothGATTService>               getIncludedService(BluetoothServiceUUID service);             Promise&lt;sequence&lt;BluetoothGATTService>>               getIncludedServices(optional BluetoothServiceUUID service);           };         "
+  },
+  {
+    "url": "https://webbluetoothchrome.github.io/web-bluetooth/",
+    "htmlWebIDL":"           interface BluetoothGATTCharacteristic : CharacteristicEventHandlers {             readonly attribute UUID uuid;             readonly attribute BluetoothGATTService service;             readonly attribute CharacteristicProperties properties;             readonly attribute DOMString instanceID;             readonly attribute ArrayBuffer? value;             Promise&lt;BluetoothGATTDescriptor> getDescriptor(BluetoothDescriptorUUID descriptor);             Promise&lt;sequence&lt;BluetoothGATTDescriptor>>               getDescriptors(optional BluetoothDescriptorUUID descriptor);             Promise&lt;ArrayBuffer> readValue();             Promise&lt;void> writeValue(BufferSource value);             Promise&lt;void> startNotifications();             Promise&lt;void> stopNotifications();           };         "
+  },
+  {
+    "url": "https://webbluetoothchrome.github.io/web-bluetooth/",
+    "htmlWebIDL":"             interface CharacteristicProperties {               readonly attribute boolean broadcast;               readonly attribute boolean read;               readonly attribute boolean writeWithoutResponse;               readonly attribute boolean write;               readonly attribute boolean notify;               readonly attribute boolean indicate;               readonly attribute boolean authenticatedSignedWrites;               readonly attribute boolean reliableWrite;               readonly attribute boolean writableAuxiliaries;             };           "
+  },
+  {
+    "url": "https://webbluetoothchrome.github.io/web-bluetooth/",
+    "htmlWebIDL":"           interface BluetoothGATTDescriptor {             readonly attribute UUID uuid;             readonly attribute BluetoothGATTCharacteristic characteristic;             readonly attribute ArrayBuffer? value;             Promise&lt;ArrayBuffer> readValue();             Promise&lt;void> writeValue(BufferSource value);           };         "
+  },
+  {
+    "url": "https://webbluetoothchrome.github.io/web-bluetooth/",
+    "htmlWebIDL":"             [NoInterfaceObject]             interface CharacteristicEventHandlers : EventTarget {               attribute EventHandler oncharacteristicvaluechanged;             };           "
+  },
+  {
+    "url": "https://webbluetoothchrome.github.io/web-bluetooth/",
+    "htmlWebIDL":"             [NoInterfaceObject]             interface ServiceEventHandlers : CharacteristicEventHandlers {               attribute EventHandler onserviceadded;               attribute EventHandler onservicechanged;               attribute EventHandler onserviceremoved;             };           "
+  },
+  {
+    "url": "https://webbluetoothchrome.github.io/web-bluetooth/",
+    "htmlWebIDL":"typedef DOMString UUID;"
+  },
+  {
+    "url": "https://webbluetoothchrome.github.io/web-bluetooth/",
+    "htmlWebIDL":"           interface BluetoothUUID {             static UUID getService((DOMString or unsigned long) name);             static UUID getCharacteristic((DOMString or unsigned long) name);             static UUID getDescriptor((DOMString or unsigned long) name);              static UUID canonicalUUID(unsigned long alias);           };            typedef (DOMString or unsigned long) BluetoothServiceUUID;           typedef (DOMString or unsigned long) BluetoothCharacteristicUUID;           typedef (DOMString or unsigned long) BluetoothDescriptorUUID;         "
+  },
+  {
+    "url": "https://webbluetoothchrome.github.io/web-bluetooth/",
+    "htmlWebIDL":"         Navigator implements NavigatorBluetooth;          [NoInterfaceObject]         interface NavigatorBluetooth {           readonly attribute Bluetooth bluetooth;         };       "
+  },
+  {
+    "url": "http://w3c.github.io/performance-timeline/",
+    "htmlWebIDL":"dictionary PerformanceEntryFilterOptions {              DOMString name;              DOMString entryType;              DOMString initiatorType; };"
+  },
+  {
+    "url": "http://w3c.github.io/performance-timeline/",
+    "htmlWebIDL":"partial interface Performance {     PerformanceEntryList getEntries (optional PerformanceEntryFilterOptions filter);     PerformanceEntryList getEntriesByType (DOMString type);     PerformanceEntryList getEntriesByName (DOMString name, optional DOMString type); }; typedef sequence&lt;PerformanceEntry> PerformanceEntryList;"
+  },
+  {
+    "url": "http://w3c.github.io/performance-timeline/",
+    "htmlWebIDL":"dictionary PerformanceObserverInit {   required sequence&lt;DOMString> entryTypes; };  [Exposed=(Window,Worker)] interface PerformanceObserverEntryList {   PerformanceEntryList getEntries (optional PerformanceEntryFilterOptions filter);   PerformanceEntryList getEntriesByType (DOMString type);   PerformanceEntryList getEntriesByName (DOMString name, optional DOMString type); };  callback PerformanceObserverCallback = void (PerformanceObserverEntryList entries,                                              PerformanceObserver observer);  [Constructor(PerformanceObserverCallback callback), Exposed=(Window,Worker)] interface PerformanceObserver {   void observe (PerformanceObserverInit options);   void disconnect (); };"
+  },
+  {
+    "url": "http://w3c.github.io/presentation-api/",
+    "htmlWebIDL":"           partial interface Navigator {             [SameObject] readonly attribute Presentation? presentation;           };                      interface Presentation {           };          "
+  },
+  {
+    "url": "http://w3c.github.io/presentation-api/",
+    "htmlWebIDL":"           [Constructor(DOMString url),            Constructor(sequence&lt;DOMString&gt; urls)]           interface PresentationRequest : EventTarget {             Promise&lt;PresentationConnection&gt; start();             Promise&lt;PresentationConnection&gt; reconnect(DOMString presentationId);             Promise&lt;PresentationAvailability&gt; getAvailability();              attribute EventHandler onconnectionavailable;           };   "
+  },
+  {
+    "url": "http://w3c.github.io/presentation-api/",
+    "htmlWebIDL":"           interface PresentationAvailability : EventTarget {             readonly attribute boolean value;              attribute EventHandler onchange;           };  "
+  },
+  {
+    "url": "http://w3c.github.io/presentation-api/",
+    "htmlWebIDL":"             [Constructor(DOMString type, PresentationConnectionAvailableEventInit eventInitDict)]             interface PresentationConnectionAvailableEvent : Event {               [SameObject] readonly attribute PresentationConnection connection;             };              dictionary PresentationConnectionAvailableEventInit : EventInit {               required PresentationConnection connection;             };   "
+  },
+  {
+    "url": "http://w3c.github.io/presentation-api/",
+    "htmlWebIDL":"           enum PresentationConnectionState { \"connecting\", \"connected\", \"closed\", \"terminated\" };           enum BinaryType { \"blob\", \"arraybuffer\" };            interface PresentationConnection : EventTarget {             readonly attribute DOMString id;             readonly attribute DOMString url;             readonly attribute PresentationConnectionState state;             void close();             void terminate();             attribute EventHandler onconnect;             attribute EventHandler onclose;             attribute EventHandler onterminate;              // Communication             attribute BinaryType binaryType;             attribute EventHandler onmessage;             void send (DOMString message);             void send (Blob data);             void send (ArrayBuffer data);             void send (ArrayBufferView data);           };  "
+  },
+  {
+    "url": "http://w3c.github.io/presentation-api/",
+    "htmlWebIDL":"             enum PresentationConnectionClosedReason { \"error\", \"closed\", \"wentaway\" };              [Constructor(DOMString type, PresentationConnectionCloseEventInit eventInitDict)]             interface PresentationConnectionCloseEvent : Event {               readonly attribute PresentationConnectionClosedReason reason;               readonly attribute DOMString message;             };              dictionary PresentationConnectionCloseEventInit : EventInit {               required PresentationConnectionClosedReason reason;               DOMString message = \"\";             };   "
+  },
+  {
+    "url": "http://w3c.github.io/presentation-api/",
+    "htmlWebIDL":"           interface PresentationReceiver {             [SameObject] readonly attribute Promise&lt;PresentationConnectionList&gt; connectionList;           };   "
+  },
+  {
+    "url": "http://w3c.github.io/presentation-api/",
+    "htmlWebIDL":"           interface PresentationConnectionList : EventTarget {             readonly attribute FrozenArray&lt;PresentationConnection&gt; connections;             attribute EventHandler onconnectionavailable;           };   "
+  },
+  {
+    "url": "http://w3c.github.io/webcomponents/spec/custom/",
+    "htmlWebIDL":" partial interface Window {     readonly attribute CustomElementsRegistry customElements; }; "
+  },
+  {
+    "url": "http://w3c.github.io/web-nfc/",
+    "htmlWebIDL":"       enum NFCRecordType {         \"empty\",         \"text\",         \"url\",         \"json\",         \"opaque\"       };        typedef (DOMString or unrestricted double or ArrayBuffer or Dictionary) NFCRecordData;        dictionary NFCRecord {         NFCRecordType recordType;         USVString mediaType;         NFCRecordData data;       };     "
+  },
+  {
+    "url": "http://w3c.github.io/web-nfc/",
+    "htmlWebIDL":"       dictionary NFCMessage {         sequence&lt;NFCRecord&gt; data;         USVString url;       };     "
+  },
+  {
+    "url": "http://w3c.github.io/web-nfc/",
+    "htmlWebIDL":"     partial interface Navigator {       readonly attribute NFC nfc;     };   "
+  },
+  {
+    "url": "http://w3c.github.io/web-nfc/",
+    "htmlWebIDL":"     typedef (DOMString or ArrayBuffer or NFCMessage) NFCPushMessage;      interface NFC {       Promise&lt;void&gt; push(NFCPushMessage message, optional NFCPushOptions options);       Promise&lt;void&gt; cancelPush(optional NFCPushTarget target=\"any\");       Promise&lt;long&gt; watch(MessageCallback callback, optional NFCWatchOptions options);       Promise&lt;void&gt; cancelWatch(optional long id);     };      callback MessageCallback = void (NFCMessage message);   "
+  },
+  {
+    "url": "http://w3c.github.io/web-nfc/",
+    "htmlWebIDL":"       enum NFCPushTarget {         \"tag\",         \"peer\",         \"any\"       };        dictionary NFCPushOptions {         NFCPushTarget target = \"any\";         unrestricted double timeout = Infinity;         boolean ignoreRead = true;       };     "
+  },
+  {
+    "url": "http://w3c.github.io/web-nfc/",
+    "htmlWebIDL":"         enum NFCWatchMode {           \"web-nfc-only\",           \"any\"         };          dictionary NFCWatchOptions {           USVString url = \"\";           NFCRecordType? recordType;           USVString mediaType = \"\";           NFCWatchMode mode = \"web-nfc-only\";         };       "
+  }
+]
