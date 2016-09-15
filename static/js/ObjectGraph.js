@@ -18,7 +18,7 @@
 
 (function(define) {
   define(
-    [ 'stdlib', 'remap', 'facade', 'NameRewriter', 'TaskQueue' ],
+    [ 'ya-stdlib-js', 'remap', 'facade', 'NameRewriter', 'TaskQueue' ],
     function(stdlib, remap, facade, NameRewriter, TaskQueue) {
       // Object identity and/or primitive type data storage.
       function ObjectGraph(opts) {

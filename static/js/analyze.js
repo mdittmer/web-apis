@@ -17,7 +17,7 @@
 'use strict';
 
 (function(define) {
-  define([ 'stdlib', 'ObjectGraph' ], function(stdlib, ObjectGraph) {
+  define([ 'ya-stdlib-js', 'ObjectGraph' ], function(stdlib, ObjectGraph) {
     // Get an element from the DOM.
     function e(selector) {
       return document.querySelector(selector);

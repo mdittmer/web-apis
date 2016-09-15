@@ -17,7 +17,7 @@
 'use strict';
 
 (function(define) {
-  define([ 'stdlib', 'parse' ], function(stdlib, parse) {
+  define([ 'ya-stdlib-js', 'parse' ], function(stdlib, parse) {
     function True() { return true; }
     function False() { return false; }
 

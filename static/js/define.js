@@ -26,21 +26,7 @@
     return modules[name];
   };
 
-  window.define = function(deps, factory) {
-    if ( ! document.currentScript ) throw new Error('Unknown module name');
-
-    if ( arguments.length === 1 ) {
-      factory = deps;
-    } else if ( deps ) {
-      var depModules = new Array(deps.length);
-      for ( var i = 0; i < deps.length; i++ ) {
-        if ( modules[deps[i]] ) depModules[i] = modules[deps[i]];
-      }
-      deps = deps.map(window.require);
-      factory = factory.bind.apply(factory, [window].concat(deps));
-    }
-    var module = factory();
-
+  function getPath() {
     var pathParts = document.currentScript.getAttribute('src').match(urlRE);
     var path;
     if ( pathParts[1] ) {
@@ -57,6 +43,51 @@
       path[path.length - 1] = lastPart.substr(
         0, lastPart.length - '.js'.length);
     }
+
+    return path;
+  }
+
+  function getDeps(deps) {
+    var depModules = new Array(deps.length);
+    for ( var i = 0; i < deps.length; i++ ) {
+      if ( modules[deps[i]] ) depModules[i] = modules[deps[i]];
+    }
+    deps = deps.map(window.require);
+    return deps;
+  }
+
+  window.define = function(a, b, c) {
+    if ( arguments.length !== 3 &&
+        document.currentScript === undefined ) {
+      throw new Error('Unknown module name');
+    }
+
+    var path;
+    var deps;
+    var factory;
+    switch (arguments.length) {
+      case 1: {
+        path = getPath();
+        deps = [];
+        factory = a;
+        break;
+      }
+      case 2: {
+        path = getPath();
+        deps = getDeps(a);
+        factory = b;
+        break;
+      }
+      default: {
+        path = a.split('.');
+        deps = getDeps(b);
+        factory = c;
+        break;
+      }
+    }
+    factory = factory.bind.apply(factory, [window].concat(deps));
+    var module = factory();
+
 
     var name = '';
     for ( var i = path.length - 1; i >= 0; i-- ) {

@@ -17,7 +17,7 @@
 'use strict';
 
 (function(define) {
-  define([ 'stdlib', 'parse' ], function(stdlib, parse) {
+  define([ 'ya-stdlib-js', 'parse' ], function(stdlib, parse) {
     // Construct parser and store tokenized factories.
     // TODO: Tokenized factories should be accessible without constructing
     // a parser.

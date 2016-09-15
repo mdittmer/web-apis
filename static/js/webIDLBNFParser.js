@@ -18,7 +18,7 @@
 
 (function(define) {
   define(
-    [ 'stdlib', 'parse', 'w3cBNFParser' ],
+    [ 'ya-stdlib-js', 'parse', 'w3cBNFParser' ],
     function(stdlib, parse, w3cBNFParser) {
       function getParser(bnfPath) {
         var future = stdlib.future();

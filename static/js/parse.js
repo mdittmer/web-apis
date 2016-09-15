@@ -19,7 +19,7 @@
 // Modified from https://github.com/foam-framework/foam/blob/master/core/parse.js.
 
 (function(define) {
-  define(['stdlib'], function(stdlib) {
+  define(['ya-stdlib-js'], function(stdlib) {
     var DEBUG_IN_PARSE = 1;
     var DEBUG_OUT_PARSE = 1;
     var DEBUG_IN_BREAK = 1;

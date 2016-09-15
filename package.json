@@ -47,7 +47,9 @@
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
     "gulp-load-plugins": "^1.3.0",
-    "run-sequence": "^1.2.2"
+    "run-sequence": "^1.2.2",
+    "webidl2": "^2.0.11",
+    "ya-stdlib-js": "git://github.com/mdittmer/ya-stdlib-js.git"
   },
   "eslintConfig": {
     "extends": "google"
