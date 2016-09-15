@@ -1,10 +1,21 @@
 {
   "plugins": [
+    "esformatter-add-trailing-commas",
     "esformatter-auto-wrap",
+    "esformatter-onevar",
     "esformatter-semicolons",
-    "esformatter-add-trailing-commas"
+    "esformatter-var-each"
   ],
   "autoWrap": {
     "maxLineLength": 80
+  },
+  "indent": {
+    "value": "  ",
+    "arguments": 0
+  },
+  "lineBreak": {
+    "after": {
+      "VariableDeclaration": "<=2"
+    }
   }
 }

@@ -10,5 +10,8 @@
       "args": "after-used",
       "argsIgnorePattern": "^var_args$"
     }]
+  },
+  "globals": {
+    "define": true
   }
 }
