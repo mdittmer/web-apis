@@ -1,0 +1,30 @@
+{
+  "name": "web-apis-investigator",
+  "description": "Investigate web APIs through various means",
+  "main": "serve.js",
+  "authors": [
+    "Mark Dittmer"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "web",
+    "platform",
+    "APIs",
+    "browser",
+    "explore",
+    "investigate",
+    "research"
+  ],
+  "homepage": "https://github.com/mdittmer/web-apis",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ya-stdlib-js": "git://github.com/mdittmer/ya-stdlib-js"
+  }
+}
