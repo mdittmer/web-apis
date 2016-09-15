@@ -153,7 +153,10 @@
                this.isPropertyBlacklisted(o, names[i]) ) continue;
 
           var name = names[i];
-          var descriptor = Object.getOwnPropertyDescriptor(o, name);
+          var descriptor;
+          try {
+            descriptor = Object.getOwnPropertyDescriptor(o, name);
+          } catch (e) {}
           if ( descriptor ) {
             metadataMap[name] = stdlib.mapMap(
               descriptor,
