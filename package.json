@@ -4,7 +4,12 @@
   "description": "Investigate web APIs through various means",
   "main": "serve.js",
   "scripts": {
-    "repl": "NODE_PATH=.:./static/js node"
+    "repl": "node",
+    "postinstall": "npm run deps && npm run build",
+    "deps": "rm -rf static/bower_components && bower install",
+    "lint": "gulp lint",
+    "build": "gulp",
+    "deploy": "node serve.js"
   },
   "repository": {
     "type": "git",
