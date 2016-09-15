@@ -14,10 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+'use strict';
 
 var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var jsonStableStringify = require('json-stable-stringify');
+
+var jsonStableStringifyConfig = {
+  space: '  ',
+  cmp: function(a, b) {
+    return a.key < b.key ? -1 : 1;
+  },
+};
+function stringify(data) {
+  return jsonStableStringify(data, jsonStableStringifyConfig);
+}
 
 var NameRewriter = require('./static/js/NameRewriter');
 
@@ -40,7 +52,7 @@ try {
   list = JSON.parse(fs.readFileSync(DATA_DIR + '/list.json'));
 } catch (e) {
   list = {};
-  fs.writeFileSync(DATA_DIR + '/list.json', JSON.stringify(list, null, 2));
+  fs.writeFileSync(DATA_DIR + '/list.json', stringify(list));
 }
 
 /**
@@ -126,8 +138,8 @@ function ensurePath(data, keys) {
  */
 function sendJSON(data, res) {
   var str = (typeof data === 'string' || data instanceof Buffer) ?
-        JSON.stringify(JSON.parse(data)) :
-        JSON.stringify(data);
+        stringify(JSON.parse(data)) :
+        stringify(data);
   res.setHeader('Content-Type', 'application/json');
   res.send(str);
 }
@@ -149,7 +161,7 @@ function sendHTML(str, res) {
 function updateList(env) {
   try {
     var dataExists = ensurePath(list, env.toArray());
-    fs.writeFileSync(DATA_DIR + '/list.json', JSON.stringify(list, null, 2));
+    fs.writeFileSync(DATA_DIR + '/list.json', stringify(list));
     return !dataExists;
   } catch (e) {
     console.error(e);
@@ -178,11 +190,11 @@ app.post('/save', function(req, res) {
   var path = OG_DATA_DIR + '/' + jsonFileName;
 
   fs.stat(path, function(err) {
-    if (err.code !== 'ENOENT') {
+    if (err && err.code !== 'ENOENT') {
       console.error(err);
       sendHTML('Error: ' + err.toString(), res);
     } else if (err) {
-      var dataStr = JSON.stringify(JSON.parse(req.body.data), null, 2);
+      var dataStr = stringify(JSON.parse(req.body.data));
       fs.writeFileSync(path, dataStr);
       updateList(env);
       sendHTML('Saved data (' + dataStr.length + ' characters of JSON)',
