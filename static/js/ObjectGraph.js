@@ -385,10 +385,10 @@
           if ( name === '__proto__' ) {
             nextId = this.protos[id];
           } else {
-            while ( id !== this.types['null'] && ! ( nextId = this.data[id][name] ) )
+            while ( ! this.isType(id) && ! ( nextId = this.data[id][name] ) )
               id = this.protos[id];
           }
-          if ( ! nextId ) return null;
+          if ( this.isType(id) ) return null;
           if ( typeof nextId !== 'number' ) debugger;
           id = nextId;
         }
