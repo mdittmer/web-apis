@@ -13,7 +13,7 @@ if [[ ! -d ${BLINK_SRC_DIR} ]]; then
 fi
 
 pushd ${BLINK_SRC_DIR}
-IDL_FILES=$(git ls-files '*.idl' | grep -v bindings/ | grep -v testing/)
+IDL_FILES=$(git ls-files '*.idl' | grep -v bindings/ | grep -v testing/ | head -n 30)
 popd
 
 IDL_FILES_ARR=(${(s/
@@ -27,28 +27,6 @@ for IDL_FILE in ${IDL_FILES_ARR[@]}; do
 done
 
 URLS=$(cat ${TMP_FILE} | sort | uniq)
-echo "" > ${TMP_FILE}
+export URLS
 
-URLS_ARR=(${(s/
-/)URLS})
-
-echo "[" >> ${TMP_FILE}
-for URL in ${URLS_ARR[@]}; do
-  echo ${URL}
-  HTML_WEB_IDL=$(curl ${URL} 2>/dev/null | sed -e ':a;N;$!ba;s/\n/ /g' | ag -o '<pre class="idl"[^>]*>(<code[^>]*>)?[^<]*(</code[^>]*>)?[^<]*</pre>' | sed -e 's/<[^>]*>//g' -e 's/\\/\\\\/g' -e 's/"/\\"/g')
-
-  HTML_WEB_IDL_ARR=(${(s/
-/)HTML_WEB_IDL})
-
-  for HWI in ${HTML_WEB_IDL_ARR[@]}; do
-    echo "  {" >> ${TMP_FILE}
-    echo "    \"url\": \"${URL}\"," >> ${TMP_FILE}
-    echo "    \"htmlWebIDL\":\"${HWI}\"" >> ${TMP_FILE}
-    echo "  }," >> ${TMP_FILE}
-  done
-
-done
-echo "]" >> ${TMP_FILE}
-
-cp ${TMP_FILE} blink_idl_fragments.json
-rm ${TMP_FILE}
+node blink_idl_urls_import.js

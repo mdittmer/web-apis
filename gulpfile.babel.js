@@ -19,6 +19,7 @@
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import runSequence from 'run-sequence';
+import webpack from 'webpack-stream';
 
 const $ = gulpLoadPlugins();
 
@@ -33,8 +34,35 @@ gulp.task('lint', () => {
     .pipe($.eslint.failAfterError());
 });
 
-gulp.task('default', () =>
+var names = ['main', 'analyze'];
+
+names.map(
+  name =>
+    gulp.task(
+      name,
+      () =>
+        gulp.src(`./static/js/${name}.js`)
+        .pipe(webpack({
+          devtool: 'inline-source-map',
+          output: {
+            filename: `${name}.bundle.js`,
+          },
+          loaders: [
+            {
+              test: /\.es6\.js$/,
+              loader: 'babel?presets[]=es2015'
+            },
+          ],
+        }))
+        .pipe(gulp.dest('./static/bundle'))
+    )
+);
+
+gulp.task('build', gulp.parallel(names));
+
+gulp.task('default', done =>
   runSequence(
-    'lint'
+    'lint',
+    done
   )
 );

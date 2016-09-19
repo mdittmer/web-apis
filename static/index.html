@@ -27,23 +27,7 @@
       white-space: pre-wrap;
     }
     </style>
-    <script language="javascript" src="js/define.js"></script>
-    <script language="javascript" src="js/id.js"></script>
-    <script language="javascript" src="bower_components/ya-stdlib-js/ya-stdlib-js.js"></script>
-    <script language="javascript" src="js/remap.js"></script>
-    <script language="javascript" src="js/facade.js"></script>
-    <script language="javascript" src="js/NameRewriter.js"></script>
-    <script language="javascript" src="js/TaskQueue.js"></script>
-    <script language="javascript" src="js/ObjectGraph.js"></script>
-
-    <script language="javascript">
-     typeof require !== 'undefined' && (function(ObjectGraph) {
-         if ( ! ObjectGraph ) return;
-         for ( var i = 1; i < arguments.length; i++ ) {
-             arguments[i] && ObjectGraph.blacklistObject(arguments[i]);
-         }
-     })(require('ObjectGraph'), require, define);
-    </script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
   </head>
   <body>
     <pre id="browser"></pre>
@@ -54,6 +38,6 @@
       <button id="send">Send data</button>
     </form>
 
-    <script language="javascript"  src="js/main.js"></script>
+    <script language="javascript" src="bundle/main.bundle.js"></script>
   </body>
 </html>

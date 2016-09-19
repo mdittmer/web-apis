@@ -20,11 +20,9 @@
   define(
     [ 'ya-stdlib-js', 'parse', 'w3cBNFParser' ],
     function(stdlib, parse, w3cBNFParser) {
-      function getParser(bnfPath) {
-        var future = stdlib.future();
-        var parser;
-
-        stdlib.loadData(bnfPath)(function(bnfStr) {
+      return function getParser(bnfPath) {
+        return stdlib.loadData(bnfPath).then(function(bnfStr) {
+          var parser;
           var res = w3cBNFParser.parseString(bnfStr);
           console.assert(res[0], 'Web IDL description parse failed');
           var webIDLParserJS = res[1].toGrammar();
@@ -33,14 +31,9 @@
             parse.getFactoryVarsCodeStr() + // Expose factoiries as vars.
               webIDLParserJS);              // Assign parser = ...
 
-          future.set(parser);
+          return parser;
         });
-
-        return future;
-      }
-      getParser.get = getParser;
-
-      return getParser;
+      };
     });
 })((function() {
   if ( typeof module !== 'undefined' && module.exports ) {

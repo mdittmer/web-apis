@@ -23,16 +23,7 @@ var idlFiles = env.IDL_FILES.split('\n').map(function(path) {
   return env.BLINK_SRC_DIR + '/' + path;
 });
 
-var jsonStableStringify = require('json-stable-stringify');
-var jsonStableStringifyConfig = {
-  space: '  ',
-  cmp: function(a, b) {
-    return a.key < b.key ? -1 : 1;
-  },
-};
-function stringify(data) {
-  return jsonStableStringify(data, jsonStableStringifyConfig);
-}
+var stringify = require('stringify');
 
 var fs = require('fs');
 function loadFiles(arr) {

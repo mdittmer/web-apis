@@ -72,23 +72,6 @@
       flex-direction: column;
     }
     </style>
-    <script language="javascript" src="js/define.js"></script>
-    <script language="javascript" src="js/id.js"></script>
-    <script language="javascript" src="bower_components/ya-stdlib-js/ya-stdlib-js.js"></script>
-    <script language="javascript" src="js/remap.js"></script>
-    <script language="javascript" src="js/facade.js"></script>
-    <script language="javascript" src="js/NameRewriter.js"></script>
-    <script language="javascript" src="js/TaskQueue.js"></script>
-    <script language="javascript" src="js/ObjectGraph.js"></script>
-
-    <script language="javascript">
-     typeof require !== 'undefined' && (function(ObjectGraph) {
-         if ( ! ObjectGraph ) return;
-         for ( var i = 1; i < arguments.length; i++ ) {
-             arguments[i] && ObjectGraph.blacklistObject(arguments[i]);
-         }
-     })(require('ObjectGraph'), require, define);
-    </script>
   </head>
   <body>
 
@@ -123,6 +106,6 @@
     <span>Primitives</span>
     <pre id="primitives"></pre>
 
-    <script language="javascript"  src="js/analyze.js"></script>
+    <script language="javascript"  src="bundle/analyze.bundle.js"></script>
   </body>
 </html>
