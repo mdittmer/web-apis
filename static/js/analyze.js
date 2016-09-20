@@ -38,11 +38,16 @@ function doAnalyses(inGraphs, exGraphs) {
 
   apisE.textContent = structsE.textContent = primitivesE.textContent = '';
 
+  // Sanity check input graph ids.
+  inGraphs.concat(exGraphs).map(g => g.getAllIds().forEach(id => {
+    if (isNaN(id)) debugger;
+  }));
+
   var graph = analysis.intersectDifference(inGraphs, exGraphs);
 
   console.assert(graph.data[graph.root]);
 
-  // TODO: Some graphs have NaN in their id set. Need to investigate.
+  // Sanity check output graph ids.
   graph.getAllIds().forEach(id => {
     if (isNaN(id)) debugger;
   });

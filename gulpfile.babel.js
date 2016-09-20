@@ -47,12 +47,18 @@ names.map(
           output: {
             filename: `${name}.bundle.js`,
           },
-          loaders: [
-            {
-              test: /\.es6\.js$/,
-              loader: 'babel?presets[]=es2015'
-            },
-          ],
+          module: {
+            loaders: [
+              {
+                test: /\.es6\.js$/,
+                loader: 'babel',
+                query: {
+                  presets: ['es2015'],
+                  plugins: ['transform-runtime']
+                },
+              },
+            ],
+          },
         }))
         .pipe(gulp.dest('./static/bundle'))
     )
