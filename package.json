@@ -6,9 +6,10 @@
   "scripts": {
     "repl": "node",
     "postinstall": "npm run deps",
-    "deps": "rm -rf static/bower_components && bower install",
+    "deps": "echo nodepsrightnow",
     "lint": "gulp lint",
-    "build": "gulp",
+    "rebuild": "npm run deps && gulp build",
+    "build": "gulp build",
     "deploy": "node serve.js"
   },
   "repository": {

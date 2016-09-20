@@ -31,6 +31,7 @@
       white-space: pre-wrap;
       flex-grow: 100;
       flex-shrink: 1;
+      min-height: 5em;
       overflow: auto;
       border: 1px solid grey;
       margin: 2px;
@@ -82,12 +83,12 @@
       <div>
         <div id="include">
           <span>Include</span>
-          <div><div id="include-inputs"></div></div>
+          <div><div id="include-inputs"><div><input list="environments" value="Firefox 50.0 OSX 10.12"><button>-</button></div></div></div>
           <button id="include-add">+</button>
         </div>
         <div id="exclude">
           <span>Exclude</span>
-          <div><div id="exclude-inputs"></div></div>
+          <div><div id="exclude-inputs"><div><input list="environments" value="Chrome 53.0.2785.116 Linux x86.64"><button>-</button></div></div></div>
           <button id="exclude-add">+</button>
         </div>
       </div>

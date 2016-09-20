@@ -42,7 +42,13 @@ function doAnalyses(inGraphs, exGraphs) {
 
   console.assert(graph.data[graph.root]);
 
-  var ids = graph.getAllIds();
+  // TODO: Some graphs have NaN in their id set. Need to investigate.
+  graph.getAllIds().forEach(id => {
+    if (isNaN(id)) debugger;
+  });
+  var ids = graph.getAllIds().filter(id => {
+    return !isNaN(id);
+  }).sort();
 
   // APIs are functions in resulting graph.
   var apis = ids.filter(function(id) {
@@ -69,6 +75,7 @@ function doAnalyses(inGraphs, exGraphs) {
 
   var primitives = ids.map(function(id) {
     var prefix = graph.getShortestKey(id);
+    console.assert(graph.lookup(prefix));
     var $ = graph.getObjectKeys(id);
     var a = $.filter(function(key) {
       return graph.isType(graph.lookup(key, id));
