@@ -34,6 +34,7 @@
     "express": "^4.14.0",
     "json-stable-stringify": "^1.0.1",
     "object-graph-js": "git://github.com/mdittmer/object-graph-js.git",
+    "webidl2": "^2.0.11",
     "ya-stdlib-js": "git://github.com/mdittmer/ya-stdlib-js.git"
   },
   "devDependencies": {
@@ -47,12 +48,7 @@
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-eslint": "^3.0.1",
     "gulp-load-plugins": "^1.3.0",
-    "object-graph-js": "git://github.com/mdittmer/object-graph-js.git",
-    "run-sequence": "^1.2.2",
-    "webidl2": "^2.0.11",
-    "webidl2-js": "git://github.com/mdittmer/webidl2-js.git",
-    "webpack-stream": "^3.2.0",
-    "ya-stdlib-js": "git://github.com/mdittmer/ya-stdlib-js.git"
+    "run-sequence": "^1.2.2"
   },
   "eslintConfig": {
     "extends": "google"
