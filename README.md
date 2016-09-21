@@ -9,7 +9,8 @@ Explore the object graph exposed by a browser's Javascript environment.
 ### Serving Locally
 
     $ npm install
-    $ node serve.js
+    $ npm run rebuild
+    $ npm run deploy
 
 ### Exploring Data
 
