@@ -19,14 +19,16 @@ popd
 IDL_FILES_ARR=(${(s/
 /)IDL_FILES})
 
-TMP_FILE=$(mktemp)
+MASTER_FILE=$(mktemp)
 
 for IDL_FILE in ${IDL_FILES_ARR[@]}; do
   echo ${IDL_FILE}
-  cat ${BLINK_SRC_DIR}/${IDL_FILE} | ag -o 'https?://[^/]+(/[^?#,.\n]*)?(\?[^#,.\n]*)?' >> ${TMP_FILE}
+  TMP_FILE=$(mktemp)
+  echo "${TMP_FILE}" >> ${MASTER_FILE}
+  cat ${BLINK_SRC_DIR}/${IDL_FILE} | ag -o 'https?://[^/]+(/[^?#,.\n]*)?(\?[^#,.\n]*)?' >> ${TMP_FILE} &!
 done
 
-URLS=$(cat ${TMP_FILE} | sort | uniq)
+URLS=$(cat $(cat ${MASTER_FILE}) | sort | uniq)
 export URLS
 
 node blink_idl_urls_import.js

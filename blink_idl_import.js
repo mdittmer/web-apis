@@ -23,7 +23,7 @@ var idlFiles = env.IDL_FILES.split('\n').map(function(path) {
   return env.BLINK_SRC_DIR + '/' + path;
 });
 
-var stringify = require('stringify');
+var stringify = require('ya-stdlib-js').stringify;
 
 var fs = require('fs');
 function loadFiles(arr) {
@@ -38,7 +38,7 @@ function loadFiles(arr) {
 
 var data = loadFiles(idlFiles);
 
-var parser = require('webIDLParser');
+var parser = require('webidl2-js');
 
 var errCount = 0;
 var parses = [];
