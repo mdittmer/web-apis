@@ -70,6 +70,8 @@ and end with something like:
 Wrote 38 IDL fragments from 222 URLs to /path/to/web-apis/./data/idl/caniuse/linked/all.json
 ```
 
+*NOTE*: This will overwrite `data/idl/caniuse/linked/all.json`.
+
 #### Local repository import example: Importing Blink's WebIDL
 
 First, make sure you have a checkout of Chromium, including Blink
