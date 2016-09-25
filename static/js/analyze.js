@@ -21,6 +21,13 @@ var og = require('object-graph-js');
 var ObjectGraph = og.ObjectGraph;
 var analysis = og.analysis;
 
+var uiData = {
+  apis: [],
+  structs: [],
+  primitives: [],
+  filter: e('#filter').value,
+};
+
 // TODO: stdlib's loadData should need this over-specification.
 var l = window.location;
 
@@ -56,7 +63,7 @@ function doAnalyses(inGraphs, exGraphs) {
   }).sort();
 
   // APIs are functions in resulting graph.
-  var apis = ids.filter(function(id) {
+  uiData.apis = ids.filter(function(id) {
     return graph.isFunction(id);
   }).map(function(id) {
     return graph.getShortestKey(id);
@@ -71,14 +78,14 @@ function doAnalyses(inGraphs, exGraphs) {
   }).sort();
   // Only report "leaf structs"; they have no other structs for which their key
   // is a prefix.
-  var structs = Array.from(allStructs).filter(
+  uiData.structs = Array.from(allStructs).filter(
     struct => !allStructs.some(
       otherStruct => otherStruct.length > struct.length &&
         otherStruct.indexOf(struct) === 0
     )
   );
 
-  var primitives = ids.map(function(id) {
+  uiData.primitives = ids.map(function(id) {
     var prefix = graph.getShortestKey(id);
     console.assert(graph.lookup(prefix));
     var $ = graph.getObjectKeys(id);
@@ -103,9 +110,7 @@ function doAnalyses(inGraphs, exGraphs) {
     );
   }).sort();
 
-  apisE.textContent = apis.join('\n');
-  structsE.textContent = structs.join('\n');
-  primitivesE.textContent = primitives.join('\n');
+  filter();
 }
 
 // Convert datalist option value to a data retrieval URL. This is tightly
@@ -214,8 +219,21 @@ function addinputTo(name, datalist) {
   Array.from(e('#' + name).querySelectorAll('input')).pop().focus();
 }
 
+function filter(evt) {
+  var str = e('#filter').value;
+  var re = new RegExp(str);
+
+  ['apis', 'structs', 'primitives'].forEach(function(name) {
+    var el = e('#' + name);
+    el.textContent = uiData[name].filter(
+      function(key) { return key.match(re); }
+    ).join('\n');
+  });
+}
+
 e('#include-add').addEventListener(
   'click', addinputTo.bind(this, 'include', e('#environments')));
 e('#exclude-add').addEventListener(
   'click', addinputTo.bind(this, 'exclude', e('#environments')));
 e('#analyze').addEventListener('click', analyze);
+e('#filter').addEventListener('input', filter);
