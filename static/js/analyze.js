@@ -186,7 +186,8 @@ stdlib.loadData('/list', { responseType: 'json' }).then(function(map) {
 });
 
 // Helper function for adding environments to include/exclude lists in DOM.
-function addinputTo(container, datalist) {
+function addinputTo(name, datalist) {
+  var container = e('#' + name + '-inputs');
   var div = document.createElement('div');
   var input = document.createElement('input');
   var rm = document.createElement('button');
@@ -197,11 +198,24 @@ function addinputTo(container, datalist) {
   div.appendChild(rm);
   container.appendChild(div);
 
-  rm.addEventListener('click', function() { container.removeChild(div); });
+  // Pressing <enter> in inputs focuses add button.
+  input.addEventListener('keyup', function(evt) {
+    if (evt.keyCode === 13) {
+      e('#' + name + '-add').focus();
+    }
+  });
+  // Clicking remove button removes input element and focuses add button.
+  rm.addEventListener('click', function() {
+    container.removeChild(div);
+    e('#' + name + '-add').focus();
+  });
+
+  // After adding new input, focus it.
+  Array.from(e('#' + name).querySelectorAll('input')).pop().focus();
 }
 
 e('#include-add').addEventListener(
-  'click', addinputTo.bind(this, e('#include-inputs'), e('#environments')));
+  'click', addinputTo.bind(this, 'include', e('#environments')));
 e('#exclude-add').addEventListener(
-  'click', addinputTo.bind(this, e('#exclude-inputs'), e('#environments')));
+  'click', addinputTo.bind(this, 'exclude', e('#environments')));
 e('#analyze').addEventListener('click', analyze);
