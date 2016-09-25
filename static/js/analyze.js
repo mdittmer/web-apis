@@ -28,8 +28,18 @@ var uiData = {
   filter: e('#filter').value,
 };
 
-// TODO: stdlib's loadData should need this over-specification.
-var l = window.location;
+function hashCode(str) {
+  var hash = 0;
+  if (str.length === 0) return hash;
+
+  for (var i = 0; i < str.length; i++) {
+    var code = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + code;
+    hash &= hash;
+  }
+
+  return Math.abs(hash % 1000);
+}
 
 // Get an element from the DOM.
 function e(selector) {
@@ -122,6 +132,8 @@ function optValueToURL(label) {
 
 // Gather configuration from DOM inputs, perform analyses, and output results.
 function analyze() {
+  e('#status-value').textContent = '... ANALYZING ...';
+
   // Map input option values to URLs.
   function inputPaths(inputs) {
     var rtn = new Array(inputs.length);
@@ -138,12 +150,17 @@ function analyze() {
   // then do analyses.
   var inGraphs = null, exGraphs = exPaths.length === 0 ? [] : null;
   function next(i) {
-    if ( inGraphs && exGraphs ) doAnalyses(inGraphs, exGraphs);
+    if ( inGraphs && exGraphs ) {
+      doAnalyses(inGraphs, exGraphs);
+      e('#status-value').textContent = 'IDLE';
+    }
   }
 
   // Map data fetched from URLs to ObjectGraph instances.
   function getObjectGraphs(jsons) {
-    return jsons.map(function(data) { return ObjectGraph.fromJSON(data); });
+    return jsons.filter(function(json) { return json !== null; }).map(
+      function(data) { return ObjectGraph.fromJSON(data); }
+    );
   }
 
   // Map URL paths to inGraphs and exGraphs, then do analyses.
@@ -188,10 +205,12 @@ var l = window.location;
 stdlib.loadData('/list', { responseType: 'json' }).then(function(map) {
   includeExcludeOpts = getKeys(map, '');
   addOpts(e('#environments'));
+  loadFromHash();
+  analyze();
 });
 
 // Helper function for adding environments to include/exclude lists in DOM.
-function addinputTo(name, datalist) {
+function addInputTo(name, datalist) {
   var container = e('#' + name + '-inputs');
   var div = document.createElement('div');
   var input = document.createElement('input');
@@ -209,14 +228,19 @@ function addinputTo(name, datalist) {
       e('#' + name + '-add').focus();
     }
   });
+  input.addEventListener('input', function() { updateHash(); analyze(); });
+
   // Clicking remove button removes input element and focuses add button.
   rm.addEventListener('click', function() {
     container.removeChild(div);
     e('#' + name + '-add').focus();
+    analyze();
   });
 
   // After adding new input, focus it.
   Array.from(e('#' + name).querySelectorAll('input')).pop().focus();
+
+  return input;
 }
 
 function filter(evt) {
@@ -231,9 +255,54 @@ function filter(evt) {
   });
 }
 
+function inputListHash(el) {
+  return Array.from(el.querySelectorAll('input')).map(
+    function(el) { return encodeURIComponent(hashCode(el.value)); }
+  ).join(',');
+}
+
+function updateHash() {
+  window.location.hash = 'q=' + encodeURIComponent(e('#filter').value) + '&i=' +
+        inputListHash(e('#include')) + '&e=' + inputListHash(e('#exclude'));
+}
+
+function loadFromHash() {
+  var hash = window.location.hash;
+  if (!hash) return;
+
+  var values = {};
+  ['q', 'i', 'e'].forEach(function(name) {
+    values[name] =
+      decodeURIComponent(hash.match(new RegExp(name + '=([^&]*)'))[1]);
+  });
+  e('#filter').value = values.q;
+  [{key: 'i', name: 'include'}, {key: 'e', name: 'exclude'}].forEach(
+    function(o) {
+      var datalist = e('#environments');
+      var hashCodes = values[o.key].split(',');
+      hashCodes = hashCodes.map(function(str) { return parseInt(str); });
+      var names = hashCodes.map(function(hash) {
+        return includeExcludeOpts.filter(function(name) {
+          return hashCode(name) === hash;
+        })[0] || '';
+      });
+      var container = e('#' + o.name + '-inputs');
+      var inputs = Array.from(container.querySelectorAll('input'));
+      while (inputs.length > names.length) {
+        container.removeChild(inputs.pop().parentElement);
+      }
+      while (inputs.length < names.length) {
+        inputs.push(addInputTo(o.name, datalist));
+      }
+      for (var i = 0; i < inputs.length; i++) {
+        inputs[i].value = names[i];
+      }
+    }
+  );
+}
+
 e('#include-add').addEventListener(
-  'click', addinputTo.bind(this, 'include', e('#environments')));
+  'click', addInputTo.bind(this, 'include', e('#environments')));
 e('#exclude-add').addEventListener(
-  'click', addinputTo.bind(this, 'exclude', e('#environments')));
-e('#analyze').addEventListener('click', analyze);
-e('#filter').addEventListener('input', filter);
+  'click', addInputTo.bind(this, 'exclude', e('#environments')));
+e('#filter').addEventListener('input', function() { filter(); updateHash(); });

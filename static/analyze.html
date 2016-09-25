@@ -5,7 +5,6 @@
     <style>
     /* From https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/: */
     pre {
-
       /* These are technically the same, but use both */
       overflow-wrap: break-word;
       word-wrap: break-word;
@@ -34,7 +33,7 @@
       min-height: 5em;
       overflow: auto;
       border: 1px solid grey;
-      margin: 2px;
+      margin: 2px 24px;
     }
     /* Very simple alternating flex layout. ">" selectors are expensive, but
     ** this page is small enough for it to not matter. */
@@ -72,6 +71,10 @@
     div > div > div > div > div > div {
       flex-direction: column;
     }
+
+    #status {
+      padding: 20px;
+    }
     </style>
   </head>
   <body>
@@ -98,7 +101,9 @@
       </div>
     </span>
 
-    <span><button id="analyze">Analyze</button></span>
+    <div id="status">
+      <div><label for="status-value">Status</label> <span id="status-value">Idle</span></div>
+    </div>
 
     <span>Report</span>
 
