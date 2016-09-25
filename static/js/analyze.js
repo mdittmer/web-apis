@@ -284,7 +284,7 @@ function loadFromHash() {
   [{key: 'i', name: 'include'}, {key: 'e', name: 'exclude'}].forEach(
     function(o) {
       var datalist = e('#environments');
-      var hashCodes = values[o.key].split(',');
+      var hashCodes = values[o.key] ? values[o.key].split(',') : [];
       hashCodes = hashCodes.map(function(str) { return parseInt(str); });
       var names = hashCodes.map(function(hash) {
         return includeExcludeOpts.filter(function(name) {
