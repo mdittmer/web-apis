@@ -356,6 +356,23 @@
   },
   {
     "parses": [
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "isConst": true,
+              "name": "FONT_FEATURE_VALUES_RULE",
+              "type": {
+                "name": "unsigned short"
+              },
+              "value": "14"
+            }
+          ],
+          "name": "CSSRule",
+          "type_": "partialinterface"
+        }
+      ]
     ],
     "url": "http://www.w3.org/TR/css-fonts-3/"
   },
@@ -655,6 +672,193 @@
   },
   {
     "parses": [
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initUIEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "UIEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initMouseEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "MouseEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initWheelEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "WheelEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initKeyboardEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "KeyboardEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initKeyboardEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "CompositionEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "defaultValue": "0",
+              "name": "charCode",
+              "type": {
+                "name": "unsigned long"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "keyCode",
+              "type": {
+                "name": "unsigned long"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "which",
+              "type": {
+                "name": "unsigned long"
+              }
+            }
+          ],
+          "name": "KeyboardEventInit",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "inheritsFrom": "Event",
+          "members": [
+            {
+              "isConst": true,
+              "name": "MODIFICATION",
+              "type": {
+                "name": "unsigned short"
+              },
+              "value": "1"
+            },
+            {
+              "isConst": true,
+              "name": "ADDITION",
+              "type": {
+                "name": "unsigned short"
+              },
+              "value": "2"
+            },
+            {
+              "isConst": true,
+              "name": "REMOVAL",
+              "type": {
+                "name": "unsigned short"
+              },
+              "value": "3"
+            },
+            {
+              "isReadOnly": true,
+              "name": "relatedNode",
+              "type": {
+                "name": "Node",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "prevValue",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "newValue",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "attrName",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "attrChange",
+              "type": {
+                "name": "unsigned short"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "initMutationEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "MutationEvent",
+          "type_": "interface"
+        }
+      ]
     ],
     "url": "http://www.w3.org/TR/uievents/"
   },
@@ -1365,6 +1569,28 @@
   },
   {
     "parses": [
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "attrs": [
+                {
+                  "name": "CEReactions",
+                  "type_": "extendedattribute"
+                }
+              ],
+              "name": "as",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "HTMLLinkElement",
+          "type_": "partialinterface"
+        }
+      ]
     ],
     "url": "https://w3c.github.io/preload/"
   },
@@ -1375,6 +1601,97 @@
   },
   {
     "parses": [
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "args": [
+                {
+                  "name": "callback",
+                  "type": {
+                    "name": "IdleRequestCallback"
+                  }
+                },
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "name": "IdleRequestOptions"
+                  }
+                }
+              ],
+              "name": "requestIdleCallback",
+              "returnType": {
+                "name": "unsigned long"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "handle",
+                  "type": {
+                    "name": "unsigned long"
+                  }
+                }
+              ],
+              "name": "cancelIdleCallback",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "Window",
+          "type_": "partialinterface"
+        },
+        {
+          "members": [
+            {
+              "name": "timeout",
+              "type": {
+                "name": "unsigned long"
+              }
+            }
+          ],
+          "name": "IdleRequestOptions",
+          "type_": "dictionary"
+        },
+        {
+          "members": [
+            {
+              "name": "timeRemaining",
+              "returnType": {
+                "name": "DOMHighResTimeStamp"
+              }
+            },
+            {
+              "isReadOnly": true,
+              "name": "didTimeout",
+              "type": {
+                "name": "boolean"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "IdleDeadline",
+          "type_": "interface"
+        },
+        {
+          "args": [
+            {
+              "name": "deadline",
+              "type": {
+                "name": "IdleDeadline"
+              }
+            }
+          ],
+          "name": "IdleRequestCallback",
+          "returnType": {
+            "name": "void"
+          },
+          "type_": "callback"
+        }
+      ]
     ],
     "url": "https://w3c.github.io/requestidlecallback/"
   },
@@ -1699,6 +2016,15 @@
   },
   {
     "parses": [
+      [
+        {
+          "name": "GLint64",
+          "type": {
+            "name": "long long"
+          },
+          "type_": "typedef"
+        }
+      ]
     ],
     "url": "https://www.khronos.org/registry/webgl/specs/latest/2.0/"
   },
