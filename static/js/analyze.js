@@ -132,8 +132,6 @@ function optValueToURL(label) {
 
 // Gather configuration from DOM inputs, perform analyses, and output results.
 function analyze() {
-  e('#status-value').textContent = '... ANALYZING ...';
-
   // Map input option values to URLs.
   function inputPaths(inputs) {
     var rtn = new Array(inputs.length);
@@ -150,7 +148,8 @@ function analyze() {
   // then do analyses.
   var inGraphs = null, exGraphs = exPaths.length === 0 ? [] : null;
   function next(i) {
-    if ( inGraphs && exGraphs ) {
+    if ( inGraphs && exGraphs && inGraphs.length > 0 ) {
+      e('#status-value').textContent = '... ANALYZING ...';
       doAnalyses(inGraphs, exGraphs);
       e('#status-value').textContent = 'IDLE';
     }
@@ -205,7 +204,10 @@ var l = window.location;
 stdlib.loadData('/list', { responseType: 'json' }).then(function(map) {
   includeExcludeOpts = getKeys(map, '');
   addOpts(e('#environments'));
-  loadFromHash();
+  if (!loadFromHash()) {
+    setupDefaults();
+    updateHash();
+  }
   analyze();
 });
 
@@ -228,7 +230,10 @@ function addInputTo(name, datalist) {
       e('#' + name + '-add').focus();
     }
   });
-  input.addEventListener('input', function() { updateHash(); analyze(); });
+  input.addEventListener('input', function() {
+    updateHash();
+    analyze();
+  });
 
   // Clicking remove button removes input element and focuses add button.
   rm.addEventListener('click', function() {
@@ -268,7 +273,7 @@ function updateHash() {
 
 function loadFromHash() {
   var hash = window.location.hash;
-  if (!hash) return;
+  if (!hash) return false;
 
   var values = {};
   ['q', 'i', 'e'].forEach(function(name) {
@@ -299,6 +304,16 @@ function loadFromHash() {
       }
     }
   );
+
+  return true;
+}
+
+function setupDefaults() {
+  var datalist = e('#environments');
+  addInputTo('include', datalist).value = 'Firefox 50.0 OSX 10.12';
+  addInputTo('exclude', datalist).value =
+    'Chrome 53.0.2785.116 Linux x86.64';
+  e('#filter').value = 'prototype';
 }
 
 e('#include-add').addEventListener(
