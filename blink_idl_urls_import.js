@@ -19,41 +19,7 @@
 // NOTE: Only to be invoked from blink_idl_urls_import.sh.
 
 const env = require('process').env;
-const request = require('hyperquest');
-const wait = require('event-stream').wait;
 
-const urls = env.URLS.split('\n');
-console.log(urls);
-
-function loadURL(url) {
-  return new Promise((resolve, reject) =>
-      request({uri: url}).pipe(wait((err, data) =>
-      err ? reject(err) : resolve(data))));
-}
-
-function tag(name, opt_close) {
-  return '<' + (opt_close ? '/' : '') + name + '[^>]*>';
-  // return '<' (opt_close ? '/' : '') + name + '[^>]*>';
-}
-function opt(str) {
-  return '(' + str + ')?';
-}
-
-function extractIDL(html) {
-  // TODO: This RegExp does not appear to be working.
-  let re = new RegExp(
-        tag('pre') +
-        opt(tag('code')) +
-        '([^<]*)' +
-        opt(tag('code', true)) +
-        tag('pre', true),
-      'g');
-  let res = [];
-  let next = null;
-  while (next = re.exec(html)) res.push(next[2]);
-  return res;
-}
-
-urls.map(loadURL).map(promise =>
-    promise.then(extractIDL)).map(promise =>
-    promise.then(idl => console.log(idl)));
+require('./idl_urls_import.js').importHTTP(
+  env.URLS.split('\n'), env.WEB_APIS_DIR + '/data/idl/blink/linked/all.json'
+);

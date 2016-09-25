@@ -20,4 +20,4 @@ export NODE_PATH
 export WEB_APIS_DIR
 export BLINK_SRC_DIR
 export IDL_FILES
-node $WEB_APIS_DIR/blink_idl_import.js
+node ${WEB_APIS_DIR}/blink_idl_import.js

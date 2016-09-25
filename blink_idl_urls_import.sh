@@ -13,7 +13,7 @@ if [[ ! -d ${BLINK_SRC_DIR} ]]; then
 fi
 
 pushd ${BLINK_SRC_DIR}
-IDL_FILES=$(git ls-files '*.idl' | grep -v bindings/ | grep -v testing/ | head -n 30)
+IDL_FILES=$(git ls-files '*.idl' | grep -v bindings/ | grep -v testing/)
 popd
 
 IDL_FILES_ARR=(${(s/
@@ -29,6 +29,8 @@ for IDL_FILE in ${IDL_FILES_ARR[@]}; do
 done
 
 URLS=$(cat $(cat ${MASTER_FILE}) | sort | uniq)
+
+export WEB_APIS_DIR
 export URLS
 
-node blink_idl_urls_import.js
+node --max_old_space_size=16384 ${WEB_APIS_DIR}/blink_idl_urls_import.js

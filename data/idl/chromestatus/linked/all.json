@@ -1,0 +1,5279 @@
+[
+  {
+    "parses": [
+    ],
+    "url": "http://asmjs.org/spec/latest/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/2006/webapi/FileAPI/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/2006/webapi/clipops/clipops.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/2009/dap/file-system/file-dir-sys.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/2009/dap/vibration/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/2011/webrtc/editor/archives/20140619/getusermedia.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/2011/webrtc/editor/getusermedia.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/2011/webrtc/editor/webrtc.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-align/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-animations-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-animations/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-cascade/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-conditional/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-device-adapt/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-exclusions/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-flexbox/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-font-loading-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-fonts/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-gcpm/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-images-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-multicol/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-position/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-scoping/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-transforms-2/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css3-images/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css3-regions/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css3-sizing/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css3-transforms/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/cssom-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/cssom-view"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/cssom-view/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/cssom/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/fxtf/compositing-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/fxtf/compositing/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/fxtf/css-masking-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/fxtf/filters/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/fxtf/geometry/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/fxtf/motion-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/fxtf/web-animations/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/geo/api/spec-source-orientation.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/houdini/css-async-style/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/houdini/css-scroll/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/html5/websockets/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/html5/webvtt/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/webfonts/WOFF2/spec/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dom.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://heycam.github.io/webidl"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://heycam.github.io/webidl/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://http2.github.io/http2-spec"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://httpwg.org/http-extensions/client-hints.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://igrigorik.github.io/http-client-hints/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://lists.w3.org/Archives/Public/www-style/2012Jun/0347.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://mkruisselbrink.github.io/navigator-connect/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://rawgit.com/w3c/touch-events/master/touchevents.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://slightlyoff.github.io/ServiceWorker/spec/service_worker/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://tabatkins.github.io/specs/css-font-display/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://tabatkins.github.io/specs/respimg/Overview.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://tc39.github.io/ecma262/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://tc39.github.io/ecmascript_simd/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://tc39.github.io/proposal-object-values-entries/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://tools.ietf.org/html/draft-grange-vp9-bitstream"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://tools.ietf.org/html/rfc5246"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://tools.ietf.org/html/rfc5861"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://tools.ietf.org/html/rfc6797"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/ambient-light/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/deviceorientation/spec-source-orientation.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/editing/input-events.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/frame-timing/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/media-source/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/mediacapture-depth/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/mediacapture-fromelement/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/mediacapture-image/index.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/mediacapture-main/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/mediacapture-main/getusermedia.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/mediacapture-output"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/netinfo/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/page-visibility/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "attrs": [
+            {
+              "identifiers": [
+                "Window",
+                "Worker"
+              ],
+              "name": "Exposed",
+              "type_": "extendedattribute"
+            }
+          ],
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "name",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "entryType",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "startTime",
+              "type": {
+                "name": "DOMHighResTimeStamp"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "duration",
+              "type": {
+                "name": "DOMHighResTimeStamp"
+              },
+              "type_": "attribute"
+            },
+            {
+              "mapPattern": [
+                "attribute"
+              ],
+              "type_": "serializer"
+            }
+          ],
+          "name": "PerformanceEntry",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "name": "name",
+              "type": {
+                "name": "DOMString"
+              }
+            },
+            {
+              "name": "entryType",
+              "type": {
+                "name": "DOMString"
+              }
+            },
+            {
+              "name": "initiatorType",
+              "type": {
+                "name": "DOMString"
+              }
+            }
+          ],
+          "name": "PerformanceEntryFilterOptions",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "args": [
+                {
+                  "name": "filter",
+                  "optional": true,
+                  "type": {
+                    "name": "PerformanceEntryFilterOptions"
+                  }
+                }
+              ],
+              "name": "getEntries",
+              "returnType": {
+                "name": "PerformanceEntryList"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "type",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                }
+              ],
+              "name": "getEntriesByType",
+              "returnType": {
+                "name": "PerformanceEntryList"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "name",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                },
+                {
+                  "name": "type",
+                  "optional": true,
+                  "type": {
+                    "name": "DOMString"
+                  }
+                }
+              ],
+              "name": "getEntriesByName",
+              "returnType": {
+                "name": "PerformanceEntryList"
+              }
+            }
+          ],
+          "name": "Performance",
+          "type_": "partialinterface"
+        },
+        {
+          "name": "PerformanceEntryList",
+          "type": {
+            "name": "sequence",
+            "params": [
+              {
+                "name": "PerformanceEntry"
+              }
+            ]
+          },
+          "type_": "typedef"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "isRequired": true,
+              "name": "entryTypes",
+              "type": {
+                "name": "sequence",
+                "params": [
+                  {
+                    "name": "DOMString"
+                  }
+                ]
+              }
+            }
+          ],
+          "name": "PerformanceObserverInit",
+          "type_": "dictionary"
+        },
+        {
+          "attrs": [
+            {
+              "identifiers": [
+                "Window",
+                "Worker"
+              ],
+              "name": "Exposed",
+              "type_": "extendedattribute"
+            }
+          ],
+          "members": [
+            {
+              "args": [
+                {
+                  "name": "filter",
+                  "optional": true,
+                  "type": {
+                    "name": "PerformanceEntryFilterOptions"
+                  }
+                }
+              ],
+              "name": "getEntries",
+              "returnType": {
+                "name": "PerformanceEntryList"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "type",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                }
+              ],
+              "name": "getEntriesByType",
+              "returnType": {
+                "name": "PerformanceEntryList"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "name",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                },
+                {
+                  "name": "type",
+                  "optional": true,
+                  "type": {
+                    "name": "DOMString"
+                  }
+                }
+              ],
+              "name": "getEntriesByName",
+              "returnType": {
+                "name": "PerformanceEntryList"
+              }
+            }
+          ],
+          "name": "PerformanceObserverEntryList",
+          "type_": "interface"
+        },
+        {
+          "args": [
+            {
+              "name": "entries",
+              "type": {
+                "name": "PerformanceObserverEntryList"
+              }
+            },
+            {
+              "name": "observer",
+              "type": {
+                "name": "PerformanceObserver"
+              }
+            }
+          ],
+          "name": "PerformanceObserverCallback",
+          "returnType": {
+            "name": "void"
+          },
+          "type_": "callback"
+        },
+        {
+          "attrs": [
+            {
+              "args": [
+                {
+                  "name": "callback",
+                  "type": {
+                    "name": "PerformanceObserverCallback"
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            },
+            {
+              "identifiers": [
+                "Window",
+                "Worker"
+              ],
+              "name": "Exposed",
+              "type_": "extendedattribute"
+            }
+          ],
+          "members": [
+            {
+              "args": [
+                {
+                  "name": "options",
+                  "type": {
+                    "name": "PerformanceObserverInit"
+                  }
+                }
+              ],
+              "name": "observe",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "name": "disconnect",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "PerformanceObserver",
+          "type_": "interface"
+        }
+      ]
+    ],
+    "url": "http://w3c.github.io/performance-timeline/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "attrs": [
+                {
+                  "name": "SameObject",
+                  "type_": "extendedattribute"
+                }
+              ],
+              "isReadOnly": true,
+              "name": "presentation",
+              "type": {
+                "name": "Presentation",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "Navigator",
+          "type_": "partialinterface"
+        },
+        {
+          "members": [
+          ],
+          "name": "Presentation",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "defaultRequest",
+              "type": {
+                "name": "PresentationRequest",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "Presentation",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "attrs": [
+                {
+                  "name": "SameObject",
+                  "type_": "extendedattribute"
+                }
+              ],
+              "isReadOnly": true,
+              "name": "receiver",
+              "type": {
+                "name": "PresentationReceiver",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "Presentation",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "attrs": [
+            {
+              "args": [
+                {
+                  "name": "url",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            },
+            {
+              "args": [
+                {
+                  "name": "urls",
+                  "type": {
+                    "name": "sequence",
+                    "params": [
+                      {
+                        "name": "DOMString"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            }
+          ],
+          "inheritsFrom": "EventTarget",
+          "members": [
+            {
+              "name": "start",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "PresentationConnection"
+                  }
+                ]
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "presentationId",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                }
+              ],
+              "name": "reconnect",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "PresentationConnection"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "getAvailability",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "PresentationAvailability"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "onconnectionavailable",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "PresentationRequest",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "inheritsFrom": "EventTarget",
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "value",
+              "type": {
+                "name": "boolean"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onchange",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "PresentationAvailability",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "attrs": [
+            {
+              "args": [
+                {
+                  "name": "type",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                },
+                {
+                  "name": "eventInitDict",
+                  "type": {
+                    "name": "PresentationConnectionAvailableEventInit"
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            }
+          ],
+          "inheritsFrom": "Event",
+          "members": [
+            {
+              "attrs": [
+                {
+                  "name": "SameObject",
+                  "type_": "extendedattribute"
+                }
+              ],
+              "isReadOnly": true,
+              "name": "connection",
+              "type": {
+                "name": "PresentationConnection"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "PresentationConnectionAvailableEvent",
+          "type_": "interface"
+        },
+        {
+          "inheritsFrom": "EventInit",
+          "members": [
+            {
+              "isRequired": true,
+              "name": "connection",
+              "type": {
+                "name": "PresentationConnection"
+              }
+            }
+          ],
+          "name": "PresentationConnectionAvailableEventInit",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "name": "PresentationConnectionState",
+          "type_": "enum",
+          "value": [
+            "connecting",
+            "connected",
+            "closed",
+            "terminated"
+          ]
+        },
+        {
+          "name": "BinaryType",
+          "type_": "enum",
+          "value": [
+            "blob",
+            "arraybuffer"
+          ]
+        },
+        {
+          "inheritsFrom": "EventTarget",
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "id",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "url",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "state",
+              "type": {
+                "name": "PresentationConnectionState"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "close",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "name": "terminate",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "name": "onconnect",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onclose",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onterminate",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "binaryType",
+              "type": {
+                "name": "BinaryType"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onmessage",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "args": [
+                {
+                  "name": "message",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                }
+              ],
+              "name": "send",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "data",
+                  "type": {
+                    "name": "Blob"
+                  }
+                }
+              ],
+              "name": "send",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "data",
+                  "type": {
+                    "name": "ArrayBuffer"
+                  }
+                }
+              ],
+              "name": "send",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "data",
+                  "type": {
+                    "name": "ArrayBufferView"
+                  }
+                }
+              ],
+              "name": "send",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "PresentationConnection",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "name": "PresentationConnectionClosedReason",
+          "type_": "enum",
+          "value": [
+            "error",
+            "closed",
+            "wentaway"
+          ]
+        },
+        {
+          "attrs": [
+            {
+              "args": [
+                {
+                  "name": "type",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                },
+                {
+                  "name": "eventInitDict",
+                  "type": {
+                    "name": "PresentationConnectionCloseEventInit"
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            }
+          ],
+          "inheritsFrom": "Event",
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "reason",
+              "type": {
+                "name": "PresentationConnectionClosedReason"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "message",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "PresentationConnectionCloseEvent",
+          "type_": "interface"
+        },
+        {
+          "inheritsFrom": "EventInit",
+          "members": [
+            {
+              "isRequired": true,
+              "name": "reason",
+              "type": {
+                "name": "PresentationConnectionClosedReason"
+              }
+            },
+            {
+              "defaultValue": "",
+              "name": "message",
+              "type": {
+                "name": "DOMString"
+              }
+            }
+          ],
+          "name": "PresentationConnectionCloseEventInit",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "attrs": [
+                {
+                  "name": "SameObject",
+                  "type_": "extendedattribute"
+                }
+              ],
+              "isReadOnly": true,
+              "name": "connectionList",
+              "type": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "PresentationConnectionList"
+                  }
+                ]
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "PresentationReceiver",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "inheritsFrom": "EventTarget",
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "connections",
+              "type": {
+                "name": "FrozenArray",
+                "params": [
+                  {
+                    "name": "PresentationConnection"
+                  }
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onconnectionavailable",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "PresentationConnectionList",
+          "type_": "interface"
+        }
+      ]
+    ],
+    "url": "http://w3c.github.io/presentation-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/remote-playback/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/resource-hints/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/touch-events/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/webappsec-clear-site-data/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/webappsec-csp/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "getSelection",
+              "returnType": {
+                "name": "Selection",
+                "params": [
+                  "nullable"
+                ]
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "x",
+                  "type": {
+                    "name": "double"
+                  }
+                },
+                {
+                  "name": "y",
+                  "type": {
+                    "name": "double"
+                  }
+                }
+              ],
+              "name": "elementFromPoint",
+              "returnType": {
+                "name": "Element",
+                "params": [
+                  "nullable"
+                ]
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "x",
+                  "type": {
+                    "name": "double"
+                  }
+                },
+                {
+                  "name": "y",
+                  "type": {
+                    "name": "double"
+                  }
+                }
+              ],
+              "name": "elementsFromPoint",
+              "returnType": {
+                "name": "sequence",
+                "params": [
+                  {
+                    "name": "Element"
+                  }
+                ]
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "x",
+                  "type": {
+                    "name": "double"
+                  }
+                },
+                {
+                  "name": "y",
+                  "type": {
+                    "name": "double"
+                  }
+                }
+              ],
+              "name": "caretPositionFromPoint",
+              "returnType": {
+                "name": "CaretPosition",
+                "params": [
+                  "nullable"
+                ]
+              }
+            },
+            {
+              "isReadOnly": true,
+              "name": "activeElement",
+              "type": {
+                "name": "Element",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "styleSheets",
+              "type": {
+                "name": "StyleSheetList"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "DocumentOrShadowRoot",
+          "type_": "partialinterface"
+        }
+      ]
+    ],
+    "url": "http://w3c.github.io/webcomponents/spec/shadow/"
+  },
+  {
+    "parses": [
+      [
+      ]
+    ],
+    "url": "http://w3c.github.io/webrtc-pc/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://webaudio.github.com/web-midi-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://webaudio.github.io/web-audio-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://webaudio.github.io/web-midi-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://whatwg.org/html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://whatwg.org/html/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://wicg.github.io/InputDeviceCapabilities/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://wicg.github.io/netinfo/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://wiki.ecmascript.org/doku.php"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://wiki.whatwg.org/wiki/CanvasOpaque"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://wiki.whatwg.org/wiki/DragAndDropEntries"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://wiki.whatwg.org/wiki/Meta_referrer"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://wiki.whatwg.org/wiki/NavigatorCores"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://wiki.xiph.org/MatroskaOpus"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.ecma-international.org/ecma-262/6.0/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.ecma-international.org/ecma-402/3.0/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.ecma-international.org/publications/standards/Ecma-408.htm"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.khronos.org/registry/typedarray/specs/latest/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.khronos.org/registry/webgl/extensions/WEBGL_shared_resources/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.khronos.org/registry/webgl/specs/latest/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/2001/WD-css3-box-20010726/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/2005/WD-css3-background-20050216/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/2014/CR-battery-status-20141209/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/2014/CR-css-shapes-1-20140320/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/2014/WD-mediaqueries-4-20140605/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/CSP1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/CSP2/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/DOM-Level-2-Style/css.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/DOM-Level-3-Events-key/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/DOM-Level-3-Events/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/MathML3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/SRI/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/SVG/fonts.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/SVG/implnote.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/SVG11/single-page.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/SVG11/struct.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/SVG11/types.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/compositing-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css-fonts-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css-snappoints-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css-text-decor-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css-will-change-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-mediaqueries/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-text/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-values"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/cssom-view/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/custom-elements/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/filter-effects/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/geolocation-API/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/mediastream-recording/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/network-error-logging/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/pointerevents/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/quota-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/service-workers/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/touch-events/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/uievents/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/web-animations/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/webdatabase/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/xslt"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/html/wg/drafts/html/master/forms.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3c-test.org/webperf/specs/ResourceTiming/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.whatwg.org/specs/web-apps/current-work/multipage/association-of-controls-and-forms.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.whatwg.org/specs/web-apps/current-work/multipage/edits.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.whatwg.org/specs/web-apps/current-work/multipage/scripting-1.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.whatwg.org/specs/web-apps/current-work/multipage/timers.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.whatwg.org/specs/web-apps/current-work/multipage/web-messaging.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.whatwg.org/specs/web-apps/current-work/multipage/webappapis.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://beverloo.github.io/budget-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://cdn.rawgit.com/WICG/interventions/master/scroll-anchoring/spec.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://developers.google.com/speed/webp/docs/riff_container"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://docs.google.com/a/chromium.org/document/d/17jg1RRL3RI969cLwbKBIcoGDsPwqaEdBxafGNYGwiY4/edit"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://docs.google.com/a/chromium.org/document/d/1RNHkx_VvKWyWg6Lr8SZ-saqsQx7rFV-ev2jRFUoVD34/edit"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://docs.google.com/document/d/1oF1T3O7_E4t1PYHV6gyCwHxOi3ystm0eSL5xZu7nvOg/edit"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dom.spec.whatwg.org"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dom.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.css-houdini.org/css-paint-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.css-houdini.org/css-properties-values-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.css-houdini.org/css-typed-om/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.css-houdini.org/worklets/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-break-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-color/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-containment/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-flexbox/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-font-loading/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-fonts/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-grid/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-multicol-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-size-adjust"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-step-sizing/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-text-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-text-decor-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-text/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-transforms/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-ui-4/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-writing-modes-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/cssom/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/mediaqueries-4/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/selectors-4/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.fxtf.org/css-masking-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.fxtf.org/filters-2/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.fxtf.org/motion-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/IndexedDB/raw-file/tip/Overview.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/dom3events/raw-file/tip/html/DOM3-Events.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/dom3events/raw-file/tip/html/DOM3Events-code.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/fullscreen/raw-file/tip/Overview.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/gamepad/raw-file/default/gamepad.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/html-media/raw-file/tip/media-source/media-source.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/ime-api/raw-file/default/Overview.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/pointerevents/raw-file/tip/pointerEvents.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/pointerlock/raw-file/default/index.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/imports/index.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/webcrypto-api/raw-file/tip/spec/Overview.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/webevents/raw-file/v1-errata/touchevents.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/webperf/raw-file/default/specs/RequestAnimationFrame/Overview.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/Beacon/Overview.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HighResolutionTime/Overview.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/NavigationTiming/Overview.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/PageVisibility/Overview.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/UserTiming/Overview.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://encoding.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://fetch.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://fullscreen.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/WebAssembly/spec"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/mounirlamouri/html-autocapitalize/blob/master/proposal.md"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/tc39/ecmascript_sharedmem"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/w3c/browser-payment-api/issues/244"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/w3c/manifest/issues/450"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/w3c/pointerevents/pull/99"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/w3c/push-api/pull/182/files"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/whatwg/dom/issues/23"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/whatwg/fetch/issues/106"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/whatwg/html/commit/98183f98c609d61e508bbec46b7ab86d37b99b47"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/whatwg/meta-theme-color"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://heycam.github.io/webidl/"
+  },
+  {
+    "parses": [
+      [
+      ]
+    ],
+    "url": "https://html.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/browsers.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/embedded-content.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/forms.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/interaction.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/obsolete.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/scripting.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/webappapis.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://igrigorik.github.io/feature-policy/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://lists.w3.org/Archives/Public/www-svg/2015Aug/att-0009/SVGWG-F2F-minutes-20150824.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://mediasession.spec.whatwg.org"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://metromoxie.github.io/webappsec/specs/suborigins/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://mikewest.github.io/cors-rfc1918/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://mozvr.github.io/webvr-spec/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://navidz.github.io/auxclick/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://notifications.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://people.mozilla.org/~jorendorff/es6-draft.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://slightlyoff.github.io/ServiceWorker/spec/service_worker/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://storage.spec.whatwg.org"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://storage.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://streams.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://svgwg.org/svg2-draft/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://svgwg.org/svg2-draft/single-page.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://svgwg.org/svg2-draft/types.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tabatkins.github.io/specs/css-apply-rule/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tabatkins.github.io/specs/css-font-display/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tc39.github.io/Array.prototype.includes/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tc39.github.io/ecma262/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tc39.github.io/ecmascript-asyncawait/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/draft-agl-tls-nextprotoneg-04"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/draft-alakuijala-brotli"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/draft-ietf-rtcweb-video-06"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/draft-ietf-tls-chacha20-poly1305-04"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/draft-ietf-tls-curve25519-01"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/draft-ietf-tls-tls13-15"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/draft-ietf-tokbind-protocol-04"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/draft-west-cookie-prefixes"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/draft-west-first-party-cookies"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/draft-west-leave-secure-cookies-alone-01"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc1945"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc5246"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc6454"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc7034"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc7465"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc7469"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc7838"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://url.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/DOM-Level-3-Events-key/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/FileAPI/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/IndexedDB/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/ServiceWorker/spec/service_worker/index.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/browser-payment-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/encrypted-media/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/gamepad/extensions.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/geofencing-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/manifest/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/mediacapture-main/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "attrs": [
+            {
+              "identifiers": [
+                "Window",
+                "Worker"
+              ],
+              "name": "Exposed",
+              "type_": "extendedattribute"
+            }
+          ],
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "name",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "entryType",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "startTime",
+              "type": {
+                "name": "DOMHighResTimeStamp"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "duration",
+              "type": {
+                "name": "DOMHighResTimeStamp"
+              },
+              "type_": "attribute"
+            },
+            {
+              "mapPattern": [
+                "attribute"
+              ],
+              "type_": "serializer"
+            }
+          ],
+          "name": "PerformanceEntry",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "name": "name",
+              "type": {
+                "name": "DOMString"
+              }
+            },
+            {
+              "name": "entryType",
+              "type": {
+                "name": "DOMString"
+              }
+            },
+            {
+              "name": "initiatorType",
+              "type": {
+                "name": "DOMString"
+              }
+            }
+          ],
+          "name": "PerformanceEntryFilterOptions",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "args": [
+                {
+                  "name": "filter",
+                  "optional": true,
+                  "type": {
+                    "name": "PerformanceEntryFilterOptions"
+                  }
+                }
+              ],
+              "name": "getEntries",
+              "returnType": {
+                "name": "PerformanceEntryList"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "type",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                }
+              ],
+              "name": "getEntriesByType",
+              "returnType": {
+                "name": "PerformanceEntryList"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "name",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                },
+                {
+                  "name": "type",
+                  "optional": true,
+                  "type": {
+                    "name": "DOMString"
+                  }
+                }
+              ],
+              "name": "getEntriesByName",
+              "returnType": {
+                "name": "PerformanceEntryList"
+              }
+            }
+          ],
+          "name": "Performance",
+          "type_": "partialinterface"
+        },
+        {
+          "name": "PerformanceEntryList",
+          "type": {
+            "name": "sequence",
+            "params": [
+              {
+                "name": "PerformanceEntry"
+              }
+            ]
+          },
+          "type_": "typedef"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "isRequired": true,
+              "name": "entryTypes",
+              "type": {
+                "name": "sequence",
+                "params": [
+                  {
+                    "name": "DOMString"
+                  }
+                ]
+              }
+            }
+          ],
+          "name": "PerformanceObserverInit",
+          "type_": "dictionary"
+        },
+        {
+          "attrs": [
+            {
+              "identifiers": [
+                "Window",
+                "Worker"
+              ],
+              "name": "Exposed",
+              "type_": "extendedattribute"
+            }
+          ],
+          "members": [
+            {
+              "args": [
+                {
+                  "name": "filter",
+                  "optional": true,
+                  "type": {
+                    "name": "PerformanceEntryFilterOptions"
+                  }
+                }
+              ],
+              "name": "getEntries",
+              "returnType": {
+                "name": "PerformanceEntryList"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "type",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                }
+              ],
+              "name": "getEntriesByType",
+              "returnType": {
+                "name": "PerformanceEntryList"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "name",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                },
+                {
+                  "name": "type",
+                  "optional": true,
+                  "type": {
+                    "name": "DOMString"
+                  }
+                }
+              ],
+              "name": "getEntriesByName",
+              "returnType": {
+                "name": "PerformanceEntryList"
+              }
+            }
+          ],
+          "name": "PerformanceObserverEntryList",
+          "type_": "interface"
+        },
+        {
+          "args": [
+            {
+              "name": "entries",
+              "type": {
+                "name": "PerformanceObserverEntryList"
+              }
+            },
+            {
+              "name": "observer",
+              "type": {
+                "name": "PerformanceObserver"
+              }
+            }
+          ],
+          "name": "PerformanceObserverCallback",
+          "returnType": {
+            "name": "void"
+          },
+          "type_": "callback"
+        },
+        {
+          "attrs": [
+            {
+              "args": [
+                {
+                  "name": "callback",
+                  "type": {
+                    "name": "PerformanceObserverCallback"
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            },
+            {
+              "identifiers": [
+                "Window",
+                "Worker"
+              ],
+              "name": "Exposed",
+              "type_": "extendedattribute"
+            }
+          ],
+          "members": [
+            {
+              "args": [
+                {
+                  "name": "options",
+                  "type": {
+                    "name": "PerformanceObserverInit"
+                  }
+                }
+              ],
+              "name": "observe",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "name": "disconnect",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "PerformanceObserver",
+          "type_": "interface"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/performance-timeline/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "inheritsFrom": "PermissionDescriptor",
+          "members": [
+            {
+              "defaultValue": "false",
+              "name": "sysex",
+              "type": {
+                "name": "boolean"
+              }
+            }
+          ],
+          "name": "MidiPermissionDescriptor",
+          "type_": "dictionary"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/permissions/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "inheritsFrom": "MouseEventInit",
+          "members": [
+            {
+              "defaultValue": "0",
+              "name": "pointerId",
+              "type": {
+                "name": "long"
+              }
+            },
+            {
+              "defaultValue": "1",
+              "name": "width",
+              "type": {
+                "name": "double"
+              }
+            },
+            {
+              "defaultValue": "1",
+              "name": "height",
+              "type": {
+                "name": "double"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "pressure",
+              "type": {
+                "name": "float"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "tangentialPressure",
+              "type": {
+                "name": "float"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "tiltX",
+              "type": {
+                "name": "long"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "tiltY",
+              "type": {
+                "name": "long"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "twist",
+              "type": {
+                "name": "long"
+              }
+            },
+            {
+              "defaultValue": "",
+              "name": "pointerType",
+              "type": {
+                "name": "DOMString"
+              }
+            },
+            {
+              "defaultValue": "false",
+              "name": "isPrimary",
+              "type": {
+                "name": "boolean"
+              }
+            }
+          ],
+          "name": "PointerEventInit",
+          "type_": "dictionary"
+        },
+        {
+          "attrs": [
+            {
+              "args": [
+                {
+                  "name": "type",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                },
+                {
+                  "name": "eventInitDict",
+                  "optional": true,
+                  "type": {
+                    "name": "PointerEventInit"
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            }
+          ],
+          "inheritsFrom": "MouseEvent",
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "pointerId",
+              "type": {
+                "name": "long"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "width",
+              "type": {
+                "name": "double"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "height",
+              "type": {
+                "name": "double"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "pressure",
+              "type": {
+                "name": "float"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "tangentialPressure",
+              "type": {
+                "name": "float"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "tiltX",
+              "type": {
+                "name": "long"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "tiltY",
+              "type": {
+                "name": "long"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "twist",
+              "type": {
+                "name": "long"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "pointerType",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "isPrimary",
+              "type": {
+                "name": "boolean"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "PointerEvent",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "ongotpointercapture",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onlostpointercapture",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "args": [
+                {
+                  "name": "pointerId",
+                  "type": {
+                    "name": "long"
+                  }
+                }
+              ],
+              "name": "setPointerCapture",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "pointerId",
+                  "type": {
+                    "name": "long"
+                  }
+                }
+              ],
+              "name": "releasePointerCapture",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "pointerId",
+                  "type": {
+                    "name": "long"
+                  }
+                }
+              ],
+              "name": "hasPointerCapture",
+              "returnType": {
+                "name": "boolean"
+              }
+            }
+          ],
+          "name": "Element",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "onpointerdown",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onpointermove",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onpointerup",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onpointercancel",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onpointerover",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onpointerout",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onpointerenter",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onpointerleave",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "GlobalEventHandlers",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "maxTouchPoints",
+              "type": {
+                "name": "long"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "Navigator",
+          "type_": "partialinterface"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/pointerevents/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/pointerlock/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/preload/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "attrs": [
+                {
+                  "name": "SameObject",
+                  "type_": "extendedattribute"
+                }
+              ],
+              "isReadOnly": true,
+              "name": "presentation",
+              "type": {
+                "name": "Presentation",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "Navigator",
+          "type_": "partialinterface"
+        },
+        {
+          "members": [
+          ],
+          "name": "Presentation",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "defaultRequest",
+              "type": {
+                "name": "PresentationRequest",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "Presentation",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "attrs": [
+                {
+                  "name": "SameObject",
+                  "type_": "extendedattribute"
+                }
+              ],
+              "isReadOnly": true,
+              "name": "receiver",
+              "type": {
+                "name": "PresentationReceiver",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "Presentation",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "attrs": [
+            {
+              "args": [
+                {
+                  "name": "url",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            },
+            {
+              "args": [
+                {
+                  "name": "urls",
+                  "type": {
+                    "name": "sequence",
+                    "params": [
+                      {
+                        "name": "DOMString"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            }
+          ],
+          "inheritsFrom": "EventTarget",
+          "members": [
+            {
+              "name": "start",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "PresentationConnection"
+                  }
+                ]
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "presentationId",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                }
+              ],
+              "name": "reconnect",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "PresentationConnection"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "getAvailability",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "PresentationAvailability"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "onconnectionavailable",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "PresentationRequest",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "inheritsFrom": "EventTarget",
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "value",
+              "type": {
+                "name": "boolean"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onchange",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "PresentationAvailability",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "attrs": [
+            {
+              "args": [
+                {
+                  "name": "type",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                },
+                {
+                  "name": "eventInitDict",
+                  "type": {
+                    "name": "PresentationConnectionAvailableEventInit"
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            }
+          ],
+          "inheritsFrom": "Event",
+          "members": [
+            {
+              "attrs": [
+                {
+                  "name": "SameObject",
+                  "type_": "extendedattribute"
+                }
+              ],
+              "isReadOnly": true,
+              "name": "connection",
+              "type": {
+                "name": "PresentationConnection"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "PresentationConnectionAvailableEvent",
+          "type_": "interface"
+        },
+        {
+          "inheritsFrom": "EventInit",
+          "members": [
+            {
+              "isRequired": true,
+              "name": "connection",
+              "type": {
+                "name": "PresentationConnection"
+              }
+            }
+          ],
+          "name": "PresentationConnectionAvailableEventInit",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "name": "PresentationConnectionState",
+          "type_": "enum",
+          "value": [
+            "connecting",
+            "connected",
+            "closed",
+            "terminated"
+          ]
+        },
+        {
+          "name": "BinaryType",
+          "type_": "enum",
+          "value": [
+            "blob",
+            "arraybuffer"
+          ]
+        },
+        {
+          "inheritsFrom": "EventTarget",
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "id",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "url",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "state",
+              "type": {
+                "name": "PresentationConnectionState"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "close",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "name": "terminate",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "name": "onconnect",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onclose",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onterminate",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "binaryType",
+              "type": {
+                "name": "BinaryType"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onmessage",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "args": [
+                {
+                  "name": "message",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                }
+              ],
+              "name": "send",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "data",
+                  "type": {
+                    "name": "Blob"
+                  }
+                }
+              ],
+              "name": "send",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "data",
+                  "type": {
+                    "name": "ArrayBuffer"
+                  }
+                }
+              ],
+              "name": "send",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "data",
+                  "type": {
+                    "name": "ArrayBufferView"
+                  }
+                }
+              ],
+              "name": "send",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "PresentationConnection",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "name": "PresentationConnectionClosedReason",
+          "type_": "enum",
+          "value": [
+            "error",
+            "closed",
+            "wentaway"
+          ]
+        },
+        {
+          "attrs": [
+            {
+              "args": [
+                {
+                  "name": "type",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                },
+                {
+                  "name": "eventInitDict",
+                  "type": {
+                    "name": "PresentationConnectionCloseEventInit"
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            }
+          ],
+          "inheritsFrom": "Event",
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "reason",
+              "type": {
+                "name": "PresentationConnectionClosedReason"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "message",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "PresentationConnectionCloseEvent",
+          "type_": "interface"
+        },
+        {
+          "inheritsFrom": "EventInit",
+          "members": [
+            {
+              "isRequired": true,
+              "name": "reason",
+              "type": {
+                "name": "PresentationConnectionClosedReason"
+              }
+            },
+            {
+              "defaultValue": "",
+              "name": "message",
+              "type": {
+                "name": "DOMString"
+              }
+            }
+          ],
+          "name": "PresentationConnectionCloseEventInit",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "attrs": [
+                {
+                  "name": "SameObject",
+                  "type_": "extendedattribute"
+                }
+              ],
+              "isReadOnly": true,
+              "name": "connectionList",
+              "type": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "PresentationConnectionList"
+                  }
+                ]
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "PresentationReceiver",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "inheritsFrom": "EventTarget",
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "connections",
+              "type": {
+                "name": "FrozenArray",
+                "params": [
+                  {
+                    "name": "PresentationConnection"
+                  }
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onconnectionavailable",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "PresentationConnectionList",
+          "type_": "interface"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/presentation-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/push-api/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "inheritsFrom": "EventTarget",
+          "members": [
+            {
+              "args": [
+                {
+                  "name": "callback",
+                  "type": {
+                    "name": "RemotePlaybackAvailabilityCallback"
+                  }
+                }
+              ],
+              "name": "watchAvailability",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "long"
+                  }
+                ]
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "id",
+                  "optional": true,
+                  "type": {
+                    "name": "long"
+                  }
+                }
+              ],
+              "name": "cancelWatchAvailability",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "void"
+                  }
+                ]
+              }
+            },
+            {
+              "isReadOnly": true,
+              "name": "state",
+              "type": {
+                "name": "RemotePlaybackState"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onconnecting",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onconnect",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "ondisconnect",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "prompt",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "void"
+                  }
+                ]
+              }
+            }
+          ],
+          "name": "RemotePlayback",
+          "type_": "interface"
+        },
+        {
+          "name": "RemotePlaybackState",
+          "type_": "enum",
+          "value": [
+            "connecting",
+            "connected",
+            "disconnected"
+          ]
+        },
+        {
+          "args": [
+            {
+              "name": "available",
+              "type": {
+                "name": "boolean"
+              }
+            }
+          ],
+          "name": "RemotePlaybackAvailabilityCallback",
+          "returnType": {
+            "name": "void"
+          },
+          "type_": "callback"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "remote",
+              "type": {
+                "name": "RemotePlayback"
+              },
+              "type_": "attribute"
+            },
+            {
+              "attrs": [
+                {
+                  "name": "CEReactions",
+                  "type_": "extendedattribute"
+                }
+              ],
+              "name": "disableRemotePlayback",
+              "type": {
+                "name": "boolean"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "HTMLMediaElement",
+          "type_": "partialinterface"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/remote-playback/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/requestidlecallback/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "attrs": [
+            {
+              "identifiers": [
+                "Window",
+                "Worker"
+              ],
+              "name": "Exposed",
+              "type_": "extendedattribute"
+            }
+          ],
+          "inheritsFrom": "PerformanceEntry",
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "initiatorType",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "nextHopProtocol",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "workerStart",
+              "type": {
+                "name": "DOMHighResTimeStamp"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "redirectStart",
+              "type": {
+                "name": "DOMHighResTimeStamp"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "redirectEnd",
+              "type": {
+                "name": "DOMHighResTimeStamp"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "fetchStart",
+              "type": {
+                "name": "DOMHighResTimeStamp"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "domainLookupStart",
+              "type": {
+                "name": "DOMHighResTimeStamp"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "domainLookupEnd",
+              "type": {
+                "name": "DOMHighResTimeStamp"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "connectStart",
+              "type": {
+                "name": "DOMHighResTimeStamp"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "connectEnd",
+              "type": {
+                "name": "DOMHighResTimeStamp"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "secureConnectionStart",
+              "type": {
+                "name": "DOMHighResTimeStamp"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "requestStart",
+              "type": {
+                "name": "DOMHighResTimeStamp"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "responseStart",
+              "type": {
+                "name": "DOMHighResTimeStamp"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "responseEnd",
+              "type": {
+                "name": "DOMHighResTimeStamp"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "transferSize",
+              "type": {
+                "name": "unsigned long long"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "encodedBodySize",
+              "type": {
+                "name": "unsigned long long"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "decodedBodySize",
+              "type": {
+                "name": "unsigned long long"
+              },
+              "type_": "attribute"
+            },
+            {
+              "mapPattern": [
+                "inherit",
+                "attribute"
+              ],
+              "type_": "serializer"
+            }
+          ],
+          "name": "PerformanceResourceTiming",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "clearResourceTimings",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "maxSize",
+                  "type": {
+                    "name": "unsigned long"
+                  }
+                }
+              ],
+              "name": "setResourceTimingBufferSize",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "name": "onresourcetimingbufferfull",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "Performance",
+          "type_": "partialinterface"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/resource-timing/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/screen-orientation/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "members": [
+            {
+              "isRequired": true,
+              "name": "identifier",
+              "type": {
+                "name": "long"
+              }
+            },
+            {
+              "isRequired": true,
+              "name": "target",
+              "type": {
+                "name": "EventTarget"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "clientX",
+              "type": {
+                "name": "double"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "clientY",
+              "type": {
+                "name": "double"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "screenX",
+              "type": {
+                "name": "double"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "screenY",
+              "type": {
+                "name": "double"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "pageX",
+              "type": {
+                "name": "double"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "pageY",
+              "type": {
+                "name": "double"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "radiusX",
+              "type": {
+                "name": "float"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "radiusY",
+              "type": {
+                "name": "float"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "rotationAngle",
+              "type": {
+                "name": "float"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "force",
+              "type": {
+                "name": "float"
+              }
+            }
+          ],
+          "name": "TouchInit",
+          "type_": "dictionary"
+        },
+        {
+          "attrs": [
+            {
+              "args": [
+                {
+                  "name": "touchInitDict",
+                  "type": {
+                    "name": "TouchInit"
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            }
+          ],
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "identifier",
+              "type": {
+                "name": "long"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "target",
+              "type": {
+                "name": "EventTarget"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "screenX",
+              "type": {
+                "name": "double"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "screenY",
+              "type": {
+                "name": "double"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "clientX",
+              "type": {
+                "name": "double"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "clientY",
+              "type": {
+                "name": "double"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "pageX",
+              "type": {
+                "name": "double"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "pageY",
+              "type": {
+                "name": "double"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "radiusX",
+              "type": {
+                "name": "float"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "radiusY",
+              "type": {
+                "name": "float"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "rotationAngle",
+              "type": {
+                "name": "float"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "force",
+              "type": {
+                "name": "float"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "Touch",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "length",
+              "type": {
+                "name": "unsigned long"
+              },
+              "type_": "attribute"
+            },
+            {
+              "args": [
+                {
+                  "name": "index",
+                  "type": {
+                    "name": "unsigned long"
+                  }
+                }
+              ],
+              "name": "item",
+              "returnType": {
+                "name": "Touch",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "specials": [
+                "getter"
+              ]
+            }
+          ],
+          "name": "TouchList",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "inheritsFrom": "EventModifierInit",
+          "members": [
+            {
+              "defaultValue": [
+                "[",
+                "]"
+              ],
+              "name": "touches",
+              "type": {
+                "name": "sequence",
+                "params": [
+                  {
+                    "name": "Touch"
+                  }
+                ]
+              }
+            },
+            {
+              "defaultValue": [
+                "[",
+                "]"
+              ],
+              "name": "targetTouches",
+              "type": {
+                "name": "sequence",
+                "params": [
+                  {
+                    "name": "Touch"
+                  }
+                ]
+              }
+            },
+            {
+              "defaultValue": [
+                "[",
+                "]"
+              ],
+              "name": "changedTouches",
+              "type": {
+                "name": "sequence",
+                "params": [
+                  {
+                    "name": "Touch"
+                  }
+                ]
+              }
+            }
+          ],
+          "name": "TouchEventInit",
+          "type_": "dictionary"
+        },
+        {
+          "attrs": [
+            {
+              "args": [
+                {
+                  "name": "type",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                },
+                {
+                  "name": "eventInitDict",
+                  "optional": true,
+                  "type": {
+                    "name": "TouchEventInit"
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            }
+          ],
+          "inheritsFrom": "UIEvent",
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "touches",
+              "type": {
+                "name": "TouchList"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "targetTouches",
+              "type": {
+                "name": "TouchList"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "changedTouches",
+              "type": {
+                "name": "TouchList"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "altKey",
+              "type": {
+                "name": "boolean"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "metaKey",
+              "type": {
+                "name": "boolean"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "ctrlKey",
+              "type": {
+                "name": "boolean"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "shiftKey",
+              "type": {
+                "name": "boolean"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "TouchEvent",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "ontouchstart",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "ontouchend",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "ontouchmove",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "ontouchcancel",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "GlobalEventHandlers",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "args": [
+                {
+                  "name": "view",
+                  "type": {
+                    "name": "WindowProxy"
+                  }
+                },
+                {
+                  "name": "target",
+                  "type": {
+                    "name": "EventTarget"
+                  }
+                },
+                {
+                  "name": "identifier",
+                  "type": {
+                    "name": "long"
+                  }
+                },
+                {
+                  "name": "pageX",
+                  "type": {
+                    "name": "double"
+                  }
+                },
+                {
+                  "name": "pageY",
+                  "type": {
+                    "name": "double"
+                  }
+                },
+                {
+                  "name": "screenX",
+                  "type": {
+                    "name": "double"
+                  }
+                },
+                {
+                  "name": "screenY",
+                  "type": {
+                    "name": "double"
+                  }
+                }
+              ],
+              "name": "createTouch",
+              "returnType": {
+                "name": "Touch"
+              }
+            },
+            {
+              "args": [
+                {
+                  "isVariadic": true,
+                  "name": "touches",
+                  "type": {
+                    "name": "Touch"
+                  }
+                }
+              ],
+              "name": "createTouchList",
+              "returnType": {
+                "name": "TouchList"
+              }
+            }
+          ],
+          "name": "Document",
+          "type_": "partialinterface"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/touch-events/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initUIEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "UIEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initMouseEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "MouseEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initWheelEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "WheelEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initKeyboardEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "KeyboardEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initKeyboardEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "CompositionEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "defaultValue": "0",
+              "name": "charCode",
+              "type": {
+                "name": "unsigned long"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "keyCode",
+              "type": {
+                "name": "unsigned long"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "which",
+              "type": {
+                "name": "unsigned long"
+              }
+            }
+          ],
+          "name": "KeyboardEventInit",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "inheritsFrom": "Event",
+          "members": [
+            {
+              "isConst": true,
+              "name": "MODIFICATION",
+              "type": {
+                "name": "unsigned short"
+              },
+              "value": "1"
+            },
+            {
+              "isConst": true,
+              "name": "ADDITION",
+              "type": {
+                "name": "unsigned short"
+              },
+              "value": "2"
+            },
+            {
+              "isConst": true,
+              "name": "REMOVAL",
+              "type": {
+                "name": "unsigned short"
+              },
+              "value": "3"
+            },
+            {
+              "isReadOnly": true,
+              "name": "relatedNode",
+              "type": {
+                "name": "Node",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "prevValue",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "newValue",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "attrName",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "attrChange",
+              "type": {
+                "name": "unsigned short"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "initMutationEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "MutationEvent",
+          "type_": "interface"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/uievents/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/web-animations/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "name": "NFCRecordType",
+          "type_": "enum",
+          "value": [
+            "empty",
+            "text",
+            "url",
+            "json",
+            "opaque"
+          ]
+        },
+        {
+          "name": "NFCRecordData",
+          "type": {
+            "type_": "uniontype",
+            "types": [
+              {
+                "name": "DOMString"
+              },
+              {
+                "name": "unrestricted double"
+              },
+              {
+                "name": "ArrayBuffer"
+              },
+              {
+                "name": "Dictionary"
+              }
+            ]
+          },
+          "type_": "typedef"
+        },
+        {
+          "members": [
+            {
+              "name": "recordType",
+              "type": {
+                "name": "NFCRecordType"
+              }
+            },
+            {
+              "name": "mediaType",
+              "type": {
+                "name": "USVString"
+              }
+            },
+            {
+              "name": "data",
+              "type": {
+                "name": "NFCRecordData"
+              }
+            }
+          ],
+          "name": "NFCRecord",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "name": "data",
+              "type": {
+                "name": "sequence",
+                "params": [
+                  {
+                    "name": "NFCRecord"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "url",
+              "type": {
+                "name": "USVString"
+              }
+            }
+          ],
+          "name": "NFCMessage",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "nfc",
+              "type": {
+                "name": "NFC"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "Navigator",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "name": "NFCPushMessage",
+          "type": {
+            "type_": "uniontype",
+            "types": [
+              {
+                "name": "DOMString"
+              },
+              {
+                "name": "ArrayBuffer"
+              },
+              {
+                "name": "NFCMessage"
+              }
+            ]
+          },
+          "type_": "typedef"
+        },
+        {
+          "members": [
+            {
+              "args": [
+                {
+                  "name": "message",
+                  "type": {
+                    "name": "NFCPushMessage"
+                  }
+                },
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "name": "NFCPushOptions"
+                  }
+                }
+              ],
+              "name": "push",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "void"
+                  }
+                ]
+              }
+            },
+            {
+              "args": [
+                {
+                  "defaultValue": "any",
+                  "name": "target",
+                  "optional": true,
+                  "type": {
+                    "name": "NFCPushTarget"
+                  }
+                }
+              ],
+              "name": "cancelPush",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "void"
+                  }
+                ]
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "callback",
+                  "type": {
+                    "name": "MessageCallback"
+                  }
+                },
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "name": "NFCWatchOptions"
+                  }
+                }
+              ],
+              "name": "watch",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "long"
+                  }
+                ]
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "id",
+                  "optional": true,
+                  "type": {
+                    "name": "long"
+                  }
+                }
+              ],
+              "name": "cancelWatch",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "void"
+                  }
+                ]
+              }
+            }
+          ],
+          "name": "NFC",
+          "type_": "interface"
+        },
+        {
+          "args": [
+            {
+              "name": "message",
+              "type": {
+                "name": "NFCMessage"
+              }
+            }
+          ],
+          "name": "MessageCallback",
+          "returnType": {
+            "name": "void"
+          },
+          "type_": "callback"
+        }
+      ],
+      [
+        {
+          "name": "NFCPushTarget",
+          "type_": "enum",
+          "value": [
+            "tag",
+            "peer",
+            "any"
+          ]
+        },
+        {
+          "members": [
+            {
+              "defaultValue": "any",
+              "name": "target",
+              "type": {
+                "name": "NFCPushTarget"
+              }
+            },
+            {
+              "defaultValue": "Infinity",
+              "name": "timeout",
+              "type": {
+                "name": "unrestricted double"
+              }
+            },
+            {
+              "defaultValue": "true",
+              "name": "ignoreRead",
+              "type": {
+                "name": "boolean"
+              }
+            }
+          ],
+          "name": "NFCPushOptions",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "name": "NFCWatchMode",
+          "type_": "enum",
+          "value": [
+            "web-nfc-only",
+            "any"
+          ]
+        },
+        {
+          "members": [
+            {
+              "defaultValue": "",
+              "name": "url",
+              "type": {
+                "name": "USVString"
+              }
+            },
+            {
+              "name": "recordType",
+              "type": {
+                "name": "NFCRecordType",
+                "params": [
+                  "nullable"
+                ]
+              }
+            },
+            {
+              "defaultValue": "",
+              "name": "mediaType",
+              "type": {
+                "name": "USVString"
+              }
+            },
+            {
+              "defaultValue": "web-nfc-only",
+              "name": "mode",
+              "type": {
+                "name": "NFCWatchMode"
+              }
+            }
+          ],
+          "name": "NFCWatchOptions",
+          "type_": "dictionary"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/web-nfc/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "members": [
+          ],
+          "name": "ExampleCredentialRequestOptions",
+          "type_": "dictionary"
+        },
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "example",
+              "type": {
+                "name": "ExampleCredentialRequestOptions",
+                "params": [
+                  "nullable"
+                ]
+              }
+            }
+          ],
+          "name": "CredentialRequestOptions",
+          "type_": "dictionary"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/webappsec-credential-management/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/webappsec-csp/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/webappsec-csp/embedded/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/webappsec-referrer-policy/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/webappsec-secure-contexts/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/webappsec-subresource-integrity/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/webappsec/specs/content-security-policy/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/webappsec/specs/mixedcontent/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/webappsec/specs/powerfulfeatures/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/webappsec/specs/referrer-policy/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/webappsec/specs/upgrade/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "getSelection",
+              "returnType": {
+                "name": "Selection",
+                "params": [
+                  "nullable"
+                ]
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "x",
+                  "type": {
+                    "name": "double"
+                  }
+                },
+                {
+                  "name": "y",
+                  "type": {
+                    "name": "double"
+                  }
+                }
+              ],
+              "name": "elementFromPoint",
+              "returnType": {
+                "name": "Element",
+                "params": [
+                  "nullable"
+                ]
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "x",
+                  "type": {
+                    "name": "double"
+                  }
+                },
+                {
+                  "name": "y",
+                  "type": {
+                    "name": "double"
+                  }
+                }
+              ],
+              "name": "elementsFromPoint",
+              "returnType": {
+                "name": "sequence",
+                "params": [
+                  {
+                    "name": "Element"
+                  }
+                ]
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "x",
+                  "type": {
+                    "name": "double"
+                  }
+                },
+                {
+                  "name": "y",
+                  "type": {
+                    "name": "double"
+                  }
+                }
+              ],
+              "name": "caretPositionFromPoint",
+              "returnType": {
+                "name": "CaretPosition",
+                "params": [
+                  "nullable"
+                ]
+              }
+            },
+            {
+              "isReadOnly": true,
+              "name": "activeElement",
+              "type": {
+                "name": "Element",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "styleSheets",
+              "type": {
+                "name": "StyleSheetList"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "DocumentOrShadowRoot",
+          "type_": "partialinterface"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/webcomponents/spec/shadow/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/webrtc-pc"
+  },
+  {
+    "parses": [
+      [
+      ]
+    ],
+    "url": "https://w3c.github.io/webrtc-pc/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://webaudio.github.io/web-audio-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://webbluetoothcg.github.io/web-bluetooth/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://wicg.github.io/BackgroundSync/spec/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://wicg.github.io/IntersectionObserver/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://wicg.github.io/ResizeObserver/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://wicg.github.io/entries-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://wicg.github.io/shape-detection-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://wicg.github.io/webusb/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://wiki.mozilla.org/APNG_Specification"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://wiki.whatwg.org/wiki/CanvasInWorkers"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://wiki.whatwg.org/wiki/Iframe_sandbox_improvments"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://wiki.whatwg.org/wiki/OffscreenCanvas"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.chromium.org/spdy/spdy-protocol/spdy-protocol-draft3-1"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.khronos.org/registry/webgl/extensions/EXT_disjoint_timer_query/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.khronos.org/registry/webgl/specs/latest/2.0/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/Bugs/Public/show_bug.cgi"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/css-variables-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/filter-effects/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/html5/forms.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/mediacapture-fromelement/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://xhr.spec.whatwg.org/"
+  }
+]

@@ -1,0 +1,1986 @@
+[
+  {
+    "parses": [
+    ],
+    "url": "http://asmjs.org/spec/latest/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-conditional/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-counter-styles/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-font-loading/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-fonts/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-images-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-logical-props/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-pseudo-4/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-size-adjust/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/css-will-change/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/csswg/cssom-view/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://dev.w3.org/fxtf/filters-2/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://developer.apple.com/fonts/TTRefMan/index.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://http2.github.io/http2-spec/index.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://ip.hhi.de/imagecom_G1/assets/pdfs/csvt_overview_0305.pdf"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://mpgedit.org/mpgedit/mpeg_format/MP3Format.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://theora.org/doc/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3.org/TR/css3-fonts/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/netinfo/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/setImmediate/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/web-animations/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://w3c.github.io/webappsec/specs/referrer-policy/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://webaudio.github.io/web-midi-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://webbluetoothcg.github.io/web-bluetooth/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://webkit.org/blog/176/css-canvas-drawing/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://webkit.org/blog/182/css-reflections/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://wiki.csswg.org/spec/css4-ui"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://wiki.ecmascript.org/doku.php"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www-mmsp.ece.mcgill.ca/documents/AudioFormats/WAVE/WAVE.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.digitalpreservation.gov/formats/fdd/fdd000114.shtml"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.ecma-international.org/ecma-262/5.1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.ecma-international.org/ecma-262/6.0/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.ecma-international.org/ecma-402/1.0/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.itu.int/rec/T-REC-T.800-200208-I"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.itu.int/rec/T-REC-T.832"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/Submission/EOT/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/2012/CR-CSP-20121115/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/CSP/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/CSS2/page.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/CSS2/text.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/CSS2/ui.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/CSS21/generate.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/CSS21/selector.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/CSS21/tables.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/CSS21/visudet.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/CSS21/visuren.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/DOM-Parsing/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/FileAPI/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/IndexedDB/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/MathML/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/PNG/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/SRI/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/SVG/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/SVG/animate.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/SVG/filters.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/SVG/fonts.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/SVG/linking.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/SVG11/extend.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/SVG11/painting.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/WD-font/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/WOFF/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/WOFF2/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/WebCryptoAPI/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/XHTMLplusSMIL/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/ambient-light/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/battery-status/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/beacon/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/clipboard-apis/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/compositing-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css-cascade-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css-device-adapt/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css-fonts-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css-masking-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css-pseudo-4/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css-shapes/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css-snappoints-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css-text-decor-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css-values/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-2d-transforms/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-3d-transforms/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "inheritsFrom": "CSSRule",
+          "members": [
+            {
+              "name": "keyText",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "style",
+              "type": {
+                "name": "CSSStyleDeclaration"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "CSSKeyframeRule",
+          "type_": "interface"
+        }
+      ]
+    ],
+    "url": "http://www.w3.org/TR/css3-animations/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-background/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-break/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-color/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-conditional/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-exclusions/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-flexbox/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-fonts/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-grid-layout/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-images/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-mediaqueries/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-multicol/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-regions/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-selectors/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-sizing/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-text/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-transitions/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-ui/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-values/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css3-webfonts/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/css4-images/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/cssom-view/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/cssom/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/custom-elements/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/file-system-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/filter-effects-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/filter-effects/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/gamepad/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/geolocation-API/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/hr-time/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/html-imports/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/ime-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/media-source/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/mediacapture-streams/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/mediaqueries-4/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/navigation-timing/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/orientation-event/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/page-visibility/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/pointerevents/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/proximity/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/resource-hints/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/resource-timing/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/screen-orientation/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/selectors4/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/shadow-dom/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/touch-events/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/uievents/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/upgrade-insecure-requests/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/user-timing/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/vibration/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/wai-aria/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/webaudio/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.w3.org/TR/webdatabase/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.webmproject.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "http://www.xiph.org/vorbis/doc/Vorbis_I_spec.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://compat.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://console.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariCSSRef/Articles/StandardCSSProperties.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoViewIfNeeded"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://developers.google.com/speed/webp/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://docs.google.com/viewer"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dom.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-backgrounds-4/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-break-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-containment/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-images-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-position/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-text-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-text-decor-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-ui-4/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-variables/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/css-writing-modes-3/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/cssom-view/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/selectors-4/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.csswg.org/selectors/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://drafts.fxtf.org/motion-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/editing/raw-file/tip/editing.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/pointerlock/raw-file/default/index.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/ResourcePriorities/Overview.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://encoding.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://fetch.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://fidoalliance.org/specs/fido-u2f-v1.0-nfc-bt-amendment-20150514/fido-u2f-javascript-api.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://fullscreen.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+      [
+      ]
+    ],
+    "url": "https://html.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/browsers.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/comms.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/dom.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/embedded-content.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/forms.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/indices.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/interaction.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/scripting.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/semantics.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/syntax.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/webappapis.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/webstorage.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/workers.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://html.spec.whatwg.org/multipage/xhtml.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://msdn.microsoft.com/en-us/library/ms531189(v=vs.85).aspx"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://notifications.spec.whatwg.org/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://slightlyoff.github.io/ServiceWorker/spec/service_worker/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tabatkins.github.io/specs/css-font-display/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/draft-grigorik-http-client-hints"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc2397"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc4346"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc5246"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc6066"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc6716"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc6797"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc7034"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc7469"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc7905"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://tools.ietf.org/html/rfc7932"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/FileAPI/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "attrs": [
+            {
+              "args": [
+                {
+                  "name": "stream",
+                  "type": {
+                    "name": "MediaStream"
+                  }
+                },
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "name": "MediaRecorderOptions"
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            }
+          ],
+          "inheritsFrom": "EventTarget",
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "stream",
+              "type": {
+                "name": "MediaStream"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "mimeType",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "state",
+              "type": {
+                "name": "RecordingState"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onstart",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onstop",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "ondataavailable",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onpause",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onresume",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onerror",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "ignoreMutedMedia",
+              "type": {
+                "name": "boolean"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "videoBitsPerSecond",
+              "type": {
+                "name": "unsigned long"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "audioBitsPerSecond",
+              "type": {
+                "name": "unsigned long"
+              },
+              "type_": "attribute"
+            },
+            {
+              "args": [
+                {
+                  "name": "timeslice",
+                  "optional": true,
+                  "type": {
+                    "name": "long"
+                  }
+                }
+              ],
+              "name": "start",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "name": "stop",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "name": "pause",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "name": "resume",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "name": "requestData",
+              "returnType": {
+                "name": "void"
+              }
+            },
+            {
+              "args": [
+                {
+                  "name": "type",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                }
+              ],
+              "isStatic": true,
+              "name": "isTypeSupported",
+              "returnType": {
+                "name": "boolean"
+              }
+            }
+          ],
+          "name": "MediaRecorder",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "name": "mimeType",
+              "type": {
+                "name": "DOMString"
+              }
+            },
+            {
+              "name": "audioBitsPerSecond",
+              "type": {
+                "name": "unsigned long"
+              }
+            },
+            {
+              "name": "videoBitsPerSecond",
+              "type": {
+                "name": "unsigned long"
+              }
+            },
+            {
+              "name": "bitsPerSecond",
+              "type": {
+                "name": "unsigned long"
+              }
+            }
+          ],
+          "name": "MediaRecorderOptions",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "name": "RecordingState",
+          "type_": "enum",
+          "value": [
+            "inactive",
+            "recording",
+            "paused"
+          ]
+        }
+      ],
+      [
+        {
+          "attrs": [
+            {
+              "args": [
+                {
+                  "name": "type",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                },
+                {
+                  "name": "eventInitDict",
+                  "type": {
+                    "name": "BlobEventInit"
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            }
+          ],
+          "inheritsFrom": "Event",
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "data",
+              "type": {
+                "name": "Blob"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "BlobEvent",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "isRequired": true,
+              "name": "data",
+              "type": {
+                "name": "Blob"
+              }
+            }
+          ],
+          "name": "BlobEventInit",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "attrs": [
+            {
+              "name": "Exposed",
+              "type_": "extendedattribute",
+              "value": "Window"
+            },
+            {
+              "args": [
+                {
+                  "name": "type",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                },
+                {
+                  "name": "eventInitDict",
+                  "type": {
+                    "name": "ErrorEventInit"
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            }
+          ],
+          "inheritsFrom": "Event",
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "error",
+              "type": {
+                "name": "Error",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "ErrorEvent",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "inheritsFrom": "EventInit",
+          "members": [
+            {
+              "defaultValue": "null",
+              "name": "error",
+              "type": {
+                "name": "Error",
+                "params": [
+                  "nullable"
+                ]
+              }
+            }
+          ],
+          "name": "ErrorEventInit",
+          "type_": "dictionary"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/mediacapture-record/MediaRecorder.html"
+  },
+  {
+    "parses": [
+      [
+        {
+          "inheritsFrom": "PermissionDescriptor",
+          "members": [
+            {
+              "defaultValue": "false",
+              "name": "sysex",
+              "type": {
+                "name": "boolean"
+              }
+            }
+          ],
+          "name": "MidiPermissionDescriptor",
+          "type_": "dictionary"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/permissions/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/preload/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/push-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/requestidlecallback/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initUIEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "UIEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initMouseEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "MouseEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initWheelEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "WheelEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initKeyboardEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "KeyboardEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initKeyboardEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "CompositionEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "defaultValue": "0",
+              "name": "charCode",
+              "type": {
+                "name": "unsigned long"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "keyCode",
+              "type": {
+                "name": "unsigned long"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "which",
+              "type": {
+                "name": "unsigned long"
+              }
+            }
+          ],
+          "name": "KeyboardEventInit",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "inheritsFrom": "Event",
+          "members": [
+            {
+              "isConst": true,
+              "name": "MODIFICATION",
+              "type": {
+                "name": "unsigned short"
+              },
+              "value": "1"
+            },
+            {
+              "isConst": true,
+              "name": "ADDITION",
+              "type": {
+                "name": "unsigned short"
+              },
+              "value": "2"
+            },
+            {
+              "isConst": true,
+              "name": "REMOVAL",
+              "type": {
+                "name": "unsigned short"
+              },
+              "value": "3"
+            },
+            {
+              "isReadOnly": true,
+              "name": "relatedNode",
+              "type": {
+                "name": "Node",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "prevValue",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "newValue",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "attrName",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "attrChange",
+              "type": {
+                "name": "unsigned short"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "initMutationEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "MutationEvent",
+          "type_": "interface"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/uievents/"
+  },
+  {
+    "parses": [
+      [
+      ]
+    ],
+    "url": "https://w3c.github.io/webrtc-pc/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/webvtt/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://webkit.org/blog/363/styling-scrollbars/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://wiki.mozilla.org/APNG_Specification"
+  },
+  {
+    "parses": [
+      [
+        {
+          "name": "GLenum",
+          "type": {
+            "name": "unsigned long"
+          },
+          "type_": "typedef"
+        },
+        {
+          "name": "GLboolean",
+          "type": {
+            "name": "boolean"
+          },
+          "type_": "typedef"
+        },
+        {
+          "name": "GLbitfield",
+          "type": {
+            "name": "unsigned long"
+          },
+          "type_": "typedef"
+        },
+        {
+          "name": "GLbyte",
+          "type": {
+            "name": "byte"
+          },
+          "type_": "typedef"
+        },
+        {
+          "name": "GLshort",
+          "type": {
+            "name": "short"
+          },
+          "type_": "typedef"
+        },
+        {
+          "name": "GLint",
+          "type": {
+            "name": "long"
+          },
+          "type_": "typedef"
+        },
+        {
+          "name": "GLsizei",
+          "type": {
+            "name": "long"
+          },
+          "type_": "typedef"
+        },
+        {
+          "name": "GLintptr",
+          "type": {
+            "name": "long long"
+          },
+          "type_": "typedef"
+        },
+        {
+          "name": "GLsizeiptr",
+          "type": {
+            "name": "long long"
+          },
+          "type_": "typedef"
+        },
+        {
+          "name": "GLubyte",
+          "type": {
+            "name": "octet"
+          },
+          "type_": "typedef"
+        },
+        {
+          "name": "GLushort",
+          "type": {
+            "name": "unsigned short"
+          },
+          "type_": "typedef"
+        },
+        {
+          "name": "GLuint",
+          "type": {
+            "name": "unsigned long"
+          },
+          "type_": "typedef"
+        },
+        {
+          "name": "GLfloat",
+          "type": {
+            "name": "unrestricted float"
+          },
+          "type_": "typedef"
+        },
+        {
+          "name": "GLclampf",
+          "type": {
+            "name": "unrestricted float"
+          },
+          "type_": "typedef"
+        }
+      ]
+    ],
+    "url": "https://www.khronos.org/registry/webgl/specs/1.0/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.khronos.org/registry/webgl/specs/latest/2.0/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initUIEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "UIEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initMouseEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "MouseEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initWheelEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "WheelEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initKeyboardEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "KeyboardEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "initKeyboardEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "CompositionEvent",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "defaultValue": "0",
+              "name": "charCode",
+              "type": {
+                "name": "unsigned long"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "keyCode",
+              "type": {
+                "name": "unsigned long"
+              }
+            },
+            {
+              "defaultValue": "0",
+              "name": "which",
+              "type": {
+                "name": "unsigned long"
+              }
+            }
+          ],
+          "name": "KeyboardEventInit",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "inheritsFrom": "Event",
+          "members": [
+            {
+              "isConst": true,
+              "name": "MODIFICATION",
+              "type": {
+                "name": "unsigned short"
+              },
+              "value": "1"
+            },
+            {
+              "isConst": true,
+              "name": "ADDITION",
+              "type": {
+                "name": "unsigned short"
+              },
+              "value": "2"
+            },
+            {
+              "isConst": true,
+              "name": "REMOVAL",
+              "type": {
+                "name": "unsigned short"
+              },
+              "value": "3"
+            },
+            {
+              "isReadOnly": true,
+              "name": "relatedNode",
+              "type": {
+                "name": "Node",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "prevValue",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "newValue",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "attrName",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "attrChange",
+              "type": {
+                "name": "unsigned short"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "initMutationEvent",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "MutationEvent",
+          "type_": "interface"
+        }
+      ]
+    ],
+    "url": "https://www.w3.org/TR/DOM-Level-3-Events/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "members": [
+          ],
+          "name": "ExampleCredentialRequestOptions",
+          "type_": "dictionary"
+        },
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "example",
+              "type": {
+                "name": "ExampleCredentialRequestOptions",
+                "params": [
+                  "nullable"
+                ]
+              }
+            }
+          ],
+          "name": "CredentialRequestOptions",
+          "type_": "dictionary"
+        }
+      ]
+    ],
+    "url": "https://www.w3.org/TR/credential-management-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/css-cascade-4/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/css-values/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/css3-values/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/cssom-view-1/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/html51/document-metadata.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/html51/semantics.html"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/payment-request/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/selection-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/selectors4/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/shadow-dom/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/community/ortc/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://xhr.spec.whatwg.org/"
+  }
+]
