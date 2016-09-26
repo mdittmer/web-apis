@@ -239,6 +239,7 @@ function addInputTo(name, datalist) {
   rm.addEventListener('click', function() {
     container.removeChild(div);
     e('#' + name + '-add').focus();
+    updateHash();
     analyze();
   });
 

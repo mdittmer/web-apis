@@ -31,7 +31,7 @@ function stringify(data) {
   return jsonStableStringify(data, jsonStableStringifyConfig);
 }
 
-var NameRewriter = require('./static/js/NameRewriter');
+var NameRewriter = require('object-graph-js').NameRewriter;
 
 var app = express();
 var nameRewriter = new NameRewriter();
@@ -213,10 +213,8 @@ app.get(
     /^\/data\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/?$/,
   function(req, res) {
     var parts = req.url.split('/').slice(2);
-    if (hasPath(list, parts))
-      sendJSON(getData(new Environment(parts)), res);
-    else
-      sendJSON(null, res);
+    if (hasPath(list, parts)) sendJSON(getData(new Environment(parts)), res);
+    else sendJSON(null, res);
   });
 
 app.listen(8000, function() {
