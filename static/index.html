@@ -27,13 +27,13 @@
       white-space: pre-wrap;
     }
     </style>
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+    <script type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
   </head>
   <body>
     <pre id="browser"></pre>
     <pre id="platform"></pre>
     <button id="collect">Collect data</button>
-    <form action="/save" method="post">
+    <form id="form" action="/save" method="post">
       <label for="data">Collected data:</label> <textarea name="data" id="data" type="input">{}</textarea>
       <button id="send">Send data</button>
     </form>

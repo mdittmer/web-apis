@@ -35,6 +35,7 @@
     "babel-runtime": "^6.11.6",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "firebase": "^3.4.1",
     "json-stable-stringify": "^1.0.1",
     "object-graph-js": "git://github.com/mdittmer/object-graph-js.git",
     "webidl2": "^2.0.11",
