@@ -20,53 +20,8 @@ var og = require('object-graph-js');
 var NameRewriter = og.NameRewriter;
 var ObjectGraph = og.ObjectGraph;
 
-var firebase = require('firebase/app');
-// Attach themselves to firebase:
-require('firebase/database');
-require('firebase/auth');
-
-var app = firebase.initializeApp({
-  apiKey: "AIzaSyBd0k0pgPyB5aYI1UY95EyHF6xbt0fcAKw",
-  authDomain: "web-apis-145612.firebaseapp.com",
-  databaseURL: "https://web-apis-145612.firebaseio.com",
-  storageBucket: "web-apis-145612.appspot.com",
-  messagingSenderId: "1086779621312",
-});
-var db = firebase.database();
-var auth;
-app.auth().onAuthStateChanged(function(user) { auth = user; });
-// TODO: Better auth.
-app.auth().signInAnonymously();
-
-
-// Firebase has key-character limitations.
-var badKeyRE = /[.#$\/[\]]/g;
-function fixKeys(o) {
-  if (o === null || o === undefined) return o;
-  var typeOf = typeof o;
-  if (typeOf === 'number' || typeOf === 'boolean' || typeOf === 'string')
-    return o;
-  var keys = Object.getOwnPropertyNames(o);
-  for (var i = 0; i < keys.length; i++) {
-    var key = keys[i];
-    var value = fixKeys(o[key]);
-
-    if (!key.match(badKeyRE)) {
-      o[key] = value;
-      continue;
-    }
-
-    var newKey = key.replace(badKeyRE, '+');
-    while (o[newKey] !== undefined) {
-      newKey = newKey + '+';
-    }
-    try {
-      delete o[key];
-      o[newKey] = value;
-    } catch (e) {}
-  }
-  return o;
-}
+var firebase = require('./firebase.js');
+firebase = firebase();
 
 // Provide some browser + platform info in the UI.
 var browserElement = document.body.querySelector('#browser');
@@ -85,18 +40,22 @@ document.body.querySelector('#collect').addEventListener('click', function() {
   var graph = new ObjectGraph({
     maxDequeueSize: 1000,
     onDone: function() {
-      dataElement.value = JSON.stringify(fixKeys(graph.toJSON()));
+      dataElement.value = JSON.stringify(firebase.fixKeys(graph.toJSON()));
     },
   });
   graph.capture(window, { key: 'window' });
 });
 document.body.querySelector('#form').addEventListener('submit', function(e) {
   e.preventDefault();
-  console.assert(auth);
-  var data = JSON.parse(dataElement.value);
-  var timestamp = data.timestamp;
-  console.assert(timestamp);
-  environmentInfo.timestamp = timestamp;
-  db.ref('og/envs').push(environmentInfo);
-  db.ref('og/ogs').push(data);
+  firebase(function(app, db, user) {
+    if (!user) throw new Error('Authentication failure');
+    var data = JSON.parse(dataElement.value);
+    var timestamp = data.timestamp;
+    if (!timestamp) throw new Error('Invalid timestamp; data may be missing');
+    environmentInfo.timestamp = timestamp;
+    environmentInfo.user = user.isAnonymous ? 'Anonymous' : user.email ?
+        user.email : user.uid;
+    db.ref('og/envs').push(environmentInfo);
+    db.ref('og/ogs').push(data);
+  });
 });
