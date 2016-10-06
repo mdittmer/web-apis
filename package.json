@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Investigate web APIs through various means",
   "main": "serve.js",
+  "engines": {
+    "node": ">=6"
+  },
   "scripts": {
     "repl": "node",
     "postinstall": "npm run deps",
