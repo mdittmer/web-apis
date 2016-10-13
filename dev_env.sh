@@ -10,4 +10,8 @@ PATH=`awk -F: '{for(i=1;i<=NF;i++){if(!($i in a)){a[$i];printf s$i;s=":"}}}'<<<$
 export NODE_PATH
 export PATH
 
+if [ -f ./dev_env.local.sh ]; then
+  . ./dev_env.local.sh
+fi
+
 npm install

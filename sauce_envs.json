@@ -1,0 +1,22 @@
+[
+  {
+    "browserName": "chrome",
+    "platform": "Windows 10",
+    "version": "53.0"
+  },
+  {
+    "browserName": "MicrosoftEdge",
+    "platform": "Windows 10",
+    "version": "13.10586"
+  },
+  {
+    "browserName": "firefox",
+    "platform": "Windows 10",
+    "version": "49.0"
+  },
+  {
+    "browserName": "safari",
+    "platform": "OS X 10.11",
+    "version": "9.0"
+  }
+]
