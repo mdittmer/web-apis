@@ -69,10 +69,10 @@ for local tunneling magic. Now run it; e.g.:
 
     $ BrowserStackLocal -k your_browserstack_access_key
 
-Skip to *Gathering the data* below.
-
 Open `browserstack_envs.json` and make sure it lists exactly the browsers you
 wish to gather data from.
+
+Skip to *Gathering the data* below.
 
 ##### Setup: SauceLabs
 
@@ -122,9 +122,6 @@ you wish to gather data from.
 Skip to *Gathering the data* below.
 
 #### Gathering the data
-
-*Final setup step*: `your_environment` is one of `browserstack`, `sauce`,
-`selenium_custom`.
 
 Make sure your development environment is up-to-date, then run the data
 gathering script:
