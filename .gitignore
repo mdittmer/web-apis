@@ -2,3 +2,4 @@
 **/node_modules
 .user/*
 npm-debug.log
+dev_env.local.sh
