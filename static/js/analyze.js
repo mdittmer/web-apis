@@ -127,7 +127,7 @@ function doAnalyses(inGraphs, exGraphs) {
 // coupled to loadData('/list') callback below, and to server's data routing
 // routing scheme.
 function optValueToURL(label) {
-  return '/data/' + label.replace(/ /g, '/');
+  return '/data/og/' + label.replace(/ /g, '/');
 }
 
 // Gather configuration from DOM inputs, perform analyses, and output results.
@@ -184,25 +184,11 @@ function addOpts(datalist) {
   }
 }
 
-// Get the full set of nested keys over a Javascript object.
-// This is used to transform output from the "/list" URL to a collection of
-// options.
-function getKeys(o, s) {
-  if (typeof o !== 'object' || o === null ) return [s];
-  var keys = Object.getOwnPropertyNames(o);
-  var rtn = [];
-  for ( var i = 0; i < keys.length; i++ ) {
-    var key = keys[i];
-    rtn = rtn.concat(getKeys(o[key], s ? s + ' ' + key : key));
-  }
-  return rtn;
-}
-
 // Get a list of environments the server has data for, and add them to a
 // <datalist>.
 var l = window.location;
-stdlib.loadData('/list', { responseType: 'json' }).then(function(map) {
-  includeExcludeOpts = getKeys(map, '');
+stdlib.loadData('/list', { responseType: 'json' }).then(function(arr) {
+  includeExcludeOpts = arr;
   addOpts(e('#environments'));
   if (!loadFromHash()) {
     setupDefaults();

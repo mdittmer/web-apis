@@ -20,6 +20,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var jsonStableStringify = require('json-stable-stringify');
+var glob = require('glob');
 
 var jsonStableStringifyConfig = {
   space: '  ',
@@ -99,7 +100,7 @@ Environment.prototype.toArray = function() {
 };
 
 Environment.prototype.getJSONFileName = function() {
-  return 'object_graph_' + this.browser.name + '_' + this.browser.version +
+  return 'window_' + this.browser.name + '_' + this.browser.version +
     '_' + this.platform.name + '_' + this.platform.version + '.json';
 };
 
@@ -206,15 +207,39 @@ app.post('/save', function(req, res) {
 });
 
 app.get('/list', function(req, res) {
-  sendJSON(fs.readFileSync(DATA_DIR + '/list.json'), res);
+  glob('./data/og/window_*.json', function(err, files) {
+    if (err) {
+      console.error(err);
+      sendJSON([], res);
+      return;
+    }
+
+    sendJSON(files.map(function(file) {
+      var parts = file.split('_');
+      // 4 platform/browser/version parts.
+      parts = parts.slice(parts.length - 4);
+      // Drop ".json".
+      var last = parts[parts.length - 1];
+      last = last.substr(0, last.length - '.json'.length);
+      parts[parts.length - 1] = last;
+      return parts.join(' ');
+    }), res);
+  });
 });
 
 app.get(
-    /^\/data\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/?$/,
+    /^\/data\/og\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/?$/,
   function(req, res) {
-    var parts = req.url.split('/').slice(2);
-    if (hasPath(list, parts)) sendJSON(getData(new Environment(parts)), res);
-    else sendJSON(null, res);
+    var parts = req.url.split('/');
+    var env = new Environment(parts.slice(3));
+
+    fs.stat(
+      OG_DATA_DIR + '/' + env.getJSONFileName(),
+      function(err) {
+        if (err) sendJSON(null, res);
+        else sendJSON(getData(env), res);
+      }
+    );
   });
 
 app.listen(8000, function() {
