@@ -17,9 +17,6 @@
 'use strict';
 
 const webdriver = require('selenium-webdriver');
-const env = require('process').env;
-const npmPkg = JSON.parse(require('fs').readFileSync('./package.json'));
-const git = require('git-rev');
 
 const url = `http://localhost:4444/wd/hub`;
 

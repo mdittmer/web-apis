@@ -1,18 +1,19 @@
 # web-apis
 
-Playground for better understanding Web APIs.
+Playground for better understanding Web APIs. Data collection supported by
+[BrowserStack](https://www.browserstack.com).
 
 ## Javascript Object Graphs
 
 Explore the object graph exposed by a browser's Javascript environment.
 
-### Serving Locally
+### Serving locally
 
     $ npm install
     $ npm run rebuild
     $ npm run deploy
 
-### Exploring Data
+### Exploring data
 
 While serving locally `localhost:8000/analyze.html`. This tool allows you to
 select browser environments to include and exclude, and then look at the APIs
@@ -28,13 +29,112 @@ E.g., What APIs and structures exist...
 
 - *NOT* in `Chrome 52.0.2743.116 OSX 10.11.6`
 
-### Collecting Data
+### Collecting data
+
+#### Manual data collection
 
 While serving locally visit `localhost:8000/index.html`. Use the buttons to
 collect and then save data about your environment.
 
-*NOTE*: If the server already knows about your environment it will not
- overwrite the data.
+*NOTE*: This will (over)write `data/og/window_[platform/browser info].json`.
+
+#### Automated data collection
+
+Data collection can be automated via Selenium. The preferred method is to use
+[BrowserStack](https://www.browserstack.com), but the data collection
+interface is also implemented [SauceLabs](https://saucelabs.com), and custom
+(local) Selenium instances.
+
+##### Setup: BrowserStack
+
+Add the following to `dev_env.local.sh` in your local checkout:
+
+```zsh
+BROWSERSTACK_USERNAME="your_browserstack_username"
+BROWSERSTACK_ACCESS_KEY="your_browserstack_access_key"
+BROWSERSTACK_VIDEO="true" # "false" or unset saves time by recording no video
+
+export BROWSERSTACK_USERNAME
+export BROWSERSTACK_ACCESS_KEY
+export BROWSERSTACK_VIDEO
+
+SELENIUM_HOST="browserstack"
+
+export SELENIUM_HOST
+```
+
+Install
+[BrowserStackLocal](https://www.browserstack.com/local-testing#command-line)
+for local tunneling magic. Now run it; e.g.:
+
+    $ BrowserStackLocal -k your_browserstack_access_key
+
+Skip to *Gathering the data* below.
+
+Open `browserstack_envs.json` and make sure it lists exactly the browsers you
+wish to gather data from.
+
+##### Setup: SauceLabs
+
+Add the following to `dev_env.local.sh` in your local checkout:
+
+```zsh
+SAUCE_USERNAME="your_sauce_username"
+SAUCE_ACCESS_KEY="your_sauce_access_key"
+SAUCE_PATH="/wd/hub"
+
+# Tunnel from localhost via sauce-connect
+SAUCE_HOST="localhost"
+SAUCE_PORT="4445"
+
+SELENIUM_HOST="sauce"
+
+export SELENIUM_HOST
+```
+
+Install
+[sauce-connect](https://wiki.saucelabs.com/display/DOCS/Setting+Up+Sauce+Connect)
+for local URL proxying. Now run it; e.g.:
+
+    $ sc
+
+Open `sauce_envs.json` and make sure it lists exactly the browsers you wish
+to gather data from.
+
+Skip to *Gathering the data* below.
+
+#### Setup: Custom Selenium
+
+Add the following to `dev_env.local.sh` in your local checkout:
+
+```zsh
+SELENIUM_HOST="selenium_custom"
+
+export SELENIUM_HOST
+```
+
+Take a look at `selenium_custom.js`. Make sure everything looks right (in
+particular, double check the `url` for connecting to Selenium).
+
+Open `selenium_custom_envs.json` and make sure it lists exactly the browsers
+you wish to gather data from.
+
+Skip to *Gathering the data* below.
+
+#### Gathering the data
+
+*Final setup step*: `your_environment` is one of `browserstack`, `sauce`,
+`selenium_custom`.
+
+Make sure your development environment is up-to-date, then run the data
+gathering script:
+
+    $ . ./dev_env.sh
+    $ node selenium_og.js
+
+*NOTE*: You can override `SELENIUM_HOST` with one of `browserstack`, `sauce`,
+ or `selenium_custom` by passing it to `selenium_og.js`. E.g., run `node
+ selenium_og.js browserstack`.
 
 ## Web IDL
 
