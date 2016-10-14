@@ -124,7 +124,7 @@ function doAnalyses(inGraphs, exGraphs) {
 }
 
 // Convert datalist option value to a data retrieval URL. This is tightly
-// coupled to loadData('/list') callback below, and to server's data routing
+// coupled to xhr('/list') callback below, and to server's data routing
 // routing scheme.
 function optValueToURL(label) {
   return '/data/og/' + label.replace(/ /g, '/');
@@ -163,11 +163,11 @@ function analyze() {
   }
 
   // Map URL paths to inGraphs and exGraphs, then do analyses.
-  stdlib.loadData(inPaths, { responseType: 'json' }).then(function(jsons) {
+  stdlib.xhr(inPaths, { responseType: 'json' }).then(function(jsons) {
     inGraphs = getObjectGraphs(jsons);
     next();
   });
-  stdlib.loadData(exPaths, { responseType: 'json' }).then(function(jsons) {
+  stdlib.xhr(exPaths, { responseType: 'json' }).then(function(jsons) {
     exGraphs = getObjectGraphs(jsons);
     next();
   });
