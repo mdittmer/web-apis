@@ -1,5 +1,6 @@
 **/bower_components
 **/node_modules
+**/npm-debug.log*
 .user/*
-npm-debug.log
+static/bundle
 dev_env.local.sh
