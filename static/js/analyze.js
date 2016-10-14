@@ -187,7 +187,7 @@ function addOpts(datalist) {
 // Get a list of environments the server has data for, and add them to a
 // <datalist>.
 var l = window.location;
-stdlib.loadData('/list', { responseType: 'json' }).then(function(arr) {
+stdlib.xhr('/list', { responseType: 'json' }).then(function(arr) {
   includeExcludeOpts = arr;
   addOpts(e('#environments'));
   if (!loadFromHash()) {
