@@ -171,19 +171,15 @@ Wrote 38 IDL fragments from 222 URLs to /path/to/web-apis/./data/idl/caniuse/lin
 
 #### Local repository import example: Importing Blink's WebIDL
 
-First, make sure you have a checkout of Chromium, including Blink
-(`third_party/WebKit` in Chromium). At a minimum, set the following
-environment variable(s):
+First, make sure you have a checkout of Blink:
+
+    $ git clone https://chromium.googlesource.com/chromium/blink
+
+At a minimum, set the following environment variable(s):
 
 ```zsh
 # <chromium-root-directory>/src
-CHROMIUM_SRC_DIR=path/to/chromium/src
-
-# OR
-
-# <blink-root-directory>
-# This is usually <chromium-root-directory>/src/third_party/WebKit
-BLINK_SRC_DIR=path/to/blink
+BLINK_SRC_DIR=/path/to/blink
 ```
 
 Next, run `blink_idl_import.sh` using something like `zsh
