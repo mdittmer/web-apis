@@ -27,22 +27,12 @@
   {
     "parses": [
     ],
-    "url": "http://crbug.com/491441"
-  },
-  {
-    "parses": [
-    ],
     "url": "http://crbug.com/501866"
   },
   {
     "parses": [
     ],
     "url": "http://crbug.com/537459"
-  },
-  {
-    "parses": [
-    ],
-    "url": "http://crbug.com/542756"
   },
   {
     "parses": [
@@ -63,11 +53,6 @@
     "parses": [
     ],
     "url": "http://dev.w3.org/2009/dap/vibration/"
-  },
-  {
-    "parses": [
-    ],
-    "url": "http://dev.w3.org/2011/webrtc/editor/webrtc"
   },
   {
     "parses": [
@@ -181,16 +166,6 @@
   },
   {
     "parses": [
-    ],
-    "url": "http://w3c.github.io/mediacapture-main/"
-  },
-  {
-    "parses": [
-    ],
-    "url": "http://w3c.github.io/mediacapture-main/getusermedia"
-  },
-  {
-    "parses": [
       [
         {
           "attrs": [
@@ -249,44 +224,9 @@
       ],
       [
         {
-          "members": [
-            {
-              "name": "name",
-              "type": {
-                "name": "DOMString"
-              }
-            },
-            {
-              "name": "entryType",
-              "type": {
-                "name": "DOMString"
-              }
-            },
-            {
-              "name": "initiatorType",
-              "type": {
-                "name": "DOMString"
-              }
-            }
-          ],
-          "name": "PerformanceEntryFilterOptions",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
           "isPartial": true,
           "members": [
             {
-              "args": [
-                {
-                  "name": "filter",
-                  "optional": true,
-                  "type": {
-                    "name": "PerformanceEntryFilterOptions"
-                  }
-                }
-              ],
               "name": "getEntries",
               "returnType": {
                 "name": "PerformanceEntryList"
@@ -376,15 +316,6 @@
           ],
           "members": [
             {
-              "args": [
-                {
-                  "name": "filter",
-                  "optional": true,
-                  "type": {
-                    "name": "PerformanceEntryFilterOptions"
-                  }
-                }
-              ],
               "name": "getEntries",
               "returnType": {
                 "name": "PerformanceEntryList"
@@ -518,10 +449,7 @@
               "isReadOnly": true,
               "name": "presentation",
               "type": {
-                "name": "Presentation",
-                "params": [
-                  "nullable"
-                ]
+                "name": "Presentation"
               },
               "type_": "attribute"
             }
@@ -1050,6 +978,11 @@
   },
   {
     "parses": [
+    ],
+    "url": "http://w3c.github.io/web-animations/"
+  },
+  {
+    "parses": [
       [
         {
           "name": "NFCRecordType",
@@ -1374,11 +1307,6 @@
   {
     "parses": [
     ],
-    "url": "http://w3c.github.io/webappsec/specs/content-security-policy/"
-  },
-  {
-    "parses": [
-    ],
     "url": "http://w3c.github.io/webappsec/specs/subresourceintegrity/"
   },
   {
@@ -1391,7 +1319,7 @@
               "isReadOnly": true,
               "name": "customElements",
               "type": {
-                "name": "CustomElementsRegistry"
+                "name": "CustomElementRegistry"
               },
               "type_": "attribute"
             }
@@ -1515,13 +1443,6 @@
       ]
     ],
     "url": "http://w3c.github.io/webcomponents/spec/shadow/"
-  },
-  {
-    "parses": [
-      [
-      ]
-    ],
-    "url": "http://w3c.github.io/webrtc-pc/"
   },
   {
     "parses": [
@@ -2958,16 +2879,6 @@
   {
     "parses": [
     ],
-    "url": "http://www.w3.org/TR/html5/system-state-and-capabilities"
-  },
-  {
-    "parses": [
-    ],
-    "url": "http://www.w3.org/TR/mediacapture-streams/"
-  },
-  {
-    "parses": [
-    ],
     "url": "http://www.w3.org/TR/page-visibility/"
   },
   {
@@ -3010,6 +2921,11 @@
   {
     "parses": [
     ],
+    "url": "https://beverloo.github.io/budget-api/"
+  },
+  {
+    "parses": [
+    ],
     "url": "https://bugs.webkit.org/show_bug"
   },
   {
@@ -3040,27 +2956,57 @@
   {
     "parses": [
     ],
-    "url": "https://crbug.com/515920)"
-  },
-  {
-    "parses": [
-    ],
     "url": "https://crbug.com/524424"
   },
   {
     "parses": [
     ],
-    "url": "https://crbug.com/584113) Enable Web Bluetooth Experiment"
+    "url": "https://crbug.com/569301"
   },
   {
     "parses": [
     ],
-    "url": "https://crbug.com/585656"
+    "url": "https://crbug.com/608460"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://crbug.com/619665"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://crbug.com/646083"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://crbug.com/647693"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://crbug.com/649328"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://crbug.com/649710"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://crbug.com/651414"
   },
   {
     "parses": [
     ],
     "url": "https://developer.mozilla.org/en-US/docs/Web/API/Blob/Blob"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://discourse.wicg.io/t/proposal-staticrange-to-be-used-instead-of-range-for-new-apis/1472"
   },
   {
     "parses": [
@@ -3095,12 +3041,17 @@
   {
     "parses": [
     ],
-    "url": "https://dvcs.w3.org/hg/dap/raw-file/tip/battery/Overview"
+    "url": "https://drafts.csswg.org/css-conditional/"
   },
   {
     "parses": [
     ],
-    "url": "https://dvcs.w3.org/hg/gamepad/raw-file/default/gamepad"
+    "url": "https://drafts.fxtf.org/geometry/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://dvcs.w3.org/hg/dap/raw-file/tip/battery/Overview"
   },
   {
     "parses": [
@@ -3135,17 +3086,47 @@
   {
     "parses": [
     ],
-    "url": "https://github.com/RByers/EventListenerOptions"
+    "url": "https://github.com/WICG/IntersectionObserver/issues/114"
   },
   {
     "parses": [
     ],
-    "url": "https://github.com/WICG/IntersectionObserver"
+    "url": "https://github.com/WICG/ResizeObserver"
   },
   {
     "parses": [
     ],
     "url": "https://github.com/WICG/ViewportAPI"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/WICG/indexed-db-observers/blob/gh-pages/EXPLAINER"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/WICG/indexed-db-observers/issues/24"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/WICG/web-share/blob/master/docs/interface"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/WebAudio/web-midi-api/issues/145 and crbug"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/WebAudio/web-midi-api/issues/168"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/WebBluetoothCG/web-bluetooth/pull/292"
   },
   {
     "parses": [
@@ -3170,12 +3151,7 @@
   {
     "parses": [
     ],
-    "url": "https://github.com/slightlyoff/IntersectionObserver"
-  },
-  {
-    "parses": [
-    ],
-    "url": "https://github.com/w3c/FileAPI/commit/8cce54559dc27bf8b8244f3f0ca9fb3e4d96efdb"
+    "url": "https://github.com/spanicker/longtasks"
   },
   {
     "parses": [
@@ -3190,7 +3166,7 @@
   {
     "parses": [
     ],
-    "url": "https://github.com/w3c/browser-payment-api/issues/6"
+    "url": "https://github.com/w3c/ServiceWorker/issues/920"
   },
   {
     "parses": [
@@ -3200,12 +3176,47 @@
   {
     "parses": [
     ],
+    "url": "https://github.com/w3c/gamepad/issues/28"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/w3c/gamepad/issues/35"
+  },
+  {
+    "parses": [
+    ],
     "url": "https://github.com/w3c/hr-time/commit/39aaf81e1ea206fdf0fde4f49604ddd64d4f5b13"
   },
   {
     "parses": [
     ],
+    "url": "https://github.com/w3c/media-source/issues/91"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/w3c/mediacapture-main/issues/404"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/w3c/mediacapture-main/issues/405"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/w3c/mediacapture-main/pull/194 but but that does not have"
+  },
+  {
+    "parses": [
+    ],
     "url": "https://github.com/w3c/mediacapture-record/issues/48"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/w3c/quota-api/issues/5"
   },
   {
     "parses": [
@@ -3219,6 +3230,27 @@
   },
   {
     "parses": [
+      [
+        {
+          "inheritsFrom": "EventInit",
+          "members": [
+            {
+              "isRequired": true,
+              "name": "reading",
+              "type": {
+                "name": "SensorReading"
+              }
+            }
+          ],
+          "name": "SensorReadingEventInit",
+          "type_": "dictionary"
+        }
+      ]
+    ],
+    "url": "https://github.com/w3c/sensors/issues/129"
+  },
+  {
+    "parses": [
     ],
     "url": "https://github.com/w3c/svgwg/commit/4c26fd36937a65192024208d85c144a21071b057"
   },
@@ -3226,6 +3258,42 @@
     "parses": [
     ],
     "url": "https://github.com/w3c/uievents/commit/1a2aa02b474fd4feaf43fdced06e6fd7214196a4"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/w3c/webrtc-pc/issues/709"
+  },
+  {
+    "parses": [
+      [
+        {
+          "inheritsFrom": "EventInit",
+          "members": [
+            {
+              "isRequired": true,
+              "name": "channel",
+              "type": {
+                "name": "RTCDataChannel"
+              }
+            }
+          ],
+          "name": "RTCDataChannelEventInit",
+          "type_": "dictionary"
+        }
+      ]
+    ],
+    "url": "https://github.com/w3c/webrtc-pc/issues/817"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/w3c/webvr/issues/83"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://github.com/whatwg/html/issues/11"
   },
   {
     "parses": [
@@ -3343,11 +3411,6 @@
   {
     "parses": [
     ],
-    "url": "https://html.spec.whatwg.org/multipage/forms"
-  },
-  {
-    "parses": [
-    ],
     "url": "https://html.spec.whatwg.org/multipage/interaction"
   },
   {
@@ -3374,6 +3437,16 @@
     "parses": [
     ],
     "url": "https://mikewest.github.io/cors-rfc1918/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://navidz.github.io/auxclick/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://noncombatant.github.io/permission-delegation-api/"
   },
   {
     "parses": [
@@ -3413,6 +3486,713 @@
   {
     "parses": [
     ],
+    "url": "https://w3c.github.io/ServiceWorker/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/ambient-light/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "attrs": [
+            {
+              "args": [
+                {
+                  "name": "methodData",
+                  "type": {
+                    "name": "sequence",
+                    "params": [
+                      {
+                        "name": "PaymentMethodData"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "details",
+                  "type": {
+                    "name": "PaymentDetails"
+                  }
+                },
+                {
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "name": "PaymentOptions"
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            },
+            {
+              "name": "SecureContext",
+              "type_": "extendedattribute"
+            }
+          ],
+          "inheritsFrom": "EventTarget",
+          "members": [
+            {
+              "name": "show",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "PaymentResponse"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "abort",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "void"
+                  }
+                ]
+              }
+            },
+            {
+              "isReadOnly": true,
+              "name": "shippingAddress",
+              "type": {
+                "name": "PaymentAddress",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "shippingOption",
+              "type": {
+                "name": "DOMString",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "shippingType",
+              "type": {
+                "name": "PaymentShippingType",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onshippingaddresschange",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            },
+            {
+              "name": "onshippingoptionchange",
+              "type": {
+                "name": "EventHandler"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "PaymentRequest",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "isRequired": true,
+              "name": "supportedMethods",
+              "type": {
+                "name": "sequence",
+                "params": [
+                  {
+                    "name": "DOMString"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "data",
+              "type": {
+                "name": "object"
+              }
+            }
+          ],
+          "name": "PaymentMethodData",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "isRequired": true,
+              "name": "currency",
+              "type": {
+                "name": "DOMString"
+              }
+            },
+            {
+              "isRequired": true,
+              "name": "value",
+              "type": {
+                "name": "DOMString"
+              }
+            },
+            {
+              "defaultValue": "urn:iso:std:iso:4217",
+              "name": "currencySystem",
+              "type": {
+                "name": "DOMString"
+              }
+            }
+          ],
+          "name": "PaymentCurrencyAmount",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "name": "total",
+              "type": {
+                "name": "PaymentItem"
+              }
+            },
+            {
+              "name": "displayItems",
+              "type": {
+                "name": "sequence",
+                "params": [
+                  {
+                    "name": "PaymentItem"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "shippingOptions",
+              "type": {
+                "name": "sequence",
+                "params": [
+                  {
+                    "name": "PaymentShippingOption"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "modifiers",
+              "type": {
+                "name": "sequence",
+                "params": [
+                  {
+                    "name": "PaymentDetailsModifier"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "error",
+              "type": {
+                "name": "DOMString"
+              }
+            }
+          ],
+          "name": "PaymentDetails",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "isRequired": true,
+              "name": "supportedMethods",
+              "type": {
+                "name": "sequence",
+                "params": [
+                  {
+                    "name": "DOMString"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "total",
+              "type": {
+                "name": "PaymentItem"
+              }
+            },
+            {
+              "name": "additionalDisplayItems",
+              "type": {
+                "name": "sequence",
+                "params": [
+                  {
+                    "name": "PaymentItem"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "data",
+              "type": {
+                "name": "object"
+              }
+            }
+          ],
+          "name": "PaymentDetailsModifier",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "name": "PaymentShippingType",
+          "type_": "enum",
+          "value": [
+            "shipping",
+            "delivery",
+            "pickup"
+          ]
+        },
+        {
+          "members": [
+            {
+              "defaultValue": "false",
+              "name": "requestPayerName",
+              "type": {
+                "name": "boolean"
+              }
+            },
+            {
+              "defaultValue": "false",
+              "name": "requestPayerEmail",
+              "type": {
+                "name": "boolean"
+              }
+            },
+            {
+              "defaultValue": "false",
+              "name": "requestPayerPhone",
+              "type": {
+                "name": "boolean"
+              }
+            },
+            {
+              "defaultValue": "false",
+              "name": "requestShipping",
+              "type": {
+                "name": "boolean"
+              }
+            },
+            {
+              "defaultValue": "shipping",
+              "name": "shippingType",
+              "type": {
+                "name": "DOMString"
+              }
+            }
+          ],
+          "name": "PaymentOptions",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "isRequired": true,
+              "name": "label",
+              "type": {
+                "name": "DOMString"
+              }
+            },
+            {
+              "isRequired": true,
+              "name": "amount",
+              "type": {
+                "name": "PaymentCurrencyAmount"
+              }
+            },
+            {
+              "defaultValue": "false",
+              "name": "pending",
+              "type": {
+                "name": "boolean"
+              }
+            }
+          ],
+          "name": "PaymentItem",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "attrs": [
+            {
+              "name": "SecureContext",
+              "type_": "extendedattribute"
+            }
+          ],
+          "members": [
+            {
+              "mapPattern": [
+                "attribute"
+              ],
+              "type_": "serializer"
+            },
+            {
+              "isReadOnly": true,
+              "name": "country",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "addressLine",
+              "type": {
+                "name": "FrozenArray",
+                "params": [
+                  {
+                    "name": "DOMString"
+                  }
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "region",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "city",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "dependentLocality",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "postalCode",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "sortingCode",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "languageCode",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "organization",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "recipient",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "phone",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "PaymentAddress",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "isRequired": true,
+              "name": "id",
+              "type": {
+                "name": "DOMString"
+              }
+            },
+            {
+              "isRequired": true,
+              "name": "label",
+              "type": {
+                "name": "DOMString"
+              }
+            },
+            {
+              "isRequired": true,
+              "name": "amount",
+              "type": {
+                "name": "PaymentCurrencyAmount"
+              }
+            },
+            {
+              "defaultValue": "false",
+              "name": "selected",
+              "type": {
+                "name": "boolean"
+              }
+            }
+          ],
+          "name": "PaymentShippingOption",
+          "type_": "dictionary"
+        }
+      ],
+      [
+        {
+          "name": "PaymentComplete",
+          "type_": "enum",
+          "value": [
+            "success",
+            "fail",
+            ""
+          ]
+        },
+        {
+          "attrs": [
+            {
+              "name": "SecureContext",
+              "type_": "extendedattribute"
+            }
+          ],
+          "members": [
+            {
+              "mapPattern": [
+                "attribute"
+              ],
+              "type_": "serializer"
+            },
+            {
+              "isReadOnly": true,
+              "name": "methodName",
+              "type": {
+                "name": "DOMString"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "details",
+              "type": {
+                "name": "object"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "shippingAddress",
+              "type": {
+                "name": "PaymentAddress",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "shippingOption",
+              "type": {
+                "name": "DOMString",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "payerName",
+              "type": {
+                "name": "DOMString",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "payerEmail",
+              "type": {
+                "name": "DOMString",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "payerPhone",
+              "type": {
+                "name": "DOMString",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "args": [
+                {
+                  "defaultValue": "",
+                  "name": "result",
+                  "optional": true,
+                  "type": {
+                    "name": "PaymentComplete"
+                  }
+                }
+              ],
+              "name": "complete",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "void"
+                  }
+                ]
+              }
+            }
+          ],
+          "name": "PaymentResponse",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "name": "allowPaymentRequest",
+              "type": {
+                "name": "boolean"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "HTMLIFrameElement",
+          "type_": "partialinterface"
+        }
+      ],
+      [
+        {
+          "attrs": [
+            {
+              "args": [
+                {
+                  "name": "type",
+                  "type": {
+                    "name": "DOMString"
+                  }
+                },
+                {
+                  "name": "eventInitDict",
+                  "optional": true,
+                  "type": {
+                    "name": "PaymentRequestUpdateEventInit"
+                  }
+                }
+              ],
+              "name": "Constructor",
+              "type_": "extendedattribute"
+            },
+            {
+              "name": "SecureContext",
+              "type_": "extendedattribute"
+            }
+          ],
+          "inheritsFrom": "Event",
+          "members": [
+            {
+              "args": [
+                {
+                  "name": "d",
+                  "type": {
+                    "name": "Promise",
+                    "params": [
+                      {
+                        "name": "PaymentDetails"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "name": "updateWith",
+              "returnType": {
+                "name": "void"
+              }
+            }
+          ],
+          "name": "PaymentRequestUpdateEvent",
+          "type_": "interface"
+        },
+        {
+          "inheritsFrom": "EventInit",
+          "members": [
+          ],
+          "name": "PaymentRequestUpdateEventInit",
+          "type_": "dictionary"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/browser-payment-api/"
+  },
+  {
+    "parses": [
+    ],
     "url": "https://w3c.github.io/browser-payment-api/specs/paymentrequest"
   },
   {
@@ -3434,6 +4214,165 @@
     "parses": [
     ],
     "url": "https://w3c.github.io/frame-timing/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/gamepad/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "name": "GamepadHand",
+          "type_": "enum",
+          "value": [
+            "",
+            "left",
+            "right"
+          ]
+        }
+      ],
+      [
+        {
+          "name": "GamepadHapticActuatorType",
+          "type_": "enum",
+          "value": [
+            "vibration"
+          ]
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "hasOrientation",
+              "type": {
+                "name": "boolean"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "hasPosition",
+              "type": {
+                "name": "boolean"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "position",
+              "type": {
+                "name": "Float32Array",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "linearVelocity",
+              "type": {
+                "name": "Float32Array",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "linearAcceleration",
+              "type": {
+                "name": "Float32Array",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "orientation",
+              "type": {
+                "name": "Float32Array",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "angularVelocity",
+              "type": {
+                "name": "Float32Array",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "angularAcceleration",
+              "type": {
+                "name": "Float32Array",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "GamepadPose",
+          "type_": "interface"
+        }
+      ],
+      [
+        {
+          "isPartial": true,
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "hand",
+              "type": {
+                "name": "GamepadHand"
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "hapticActuators",
+              "type": {
+                "name": "GamepadHapticActuator",
+                "params": [
+                  "array"
+                ]
+              },
+              "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "pose",
+              "type": {
+                "name": "GamepadPose",
+                "params": [
+                  "nullable"
+                ]
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "Gamepad",
+          "type_": "partialinterface"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/gamepad/extensions"
   },
   {
     "parses": [
@@ -3462,40 +4401,6 @@
           "members": [
             {
               "name": "now",
-              "returnType": {
-                "name": "DOMHighResTimeStamp"
-              }
-            },
-            {
-              "args": [
-                {
-                  "name": "time",
-                  "type": {
-                    "name": "DOMHighResTimeStamp"
-                  }
-                },
-                {
-                  "name": "timeSource",
-                  "type": {
-                    "type_": "uniontype",
-                    "types": [
-                      {
-                        "name": "Window"
-                      },
-                      {
-                        "name": "Worker"
-                      },
-                      {
-                        "name": "SharedWorker"
-                      },
-                      {
-                        "name": "ServiceWorker"
-                      }
-                    ]
-                  }
-                }
-              ],
-              "name": "translateTime",
               "returnType": {
                 "name": "DOMHighResTimeStamp"
               }
@@ -3598,12 +4503,15 @@
               "type_": "attribute"
             },
             {
-              "isReadOnly": true,
-              "name": "previewStream",
-              "type": {
-                "name": "MediaStream"
-              },
-              "type_": "attribute"
+              "name": "takePhoto",
+              "returnType": {
+                "name": "Promise",
+                "params": [
+                  {
+                    "name": "Blob"
+                  }
+                ]
+              }
             },
             {
               "name": "getPhotoCapabilities",
@@ -3639,28 +4547,6 @@
               }
             },
             {
-              "args": [
-                {
-                  "name": "photoSettings",
-                  "type": {
-                    "name": "PhotoSettings",
-                    "params": [
-                      "nullable"
-                    ]
-                  }
-                }
-              ],
-              "name": "takePhoto",
-              "returnType": {
-                "name": "Promise",
-                "params": [
-                  {
-                    "name": "Blob"
-                  }
-                ]
-              }
-            },
-            {
               "name": "grabFrame",
               "returnType": {
                 "name": "Promise",
@@ -3673,31 +4559,6 @@
             }
           ],
           "name": "ImageCapture",
-          "type_": "interface"
-        }
-      ],
-      [
-        {
-          "attrs": [
-            {
-              "name": "NoInterfaceObject",
-              "type_": "extendedattribute"
-            }
-          ],
-          "members": [
-            {
-              "isReadOnly": true,
-              "name": "errorDescription",
-              "type": {
-                "name": "DOMString",
-                "params": [
-                  "nullable"
-                ]
-              },
-              "type_": "attribute"
-            }
-          ],
-          "name": "ImageCaptureError",
           "type_": "interface"
         }
       ],
@@ -3716,7 +4577,7 @@
               "isReadOnly": true,
               "name": "colorTemperature",
               "type": {
-                "name": "unsigned long"
+                "name": "MediaSettingsRange"
               },
               "type_": "attribute"
             },
@@ -3964,6 +4825,14 @@
                 "name": "long"
               },
               "type_": "attribute"
+            },
+            {
+              "isReadOnly": true,
+              "name": "step",
+              "type": {
+                "name": "long"
+              },
+              "type_": "attribute"
             }
           ],
           "name": "MediaSettingsRange",
@@ -3979,7 +4848,7 @@
             "auto",
             "off",
             "flash",
-            "on"
+            "torch"
           ]
         }
       ],
@@ -4022,1557 +4891,18 @@
   },
   {
     "parses": [
-      [
-        {
-          "attrs": [
-            {
-              "name": "Exposed",
-              "type_": "extendedattribute",
-              "value": "Window"
-            },
-            {
-              "name": "Constructor",
-              "type_": "extendedattribute"
-            },
-            {
-              "args": [
-                {
-                  "name": "stream",
-                  "type": {
-                    "name": "MediaStream"
-                  }
-                }
-              ],
-              "name": "Constructor",
-              "type_": "extendedattribute"
-            },
-            {
-              "args": [
-                {
-                  "name": "tracks",
-                  "type": {
-                    "name": "sequence",
-                    "params": [
-                      {
-                        "name": "MediaStreamTrack"
-                      }
-                    ]
-                  }
-                }
-              ],
-              "name": "Constructor",
-              "type_": "extendedattribute"
-            }
-          ],
-          "inheritsFrom": "EventTarget",
-          "members": [
-            {
-              "isReadOnly": true,
-              "name": "id",
-              "type": {
-                "name": "DOMString"
-              },
-              "type_": "attribute"
-            },
-            {
-              "name": "getAudioTracks",
-              "returnType": {
-                "name": "sequence",
-                "params": [
-                  {
-                    "name": "MediaStreamTrack"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "getVideoTracks",
-              "returnType": {
-                "name": "sequence",
-                "params": [
-                  {
-                    "name": "MediaStreamTrack"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "getTracks",
-              "returnType": {
-                "name": "sequence",
-                "params": [
-                  {
-                    "name": "MediaStreamTrack"
-                  }
-                ]
-              }
-            },
-            {
-              "args": [
-                {
-                  "name": "trackId",
-                  "type": {
-                    "name": "DOMString"
-                  }
-                }
-              ],
-              "name": "getTrackById",
-              "returnType": {
-                "name": "MediaStreamTrack",
-                "params": [
-                  "nullable"
-                ]
-              }
-            },
-            {
-              "args": [
-                {
-                  "name": "track",
-                  "type": {
-                    "name": "MediaStreamTrack"
-                  }
-                }
-              ],
-              "name": "addTrack",
-              "returnType": {
-                "name": "void"
-              }
-            },
-            {
-              "args": [
-                {
-                  "name": "track",
-                  "type": {
-                    "name": "MediaStreamTrack"
-                  }
-                }
-              ],
-              "name": "removeTrack",
-              "returnType": {
-                "name": "void"
-              }
-            },
-            {
-              "name": "clone",
-              "returnType": {
-                "name": "MediaStream"
-              }
-            },
-            {
-              "isReadOnly": true,
-              "name": "active",
-              "type": {
-                "name": "boolean"
-              },
-              "type_": "attribute"
-            },
-            {
-              "name": "onaddtrack",
-              "type": {
-                "name": "EventHandler"
-              },
-              "type_": "attribute"
-            },
-            {
-              "name": "onremovetrack",
-              "type": {
-                "name": "EventHandler"
-              },
-              "type_": "attribute"
-            }
-          ],
-          "name": "MediaStream",
-          "type_": "interface"
-        }
-      ],
-      [
-        {
-          "attrs": [
-            {
-              "name": "Exposed",
-              "type_": "extendedattribute",
-              "value": "Window"
-            }
-          ],
-          "inheritsFrom": "EventTarget",
-          "members": [
-            {
-              "isReadOnly": true,
-              "name": "kind",
-              "type": {
-                "name": "DOMString"
-              },
-              "type_": "attribute"
-            },
-            {
-              "isReadOnly": true,
-              "name": "id",
-              "type": {
-                "name": "DOMString"
-              },
-              "type_": "attribute"
-            },
-            {
-              "isReadOnly": true,
-              "name": "label",
-              "type": {
-                "name": "DOMString"
-              },
-              "type_": "attribute"
-            },
-            {
-              "name": "enabled",
-              "type": {
-                "name": "boolean"
-              },
-              "type_": "attribute"
-            },
-            {
-              "isReadOnly": true,
-              "name": "muted",
-              "type": {
-                "name": "boolean"
-              },
-              "type_": "attribute"
-            },
-            {
-              "name": "onmute",
-              "type": {
-                "name": "EventHandler"
-              },
-              "type_": "attribute"
-            },
-            {
-              "name": "onunmute",
-              "type": {
-                "name": "EventHandler"
-              },
-              "type_": "attribute"
-            },
-            {
-              "isReadOnly": true,
-              "name": "readyState",
-              "type": {
-                "name": "MediaStreamTrackState"
-              },
-              "type_": "attribute"
-            },
-            {
-              "name": "onended",
-              "type": {
-                "name": "EventHandler"
-              },
-              "type_": "attribute"
-            },
-            {
-              "name": "clone",
-              "returnType": {
-                "name": "MediaStreamTrack"
-              }
-            },
-            {
-              "name": "stop",
-              "returnType": {
-                "name": "void"
-              }
-            },
-            {
-              "name": "getCapabilities",
-              "returnType": {
-                "name": "MediaTrackCapabilities"
-              }
-            },
-            {
-              "name": "getConstraints",
-              "returnType": {
-                "name": "MediaTrackConstraints"
-              }
-            },
-            {
-              "name": "getSettings",
-              "returnType": {
-                "name": "MediaTrackSettings"
-              }
-            },
-            {
-              "args": [
-                {
-                  "name": "constraints",
-                  "optional": true,
-                  "type": {
-                    "name": "MediaTrackConstraints"
-                  }
-                }
-              ],
-              "name": "applyConstraints",
-              "returnType": {
-                "name": "Promise",
-                "params": [
-                  {
-                    "name": "void"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "onoverconstrained",
-              "type": {
-                "name": "EventHandler"
-              },
-              "type_": "attribute"
-            }
-          ],
-          "name": "MediaStreamTrack",
-          "type_": "interface"
-        }
-      ],
-      [
-        {
-          "name": "MediaStreamTrackState",
-          "type_": "enum",
-          "value": [
-            "live",
-            "ended"
-          ]
-        }
-      ],
-      [
-        {
-          "members": [
-            {
-              "defaultValue": "true",
-              "name": "width",
-              "type": {
-                "name": "boolean"
-              }
-            },
-            {
-              "defaultValue": "true",
-              "name": "height",
-              "type": {
-                "name": "boolean"
-              }
-            },
-            {
-              "defaultValue": "true",
-              "name": "aspectRatio",
-              "type": {
-                "name": "boolean"
-              }
-            },
-            {
-              "defaultValue": "true",
-              "name": "frameRate",
-              "type": {
-                "name": "boolean"
-              }
-            },
-            {
-              "defaultValue": "true",
-              "name": "facingMode",
-              "type": {
-                "name": "boolean"
-              }
-            },
-            {
-              "defaultValue": "true",
-              "name": "volume",
-              "type": {
-                "name": "boolean"
-              }
-            },
-            {
-              "defaultValue": "true",
-              "name": "sampleRate",
-              "type": {
-                "name": "boolean"
-              }
-            },
-            {
-              "defaultValue": "true",
-              "name": "sampleSize",
-              "type": {
-                "name": "boolean"
-              }
-            },
-            {
-              "defaultValue": "true",
-              "name": "echoCancellation",
-              "type": {
-                "name": "boolean"
-              }
-            },
-            {
-              "defaultValue": "true",
-              "name": "latency",
-              "type": {
-                "name": "boolean"
-              }
-            },
-            {
-              "defaultValue": "true",
-              "name": "channelCount",
-              "type": {
-                "name": "boolean"
-              }
-            },
-            {
-              "defaultValue": "true",
-              "name": "deviceId",
-              "type": {
-                "name": "boolean"
-              }
-            },
-            {
-              "defaultValue": "true",
-              "name": "groupId",
-              "type": {
-                "name": "boolean"
-              }
-            }
-          ],
-          "name": "MediaTrackSupportedConstraints",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "members": [
-            {
-              "name": "width",
-              "type": {
-                "type_": "uniontype",
-                "types": [
-                  {
-                    "name": "long"
-                  },
-                  {
-                    "name": "LongRange"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "height",
-              "type": {
-                "type_": "uniontype",
-                "types": [
-                  {
-                    "name": "long"
-                  },
-                  {
-                    "name": "LongRange"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "aspectRatio",
-              "type": {
-                "type_": "uniontype",
-                "types": [
-                  {
-                    "name": "double"
-                  },
-                  {
-                    "name": "DoubleRange"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "frameRate",
-              "type": {
-                "type_": "uniontype",
-                "types": [
-                  {
-                    "name": "double"
-                  },
-                  {
-                    "name": "DoubleRange"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "facingMode",
-              "type": {
-                "name": "sequence",
-                "params": [
-                  {
-                    "name": "DOMString"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "volume",
-              "type": {
-                "type_": "uniontype",
-                "types": [
-                  {
-                    "name": "double"
-                  },
-                  {
-                    "name": "DoubleRange"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "sampleRate",
-              "type": {
-                "type_": "uniontype",
-                "types": [
-                  {
-                    "name": "long"
-                  },
-                  {
-                    "name": "LongRange"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "sampleSize",
-              "type": {
-                "type_": "uniontype",
-                "types": [
-                  {
-                    "name": "long"
-                  },
-                  {
-                    "name": "LongRange"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "echoCancellation",
-              "type": {
-                "name": "sequence",
-                "params": [
-                  {
-                    "name": "boolean"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "latency",
-              "type": {
-                "type_": "uniontype",
-                "types": [
-                  {
-                    "name": "double"
-                  },
-                  {
-                    "name": "DoubleRange"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "channelCount",
-              "type": {
-                "type_": "uniontype",
-                "types": [
-                  {
-                    "name": "long"
-                  },
-                  {
-                    "name": "LongRange"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "deviceId",
-              "type": {
-                "name": "DOMString"
-              }
-            },
-            {
-              "name": "groupId",
-              "type": {
-                "name": "DOMString"
-              }
-            }
-          ],
-          "name": "MediaTrackCapabilities",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "inheritsFrom": "MediaTrackConstraintSet",
-          "members": [
-            {
-              "name": "advanced",
-              "type": {
-                "name": "sequence",
-                "params": [
-                  {
-                    "name": "MediaTrackConstraintSet"
-                  }
-                ]
-              }
-            }
-          ],
-          "name": "MediaTrackConstraints",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "members": [
-            {
-              "name": "width",
-              "type": {
-                "name": "ConstrainLong"
-              }
-            },
-            {
-              "name": "height",
-              "type": {
-                "name": "ConstrainLong"
-              }
-            },
-            {
-              "name": "aspectRatio",
-              "type": {
-                "name": "ConstrainDouble"
-              }
-            },
-            {
-              "name": "frameRate",
-              "type": {
-                "name": "ConstrainDouble"
-              }
-            },
-            {
-              "name": "facingMode",
-              "type": {
-                "name": "ConstrainDOMString"
-              }
-            },
-            {
-              "name": "volume",
-              "type": {
-                "name": "ConstrainDouble"
-              }
-            },
-            {
-              "name": "sampleRate",
-              "type": {
-                "name": "ConstrainLong"
-              }
-            },
-            {
-              "name": "sampleSize",
-              "type": {
-                "name": "ConstrainLong"
-              }
-            },
-            {
-              "name": "echoCancellation",
-              "type": {
-                "name": "ConstrainBoolean"
-              }
-            },
-            {
-              "name": "latency",
-              "type": {
-                "name": "ConstrainDouble"
-              }
-            },
-            {
-              "name": "channelCount",
-              "type": {
-                "name": "ConstrainLong"
-              }
-            },
-            {
-              "name": "deviceId",
-              "type": {
-                "name": "ConstrainDOMString"
-              }
-            },
-            {
-              "name": "groupId",
-              "type": {
-                "name": "ConstrainDOMString"
-              }
-            }
-          ],
-          "name": "MediaTrackConstraintSet",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "members": [
-            {
-              "name": "width",
-              "type": {
-                "name": "long"
-              }
-            },
-            {
-              "name": "height",
-              "type": {
-                "name": "long"
-              }
-            },
-            {
-              "name": "aspectRatio",
-              "type": {
-                "name": "double"
-              }
-            },
-            {
-              "name": "frameRate",
-              "type": {
-                "name": "double"
-              }
-            },
-            {
-              "name": "facingMode",
-              "type": {
-                "name": "DOMString"
-              }
-            },
-            {
-              "name": "volume",
-              "type": {
-                "name": "double"
-              }
-            },
-            {
-              "name": "sampleRate",
-              "type": {
-                "name": "long"
-              }
-            },
-            {
-              "name": "sampleSize",
-              "type": {
-                "name": "long"
-              }
-            },
-            {
-              "name": "echoCancellation",
-              "type": {
-                "name": "boolean"
-              }
-            },
-            {
-              "name": "latency",
-              "type": {
-                "name": "double"
-              }
-            },
-            {
-              "name": "channelCount",
-              "type": {
-                "name": "long"
-              }
-            },
-            {
-              "name": "deviceId",
-              "type": {
-                "name": "DOMString"
-              }
-            },
-            {
-              "name": "groupId",
-              "type": {
-                "name": "DOMString"
-              }
-            }
-          ],
-          "name": "MediaTrackSettings",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "name": "VideoFacingModeEnum",
-          "type_": "enum",
-          "value": [
-            "user",
-            "environment",
-            "left",
-            "right"
-          ]
-        }
-      ],
-      [
-        {
-          "attrs": [
-            {
-              "name": "Exposed",
-              "type_": "extendedattribute",
-              "value": "Window"
-            },
-            {
-              "args": [
-                {
-                  "name": "type",
-                  "type": {
-                    "name": "DOMString"
-                  }
-                },
-                {
-                  "name": "eventInitDict",
-                  "type": {
-                    "name": "MediaStreamTrackEventInit"
-                  }
-                }
-              ],
-              "name": "Constructor",
-              "type_": "extendedattribute"
-            }
-          ],
-          "inheritsFrom": "Event",
-          "members": [
-            {
-              "attrs": [
-                {
-                  "name": "SameObject",
-                  "type_": "extendedattribute"
-                }
-              ],
-              "isReadOnly": true,
-              "name": "track",
-              "type": {
-                "name": "MediaStreamTrack"
-              },
-              "type_": "attribute"
-            }
-          ],
-          "name": "MediaStreamTrackEvent",
-          "type_": "interface"
-        }
-      ],
-      [
-        {
-          "inheritsFrom": "EventInit",
-          "members": [
-            {
-              "isRequired": true,
-              "name": "track",
-              "type": {
-                "name": "MediaStreamTrack"
-              }
-            }
-          ],
-          "name": "MediaStreamTrackEventInit",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "attrs": [
-            {
-              "name": "Exposed",
-              "type_": "extendedattribute",
-              "value": "Window"
-            },
-            {
-              "args": [
-                {
-                  "name": "type",
-                  "type": {
-                    "name": "DOMString"
-                  }
-                },
-                {
-                  "name": "eventInitDict",
-                  "type": {
-                    "name": "OverconstrainedErrorEventInit"
-                  }
-                }
-              ],
-              "name": "Constructor",
-              "type_": "extendedattribute"
-            }
-          ],
-          "inheritsFrom": "Event",
-          "members": [
-            {
-              "isReadOnly": true,
-              "name": "error",
-              "type": {
-                "name": "OverconstrainedError",
-                "params": [
-                  "nullable"
-                ]
-              },
-              "type_": "attribute"
-            }
-          ],
-          "name": "OverconstrainedErrorEvent",
-          "type_": "interface"
-        }
-      ],
-      [
-        {
-          "inheritsFrom": "EventInit",
-          "members": [
-            {
-              "defaultValue": "null",
-              "name": "error",
-              "type": {
-                "name": "OverconstrainedError",
-                "params": [
-                  "nullable"
-                ]
-              }
-            }
-          ],
-          "name": "OverconstrainedErrorEventInit",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "attrs": [
-            {
-              "name": "Exposed",
-              "type_": "extendedattribute",
-              "value": "Window"
-            },
-            {
-              "name": "NoInterfaceObject",
-              "type_": "extendedattribute"
-            }
-          ],
-          "members": [
-            {
-              "attrs": [
-                {
-                  "name": "SameObject",
-                  "type_": "extendedattribute"
-                }
-              ],
-              "isReadOnly": true,
-              "name": "mediaDevices",
-              "type": {
-                "name": "MediaDevices"
-              },
-              "type_": "attribute"
-            }
-          ],
-          "name": "NavigatorUserMedia",
-          "type_": "interface"
-        }
-      ],
-      [
-        {
-          "implemented": "NavigatorUserMedia",
-          "implementer": "Navigator",
-          "type_": "implements"
-        }
-      ],
-      [
-        {
-          "attrs": [
-            {
-              "name": "Exposed",
-              "type_": "extendedattribute",
-              "value": "Window"
-            }
-          ],
-          "inheritsFrom": "EventTarget",
-          "members": [
-            {
-              "name": "ondevicechange",
-              "type": {
-                "name": "EventHandler"
-              },
-              "type_": "attribute"
-            },
-            {
-              "name": "enumerateDevices",
-              "returnType": {
-                "name": "Promise",
-                "params": [
-                  {
-                    "name": "sequence",
-                    "params": [
-                      {
-                        "name": "MediaDeviceInfo"
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-          ],
-          "name": "MediaDevices",
-          "type_": "interface"
-        }
-      ],
-      [
-        {
-          "attrs": [
-            {
-              "name": "Exposed",
-              "type_": "extendedattribute",
-              "value": "Window"
-            }
-          ],
-          "members": [
-            {
-              "isReadOnly": true,
-              "name": "deviceId",
-              "type": {
-                "name": "DOMString"
-              },
-              "type_": "attribute"
-            },
-            {
-              "isReadOnly": true,
-              "name": "kind",
-              "type": {
-                "name": "MediaDeviceKind"
-              },
-              "type_": "attribute"
-            },
-            {
-              "isReadOnly": true,
-              "name": "label",
-              "type": {
-                "name": "DOMString"
-              },
-              "type_": "attribute"
-            },
-            {
-              "isReadOnly": true,
-              "name": "groupId",
-              "type": {
-                "name": "DOMString"
-              },
-              "type_": "attribute"
-            },
-            {
-              "mapPattern": [
-                "attribute"
-              ],
-              "type_": "serializer"
-            }
-          ],
-          "name": "MediaDeviceInfo",
-          "type_": "interface"
-        }
-      ],
-      [
-        {
-          "name": "MediaDeviceKind",
-          "type_": "enum",
-          "value": [
-            "audioinput",
-            "audiooutput",
-            "videoinput"
-          ]
-        }
-      ],
-      [
-        {
-          "inheritsFrom": "MediaDeviceInfo",
-          "members": [
-            {
-              "name": "getCapabilities",
-              "returnType": {
-                "name": "MediaTrackCapabilities"
-              }
-            }
-          ],
-          "name": "InputDeviceInfo",
-          "type_": "interface"
-        }
-      ],
-      [
-        {
-          "isPartial": true,
-          "members": [
-            {
-              "args": [
-                {
-                  "name": "constraints",
-                  "type": {
-                    "name": "MediaStreamConstraints"
-                  }
-                },
-                {
-                  "name": "successCallback",
-                  "type": {
-                    "name": "NavigatorUserMediaSuccessCallback"
-                  }
-                },
-                {
-                  "name": "errorCallback",
-                  "type": {
-                    "name": "NavigatorUserMediaErrorCallback"
-                  }
-                }
-              ],
-              "name": "getUserMedia",
-              "returnType": {
-                "name": "void"
-              }
-            }
-          ],
-          "name": "NavigatorUserMedia",
-          "type_": "partialinterface"
-        }
-      ],
-      [
-        {
-          "isPartial": true,
-          "members": [
-            {
-              "name": "getSupportedConstraints",
-              "returnType": {
-                "name": "MediaTrackSupportedConstraints"
-              }
-            },
-            {
-              "args": [
-                {
-                  "name": "constraints",
-                  "optional": true,
-                  "type": {
-                    "name": "MediaStreamConstraints"
-                  }
-                }
-              ],
-              "name": "getUserMedia",
-              "returnType": {
-                "name": "Promise",
-                "params": [
-                  {
-                    "name": "MediaStream"
-                  }
-                ]
-              }
-            }
-          ],
-          "name": "MediaDevices",
-          "type_": "partialinterface"
-        }
-      ],
-      [
-        {
-          "members": [
-            {
-              "defaultValue": "false",
-              "name": "video",
-              "type": {
-                "type_": "uniontype",
-                "types": [
-                  {
-                    "name": "boolean"
-                  },
-                  {
-                    "name": "MediaTrackConstraints"
-                  }
-                ]
-              }
-            },
-            {
-              "defaultValue": "false",
-              "name": "audio",
-              "type": {
-                "type_": "uniontype",
-                "types": [
-                  {
-                    "name": "boolean"
-                  },
-                  {
-                    "name": "MediaTrackConstraints"
-                  }
-                ]
-              }
-            }
-          ],
-          "name": "MediaStreamConstraints",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "args": [
-            {
-              "name": "stream",
-              "type": {
-                "name": "MediaStream"
-              }
-            }
-          ],
-          "name": "NavigatorUserMediaSuccessCallback",
-          "returnType": {
-            "name": "void"
-          },
-          "type_": "callback"
-        }
-      ],
-      [
-        {
-          "args": [
-            {
-              "name": "error",
-              "type": {
-                "name": "MediaStreamError"
-              }
-            }
-          ],
-          "name": "NavigatorUserMediaErrorCallback",
-          "returnType": {
-            "name": "void"
-          },
-          "type_": "callback"
-        }
-      ],
-      [
-        {
-          "name": "MediaStreamError",
-          "type": {
-            "name": "object"
-          },
-          "type_": "typedef"
-        }
-      ],
-      [
-        {
-          "attrs": [
-            {
-              "name": "NoInterfaceObject",
-              "type_": "extendedattribute"
-            }
-          ],
-          "members": [
-            {
-              "name": "getCapabilities",
-              "returnType": {
-                "name": "Capabilities"
-              }
-            },
-            {
-              "name": "getConstraints",
-              "returnType": {
-                "name": "Constraints"
-              }
-            },
-            {
-              "name": "getSettings",
-              "returnType": {
-                "name": "Settings"
-              }
-            },
-            {
-              "args": [
-                {
-                  "name": "constraints",
-                  "optional": true,
-                  "type": {
-                    "name": "Constraints"
-                  }
-                }
-              ],
-              "name": "applyConstraints",
-              "returnType": {
-                "name": "Promise",
-                "params": [
-                  {
-                    "name": "void"
-                  }
-                ]
-              }
-            },
-            {
-              "name": "onoverconstrained",
-              "type": {
-                "name": "EventHandler"
-              },
-              "type_": "attribute"
-            }
-          ],
-          "name": "ConstrainablePattern",
-          "type_": "interface"
-        }
-      ],
-      [
-        {
-          "members": [
-            {
-              "name": "max",
-              "type": {
-                "name": "double"
-              }
-            },
-            {
-              "name": "min",
-              "type": {
-                "name": "double"
-              }
-            }
-          ],
-          "name": "DoubleRange",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "inheritsFrom": "DoubleRange",
-          "members": [
-            {
-              "name": "exact",
-              "type": {
-                "name": "double"
-              }
-            },
-            {
-              "name": "ideal",
-              "type": {
-                "name": "double"
-              }
-            }
-          ],
-          "name": "ConstrainDoubleRange",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "members": [
-            {
-              "name": "max",
-              "type": {
-                "name": "long"
-              }
-            },
-            {
-              "name": "min",
-              "type": {
-                "name": "long"
-              }
-            }
-          ],
-          "name": "LongRange",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "inheritsFrom": "LongRange",
-          "members": [
-            {
-              "name": "exact",
-              "type": {
-                "name": "long"
-              }
-            },
-            {
-              "name": "ideal",
-              "type": {
-                "name": "long"
-              }
-            }
-          ],
-          "name": "ConstrainLongRange",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "members": [
-            {
-              "name": "exact",
-              "type": {
-                "name": "boolean"
-              }
-            },
-            {
-              "name": "ideal",
-              "type": {
-                "name": "boolean"
-              }
-            }
-          ],
-          "name": "ConstrainBooleanParameters",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "members": [
-            {
-              "name": "exact",
-              "type": {
-                "type_": "uniontype",
-                "types": [
-                  {
-                    "name": "DOMString"
-                  },
-                  {
-                    "name": "sequence",
-                    "params": [
-                      {
-                        "name": "DOMString"
-                      }
-                    ]
-                  }
-                ]
-              }
-            },
-            {
-              "name": "ideal",
-              "type": {
-                "type_": "uniontype",
-                "types": [
-                  {
-                    "name": "DOMString"
-                  },
-                  {
-                    "name": "sequence",
-                    "params": [
-                      {
-                        "name": "DOMString"
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-          ],
-          "name": "ConstrainDOMStringParameters",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "name": "ConstrainLong",
-          "type": {
-            "type_": "uniontype",
-            "types": [
-              {
-                "name": "long"
-              },
-              {
-                "name": "ConstrainLongRange"
-              }
-            ]
-          },
-          "type_": "typedef"
-        }
-      ],
-      [
-        {
-          "name": "ConstrainDouble",
-          "type": {
-            "type_": "uniontype",
-            "types": [
-              {
-                "name": "double"
-              },
-              {
-                "name": "ConstrainDoubleRange"
-              }
-            ]
-          },
-          "type_": "typedef"
-        }
-      ],
-      [
-        {
-          "name": "ConstrainBoolean",
-          "type": {
-            "type_": "uniontype",
-            "types": [
-              {
-                "name": "boolean"
-              },
-              {
-                "name": "ConstrainBooleanParameters"
-              }
-            ]
-          },
-          "type_": "typedef"
-        }
-      ],
-      [
-        {
-          "name": "ConstrainDOMString",
-          "type": {
-            "type_": "uniontype",
-            "types": [
-              {
-                "name": "DOMString"
-              },
-              {
-                "name": "sequence",
-                "params": [
-                  {
-                    "name": "DOMString"
-                  }
-                ]
-              },
-              {
-                "name": "ConstrainDOMStringParameters"
-              }
-            ]
-          },
-          "type_": "typedef"
-        }
-      ],
-      [
-        {
-          "members": [
-          ],
-          "name": "Capabilities",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "members": [
-          ],
-          "name": "Settings",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "members": [
-          ],
-          "name": "ConstraintSet",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
-          "inheritsFrom": "ConstraintSet",
-          "members": [
-            {
-              "name": "advanced",
-              "type": {
-                "name": "sequence",
-                "params": [
-                  {
-                    "name": "ConstraintSet"
-                  }
-                ]
-              }
-            }
-          ],
-          "name": "Constraints",
-          "type_": "dictionary"
-        }
-      ]
     ],
-    "url": "https://w3c.github.io/mediacapture-main/getusermedia"
+    "url": "https://w3c.github.io/mediacapture-main/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/mediacapture-main/archives/20131017/getusermedia"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/mediacapture-main/archives/20150629/getusermedia"
   },
   {
     "parses": [
@@ -6089,44 +5419,9 @@
       ],
       [
         {
-          "members": [
-            {
-              "name": "name",
-              "type": {
-                "name": "DOMString"
-              }
-            },
-            {
-              "name": "entryType",
-              "type": {
-                "name": "DOMString"
-              }
-            },
-            {
-              "name": "initiatorType",
-              "type": {
-                "name": "DOMString"
-              }
-            }
-          ],
-          "name": "PerformanceEntryFilterOptions",
-          "type_": "dictionary"
-        }
-      ],
-      [
-        {
           "isPartial": true,
           "members": [
             {
-              "args": [
-                {
-                  "name": "filter",
-                  "optional": true,
-                  "type": {
-                    "name": "PerformanceEntryFilterOptions"
-                  }
-                }
-              ],
               "name": "getEntries",
               "returnType": {
                 "name": "PerformanceEntryList"
@@ -6216,15 +5511,6 @@
           ],
           "members": [
             {
-              "args": [
-                {
-                  "name": "filter",
-                  "optional": true,
-                  "type": {
-                    "name": "PerformanceEntryFilterOptions"
-                  }
-                }
-              ],
               "name": "getEntries",
               "returnType": {
                 "name": "PerformanceEntryList"
@@ -6704,6 +5990,11 @@
   },
   {
     "parses": [
+    ],
+    "url": "https://w3c.github.io/pointerlock/"
+  },
+  {
+    "parses": [
       [
         {
           "isPartial": true,
@@ -6718,10 +6009,7 @@
               "isReadOnly": true,
               "name": "presentation",
               "type": {
-                "name": "Presentation",
-                "params": [
-                  "nullable"
-                ]
+                "name": "Presentation"
               },
               "type_": "attribute"
             }
@@ -7245,6 +6533,11 @@
   },
   {
     "parses": [
+    ],
+    "url": "https://w3c.github.io/quota-api/"
+  },
+  {
+    "parses": [
       [
         {
           "inheritsFrom": "EventTarget",
@@ -7592,6 +6885,11 @@
       ]
     ],
     "url": "https://w3c.github.io/resource-timing/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/sensors/"
   },
   {
     "parses": [
@@ -8767,6 +8065,73 @@
   {
     "parses": [
     ],
+    "url": "https://w3c.github.io/webappsec-csp/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/webappsec-csp/embedded/"
+  },
+  {
+    "parses": [
+      [
+        {
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "isSecureContext",
+              "type": {
+                "name": "boolean"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "GlobalSecureContext",
+          "type_": "interface"
+        },
+        {
+          "implemented": "GlobalSecureContext",
+          "implementer": "Window",
+          "type_": "implements"
+        },
+        {
+          "implemented": "GlobalSecureContext",
+          "implementer": "WorkerGlobalScope",
+          "type_": "implements"
+        }
+      ],
+      [
+        {
+          "members": [
+            {
+              "isReadOnly": true,
+              "name": "isSecureContext",
+              "type": {
+                "name": "boolean"
+              },
+              "type_": "attribute"
+            }
+          ],
+          "name": "GlobalSecureContext",
+          "type_": "interface"
+        },
+        {
+          "implemented": "GlobalSecureContext",
+          "implementer": "Window",
+          "type_": "implements"
+        },
+        {
+          "implemented": "GlobalSecureContext",
+          "implementer": "WorkerGlobalScope",
+          "type_": "implements"
+        }
+      ]
+    ],
+    "url": "https://w3c.github.io/webappsec-secure-contexts/"
+  },
+  {
+    "parses": [
+    ],
     "url": "https://w3c.github.io/webappsec/specs/content-security-policy/"
   },
   {
@@ -8948,10 +8313,25 @@
   },
   {
     "parses": [
+    ],
+    "url": "https://w3c.github.io/webcrypto/Overview"
+  },
+  {
+    "parses": [
       [
       ]
     ],
     "url": "https://w3c.github.io/webrtc-pc/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://w3c.github.io/webvr/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://webaudio.github.io/web-audio-api/"
   },
   {
     "parses": [
@@ -9972,6 +9352,26 @@
   {
     "parses": [
     ],
+    "url": "https://wicg.github.io/IntersectionObserver/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://wicg.github.io/entries-api/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://wicg.github.io/mediasession/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://wicg.github.io/shape-detection-api/"
+  },
+  {
+    "parses": [
+    ],
     "url": "https://wicg.github.io/webusb/"
   },
   {
@@ -10048,6 +9448,26 @@
     "parses": [
     ],
     "url": "https://www.w3.org/TR/2013/WD-mediacapture-streams-20130903/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/2015/WD-webrtc-20150210/"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/html5/webappapis"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/image-capture"
+  },
+  {
+    "parses": [
+    ],
+    "url": "https://www.w3.org/TR/image-capture/"
   },
   {
     "parses": [
