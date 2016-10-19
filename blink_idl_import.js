@@ -19,9 +19,16 @@
 // NOTE: Only to be invoked from blink_idl_import.sh.
 
 var env = require('process').env;
-var idlFiles = env.IDL_FILES.split('\n').map(function(path) {
-  return env.BLINK_SRC_DIR + '/' + path;
-});
+var idlFiles = env.IDL_FILES.split('\n');
+var blinkSrcDir = env.BLINK_SRC_DIR;
+var blinkHash = env.BLINK_COMMIT_HASH;
+
+function getLocalPath(relativePath) {
+  return `${blinkSrcDir}/${relativePath}`;
+}
+function getURL(path) {
+  return `https://chromium.googlesource.com/chromium/blink/+/${blinkHash}/${path}`;
+}
 
 var stringify = require('ya-stdlib-js').stringify;
 
@@ -30,7 +37,7 @@ function loadFiles(arr) {
   for (var i = 0; i < arr.length; i++) {
     arr[i] = {
       path: arr[i],
-      contents: fs.readFileSync(arr[i]).toString(),
+      contents: fs.readFileSync(getLocalPath(arr[i])).toString(),
     };
   }
   return arr;
@@ -44,9 +51,13 @@ var errCount = 0;
 var parses = [];
 data.forEach(function(datum) {
   try {
+    var url = getURL(datum.path);
     var res = parser.parseString(datum.contents);
     if (res[0]) {
-      parses = parses.concat(res[1]);
+      parses.push({
+        url: url,
+        parses: res[1],
+      });
     } else {
       errCount++;
       console.warn('Incomplete parse from', datum.path);
