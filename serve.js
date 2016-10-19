@@ -49,14 +49,6 @@ var HTML_HEAD = '<html><head>' +
       '</head><body>';
 var HTML_FOOT = '</body></html>';
 
-var list;
-try {
-  list = JSON.parse(fs.readFileSync(DATA_DIR + '/list.json'));
-} catch (e) {
-  list = {};
-  fs.writeFileSync(DATA_DIR + '/list.json', stringify(list));
-}
-
 /**
  * Browser product info.
  * @constructor
@@ -156,22 +148,6 @@ function sendHTML(str, res) {
 }
 
 /**
- * Update internal list of object graph data stored by this server.
- * @param {Object} env - The environment for which data has been added
- * @return {Boolean} - Whether or not the list was updated successfully
- */
-function updateList(env) {
-  try {
-    var dataExists = ensurePath(list, env.toArray());
-    fs.writeFileSync(DATA_DIR + '/list.json', stringify(list));
-    return !dataExists;
-  } catch (e) {
-    console.error(e);
-    return false;
-  }
-}
-
-/**
  * Get object graph data.
  * @param {Environment} info - The requested browser environment
  * @return {Buffer} - The requested data in a JSON string buffer
@@ -198,7 +174,6 @@ app.post('/save', timeout('30s'), function(req, res) {
     } else if (err) {
       var dataStr = stringify(JSON.parse(req.body.data));
       fs.writeFileSync(path, dataStr);
-      updateList(env);
       sendHTML('Saved data (' + dataStr.length + ' characters of JSON)',
                res);
     } else {
