@@ -19,7 +19,13 @@
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import runSequence from 'run-sequence';
-import webpack from 'webpack-stream';
+import webpackStream from 'webpack-stream';
+import webpack from 'webpack';
+import yargs from 'yargs';
+
+const argv = yargs
+    .describe('production', 'Build for production')
+    .argv;
 
 const $ = gulpLoadPlugins();
 
@@ -34,32 +40,39 @@ gulp.task('lint', () => {
     .pipe($.eslint.failAfterError());
 });
 
-var names = ['main', 'analyze'];
+const names = ['main', 'analyze'];
+
+let webpackConfig = {
+  module: {
+    loaders: [
+      {
+        test: /\.es6\.js$/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015'],
+          plugins: ['transform-runtime']
+        },
+      },
+    ],
+  },
+  plugins: [],
+};
+if (argv.production) {
+  webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin());
+} else {
+  webpackConfig.devtool = 'inline-source-map';
+}
 
 names.map(
   name =>
     gulp.task(
       name,
-      () =>
-        gulp.src(`./static/js/${name}.js`)
-        .pipe(webpack({
-          devtool: 'inline-source-map',
+      () => gulp.src(`./static/js/${name}.js`)
+        .pipe(webpackStream(Object.assign({
           output: {
             filename: `${name}.bundle.js`,
           },
-          module: {
-            loaders: [
-              {
-                test: /\.es6\.js$/,
-                loader: 'babel',
-                query: {
-                  presets: ['es2015'],
-                  plugins: ['transform-runtime']
-                },
-              },
-            ],
-          },
-        }))
+        }, webpackConfig)))
         .pipe(gulp.dest('./static/bundle'))
     )
 );

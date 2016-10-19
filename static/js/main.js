@@ -31,20 +31,20 @@ browserElement.textContent = environmentInfo.browser.name + ' ' +
 platformElement.textContent = environmentInfo.platform.name + ' ' +
   environmentInfo.platform.version;
 
-// Facilitate form submission and WebDriver observation:
-// Set value, textContent, and "value" element attribute.
 var dataElement = document.body.querySelector('#data');
+var statusElement = document.body.querySelector('#status');
 function setData(str) {
-  dataElement.value = dataElement.textContent = str;
-  dataElement.setAttribute('value', str);
+  dataElement.value = str;
 }
 
 // Wire up listener for user-initiated data collection.
 document.body.querySelector('#collect').addEventListener('click', function() {
+  statusElement.textContent = 'Collecting data...';
   var graph = new ObjectGraph({
     maxDequeueSize: 1000,
     onDone: function() {
       setData(JSON.stringify(graph.toJSON()));
+      statusElement.textContent = 'Data collected.';
     },
   });
   graph.capture(window, {key: 'window'});

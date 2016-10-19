@@ -56,19 +56,21 @@ function doAnalyses(inGraphs, exGraphs) {
   apisE.textContent = structsE.textContent = primitivesE.textContent = '';
 
   // Sanity check input graph ids.
-  inGraphs.concat(exGraphs).map(g => g.getAllIds().forEach(id => {
-    if (isNaN(id)) debugger;
-  }));
+  inGraphs.concat(exGraphs).map(function(g) {
+    g.getAllIds().forEach(function(id) {
+      if (isNaN(id)) debugger;
+    });
+  });
 
   var graph = analysis.intersectDifference(inGraphs, exGraphs);
 
   console.assert(graph.data[graph.root]);
 
   // Sanity check output graph ids.
-  graph.getAllIds().forEach(id => {
+  graph.getAllIds().forEach(function(id) {
     if (isNaN(id)) debugger;
   });
-  var ids = graph.getAllIds().filter(id => {
+  var ids = graph.getAllIds().filter(function(id) {
     return !isNaN(id);
   }).sort();
 
@@ -89,10 +91,12 @@ function doAnalyses(inGraphs, exGraphs) {
   // Only report "leaf structs"; they have no other structs for which their key
   // is a prefix.
   uiData.structs = Array.from(allStructs).filter(
-    struct => !allStructs.some(
-      otherStruct => otherStruct.length > struct.length &&
-        otherStruct.indexOf(struct) === 0
-    )
+    function(struct) {
+      return !allStructs.some(function(otherStruct) {
+        return otherStruct.length > struct.length &&
+            otherStruct.indexOf(struct) === 0;
+      });
+    }
   );
 
   uiData.primitives = ids.map(function(id) {

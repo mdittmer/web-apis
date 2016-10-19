@@ -34,7 +34,8 @@
     <pre id="platform"></pre>
     <button id="collect">Collect data</button>
     <form action="/save" method="post">
-      <label for="data">Collected data:</label> <textarea name="data" id="data" type="input" value="{}">{}</textarea>
+      <label for="status">Status:</label> <span id="status">Idle</span>
+      <input name="data" id="data" type="hidden" value="{}">
       <button id="send">Send data</button>
     </form>
 

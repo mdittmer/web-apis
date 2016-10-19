@@ -21,6 +21,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var jsonStableStringify = require('json-stable-stringify');
 var glob = require('glob');
+var timeout = require('connect-timeout');
 
 var jsonStableStringifyConfig = {
   space: '  ',
@@ -179,7 +180,7 @@ function getData(info) {
   return fs.readFileSync(OG_DATA_DIR + '/' + info.getJSONFileName());
 }
 
-app.post('/save', function(req, res) {
+app.post('/save', timeout('30s'), function(req, res) {
   if (!(req.body && req.body.data)) {
     sendHTML('No data saved: No data found.', res);
     return;
