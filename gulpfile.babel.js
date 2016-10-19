@@ -40,7 +40,7 @@ gulp.task('lint', () => {
     .pipe($.eslint.failAfterError());
 });
 
-const names = ['main', 'analyze'];
+const names = ['main', 'analyze_og'];
 
 let webpackConfig = {
   module: {

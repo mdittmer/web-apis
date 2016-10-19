@@ -15,7 +15,7 @@ Explore the object graph exposed by a browser's Javascript environment.
 
 ### Exploring data
 
-While serving locally `localhost:8000/analyze.html`. This tool allows you to
+While serving locally `localhost:8000/analyze_og.html`. This tool allows you to
 select browser environments to include and exclude, and then look at the APIs
 and structures in the resulting environment.
 
