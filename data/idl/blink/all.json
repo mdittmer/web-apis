@@ -1763,6 +1763,842 @@
     "type_": "interface"
   },
   {
+    "attrs": [
+      {
+        "identifiers": [
+          "Window",
+          "Worker"
+        ],
+        "name": "Exposed",
+        "type_": "extendedattribute"
+      }
+    ],
+    "members": [
+      {
+        "args": [
+          {
+            "name": "type",
+            "type": {
+              "name": "DOMString"
+            }
+          },
+          {
+            "name": "callback",
+            "type": {
+              "name": "EventListener",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "defaultValue": "false",
+            "name": "capture",
+            "optional": true,
+            "type": {
+              "name": "boolean"
+            }
+          }
+        ],
+        "name": "addEventListener",
+        "returnType": {
+          "name": "void"
+        }
+      },
+      {
+        "args": [
+          {
+            "name": "type",
+            "type": {
+              "name": "DOMString"
+            }
+          },
+          {
+            "name": "callback",
+            "type": {
+              "name": "EventListener",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "defaultValue": "false",
+            "name": "capture",
+            "optional": true,
+            "type": {
+              "name": "boolean"
+            }
+          }
+        ],
+        "name": "removeEventListener",
+        "returnType": {
+          "name": "void"
+        }
+      },
+      {
+        "args": [
+          {
+            "name": "event",
+            "type": {
+              "name": "Event"
+            }
+          }
+        ],
+        "name": "dispatchEvent",
+        "returnType": {
+          "name": "boolean"
+        }
+      }
+    ],
+    "name": "EventTarget",
+    "type_": "interface"
+  },
+  {
+    "members": [
+      {
+        "args": [
+          {
+            "name": "event",
+            "type": {
+              "name": "Event"
+            }
+          }
+        ],
+        "name": "handleEvent",
+        "returnType": {
+          "name": "void"
+        }
+      }
+    ],
+    "name": "EventListener",
+    "type_": "callback"
+  },
+  {
+    "args": [
+      {
+        "name": "event",
+        "type": {
+          "name": "Event"
+        }
+      }
+    ],
+    "attrs": [
+      {
+        "name": "TreatNonCallableAsNull",
+        "type_": "extendedattribute"
+      }
+    ],
+    "name": "EventHandlerNonNull",
+    "returnType": {
+      "name": "any"
+    },
+    "type_": "callback"
+  },
+  {
+    "name": "EventHandler",
+    "type": {
+      "name": "EventHandlerNonNull",
+      "params": [
+        "nullable"
+      ]
+    },
+    "type_": "typedef"
+  },
+  {
+    "args": [
+      {
+        "name": "event",
+        "type": {
+          "type_": "uniontype",
+          "types": [
+            {
+              "name": "Event"
+            },
+            {
+              "name": "DOMString"
+            }
+          ]
+        }
+      },
+      {
+        "name": "source",
+        "optional": true,
+        "type": {
+          "name": "DOMString"
+        }
+      },
+      {
+        "name": "lineno",
+        "optional": true,
+        "type": {
+          "name": "unsigned long"
+        }
+      },
+      {
+        "name": "column",
+        "optional": true,
+        "type": {
+          "name": "unsigned long"
+        }
+      },
+      {
+        "name": "error",
+        "optional": true,
+        "type": {
+          "name": "any"
+        }
+      }
+    ],
+    "attrs": [
+      {
+        "name": "TreatNonCallableAsNull",
+        "type_": "extendedattribute"
+      }
+    ],
+    "name": "OnErrorEventHandlerNonNull",
+    "returnType": {
+      "name": "any"
+    },
+    "type_": "callback"
+  },
+  {
+    "name": "OnErrorEventHandler",
+    "type": {
+      "name": "OnErrorEventHandlerNonNull",
+      "params": [
+        "nullable"
+      ]
+    },
+    "type_": "typedef"
+  },
+  {
+    "attrs": [
+      {
+        "name": "Exposed",
+        "type_": "extendedattribute",
+        "value": "Worker"
+      }
+    ],
+    "inheritsFrom": "EventTarget",
+    "members": [
+      {
+        "isReadOnly": true,
+        "name": "self",
+        "type": {
+          "name": "WorkerGlobalScope"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "location",
+        "type": {
+          "name": "WorkerLocation"
+        },
+        "type_": "attribute"
+      },
+      {
+        "name": "close",
+        "returnType": {
+          "name": "void"
+        }
+      },
+      {
+        "name": "onerror",
+        "type": {
+          "name": "OnErrorEventHandler"
+        },
+        "type_": "attribute"
+      },
+      {
+        "name": "onlanguagechange",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
+      },
+      {
+        "name": "onoffline",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
+      },
+      {
+        "name": "ononline",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
+      }
+    ],
+    "name": "WorkerGlobalScope",
+    "type_": "interface"
+  },
+  {
+    "attrs": [
+      {
+        "identifiers": [
+          "Worker",
+          "DedicatedWorker"
+        ],
+        "name": "Global",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "Exposed",
+        "type_": "extendedattribute",
+        "value": "DedicatedWorker"
+      }
+    ],
+    "inheritsFrom": "WorkerGlobalScope",
+    "members": [
+      {
+        "args": [
+          {
+            "name": "message",
+            "type": {
+              "name": "any"
+            }
+          },
+          {
+            "name": "transfer",
+            "optional": true,
+            "type": {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "Transferable"
+                }
+              ]
+            }
+          }
+        ],
+        "name": "postMessage",
+        "returnType": {
+          "name": "void"
+        }
+      },
+      {
+        "name": "onmessage",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
+      }
+    ],
+    "name": "DedicatedWorkerGlobalScope",
+    "type_": "interface"
+  },
+  {
+    "isPartial": true,
+    "members": [
+      {
+        "args": [
+          {
+            "isVariadic": true,
+            "name": "urls",
+            "type": {
+              "name": "DOMString"
+            }
+          }
+        ],
+        "name": "importScripts",
+        "returnType": {
+          "name": "void"
+        }
+      },
+      {
+        "isReadOnly": true,
+        "name": "navigator",
+        "type": {
+          "name": "WorkerNavigator"
+        },
+        "type_": "attribute"
+      }
+    ],
+    "name": "WorkerGlobalScope",
+    "type_": "partialinterface"
+  },
+  {
+    "implemented": "WindowTimers",
+    "implementer": "WorkerGlobalScope",
+    "type_": "implements"
+  },
+  {
+    "implemented": "WindowBase64",
+    "implementer": "WorkerGlobalScope",
+    "type_": "implements"
+  },
+  {
+    "attrs": [
+      {
+        "name": "NoInterfaceObject",
+        "type_": "extendedattribute"
+      },
+      {
+        "identifiers": [
+          "Window",
+          "Worker"
+        ],
+        "name": "Exposed",
+        "type_": "extendedattribute"
+      }
+    ],
+    "members": [
+      {
+        "args": [
+          {
+            "name": "handler",
+            "type": {
+              "name": "Function"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "timeout",
+            "optional": true,
+            "type": {
+              "name": "long"
+            }
+          },
+          {
+            "isVariadic": true,
+            "name": "arguments",
+            "type": {
+              "name": "any"
+            }
+          }
+        ],
+        "name": "setTimeout",
+        "returnType": {
+          "name": "long"
+        }
+      },
+      {
+        "args": [
+          {
+            "name": "handler",
+            "type": {
+              "name": "DOMString"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "timeout",
+            "optional": true,
+            "type": {
+              "name": "long"
+            }
+          },
+          {
+            "isVariadic": true,
+            "name": "arguments",
+            "type": {
+              "name": "any"
+            }
+          }
+        ],
+        "name": "setTimeout",
+        "returnType": {
+          "name": "long"
+        }
+      },
+      {
+        "args": [
+          {
+            "defaultValue": "0",
+            "name": "handle",
+            "optional": true,
+            "type": {
+              "name": "long"
+            }
+          }
+        ],
+        "name": "clearTimeout",
+        "returnType": {
+          "name": "void"
+        }
+      },
+      {
+        "args": [
+          {
+            "name": "handler",
+            "type": {
+              "name": "Function"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "timeout",
+            "optional": true,
+            "type": {
+              "name": "long"
+            }
+          },
+          {
+            "isVariadic": true,
+            "name": "arguments",
+            "type": {
+              "name": "any"
+            }
+          }
+        ],
+        "name": "setInterval",
+        "returnType": {
+          "name": "long"
+        }
+      },
+      {
+        "args": [
+          {
+            "name": "handler",
+            "type": {
+              "name": "DOMString"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "timeout",
+            "optional": true,
+            "type": {
+              "name": "long"
+            }
+          },
+          {
+            "isVariadic": true,
+            "name": "arguments",
+            "type": {
+              "name": "any"
+            }
+          }
+        ],
+        "name": "setInterval",
+        "returnType": {
+          "name": "long"
+        }
+      },
+      {
+        "args": [
+          {
+            "defaultValue": "0",
+            "name": "handle",
+            "optional": true,
+            "type": {
+              "name": "long"
+            }
+          }
+        ],
+        "name": "clearInterval",
+        "returnType": {
+          "name": "void"
+        }
+      }
+    ],
+    "name": "WindowTimers",
+    "type_": "interface"
+  },
+  {
+    "attrs": [
+      {
+        "name": "NoInterfaceObject",
+        "type_": "extendedattribute"
+      },
+      {
+        "identifiers": [
+          "Window",
+          "Worker"
+        ],
+        "name": "Exposed",
+        "type_": "extendedattribute"
+      }
+    ],
+    "members": [
+      {
+        "args": [
+          {
+            "name": "btoa",
+            "type": {
+              "name": "DOMString"
+            }
+          }
+        ],
+        "name": "btoa",
+        "returnType": {
+          "name": "DOMString"
+        }
+      },
+      {
+        "args": [
+          {
+            "name": "atob",
+            "type": {
+              "name": "DOMString"
+            }
+          }
+        ],
+        "name": "atob",
+        "returnType": {
+          "name": "DOMString"
+        }
+      }
+    ],
+    "name": "WindowBase64",
+    "type_": "interface"
+  },
+  {
+    "attrs": [
+      {
+        "name": "Exposed",
+        "type_": "extendedattribute",
+        "value": "Worker"
+      }
+    ],
+    "members": [
+    ],
+    "name": "WorkerNavigator",
+    "type_": "interface"
+  },
+  {
+    "implemented": "NavigatorID",
+    "implementer": "WorkerNavigator",
+    "type_": "implements"
+  },
+  {
+    "implemented": "NavigatorLanguage",
+    "implementer": "WorkerNavigator",
+    "type_": "implements"
+  },
+  {
+    "implemented": "NavigatorOnLine",
+    "implementer": "WorkerNavigator",
+    "type_": "implements"
+  },
+  {
+    "attrs": [
+      {
+        "name": "NoInterfaceObject",
+        "type_": "extendedattribute"
+      },
+      {
+        "identifiers": [
+          "Window",
+          "Worker"
+        ],
+        "name": "Exposed",
+        "type_": "extendedattribute"
+      }
+    ],
+    "members": [
+      {
+        "isReadOnly": true,
+        "name": "appCodeName",
+        "type": {
+          "name": "DOMString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "appName",
+        "type": {
+          "name": "DOMString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "appVersion",
+        "type": {
+          "name": "DOMString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "platform",
+        "type": {
+          "name": "DOMString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "product",
+        "type": {
+          "name": "DOMString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "userAgent",
+        "type": {
+          "name": "DOMString"
+        },
+        "type_": "attribute"
+      }
+    ],
+    "name": "NavigatorID",
+    "type_": "interface"
+  },
+  {
+    "attrs": [
+      {
+        "name": "NoInterfaceObject",
+        "type_": "extendedattribute"
+      },
+      {
+        "identifiers": [
+          "Window",
+          "Worker"
+        ],
+        "name": "Exposed",
+        "type_": "extendedattribute"
+      }
+    ],
+    "members": [
+      {
+        "isReadOnly": true,
+        "name": "language",
+        "type": {
+          "name": "DOMString",
+          "params": [
+            "nullable"
+          ]
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "languages",
+        "type": {
+          "name": "DOMString",
+          "params": [
+            "array"
+          ]
+        },
+        "type_": "attribute"
+      }
+    ],
+    "name": "NavigatorLanguage",
+    "type_": "interface"
+  },
+  {
+    "attrs": [
+      {
+        "name": "NoInterfaceObject",
+        "type_": "extendedattribute"
+      },
+      {
+        "identifiers": [
+          "Window",
+          "Worker"
+        ],
+        "name": "Exposed",
+        "type_": "extendedattribute"
+      }
+    ],
+    "members": [
+      {
+        "isReadOnly": true,
+        "name": "onLine",
+        "type": {
+          "name": "boolean"
+        },
+        "type_": "attribute"
+      }
+    ],
+    "name": "NavigatorOnLine",
+    "type_": "interface"
+  },
+  {
+    "attrs": [
+      {
+        "name": "Exposed",
+        "type_": "extendedattribute",
+        "value": "Worker"
+      }
+    ],
+    "members": [
+      {
+        "isReadOnly": true,
+        "name": "href",
+        "type": {
+          "name": "USVString"
+        },
+        "type_": "stringifier"
+      },
+      {
+        "isReadOnly": true,
+        "name": "origin",
+        "type": {
+          "name": "USVString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "protocol",
+        "type": {
+          "name": "USVString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "host",
+        "type": {
+          "name": "USVString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "hostname",
+        "type": {
+          "name": "USVString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "port",
+        "type": {
+          "name": "USVString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "pathname",
+        "type": {
+          "name": "USVString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "search",
+        "type": {
+          "name": "USVString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "hash",
+        "type": {
+          "name": "USVString"
+        },
+        "type_": "attribute"
+      }
+    ],
+    "name": "WorkerLocation",
+    "type_": "interface"
+  },
+  {
     "name": "AnimationPlayState",
     "type_": "enum",
     "value": [
@@ -2066,7 +2902,7 @@
         "isReadOnly": true,
         "name": "timing",
         "type": {
-          "name": "AnimationEffectTiming"
+          "name": "AnimationEffectTimingReadOnly"
         },
         "type_": "attribute"
       },
@@ -2088,6 +2924,7 @@
         "value": "WebAnimationsAPI"
       }
     ],
+    "inheritsFrom": "AnimationEffectTimingReadOnly",
     "members": [
       {
         "name": "delay",
@@ -2275,6 +3112,91 @@
     ],
     "name": "AnimationEffectTimingProperties",
     "type_": "dictionary"
+  },
+  {
+    "attrs": [
+      {
+        "name": "RuntimeEnabled",
+        "type_": "extendedattribute",
+        "value": "WebAnimationsAPI"
+      }
+    ],
+    "members": [
+      {
+        "isReadOnly": true,
+        "name": "delay",
+        "type": {
+          "name": "double"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "endDelay",
+        "type": {
+          "name": "double"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "fill",
+        "type": {
+          "name": "DOMString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "iterationStart",
+        "type": {
+          "name": "double"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "iterations",
+        "type": {
+          "name": "unrestricted double"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "duration",
+        "type": {
+          "type_": "uniontype",
+          "types": [
+            {
+              "name": "unrestricted double"
+            },
+            {
+              "name": "DOMString"
+            }
+          ]
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "direction",
+        "type": {
+          "name": "DOMString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "easing",
+        "type": {
+          "name": "DOMString"
+        },
+        "type_": "attribute"
+      }
+    ],
+    "name": "AnimationEffectTimingReadOnly",
+    "type_": "interface"
   },
   {
     "attrs": [
@@ -2625,7 +3547,7 @@
         "value": "WebAnimationsAPI"
       }
     ],
-    "inheritsFrom": "AnimationEffectReadOnly",
+    "inheritsFrom": "KeyframeEffectReadOnly",
     "members": [
     ],
     "name": "KeyframeEffect",
@@ -2647,7 +3569,116 @@
   },
   {
     "attrs": [
+      {
+        "args": [
+          {
+            "name": "target",
+            "type": {
+              "name": "Element",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "name": "effect",
+            "type": {
+              "params": [
+                "nullable"
+              ],
+              "type_": "uniontype",
+              "types": [
+                {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "Dictionary"
+                    }
+                  ]
+                },
+                {
+                  "name": "Dictionary"
+                }
+              ]
+            }
+          },
+          {
+            "name": "timing",
+            "optional": true,
+            "type": {
+              "name": "unrestricted double"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "args": [
+          {
+            "name": "target",
+            "type": {
+              "name": "Element",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "name": "effect",
+            "type": {
+              "params": [
+                "nullable"
+              ],
+              "type_": "uniontype",
+              "types": [
+                {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "Dictionary"
+                    }
+                  ]
+                },
+                {
+                  "name": "Dictionary"
+                }
+              ]
+            }
+          },
+          {
+            "name": "timing",
+            "type": {
+              "name": "KeyframeEffectOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "ConstructorCallWith",
+        "type_": "extendedattribute",
+        "value": "ExecutionContext"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      },
+      {
+        "name": "RuntimeEnabled",
+        "type_": "extendedattribute",
+        "value": "WebAnimationsAPI"
+      }
     ],
+    "inheritsFrom": "AnimationEffectReadOnly",
+    "members": [
+    ],
+    "name": "KeyframeEffectReadOnly",
+    "type_": "interface"
+  },
+  {
     "members": [
       {
         "name": "dropEffect",
@@ -2788,8 +3819,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -2845,8 +3874,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -3025,6 +4052,21 @@
       }
     ],
     "name": "CSS",
+    "type_": "interface"
+  },
+  {
+    "inheritsFrom": "CSSGroupingRule",
+    "members": [
+      {
+        "isReadOnly": true,
+        "name": "conditionText",
+        "type": {
+          "name": "DOMString"
+        },
+        "type_": "attribute"
+      }
+    ],
+    "name": "CSSConditionRule",
     "type_": "interface"
   },
   {
@@ -3277,7 +4319,7 @@
     "type_": "interface"
   },
   {
-    "inheritsFrom": "CSSGroupingRule",
+    "inheritsFrom": "CSSConditionRule",
     "members": [
       {
         "attrs": [
@@ -4046,76 +5088,8 @@
     "type_": "interface"
   },
   {
-    "inheritsFrom": "CSSRule",
+    "inheritsFrom": "CSSConditionRule",
     "members": [
-      {
-        "isReadOnly": true,
-        "name": "conditionText",
-        "type": {
-          "name": "DOMString"
-        },
-        "type_": "attribute"
-      },
-      {
-        "attrs": [
-          {
-            "name": "SameObject",
-            "type_": "extendedattribute"
-          }
-        ],
-        "isReadOnly": true,
-        "name": "cssRules",
-        "type": {
-          "name": "CSSRuleList"
-        },
-        "type_": "attribute"
-      },
-      {
-        "args": [
-          {
-            "name": "rule",
-            "type": {
-              "name": "DOMString"
-            }
-          },
-          {
-            "name": "index",
-            "type": {
-              "name": "unsigned long"
-            }
-          }
-        ],
-        "attrs": [
-          {
-            "name": "RaisesException",
-            "type_": "extendedattribute"
-          }
-        ],
-        "name": "insertRule",
-        "returnType": {
-          "name": "unsigned long"
-        }
-      },
-      {
-        "args": [
-          {
-            "name": "index",
-            "type": {
-              "name": "unsigned long"
-            }
-          }
-        ],
-        "attrs": [
-          {
-            "name": "RaisesException",
-            "type_": "extendedattribute"
-          }
-        ],
-        "name": "deleteRule",
-        "returnType": {
-          "name": "void"
-        }
-      }
     ],
     "name": "CSSSupportsRule",
     "type_": "interface"
@@ -4665,8 +5639,6 @@
     "type_": "dictionary"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "name": "mediaText",
@@ -4982,37 +5954,6 @@
         ],
         "isStatic": true,
         "name": "registerProperty",
-        "returnType": {
-          "name": "void"
-        }
-      },
-      {
-        "args": [
-          {
-            "name": "name",
-            "type": {
-              "name": "DOMString"
-            }
-          }
-        ],
-        "attrs": [
-          {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "CSSVariables2"
-          },
-          {
-            "name": "CallWith",
-            "type_": "extendedattribute",
-            "value": "ExecutionContext"
-          },
-          {
-            "name": "RaisesException",
-            "type_": "extendedattribute"
-          }
-        ],
-        "isStatic": true,
-        "name": "unregisterProperty",
         "returnType": {
           "name": "void"
         }
@@ -6374,10 +7315,6 @@
         ],
         "attrs": [
           {
-            "name": "RaisesException",
-            "type_": "extendedattribute"
-          },
-          {
             "name": "NewObject",
             "type_": "extendedattribute"
           }
@@ -6398,10 +7335,6 @@
         ],
         "attrs": [
           {
-            "name": "RaisesException",
-            "type_": "extendedattribute"
-          },
-          {
             "name": "NewObject",
             "type_": "extendedattribute"
           }
@@ -6421,10 +7354,6 @@
           }
         ],
         "attrs": [
-          {
-            "name": "RaisesException",
-            "type_": "extendedattribute"
-          },
           {
             "name": "NewObject",
             "type_": "extendedattribute"
@@ -7345,6 +8274,7 @@
             "type_": "extendedattribute"
           }
         ],
+        "isReadOnly": true,
         "name": "value",
         "type": {
           "name": "double"
@@ -8646,8 +9576,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -8702,8 +9630,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -8824,9 +9750,11 @@
           {
             "name": "attributeArray",
             "type": {
-              "name": "DOMString",
+              "name": "sequence",
               "params": [
-                "array"
+                {
+                  "name": "DOMString"
+                }
               ]
             }
           }
@@ -9368,6 +10296,28 @@
         "type_": "extendedattribute"
       },
       {
+        "args": [
+          {
+            "name": "numberSequence",
+            "type": {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "unrestricted double"
+                }
+              ]
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      },
+      {
         "name": "RuntimeEnabled",
         "type_": "extendedattribute",
         "value": "GeometryInterfaces"
@@ -9700,7 +10650,24 @@
       {
         "args": [
           {
-            "name": "scale",
+            "defaultValue": "1",
+            "name": "scaleX",
+            "optional": true,
+            "type": {
+              "name": "unrestricted double"
+            }
+          },
+          {
+            "name": "scaleY",
+            "optional": true,
+            "type": {
+              "name": "unrestricted double"
+            }
+          },
+          {
+            "defaultValue": "1",
+            "name": "scaleZ",
+            "optional": true,
             "type": {
               "name": "unrestricted double"
             }
@@ -9716,6 +10683,14 @@
           {
             "defaultValue": "0",
             "name": "originY",
+            "optional": true,
+            "type": {
+              "name": "unrestricted double"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "originZ",
             "optional": true,
             "type": {
               "name": "unrestricted double"
@@ -9768,22 +10743,8 @@
       {
         "args": [
           {
-            "name": "scaleX",
-            "type": {
-              "name": "unrestricted double"
-            }
-          },
-          {
-            "defaultValue": "1",
-            "name": "scaleY",
-            "optional": true,
-            "type": {
-              "name": "unrestricted double"
-            }
-          },
-          {
-            "defaultValue": "1",
-            "name": "scaleZ",
+            "defaultValue": "0",
+            "name": "x",
             "optional": true,
             "type": {
               "name": "unrestricted double"
@@ -9791,7 +10752,7 @@
           },
           {
             "defaultValue": "0",
-            "name": "originX",
+            "name": "y",
             "optional": true,
             "type": {
               "name": "unrestricted double"
@@ -9799,7 +10760,7 @@
           },
           {
             "defaultValue": "0",
-            "name": "originY",
+            "name": "z",
             "optional": true,
             "type": {
               "name": "unrestricted double"
@@ -9807,14 +10768,14 @@
           },
           {
             "defaultValue": "0",
-            "name": "originZ",
+            "name": "angle",
             "optional": true,
             "type": {
               "name": "unrestricted double"
             }
           }
         ],
-        "name": "scaleNonUniformSelf",
+        "name": "rotateAxisAngleSelf",
         "returnType": {
           "name": "DOMMatrix"
         }
@@ -10345,7 +11306,24 @@
       {
         "args": [
           {
-            "name": "scale",
+            "defaultValue": "1",
+            "name": "scaleX",
+            "optional": true,
+            "type": {
+              "name": "unrestricted double"
+            }
+          },
+          {
+            "name": "scaleY",
+            "optional": true,
+            "type": {
+              "name": "unrestricted double"
+            }
+          },
+          {
+            "defaultValue": "1",
+            "name": "scaleZ",
+            "optional": true,
             "type": {
               "name": "unrestricted double"
             }
@@ -10361,6 +11339,14 @@
           {
             "defaultValue": "0",
             "name": "originY",
+            "optional": true,
+            "type": {
+              "name": "unrestricted double"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "originZ",
             "optional": true,
             "type": {
               "name": "unrestricted double"
@@ -10413,22 +11399,8 @@
       {
         "args": [
           {
-            "name": "scaleX",
-            "type": {
-              "name": "unrestricted double"
-            }
-          },
-          {
-            "defaultValue": "1",
-            "name": "scaleY",
-            "optional": true,
-            "type": {
-              "name": "unrestricted double"
-            }
-          },
-          {
-            "defaultValue": "1",
-            "name": "scaleZn",
+            "defaultValue": "0",
+            "name": "x",
             "optional": true,
             "type": {
               "name": "unrestricted double"
@@ -10436,7 +11408,7 @@
           },
           {
             "defaultValue": "0",
-            "name": "originX",
+            "name": "y",
             "optional": true,
             "type": {
               "name": "unrestricted double"
@@ -10444,7 +11416,7 @@
           },
           {
             "defaultValue": "0",
-            "name": "originY",
+            "name": "z",
             "optional": true,
             "type": {
               "name": "unrestricted double"
@@ -10452,14 +11424,14 @@
           },
           {
             "defaultValue": "0",
-            "name": "originZ",
+            "name": "angle",
             "optional": true,
             "type": {
               "name": "unrestricted double"
             }
           }
         ],
-        "name": "scaleNonUniform",
+        "name": "rotateAxisAngle",
         "returnType": {
           "name": "DOMMatrix"
         }
@@ -10951,8 +11923,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -11344,6 +12314,12 @@
     "type_": "interface"
   },
   {
+    "attrs": [
+      {
+        "name": "Custom",
+        "type_": "extendedattribute"
+      }
+    ],
     "name": "CustomElementConstructor",
     "returnType": {
       "name": "Element"
@@ -12979,6 +13955,11 @@
           {
             "name": "LegacyInterfaceTypeChecking",
             "type_": "extendedattribute"
+          },
+          {
+            "name": "Custom",
+            "type_": "extendedattribute",
+            "value": "CallPrologue"
           }
         ],
         "name": "createTouch",
@@ -15186,6 +16167,22 @@
     "type_": "implements"
   },
   {
+    "members": [
+      {
+        "defaultValue": "null",
+        "name": "extends",
+        "type": {
+          "name": "DOMString",
+          "params": [
+            "nullable"
+          ]
+        }
+      }
+    ],
+    "name": "ElementDefinitionOptions",
+    "type_": "dictionary"
+  },
+  {
     "isPartial": true,
     "members": [
       {
@@ -15985,13 +16982,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-      {
-        "name": "RuntimeEnabled",
-        "type_": "extendedattribute",
-        "value": "RequestIdleCallback"
-      }
-    ],
     "members": [
       {
         "name": "timeRemaining",
@@ -16012,13 +17002,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-      {
-        "name": "RuntimeEnabled",
-        "type_": "extendedattribute",
-        "value": "RequestIdleCallback"
-      }
-    ],
     "members": [
       {
         "args": [
@@ -16125,6 +17108,12 @@
         }
       }
     ],
+    "attrs": [
+      {
+        "name": "Custom",
+        "type_": "extendedattribute"
+      }
+    ],
     "name": "IntersectionObserverCallback",
     "returnType": {
       "name": "void"
@@ -16143,6 +17132,7 @@
           },
           {
             "name": "options",
+            "optional": true,
             "type": {
               "name": "IntersectionObserverInit"
             }
@@ -16168,6 +17158,38 @@
       }
     ],
     "members": [
+      {
+        "isReadOnly": true,
+        "name": "root",
+        "type": {
+          "name": "Element",
+          "params": [
+            "nullable"
+          ]
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "rootMargin",
+        "type": {
+          "name": "DOMString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "thresholds",
+        "type": {
+          "name": "FrozenArray",
+          "params": [
+            {
+              "name": "double"
+            }
+          ]
+        },
+        "type_": "attribute"
+      },
       {
         "args": [
           {
@@ -16236,38 +17258,6 @@
             }
           ]
         }
-      },
-      {
-        "isReadOnly": true,
-        "name": "root",
-        "type": {
-          "name": "Element",
-          "params": [
-            "nullable"
-          ]
-        },
-        "type_": "attribute"
-      },
-      {
-        "isReadOnly": true,
-        "name": "rootMargin",
-        "type": {
-          "name": "DOMString"
-        },
-        "type_": "attribute"
-      },
-      {
-        "isReadOnly": true,
-        "name": "thresholds",
-        "type": {
-          "name": "FrozenArray",
-          "params": [
-            {
-              "name": "double"
-            }
-          ]
-        },
-        "type_": "attribute"
       }
     ],
     "name": "IntersectionObserver",
@@ -16282,6 +17272,25 @@
       }
     ],
     "members": [
+      {
+        "isReadOnly": true,
+        "name": "time",
+        "type": {
+          "name": "DOMHighResTimeStamp"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "rootBounds",
+        "type": {
+          "name": "ClientRect",
+          "params": [
+            "nullable"
+          ]
+        },
+        "type_": "attribute"
+      },
       {
         "isReadOnly": true,
         "name": "boundingClientRect",
@@ -16308,28 +17317,9 @@
       },
       {
         "isReadOnly": true,
-        "name": "rootBounds",
-        "type": {
-          "name": "ClientRect",
-          "params": [
-            "nullable"
-          ]
-        },
-        "type_": "attribute"
-      },
-      {
-        "isReadOnly": true,
         "name": "target",
         "type": {
           "name": "Element"
-        },
-        "type_": "attribute"
-      },
-      {
-        "isReadOnly": true,
-        "name": "time",
-        "type": {
-          "name": "DOMHighResTimeStamp"
         },
         "type_": "attribute"
       }
@@ -16347,6 +17337,7 @@
     ],
     "members": [
       {
+        "defaultValue": "null",
         "name": "root",
         "type": {
           "name": "Element",
@@ -16356,6 +17347,7 @@
         }
       },
       {
+        "defaultValue": "0px",
         "name": "rootMargin",
         "type": {
           "name": "DOMString"
@@ -16371,9 +17363,11 @@
               "name": "double"
             },
             {
-              "name": "double",
+              "name": "sequence",
               "params": [
-                "array"
+                {
+                  "name": "double"
+                }
               ]
             }
           ]
@@ -16685,8 +17679,6 @@
     "type_": "dictionary"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -19580,8 +20572,6 @@
     "type_": "dictionary"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -20270,7 +21260,7 @@
             "name": "options",
             "optional": true,
             "type": {
-              "name": "ElementRegistrationOptions"
+              "name": "ElementDefinitionOptions"
             }
           }
         ],
@@ -21193,7 +22183,7 @@
             "name": "eventInitDict",
             "optional": true,
             "type": {
-              "name": "AnimationPlayerEventInit"
+              "name": "AnimationPlaybackEventInit"
             }
           }
         ],
@@ -21223,12 +22213,15 @@
         "isReadOnly": true,
         "name": "timelineTime",
         "type": {
-          "name": "double"
+          "name": "double",
+          "params": [
+            "nullable"
+          ]
         },
         "type_": "attribute"
       }
     ],
-    "name": "AnimationPlayerEvent",
+    "name": "AnimationPlaybackEvent",
     "type_": "interface"
   },
   {
@@ -21255,7 +22248,7 @@
         }
       }
     ],
-    "name": "AnimationPlayerEventInit",
+    "name": "AnimationPlaybackEventInit",
     "type_": "dictionary"
   },
   {
@@ -21865,6 +22858,34 @@
         "type_": "attribute"
       },
       {
+        "attrs": [
+          {
+            "name": "RuntimeEnabled",
+            "type_": "extendedattribute",
+            "value": "ShadowDOMV1"
+          },
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "EventComposedPath"
+          },
+          {
+            "name": "CallWith",
+            "type_": "extendedattribute",
+            "value": "ScriptState"
+          }
+        ],
+        "name": "composedPath",
+        "returnType": {
+          "name": "sequence",
+          "params": [
+            {
+              "name": "EventTarget"
+            }
+          ]
+        }
+      },
+      {
         "isConst": true,
         "name": "NONE",
         "type": {
@@ -22052,57 +23073,6 @@
         }
       },
       {
-        "attrs": [
-          {
-            "name": "MeasureAs",
-            "type_": "extendedattribute",
-            "value": "EventPath"
-          },
-          {
-            "name": "CallWith",
-            "type_": "extendedattribute",
-            "value": "ScriptState"
-          }
-        ],
-        "isReadOnly": true,
-        "name": "path",
-        "type": {
-          "name": "EventTarget",
-          "params": [
-            "array"
-          ]
-        },
-        "type_": "attribute"
-      },
-      {
-        "attrs": [
-          {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "ShadowDOMV1"
-          },
-          {
-            "name": "MeasureAs",
-            "type_": "extendedattribute",
-            "value": "EventComposedPath"
-          },
-          {
-            "name": "CallWith",
-            "type_": "extendedattribute",
-            "value": "ScriptState"
-          }
-        ],
-        "name": "composedPath",
-        "returnType": {
-          "name": "sequence",
-          "params": [
-            {
-              "name": "EventTarget"
-            }
-          ]
-        }
-      },
-      {
         "isConst": true,
         "name": "MOUSEDOWN",
         "type": {
@@ -22287,6 +23257,29 @@
           "name": "boolean"
         },
         "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "EventPath"
+          },
+          {
+            "name": "CallWith",
+            "type_": "extendedattribute",
+            "value": "ScriptState"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "path",
+        "type": {
+          "name": "EventTarget",
+          "params": [
+            "array"
+          ]
+        },
+        "type_": "attribute"
       }
     ],
     "name": "Event",
@@ -22327,8 +23320,6 @@
     "type_": "dictionary"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "args": [
@@ -23423,9 +24414,11 @@
             "name": "portsArg",
             "optional": true,
             "type": {
-              "name": "MessagePort",
+              "name": "sequence",
               "params": [
-                "array"
+                {
+                  "name": "MessagePort"
+                }
               ]
             }
           }
@@ -23474,7 +24467,10 @@
       {
         "name": "source",
         "type": {
-          "name": "EventTarget"
+          "name": "EventTarget",
+          "params": [
+            "nullable"
+          ]
         }
       },
       {
@@ -24361,30 +25357,6 @@
           "name": "long"
         },
         "type_": "attribute"
-      },
-      {
-        "attrs": [
-          {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "PointerEvent"
-          },
-          {
-            "name": "DeprecateAs",
-            "type_": "extendedattribute",
-            "value": "NavigatorPointerEnabled"
-          },
-          {
-            "name": "NotEnumerable",
-            "type_": "extendedattribute"
-          }
-        ],
-        "isReadOnly": true,
-        "name": "pointerEnabled",
-        "type": {
-          "name": "boolean"
-        },
-        "type_": "attribute"
       }
     ],
     "name": "Navigator",
@@ -24994,6 +25966,14 @@
     "type_": "interface"
   },
   {
+    "name": "SecurityPolicyViolationEventDisposition",
+    "type_": "enum",
+    "value": [
+      "enforce",
+      "report"
+    ]
+  },
+  {
     "attrs": [
       {
         "args": [
@@ -25079,6 +26059,14 @@
       },
       {
         "isReadOnly": true,
+        "name": "disposition",
+        "type": {
+          "name": "SecurityPolicyViolationEventDisposition"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
         "name": "sourceFile",
         "type": {
           "name": "DOMString"
@@ -25156,6 +26144,12 @@
         "name": "originalPolicy",
         "type": {
           "name": "DOMString"
+        }
+      },
+      {
+        "name": "disposition",
+        "type": {
+          "name": "SecurityPolicyViolationEventDisposition"
         }
       },
       {
@@ -26699,8 +27693,6 @@
     "type_": "partialinterface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -26747,8 +27739,6 @@
     ]
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -27089,6 +28079,11 @@
             "name": "DoNotCheckSecurity",
             "type_": "extendedattribute",
             "value": "Setter"
+          },
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute",
+            "value": "Setter"
           }
         ],
         "name": "href",
@@ -27153,6 +28148,11 @@
             ],
             "name": "SetterCallWith",
             "type_": "extendedattribute"
+          },
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute",
+            "value": "Setter"
           }
         ],
         "name": "host",
@@ -27170,6 +28170,11 @@
             ],
             "name": "SetterCallWith",
             "type_": "extendedattribute"
+          },
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute",
+            "value": "Setter"
           }
         ],
         "name": "hostname",
@@ -27187,6 +28192,11 @@
             ],
             "name": "SetterCallWith",
             "type_": "extendedattribute"
+          },
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute",
+            "value": "Setter"
           }
         ],
         "name": "port",
@@ -27204,6 +28214,11 @@
             ],
             "name": "SetterCallWith",
             "type_": "extendedattribute"
+          },
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute",
+            "value": "Setter"
           }
         ],
         "name": "pathname",
@@ -27221,6 +28236,11 @@
             ],
             "name": "SetterCallWith",
             "type_": "extendedattribute"
+          },
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute",
+            "value": "Setter"
           }
         ],
         "name": "search",
@@ -27238,6 +28258,11 @@
             ],
             "name": "SetterCallWith",
             "type_": "extendedattribute"
+          },
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute",
+            "value": "Setter"
           }
         ],
         "name": "hash",
@@ -27268,8 +28293,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "attrs": [
@@ -27539,8 +28562,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -28488,11 +29509,6 @@
           {
             "name": "Measure",
             "type_": "extendedattribute"
-          },
-          {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "RequestIdleCallback"
           }
         ],
         "name": "requestIdleCallback",
@@ -28507,13 +29523,6 @@
             "type": {
               "name": "long"
             }
-          }
-        ],
-        "attrs": [
-          {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "RequestIdleCallback"
           }
         ],
         "name": "cancelIdleCallback",
@@ -31959,7 +32968,7 @@
   {
     "attrs": [
       {
-        "name": "CustomConstructor",
+        "name": "HTMLConstructor",
         "type_": "extendedattribute"
       }
     ],
@@ -34048,6 +35057,28 @@
       {
         "attrs": [
           {
+            "name": "RuntimeEnabled",
+            "type_": "extendedattribute",
+            "value": "EmbedderCSPEnforcement"
+          },
+          {
+            "name": "CEReactions",
+            "type_": "extendedattribute"
+          },
+          {
+            "name": "Reflect",
+            "type_": "extendedattribute"
+          }
+        ],
+        "name": "csp",
+        "type": {
+          "name": "DOMString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
             "name": "CEReactions",
             "type_": "extendedattribute"
           },
@@ -34509,7 +35540,7 @@
         ],
         "name": "hspace",
         "type": {
-          "name": "long"
+          "name": "unsigned long"
         },
         "type_": "attribute"
       },
@@ -34526,7 +35557,7 @@
         ],
         "name": "vspace",
         "type": {
-          "name": "long"
+          "name": "unsigned long"
         },
         "type_": "attribute"
       },
@@ -37275,6 +38306,10 @@
           {
             "name": "Reflect",
             "type_": "extendedattribute"
+          },
+          {
+            "name": "URL",
+            "type_": "extendedattribute"
           }
         ],
         "name": "icon",
@@ -37958,7 +38993,7 @@
         ],
         "name": "hspace",
         "type": {
-          "name": "long"
+          "name": "unsigned long"
         },
         "type_": "attribute"
       },
@@ -37992,7 +39027,7 @@
         ],
         "name": "vspace",
         "type": {
-          "name": "long"
+          "name": "unsigned long"
         },
         "type_": "attribute"
       },
@@ -39997,10 +41032,6 @@
           {
             "name": "CEReactions",
             "type_": "extendedattribute"
-          },
-          {
-            "name": "Reflect",
-            "type_": "extendedattribute"
           }
         ],
         "name": "scope",
@@ -41873,8 +42904,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isConst": true,
@@ -41961,8 +42990,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -42142,8 +43169,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -42198,8 +43223,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -42783,8 +43806,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -44355,6 +45376,11 @@
         "name": "RuntimeEnabled",
         "type_": "extendedattribute",
         "value": "ExperimentalCanvasFeatures"
+      },
+      {
+        "name": "MeasureAs",
+        "type_": "extendedattribute",
+        "value": "OffscreenCanvas"
       }
     ],
     "members": [
@@ -44409,148 +45435,6 @@
     ],
     "name": "OffscreenCanvas",
     "type_": "interface"
-  },
-  {
-    "attrs": [
-      {
-        "name": "ActiveScriptWrappable",
-        "type_": "extendedattribute"
-      },
-      {
-        "name": "DependentLifetime",
-        "type_": "extendedattribute"
-      },
-      {
-        "args": [
-          {
-            "name": "url",
-            "type": {
-              "name": "DOMString"
-            }
-          },
-          {
-            "name": "eventSourceInitDict",
-            "optional": true,
-            "type": {
-              "name": "EventSourceInit"
-            }
-          }
-        ],
-        "name": "Constructor",
-        "type_": "extendedattribute"
-      },
-      {
-        "name": "ConstructorCallWith",
-        "type_": "extendedattribute",
-        "value": "ExecutionContext"
-      },
-      {
-        "identifiers": [
-          "Window",
-          "Worker"
-        ],
-        "name": "Exposed",
-        "type_": "extendedattribute"
-      },
-      {
-        "name": "RaisesException",
-        "type_": "extendedattribute",
-        "value": "Constructor"
-      }
-    ],
-    "inheritsFrom": "EventTarget",
-    "members": [
-      {
-        "isReadOnly": true,
-        "name": "url",
-        "type": {
-          "name": "DOMString"
-        },
-        "type_": "attribute"
-      },
-      {
-        "isReadOnly": true,
-        "name": "withCredentials",
-        "type": {
-          "name": "boolean"
-        },
-        "type_": "attribute"
-      },
-      {
-        "isConst": true,
-        "name": "CONNECTING",
-        "type": {
-          "name": "unsigned short"
-        },
-        "value": "0"
-      },
-      {
-        "isConst": true,
-        "name": "OPEN",
-        "type": {
-          "name": "unsigned short"
-        },
-        "value": "1"
-      },
-      {
-        "isConst": true,
-        "name": "CLOSED",
-        "type": {
-          "name": "unsigned short"
-        },
-        "value": "2"
-      },
-      {
-        "isReadOnly": true,
-        "name": "readyState",
-        "type": {
-          "name": "unsigned short"
-        },
-        "type_": "attribute"
-      },
-      {
-        "name": "onopen",
-        "type": {
-          "name": "EventHandler"
-        },
-        "type_": "attribute"
-      },
-      {
-        "name": "onmessage",
-        "type": {
-          "name": "EventHandler"
-        },
-        "type_": "attribute"
-      },
-      {
-        "name": "onerror",
-        "type": {
-          "name": "EventHandler"
-        },
-        "type_": "attribute"
-      },
-      {
-        "name": "close",
-        "returnType": {
-          "name": "void"
-        }
-      }
-    ],
-    "name": "EventSource",
-    "type_": "interface"
-  },
-  {
-    "members": [
-      {
-        "defaultValue": "false",
-        "name": "withCredentials",
-        "type": {
-          "name": "boolean"
-        }
-      }
-    ],
-    "name": "EventSourceInit",
-    "type_": "dictionary"
   },
   {
     "attrs": [
@@ -54050,8 +54934,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "inheritsFrom": "EventTarget",
     "members": [
       {
@@ -54417,54 +55299,6 @@
       {
         "attrs": [
           {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "LongTaskObserver"
-          }
-        ],
-        "name": "clearLongTaskTimings",
-        "returnType": {
-          "name": "void"
-        }
-      },
-      {
-        "args": [
-          {
-            "name": "maxSize",
-            "type": {
-              "name": "unsigned long"
-            }
-          }
-        ],
-        "attrs": [
-          {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "LongTaskObserver"
-          }
-        ],
-        "name": "setLongTaskTimingBufferSize",
-        "returnType": {
-          "name": "void"
-        }
-      },
-      {
-        "attrs": [
-          {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "LongTaskObserver"
-          }
-        ],
-        "name": "onlongtasktimingbufferfull",
-        "type": {
-          "name": "EventHandler"
-        },
-        "type_": "attribute"
-      },
-      {
-        "attrs": [
-          {
             "name": "Measure",
             "type_": "extendedattribute"
           }
@@ -54503,8 +55337,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -54563,13 +55395,24 @@
   {
     "attrs": [
       {
-        "name": "RuntimeEnabled",
+        "name": "OriginTrialEnabled",
         "type_": "extendedattribute",
         "value": "LongTaskObserver"
       }
     ],
     "inheritsFrom": "PerformanceEntry",
     "members": [
+      {
+        "isReadOnly": true,
+        "name": "culpritWindow",
+        "type": {
+          "name": "Window",
+          "params": [
+            "nullable"
+          ]
+        },
+        "type_": "attribute"
+      }
     ],
     "name": "PerformanceLongTaskTiming",
     "type_": "interface"
@@ -55855,6 +56698,21 @@
           "name": "EventHandler"
         },
         "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "ImplementedAs",
+            "type_": "extendedattribute",
+            "value": "isSecureContextForBindings"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "isSecureContext",
+        "type": {
+          "name": "boolean"
+        },
+        "type_": "attribute"
       }
     ],
     "name": "WorkerGlobalScope",
@@ -56351,8 +57209,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "args": [
@@ -56435,8 +57291,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isConst": true,
@@ -57435,7 +58289,7 @@
           "name": "Promise",
           "params": [
             {
-              "name": "DOMString"
+              "name": "AppBannerPromptResult"
             }
           ]
         },
@@ -58091,6 +58945,13 @@
         "type_": "attribute"
       },
       {
+        "attrs": [
+          {
+            "name": "DeprecateAs",
+            "type_": "extendedattribute",
+            "value": "DeprecatedBluetoothDeviceUUIDsAttribute"
+          }
+        ],
         "isReadOnly": true,
         "name": "uuids",
         "type": {
@@ -58684,16 +59545,16 @@
     "type_": "typedef"
   },
   {
+    "attrs": [
+      {
+        "name": "OriginTrialEnabled",
+        "type_": "extendedattribute",
+        "value": "WebBluetooth"
+      }
+    ],
     "isPartial": true,
     "members": [
       {
-        "attrs": [
-          {
-            "name": "OriginTrialEnabled",
-            "type_": "extendedattribute",
-            "value": "WebBluetooth"
-          }
-        ],
         "isReadOnly": true,
         "name": "bluetooth",
         "type": {
@@ -59659,6 +60520,11 @@
           {
             "name": "RaisesException",
             "type_": "extendedattribute"
+          },
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "OffscreenCanvas"
           }
         ],
         "name": "transferControlToOffscreen",
@@ -60144,6 +61010,9 @@
     "type": {
       "type_": "uniontype",
       "types": [
+        {
+          "name": "CSSImageValue"
+        },
         {
           "name": "HTMLImageElement"
         },
@@ -64852,8 +65721,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "defaultValue": "false",
@@ -65120,13 +65987,14 @@
     "inheritsFrom": "EventInit",
     "members": [
       {
-        "defaultValue": "license-request",
+        "isRequired": true,
         "name": "messageType",
         "type": {
           "name": "MediaKeyMessageType"
         }
       },
       {
+        "isRequired": true,
         "name": "message",
         "type": {
           "name": "ArrayBuffer"
@@ -65398,8 +66266,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -65449,6 +66315,17 @@
   {
     "members": [
       {
+        "defaultValue": "",
+        "name": "label",
+        "type": {
+          "name": "DOMString"
+        }
+      },
+      {
+        "defaultValue": [
+          "[",
+          "]"
+        ],
         "name": "initDataTypes",
         "type": {
           "name": "sequence",
@@ -65460,6 +66337,10 @@
         }
       },
       {
+        "defaultValue": [
+          "[",
+          "]"
+        ],
         "name": "audioCapabilities",
         "type": {
           "name": "sequence",
@@ -65471,6 +66352,10 @@
         }
       },
       {
+        "defaultValue": [
+          "[",
+          "]"
+        ],
         "name": "videoCapabilities",
         "type": {
           "name": "sequence",
@@ -65504,12 +66389,6 @@
               "name": "DOMString"
             }
           ]
-        }
-      },
-      {
-        "name": "label",
-        "type": {
-          "name": "DOMString"
         }
       }
     ],
@@ -65656,6 +66535,148 @@
     ],
     "name": "Navigator",
     "type_": "partialinterface"
+  },
+  {
+    "attrs": [
+      {
+        "name": "ActiveScriptWrappable",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "DependentLifetime",
+        "type_": "extendedattribute"
+      },
+      {
+        "args": [
+          {
+            "name": "url",
+            "type": {
+              "name": "DOMString"
+            }
+          },
+          {
+            "name": "eventSourceInitDict",
+            "optional": true,
+            "type": {
+              "name": "EventSourceInit"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "ConstructorCallWith",
+        "type_": "extendedattribute",
+        "value": "ExecutionContext"
+      },
+      {
+        "identifiers": [
+          "Window",
+          "Worker"
+        ],
+        "name": "Exposed",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      }
+    ],
+    "inheritsFrom": "EventTarget",
+    "members": [
+      {
+        "isReadOnly": true,
+        "name": "url",
+        "type": {
+          "name": "DOMString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "withCredentials",
+        "type": {
+          "name": "boolean"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isConst": true,
+        "name": "CONNECTING",
+        "type": {
+          "name": "unsigned short"
+        },
+        "value": "0"
+      },
+      {
+        "isConst": true,
+        "name": "OPEN",
+        "type": {
+          "name": "unsigned short"
+        },
+        "value": "1"
+      },
+      {
+        "isConst": true,
+        "name": "CLOSED",
+        "type": {
+          "name": "unsigned short"
+        },
+        "value": "2"
+      },
+      {
+        "isReadOnly": true,
+        "name": "readyState",
+        "type": {
+          "name": "unsigned short"
+        },
+        "type_": "attribute"
+      },
+      {
+        "name": "onopen",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
+      },
+      {
+        "name": "onmessage",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
+      },
+      {
+        "name": "onerror",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
+      },
+      {
+        "name": "close",
+        "returnType": {
+          "name": "void"
+        }
+      }
+    ],
+    "name": "EventSource",
+    "type_": "interface"
+  },
+  {
+    "members": [
+      {
+        "defaultValue": "false",
+        "name": "withCredentials",
+        "type": {
+          "name": "boolean"
+        }
+      }
+    ],
+    "name": "EventSourceInit",
+    "type_": "dictionary"
   },
   {
     "attrs": [
@@ -67140,9 +68161,11 @@
         ],
         "name": "readEntries",
         "returnType": {
-          "name": "EntrySync",
+          "name": "sequence",
           "params": [
-            "array"
+            {
+              "name": "EntrySync"
+            }
           ]
         }
       }
@@ -67157,9 +68180,11 @@
           {
             "name": "entries",
             "type": {
-              "name": "Entry",
+              "name": "sequence",
               "params": [
-                "array"
+                {
+                  "name": "Entry"
+                }
               ]
             }
           }
@@ -68447,8 +69472,14 @@
     "type_": "partialinterface"
   },
   {
-    "attrs": [
-    ],
+    "name": "GamepadHand",
+    "type_": "enum",
+    "value": [
+      "left",
+      "right"
+    ]
+  },
+  {
     "members": [
       {
         "isReadOnly": true,
@@ -68511,14 +69542,75 @@
           ]
         },
         "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "OriginTrialEnabled",
+            "type_": "extendedattribute",
+            "value": "GamepadExtensions"
+          },
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "GamepadPose"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "pose",
+        "type": {
+          "name": "GamepadPose",
+          "params": [
+            "nullable"
+          ]
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "OriginTrialEnabled",
+            "type_": "extendedattribute",
+            "value": "GamepadExtensions"
+          },
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "GamepadHand"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "hand",
+        "type": {
+          "name": "GamepadHand"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "OriginTrialEnabled",
+            "type_": "extendedattribute",
+            "value": "GamepadExtensions"
+          },
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "GamepadDisplayId"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "displayId",
+        "type": {
+          "name": "unsigned long"
+        },
+        "type_": "attribute"
       }
     ],
     "name": "Gamepad",
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -68531,9 +69623,14 @@
       {
         "attrs": [
           {
-            "name": "RuntimeEnabled",
+            "name": "OriginTrialEnabled",
             "type_": "extendedattribute",
             "value": "GamepadExtensions"
+          },
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "GamepadButtonTouched"
           }
         ],
         "isReadOnly": true,
@@ -68604,7 +69701,10 @@
       {
         "name": "gamepad",
         "type": {
-          "name": "Gamepad"
+          "name": "Gamepad",
+          "params": [
+            "nullable"
+          ]
         }
       }
     ],
@@ -68654,6 +69754,157 @@
       }
     ],
     "name": "GamepadList",
+    "type_": "interface"
+  },
+  {
+    "attrs": [
+      {
+        "name": "OriginTrialEnabled",
+        "type_": "extendedattribute",
+        "value": "GamepadExtensions"
+      }
+    ],
+    "members": [
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "GamepadPoseHasOrientation"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "hasOrientation",
+        "type": {
+          "name": "boolean"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "GamepadPoseHasPosition"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "hasPosition",
+        "type": {
+          "name": "boolean"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "GamepadPosePosition"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "position",
+        "type": {
+          "name": "Float32Array",
+          "params": [
+            "nullable"
+          ]
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "GamepadPoseLinearVelocity"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "linearVelocity",
+        "type": {
+          "name": "Float32Array",
+          "params": [
+            "nullable"
+          ]
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "GamepadPoseLinearAcceleration"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "linearAcceleration",
+        "type": {
+          "name": "Float32Array",
+          "params": [
+            "nullable"
+          ]
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "GamepadPoseOrientation"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "orientation",
+        "type": {
+          "name": "Float32Array",
+          "params": [
+            "nullable"
+          ]
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "GamepadPoseAngularVelocity"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "angularVelocity",
+        "type": {
+          "name": "Float32Array",
+          "params": [
+            "nullable"
+          ]
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "GamepadPoseAngularAcceleration"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "angularAcceleration",
+        "type": {
+          "name": "Float32Array",
+          "params": [
+            "nullable"
+          ]
+        },
+        "type_": "attribute"
+      }
+    ],
+    "name": "GamepadPose",
     "type_": "interface"
   },
   {
@@ -69239,6 +70490,14 @@
           "name": "long"
         },
         "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "step",
+        "type": {
+          "name": "long"
+        },
+        "type_": "attribute"
       }
     ],
     "name": "MediaSettingsRange",
@@ -69276,7 +70535,87 @@
     "members": [
       {
         "isReadOnly": true,
+        "name": "whiteBalanceMode",
+        "type": {
+          "name": "MeteringMode"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "colorTemperature",
+        "type": {
+          "name": "MediaSettingsRange"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "exposureMode",
+        "type": {
+          "name": "MeteringMode"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "exposureCompensation",
+        "type": {
+          "name": "MediaSettingsRange"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
         "name": "iso",
+        "type": {
+          "name": "MediaSettingsRange"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "redEyeReduction",
+        "type": {
+          "name": "boolean"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "focusMode",
+        "type": {
+          "name": "MeteringMode"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "brightness",
+        "type": {
+          "name": "MediaSettingsRange"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "contrast",
+        "type": {
+          "name": "MediaSettingsRange"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "saturation",
+        "type": {
+          "name": "MediaSettingsRange"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "sharpness",
         "type": {
           "name": "MediaSettingsRange"
         },
@@ -69308,49 +70647,9 @@
       },
       {
         "isReadOnly": true,
-        "name": "focusMode",
-        "type": {
-          "name": "MeteringMode"
-        },
-        "type_": "attribute"
-      },
-      {
-        "isReadOnly": true,
-        "name": "exposureMode",
-        "type": {
-          "name": "MeteringMode"
-        },
-        "type_": "attribute"
-      },
-      {
-        "isReadOnly": true,
-        "name": "exposureCompensation",
-        "type": {
-          "name": "MediaSettingsRange"
-        },
-        "type_": "attribute"
-      },
-      {
-        "isReadOnly": true,
-        "name": "whiteBalanceMode",
-        "type": {
-          "name": "MeteringMode"
-        },
-        "type_": "attribute"
-      },
-      {
-        "isReadOnly": true,
         "name": "fillLightMode",
         "type": {
           "name": "FillLightMode"
-        },
-        "type_": "attribute"
-      },
-      {
-        "isReadOnly": true,
-        "name": "redEyeReduction",
-        "type": {
-          "name": "boolean"
         },
         "type_": "attribute"
       }
@@ -69368,6 +70667,83 @@
     ],
     "members": [
       {
+        "name": "whiteBalanceMode",
+        "type": {
+          "name": "MeteringMode"
+        }
+      },
+      {
+        "name": "colorTemperature",
+        "type": {
+          "name": "unsigned long"
+        }
+      },
+      {
+        "name": "exposureMode",
+        "type": {
+          "name": "MeteringMode"
+        }
+      },
+      {
+        "name": "exposureCompensation",
+        "type": {
+          "name": "unsigned long"
+        }
+      },
+      {
+        "name": "iso",
+        "type": {
+          "name": "unsigned long"
+        }
+      },
+      {
+        "name": "redEyeReduction",
+        "type": {
+          "name": "boolean"
+        }
+      },
+      {
+        "name": "focusMode",
+        "type": {
+          "name": "MeteringMode"
+        }
+      },
+      {
+        "name": "pointsOfInterest",
+        "type": {
+          "name": "sequence",
+          "params": [
+            {
+              "name": "Point2D"
+            }
+          ]
+        }
+      },
+      {
+        "name": "brightness",
+        "type": {
+          "name": "unsigned long"
+        }
+      },
+      {
+        "name": "contrast",
+        "type": {
+          "name": "unsigned long"
+        }
+      },
+      {
+        "name": "saturation",
+        "type": {
+          "name": "unsigned long"
+        }
+      },
+      {
+        "name": "sharpness",
+        "type": {
+          "name": "unsigned long"
+        }
+      },
+      {
         "name": "zoom",
         "type": {
           "name": "unsigned long"
@@ -69386,56 +70762,9 @@
         }
       },
       {
-        "name": "focusMode",
-        "type": {
-          "name": "MeteringMode"
-        }
-      },
-      {
-        "name": "exposureMode",
-        "type": {
-          "name": "MeteringMode"
-        }
-      },
-      {
-        "name": "exposureCompensation",
-        "type": {
-          "name": "unsigned long"
-        }
-      },
-      {
-        "name": "whiteBalanceMode",
-        "type": {
-          "name": "MeteringMode"
-        }
-      },
-      {
-        "name": "iso",
-        "type": {
-          "name": "unsigned long"
-        }
-      },
-      {
-        "name": "redEyeReduction",
-        "type": {
-          "name": "boolean"
-        }
-      },
-      {
         "name": "fillLightMode",
         "type": {
           "name": "FillLightMode"
-        }
-      },
-      {
-        "name": "pointsOfInterest",
-        "type": {
-          "name": "sequence",
-          "params": [
-            {
-              "name": "Point2D"
-            }
-          ]
         }
       }
     ],
@@ -72648,37 +73977,6 @@
   {
     "attrs": [
       {
-        "name": "RuntimeEnabled",
-        "type_": "extendedattribute",
-        "value": "MediaSession"
-      }
-    ],
-    "isPartial": true,
-    "members": [
-      {
-        "attrs": [
-          {
-            "name": "RaisesException",
-            "type_": "extendedattribute",
-            "value": "Setter"
-          }
-        ],
-        "name": "session",
-        "type": {
-          "name": "MediaSession",
-          "params": [
-            "nullable"
-          ]
-        },
-        "type_": "attribute"
-      }
-    ],
-    "name": "HTMLMediaElement",
-    "type_": "partialinterface"
-  },
-  {
-    "attrs": [
-      {
         "name": "ConstructorCallWith",
         "type_": "extendedattribute",
         "value": "ExecutionContext"
@@ -72686,9 +73984,9 @@
       {
         "args": [
           {
-            "name": "artwork",
+            "name": "image",
             "type": {
-              "name": "MediaArtworkInit"
+              "name": "MediaImageInit"
             }
           }
         ],
@@ -72727,7 +74025,7 @@
         "type_": "attribute"
       }
     ],
-    "name": "MediaArtwork",
+    "name": "MediaImage",
     "type_": "interface"
   },
   {
@@ -72754,7 +74052,7 @@
         }
       }
     ],
-    "name": "MediaArtworkInit",
+    "name": "MediaImageInit",
     "type_": "dictionary"
   },
   {
@@ -72814,7 +74112,7 @@
           "name": "FrozenArray",
           "params": [
             {
-              "name": "MediaArtwork"
+              "name": "MediaImage"
             }
           ]
         },
@@ -72857,7 +74155,7 @@
           "name": "sequence",
           "params": [
             {
-              "name": "MediaArtworkInit"
+              "name": "MediaImageInit"
             }
           ]
         }
@@ -72869,20 +74167,6 @@
   {
     "attrs": [
       {
-        "name": "Constructor",
-        "type_": "extendedattribute"
-      },
-      {
-        "name": "ConstructorCallWith",
-        "type_": "extendedattribute",
-        "value": "ExecutionContext"
-      },
-      {
-        "name": "RaisesException",
-        "type_": "extendedattribute",
-        "value": "Constructor"
-      },
-      {
         "name": "RuntimeEnabled",
         "type_": "extendedattribute",
         "value": "MediaSession"
@@ -72890,6 +74174,13 @@
     ],
     "members": [
       {
+        "attrs": [
+          {
+            "name": "CallWith",
+            "type_": "extendedattribute",
+            "value": "ScriptState"
+          }
+        ],
         "name": "metadata",
         "type": {
           "name": "MediaMetadata",
@@ -72898,46 +74189,39 @@
           ]
         },
         "type_": "attribute"
-      },
-      {
-        "attrs": [
-          {
-            "name": "CallWith",
-            "type_": "extendedattribute",
-            "value": "ScriptState"
-          }
-        ],
-        "name": "activate",
-        "returnType": {
-          "name": "Promise",
-          "params": [
-            {
-              "name": "void"
-            }
-          ]
-        }
-      },
-      {
-        "attrs": [
-          {
-            "name": "CallWith",
-            "type_": "extendedattribute",
-            "value": "ScriptState"
-          }
-        ],
-        "name": "deactivate",
-        "returnType": {
-          "name": "Promise",
-          "params": [
-            {
-              "name": "void"
-            }
-          ]
-        }
       }
     ],
     "name": "MediaSession",
     "type_": "interface"
+  },
+  {
+    "attrs": [
+      {
+        "identifiers": [
+          "Window"
+        ],
+        "name": "Exposed",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RuntimeEnabled",
+        "type_": "extendedattribute",
+        "value": "MediaSession"
+      }
+    ],
+    "isPartial": true,
+    "members": [
+      {
+        "isReadOnly": true,
+        "name": "mediaSession",
+        "type": {
+          "name": "MediaSession"
+        },
+        "type_": "attribute"
+      }
+    ],
+    "name": "Navigator",
+    "type_": "partialinterface"
   },
   {
     "attrs": [
@@ -73505,8 +74789,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "inheritsFrom": "EventTarget",
     "members": [
       {
@@ -73773,10 +75055,7 @@
         "isStatic": true,
         "name": "createObjectURL",
         "returnType": {
-          "name": "DOMString",
-          "params": [
-            "nullable"
-          ]
+          "name": "DOMString"
         }
       }
     ],
@@ -74056,15 +75335,24 @@
       {
         "name": "DependentLifetime",
         "type_": "extendedattribute"
-      },
-      {
-        "name": "ConstructorCallWith",
-        "type_": "extendedattribute",
-        "value": "ExecutionContext"
       }
     ],
     "inheritsFrom": "EventTarget",
     "members": [
+      {
+        "attrs": [
+          {
+            "name": "RuntimeEnabled",
+            "type_": "extendedattribute",
+            "value": "OnDeviceChange"
+          }
+        ],
+        "name": "ondevicechange",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
+      },
       {
         "attrs": [
           {
@@ -74109,7 +75397,8 @@
       {
         "args": [
           {
-            "name": "options",
+            "name": "constraints",
+            "optional": true,
             "type": {
               "name": "MediaStreamConstraints"
             }
@@ -74145,20 +75434,6 @@
             }
           ]
         }
-      },
-      {
-        "attrs": [
-          {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "OnDeviceChange"
-          }
-        ],
-        "name": "ondevicechange",
-        "type": {
-          "name": "EventHandler"
-        },
-        "type_": "attribute"
       }
     ],
     "name": "MediaDevices",
@@ -74187,9 +75462,11 @@
           {
             "name": "tracks",
             "type": {
-              "name": "MediaStreamTrack",
+              "name": "sequence",
               "params": [
-                "array"
+                {
+                  "name": "MediaStreamTrack"
+                }
               ]
             }
           }
@@ -74201,10 +75478,6 @@
         "name": "ConstructorCallWith",
         "type_": "extendedattribute",
         "value": "ExecutionContext"
-      },
-      {
-        "name": "NoInterfaceObject",
-        "type_": "extendedattribute"
       }
     ],
     "inheritsFrom": "EventTarget",
@@ -74253,6 +75526,23 @@
       {
         "args": [
           {
+            "name": "trackId",
+            "type": {
+              "name": "DOMString"
+            }
+          }
+        ],
+        "name": "getTrackById",
+        "returnType": {
+          "name": "MediaStreamTrack",
+          "params": [
+            "nullable"
+          ]
+        }
+      },
+      {
+        "args": [
+          {
             "name": "track",
             "type": {
               "name": "MediaStreamTrack"
@@ -74291,20 +75581,6 @@
         }
       },
       {
-        "args": [
-          {
-            "name": "trackId",
-            "type": {
-              "name": "DOMString"
-            }
-          }
-        ],
-        "name": "getTrackById",
-        "returnType": {
-          "name": "MediaStreamTrack"
-        }
-      },
-      {
         "attrs": [
           {
             "name": "CallWith",
@@ -74332,20 +75608,6 @@
         "type_": "attribute"
       },
       {
-        "name": "onactive",
-        "type": {
-          "name": "EventHandler"
-        },
-        "type_": "attribute"
-      },
-      {
-        "name": "oninactive",
-        "type": {
-          "name": "EventHandler"
-        },
-        "type_": "attribute"
-      },
-      {
         "name": "onaddtrack",
         "type": {
           "name": "EventHandler"
@@ -74358,6 +75620,20 @@
           "name": "EventHandler"
         },
         "type_": "attribute"
+      },
+      {
+        "name": "onactive",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
+      },
+      {
+        "name": "oninactive",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
       }
     ],
     "name": "MediaStream",
@@ -74366,6 +75642,7 @@
   {
     "members": [
       {
+        "defaultValue": "false",
         "name": "video",
         "type": {
           "type_": "uniontype",
@@ -74380,6 +75657,7 @@
         }
       },
       {
+        "defaultValue": "false",
         "name": "audio",
         "type": {
           "type_": "uniontype",
@@ -74442,12 +75720,24 @@
       {
         "name": "stream",
         "type": {
-          "name": "MediaStream"
+          "name": "MediaStream",
+          "params": [
+            "nullable"
+          ]
         }
       }
     ],
     "name": "MediaStreamEventInit",
     "type_": "dictionary"
+  },
+  {
+    "name": "MediaStreamTrackState",
+    "type_": "enum",
+    "value": [
+      "live",
+      "muted",
+      "ended"
+    ]
   },
   {
     "attrs": [
@@ -74502,6 +75792,91 @@
         "type_": "attribute"
       },
       {
+        "name": "onmute",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
+      },
+      {
+        "name": "onunmute",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
+      },
+      {
+        "isReadOnly": true,
+        "name": "readyState",
+        "type": {
+          "name": "MediaStreamTrackState"
+        },
+        "type_": "attribute"
+      },
+      {
+        "name": "onended",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "CallWith",
+            "type_": "extendedattribute",
+            "value": "ExecutionContext"
+          }
+        ],
+        "name": "clone",
+        "returnType": {
+          "name": "MediaStreamTrack"
+        }
+      },
+      {
+        "attrs": [
+          {
+            "name": "ImplementedAs",
+            "type_": "extendedattribute",
+            "value": "stopTrack"
+          },
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute"
+          }
+        ],
+        "name": "stop",
+        "returnType": {
+          "name": "void"
+        }
+      },
+      {
+        "attrs": [
+          {
+            "name": "RuntimeEnabled",
+            "type_": "extendedattribute",
+            "value": "MediaConstraints"
+          }
+        ],
+        "name": "getConstraints",
+        "returnType": {
+          "name": "MediaTrackConstraints"
+        }
+      },
+      {
+        "attrs": [
+          {
+            "name": "RuntimeEnabled",
+            "type_": "extendedattribute",
+            "value": "MediaGetSettings"
+          }
+        ],
+        "name": "getSettings",
+        "returnType": {
+          "name": "MediaTrackSettings"
+        }
+      },
+      {
         "attrs": [
           {
             "name": "MeasureAs",
@@ -74513,14 +75888,6 @@
         "name": "remote",
         "type": {
           "name": "boolean"
-        },
-        "type_": "attribute"
-      },
-      {
-        "isReadOnly": true,
-        "name": "readyState",
-        "type": {
-          "name": "DOMString"
         },
         "type_": "attribute"
       },
@@ -74554,83 +75921,6 @@
         "returnType": {
           "name": "void"
         }
-      },
-      {
-        "attrs": [
-          {
-            "name": "ImplementedAs",
-            "type_": "extendedattribute",
-            "value": "stopTrack"
-          },
-          {
-            "name": "RaisesException",
-            "type_": "extendedattribute"
-          }
-        ],
-        "name": "stop",
-        "returnType": {
-          "name": "void"
-        }
-      },
-      {
-        "attrs": [
-          {
-            "name": "CallWith",
-            "type_": "extendedattribute",
-            "value": "ExecutionContext"
-          }
-        ],
-        "name": "clone",
-        "returnType": {
-          "name": "MediaStreamTrack"
-        }
-      },
-      {
-        "attrs": [
-          {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "MediaConstraints"
-          }
-        ],
-        "name": "getConstraints",
-        "returnType": {
-          "name": "MediaTrackConstraints"
-        }
-      },
-      {
-        "attrs": [
-          {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "MediaGetSettings"
-          }
-        ],
-        "name": "getSettings",
-        "returnType": {
-          "name": "MediaTrackSettings"
-        }
-      },
-      {
-        "name": "onmute",
-        "type": {
-          "name": "EventHandler"
-        },
-        "type_": "attribute"
-      },
-      {
-        "name": "onunmute",
-        "type": {
-          "name": "EventHandler"
-        },
-        "type_": "attribute"
-      },
-      {
-        "name": "onended",
-        "type": {
-          "name": "EventHandler"
-        },
-        "type_": "attribute"
       }
     ],
     "name": "MediaStreamTrack",
@@ -74639,13 +75929,38 @@
   {
     "attrs": [
       {
-        "name": "NoInterfaceObject",
+        "name": "Exposed",
+        "type_": "extendedattribute",
+        "value": "Window"
+      },
+      {
+        "args": [
+          {
+            "name": "type",
+            "type": {
+              "name": "DOMString"
+            }
+          },
+          {
+            "name": "eventInitDict",
+            "type": {
+              "name": "MediaStreamTrackEventInit"
+            }
+          }
+        ],
+        "name": "Constructor",
         "type_": "extendedattribute"
       }
     ],
     "inheritsFrom": "Event",
     "members": [
       {
+        "attrs": [
+          {
+            "name": "SameObject",
+            "type_": "extendedattribute"
+          }
+        ],
         "isReadOnly": true,
         "name": "track",
         "type": {
@@ -74656,6 +75971,20 @@
     ],
     "name": "MediaStreamTrackEvent",
     "type_": "interface"
+  },
+  {
+    "inheritsFrom": "EventInit",
+    "members": [
+      {
+        "isRequired": true,
+        "name": "track",
+        "type": {
+          "name": "MediaStreamTrack"
+        }
+      }
+    ],
+    "name": "MediaStreamTrackEventInit",
+    "type_": "dictionary"
   },
   {
     "members": [
@@ -75161,49 +76490,7 @@
       {
         "args": [
           {
-            "name": "options",
-            "type": {
-              "name": "MediaStreamConstraints"
-            }
-          },
-          {
-            "name": "successCallback",
-            "type": {
-              "name": "NavigatorUserMediaSuccessCallback"
-            }
-          },
-          {
-            "name": "errorCallback",
-            "type": {
-              "name": "NavigatorUserMediaErrorCallback"
-            }
-          }
-        ],
-        "attrs": [
-          {
-            "name": "RaisesException",
-            "type_": "extendedattribute"
-          },
-          {
-            "name": "ImplementedAs",
-            "type_": "extendedattribute",
-            "value": "getUserMedia"
-          },
-          {
-            "name": "MeasureAs",
-            "type_": "extendedattribute",
-            "value": "GetUserMediaPrefixed"
-          }
-        ],
-        "name": "webkitGetUserMedia",
-        "returnType": {
-          "name": "void"
-        }
-      },
-      {
-        "args": [
-          {
-            "name": "options",
+            "name": "constraints",
             "type": {
               "name": "MediaStreamConstraints"
             }
@@ -75241,22 +76528,63 @@
         "returnType": {
           "name": "void"
         }
+      },
+      {
+        "args": [
+          {
+            "name": "constraints",
+            "type": {
+              "name": "MediaStreamConstraints"
+            }
+          },
+          {
+            "name": "successCallback",
+            "type": {
+              "name": "NavigatorUserMediaSuccessCallback"
+            }
+          },
+          {
+            "name": "errorCallback",
+            "type": {
+              "name": "NavigatorUserMediaErrorCallback"
+            }
+          }
+        ],
+        "attrs": [
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute"
+          },
+          {
+            "name": "ImplementedAs",
+            "type_": "extendedattribute",
+            "value": "getUserMedia"
+          },
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "GetUserMediaPrefixed"
+          }
+        ],
+        "name": "webkitGetUserMedia",
+        "returnType": {
+          "name": "void"
+        }
       }
     ],
     "name": "Navigator",
     "type_": "partialinterface"
   },
   {
-    "attrs": [
-      {
-        "name": "ConstructorCallWith",
-        "type_": "extendedattribute",
-        "value": "ExecutionContext"
-      }
-    ],
     "isPartial": true,
     "members": [
       {
+        "attrs": [
+          {
+            "name": "SameObject",
+            "type_": "extendedattribute"
+          }
+        ],
         "isReadOnly": true,
         "name": "mediaDevices",
         "type": {
@@ -75293,6 +76621,12 @@
         "type_": "attribute"
       },
       {
+        "attrs": [
+          {
+            "name": "Measure",
+            "type_": "extendedattribute"
+          }
+        ],
         "isReadOnly": true,
         "name": "constraintName",
         "type": {
@@ -75419,10 +76753,7 @@
         "isStatic": true,
         "name": "createObjectURL",
         "returnType": {
-          "name": "DOMString",
-          "params": [
-            "nullable"
-          ]
+          "name": "DOMString"
         }
       }
     ],
@@ -76608,6 +77939,24 @@
           "name": "DOMString"
         },
         "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "RuntimeEnabled",
+            "type_": "extendedattribute",
+            "value": "NotificationInlineReplies"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "reply",
+        "type": {
+          "name": "DOMString",
+          "params": [
+            "nullable"
+          ]
+        },
+        "type_": "attribute"
       }
     ],
     "name": "NotificationEvent",
@@ -76628,6 +77977,23 @@
         "name": "action",
         "type": {
           "name": "DOMString"
+        }
+      },
+      {
+        "attrs": [
+          {
+            "name": "RuntimeEnabled",
+            "type_": "extendedattribute",
+            "value": "NotificationInlineReplies"
+          }
+        ],
+        "defaultValue": "",
+        "name": "reply",
+        "type": {
+          "name": "DOMString",
+          "params": [
+            "nullable"
+          ]
         }
       }
     ],
@@ -77988,6 +79354,12 @@
     ],
     "members": [
       {
+        "mapPattern": [
+          "attribute"
+        ],
+        "type_": "serializer"
+      },
+      {
         "isReadOnly": true,
         "name": "country",
         "type": {
@@ -78073,6 +79445,13 @@
         "type_": "attribute"
       },
       {
+        "attrs": [
+          {
+            "name": "DeprecateAs",
+            "type_": "extendedattribute",
+            "value": "PaymentAddressCareOf"
+          }
+        ],
         "isReadOnly": true,
         "name": "careOf",
         "type": {
@@ -78111,6 +79490,13 @@
       {
         "isRequired": true,
         "name": "value",
+        "type": {
+          "name": "DOMString"
+        }
+      },
+      {
+        "defaultValue": "urn:iso:std:iso:4217",
+        "name": "currencySystem",
         "type": {
           "name": "DOMString"
         }
@@ -78165,6 +79551,12 @@
               "name": "PaymentDetailsModifier"
             }
           ]
+        }
+      },
+      {
+        "name": "error",
+        "type": {
+          "name": "DOMString"
         }
       }
     ],
@@ -78272,6 +79664,15 @@
     "type_": "dictionary"
   },
   {
+    "name": "PaymentShippingType",
+    "type_": "enum",
+    "value": [
+      "shipping",
+      "delivery",
+      "pickup"
+    ]
+  },
+  {
     "attrs": [
       {
         "name": "RuntimeEnabled",
@@ -78280,6 +79681,20 @@
       }
     ],
     "members": [
+      {
+        "attrs": [
+          {
+            "name": "RuntimeEnabled",
+            "type_": "extendedattribute",
+            "value": "PaymentRequestPayerName"
+          }
+        ],
+        "defaultValue": "false",
+        "name": "requestPayerName",
+        "type": {
+          "name": "boolean"
+        }
+      },
       {
         "defaultValue": "false",
         "name": "requestPayerEmail",
@@ -78299,6 +79714,13 @@
         "name": "requestShipping",
         "type": {
           "name": "boolean"
+        }
+      },
+      {
+        "defaultValue": "shipping",
+        "name": "shippingType",
+        "type": {
+          "name": "DOMString"
         }
       }
     ],
@@ -78429,6 +79851,17 @@
         "type_": "attribute"
       },
       {
+        "isReadOnly": true,
+        "name": "shippingType",
+        "type": {
+          "name": "PaymentShippingType",
+          "params": [
+            "nullable"
+          ]
+        },
+        "type_": "attribute"
+      },
+      {
         "name": "onshippingaddresschange",
         "type": {
           "name": "EventHandler"
@@ -78542,10 +79975,34 @@
     ],
     "members": [
       {
+        "mapPattern": [
+          "attribute"
+        ],
+        "type_": "serializer"
+      },
+      {
         "isReadOnly": true,
         "name": "methodName",
         "type": {
           "name": "DOMString"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "RuntimeEnabled",
+            "type_": "extendedattribute",
+            "value": "PaymentRequestPayerName"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "payerName",
+        "type": {
+          "name": "DOMString",
+          "params": [
+            "nullable"
+          ]
         },
         "type_": "attribute"
       },
@@ -78693,8 +80150,6 @@
     "type_": "dictionary"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -78859,6 +80314,16 @@
     "type_": "dictionary"
   },
   {
+    "name": "RTCDataChannelState",
+    "type_": "enum",
+    "value": [
+      "connecting",
+      "open",
+      "closing",
+      "closed"
+    ]
+  },
+  {
     "attrs": [
       {
         "name": "ActiveScriptWrappable",
@@ -78879,15 +80344,7 @@
         "isReadOnly": true,
         "name": "label",
         "type": {
-          "name": "DOMString"
-        },
-        "type_": "attribute"
-      },
-      {
-        "isReadOnly": true,
-        "name": "reliable",
-        "type": {
-          "name": "boolean"
+          "name": "USVString"
         },
         "type_": "attribute"
       },
@@ -78900,6 +80357,12 @@
         "type_": "attribute"
       },
       {
+        "attrs": [
+          {
+            "name": "Measure",
+            "type_": "extendedattribute"
+          }
+        ],
         "isReadOnly": true,
         "name": "maxRetransmitTime",
         "type": {
@@ -78908,6 +80371,12 @@
         "type_": "attribute"
       },
       {
+        "attrs": [
+          {
+            "name": "Measure",
+            "type_": "extendedattribute"
+          }
+        ],
         "isReadOnly": true,
         "name": "maxRetransmits",
         "type": {
@@ -78919,7 +80388,7 @@
         "isReadOnly": true,
         "name": "protocol",
         "type": {
-          "name": "DOMString"
+          "name": "USVString"
         },
         "type_": "attribute"
       },
@@ -78943,7 +80412,7 @@
         "isReadOnly": true,
         "name": "readyState",
         "type": {
-          "name": "DOMString"
+          "name": "RTCDataChannelState"
         },
         "type_": "attribute"
       },
@@ -79096,6 +80565,20 @@
         "returnType": {
           "name": "void"
         }
+      },
+      {
+        "attrs": [
+          {
+            "name": "Measure",
+            "type_": "extendedattribute"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "reliable",
+        "type": {
+          "name": "boolean"
+        },
+        "type_": "attribute"
       }
     ],
     "name": "RTCDataChannel",
@@ -79959,6 +81442,11 @@
         ],
         "attrs": [
           {
+            "name": "CallWith",
+            "type_": "extendedattribute",
+            "value": "ExecutionContext"
+          },
+          {
             "name": "RaisesException",
             "type_": "extendedattribute"
           }
@@ -79970,167 +81458,6 @@
       },
       {
         "name": "ondatachannel",
-        "type": {
-          "name": "EventHandler"
-        },
-        "type_": "attribute"
-      },
-      {
-        "args": [
-          {
-            "name": "configuration",
-            "optional": true,
-            "type": {
-              "name": "Dictionary"
-            }
-          },
-          {
-            "name": "mediaConstraints",
-            "optional": true,
-            "type": {
-              "name": "Dictionary"
-            }
-          }
-        ],
-        "attrs": [
-          {
-            "name": "CallWith",
-            "type_": "extendedattribute",
-            "value": "ExecutionContext"
-          },
-          {
-            "name": "RaisesException",
-            "type_": "extendedattribute"
-          }
-        ],
-        "name": "updateIce",
-        "returnType": {
-          "name": "void"
-        }
-      },
-      {
-        "name": "getLocalStreams",
-        "returnType": {
-          "name": "sequence",
-          "params": [
-            {
-              "name": "MediaStream"
-            }
-          ]
-        }
-      },
-      {
-        "name": "getRemoteStreams",
-        "returnType": {
-          "name": "sequence",
-          "params": [
-            {
-              "name": "MediaStream"
-            }
-          ]
-        }
-      },
-      {
-        "args": [
-          {
-            "name": "streamId",
-            "type": {
-              "name": "DOMString"
-            }
-          }
-        ],
-        "name": "getStreamById",
-        "returnType": {
-          "name": "MediaStream"
-        }
-      },
-      {
-        "args": [
-          {
-            "name": "stream",
-            "type": {
-              "name": "MediaStream",
-              "params": [
-                "nullable"
-              ]
-            }
-          },
-          {
-            "name": "mediaConstraints",
-            "optional": true,
-            "type": {
-              "name": "Dictionary"
-            }
-          }
-        ],
-        "attrs": [
-          {
-            "name": "CallWith",
-            "type_": "extendedattribute",
-            "value": "ExecutionContext"
-          },
-          {
-            "name": "RaisesException",
-            "type_": "extendedattribute"
-          }
-        ],
-        "name": "addStream",
-        "returnType": {
-          "name": "void"
-        }
-      },
-      {
-        "args": [
-          {
-            "name": "stream",
-            "type": {
-              "name": "MediaStream",
-              "params": [
-                "nullable"
-              ]
-            }
-          }
-        ],
-        "attrs": [
-          {
-            "name": "RaisesException",
-            "type_": "extendedattribute"
-          }
-        ],
-        "name": "removeStream",
-        "returnType": {
-          "name": "void"
-        }
-      },
-      {
-        "args": [
-          {
-            "name": "track",
-            "type": {
-              "name": "MediaStreamTrack"
-            }
-          }
-        ],
-        "attrs": [
-          {
-            "name": "RaisesException",
-            "type_": "extendedattribute"
-          }
-        ],
-        "name": "createDTMFSender",
-        "returnType": {
-          "name": "RTCDTMFSender"
-        }
-      },
-      {
-        "name": "onaddstream",
-        "type": {
-          "name": "EventHandler"
-        },
-        "type_": "attribute"
-      },
-      {
-        "name": "onremovestream",
         "type": {
           "name": "EventHandler"
         },
@@ -80166,6 +81493,196 @@
             }
           ]
         }
+      },
+      {
+        "args": [
+          {
+            "name": "configuration",
+            "optional": true,
+            "type": {
+              "name": "Dictionary"
+            }
+          },
+          {
+            "name": "mediaConstraints",
+            "optional": true,
+            "type": {
+              "name": "Dictionary"
+            }
+          }
+        ],
+        "attrs": [
+          {
+            "name": "Measure",
+            "type_": "extendedattribute"
+          },
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute"
+          }
+        ],
+        "name": "updateIce",
+        "returnType": {
+          "name": "void"
+        }
+      },
+      {
+        "attrs": [
+          {
+            "name": "Measure",
+            "type_": "extendedattribute"
+          }
+        ],
+        "name": "getLocalStreams",
+        "returnType": {
+          "name": "sequence",
+          "params": [
+            {
+              "name": "MediaStream"
+            }
+          ]
+        }
+      },
+      {
+        "attrs": [
+          {
+            "name": "Measure",
+            "type_": "extendedattribute"
+          }
+        ],
+        "name": "getRemoteStreams",
+        "returnType": {
+          "name": "sequence",
+          "params": [
+            {
+              "name": "MediaStream"
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          {
+            "name": "streamId",
+            "type": {
+              "name": "DOMString"
+            }
+          }
+        ],
+        "attrs": [
+          {
+            "name": "Measure",
+            "type_": "extendedattribute"
+          }
+        ],
+        "name": "getStreamById",
+        "returnType": {
+          "name": "MediaStream"
+        }
+      },
+      {
+        "args": [
+          {
+            "name": "stream",
+            "type": {
+              "name": "MediaStream",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "name": "mediaConstraints",
+            "optional": true,
+            "type": {
+              "name": "Dictionary"
+            }
+          }
+        ],
+        "attrs": [
+          {
+            "name": "Measure",
+            "type_": "extendedattribute"
+          },
+          {
+            "name": "CallWith",
+            "type_": "extendedattribute",
+            "value": "ExecutionContext"
+          },
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute"
+          }
+        ],
+        "name": "addStream",
+        "returnType": {
+          "name": "void"
+        }
+      },
+      {
+        "args": [
+          {
+            "name": "stream",
+            "type": {
+              "name": "MediaStream",
+              "params": [
+                "nullable"
+              ]
+            }
+          }
+        ],
+        "attrs": [
+          {
+            "name": "Measure",
+            "type_": "extendedattribute"
+          },
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute"
+          }
+        ],
+        "name": "removeStream",
+        "returnType": {
+          "name": "void"
+        }
+      },
+      {
+        "args": [
+          {
+            "name": "track",
+            "type": {
+              "name": "MediaStreamTrack"
+            }
+          }
+        ],
+        "attrs": [
+          {
+            "name": "Measure",
+            "type_": "extendedattribute"
+          },
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute"
+          }
+        ],
+        "name": "createDTMFSender",
+        "returnType": {
+          "name": "RTCDTMFSender"
+        }
+      },
+      {
+        "name": "onaddstream",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
+      },
+      {
+        "name": "onremovestream",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
       }
     ],
     "name": "RTCPeerConnection",
@@ -80304,6 +81821,29 @@
     ],
     "name": "RTCStatsCallback",
     "type_": "callback"
+  },
+  {
+    "attrs": [
+      {
+        "name": "RuntimeEnabled",
+        "type_": "extendedattribute",
+        "value": "RTCPeerConnectionNewGetStats"
+      }
+    ],
+    "members": [
+      {
+        "isReadOnly": true,
+        "keyType": {
+          "name": "DOMString"
+        },
+        "type_": "maplike",
+        "valueType": {
+          "name": "object"
+        }
+      }
+    ],
+    "name": "RTCStatsReport",
+    "type_": "interface"
   },
   {
     "attrs": [
@@ -82528,7 +84068,7 @@
       {
         "attrs": [
           {
-            "name": "OriginTrialEnabled",
+            "name": "RuntimeEnabled",
             "type_": "extendedattribute",
             "value": "DurableStorage"
           }
@@ -82626,7 +84166,7 @@
         "type_": "extendedattribute"
       },
       {
-        "name": "OriginTrialEnabled",
+        "name": "RuntimeEnabled",
         "type_": "extendedattribute",
         "value": "DurableStorage"
       }
@@ -82880,7 +84420,7 @@
       {
         "attrs": [
           {
-            "name": "OriginTrialEnabled",
+            "name": "RuntimeEnabled",
             "type_": "extendedattribute",
             "value": "DurableStorage"
           }
@@ -82901,6 +84441,11 @@
     "members": [
       {
         "attrs": [
+          {
+            "name": "CallWith",
+            "type_": "extendedattribute",
+            "value": "ScriptState"
+          },
           {
             "name": "RuntimeEnabled",
             "type_": "extendedattribute",
@@ -82944,10 +84489,30 @@
     ]
   },
   {
+    "args": [
+      {
+        "name": "available",
+        "type": {
+          "name": "boolean"
+        }
+      }
+    ],
+    "name": "RemotePlaybackAvailabilityCallback",
+    "returnType": {
+      "name": "void"
+    },
+    "type_": "callback"
+  },
+  {
     "attrs": [
       {
         "name": "ActiveScriptWrappable",
         "type_": "extendedattribute"
+      },
+      {
+        "name": "Custom",
+        "type_": "extendedattribute",
+        "value": "VisitDOMWrapper"
       },
       {
         "name": "DependentLifetime",
@@ -82970,87 +84535,78 @@
         "type_": "attribute"
       },
       {
-        "name": "onstatechange",
+        "name": "onconnecting",
         "type": {
           "name": "EventHandler"
         },
         "type_": "attribute"
       },
       {
-        "attrs": [
+        "name": "onconnect",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
+      },
+      {
+        "name": "ondisconnect",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
+      },
+      {
+        "args": [
           {
-            "name": "CallWith",
-            "type_": "extendedattribute",
-            "value": "ScriptState"
+            "name": "callback",
+            "type": {
+              "name": "RemotePlaybackAvailabilityCallback"
+            }
           }
         ],
-        "name": "getAvailability",
+        "name": "watchAvailability",
         "returnType": {
           "name": "Promise",
           "params": [
             {
-              "name": "RemotePlaybackAvailability"
+              "name": "long"
             }
           ]
         }
       },
       {
-        "attrs": [
+        "args": [
           {
-            "name": "CallWith",
-            "type_": "extendedattribute",
-            "value": "ScriptState"
+            "name": "id",
+            "optional": true,
+            "type": {
+              "name": "long"
+            }
           }
         ],
-        "name": "connect",
+        "name": "cancelWatchAvailability",
         "returnType": {
           "name": "Promise",
           "params": [
             {
-              "name": "bool"
+              "name": "void"
+            }
+          ]
+        }
+      },
+      {
+        "name": "prompt",
+        "returnType": {
+          "name": "Promise",
+          "params": [
+            {
+              "name": "void"
             }
           ]
         }
       }
     ],
     "name": "RemotePlayback",
-    "type_": "interface"
-  },
-  {
-    "attrs": [
-      {
-        "name": "ActiveScriptWrappable",
-        "type_": "extendedattribute"
-      },
-      {
-        "name": "DependentLifetime",
-        "type_": "extendedattribute"
-      },
-      {
-        "name": "RuntimeEnabled",
-        "type_": "extendedattribute",
-        "value": "RemotePlayback"
-      }
-    ],
-    "inheritsFrom": "EventTarget",
-    "members": [
-      {
-        "isReadOnly": true,
-        "name": "value",
-        "type": {
-          "name": "boolean"
-        },
-        "type_": "attribute"
-      },
-      {
-        "name": "onchange",
-        "type": {
-          "name": "EventHandler"
-        },
-        "type_": "attribute"
-      }
-    ],
-    "name": "RemotePlaybackAvailability",
     "type_": "interface"
   },
   {
@@ -83183,6 +84739,100 @@
     "type_": "partialinterface"
   },
   {
+    "attrs": [
+      {
+        "name": "RuntimeEnabled",
+        "type_": "extendedattribute",
+        "value": "Sensor"
+      },
+      {
+        "args": [
+          {
+            "name": "sensorOptions",
+            "optional": true,
+            "type": {
+              "name": "SensorOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "ConstructorCallWith",
+        "type_": "extendedattribute",
+        "value": "ScriptState"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      }
+    ],
+    "inheritsFrom": "Sensor",
+    "members": [
+      {
+        "isReadOnly": true,
+        "name": "reading",
+        "type": {
+          "name": "AmbientLightSensorReading",
+          "params": [
+            "nullable"
+          ]
+        },
+        "type_": "attribute"
+      }
+    ],
+    "name": "AmbientLightSensor",
+    "type_": "interface"
+  },
+  {
+    "attrs": [
+      {
+        "name": "RuntimeEnabled",
+        "type_": "extendedattribute",
+        "value": "Sensor"
+      },
+      {
+        "args": [
+          {
+            "name": "ambientLightSensorReadingInit",
+            "type": {
+              "name": "AmbientLightSensorReadingInit"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      }
+    ],
+    "inheritsFrom": "SensorReading",
+    "members": [
+      {
+        "isReadOnly": true,
+        "name": "illuminance",
+        "type": {
+          "name": "unrestricted double"
+        },
+        "type_": "attribute"
+      }
+    ],
+    "name": "AmbientLightSensorReading",
+    "type_": "interface"
+  },
+  {
+    "members": [
+      {
+        "name": "illuminance",
+        "type": {
+          "name": "unrestricted double"
+        }
+      }
+    ],
+    "name": "AmbientLightSensorReadingInit",
+    "type_": "dictionary"
+  },
+  {
     "name": "SensorState",
     "type_": "enum",
     "value": [
@@ -83304,7 +84954,7 @@
             }
           },
           {
-            "name": "errorEventInitDict",
+            "name": "eventInitDict",
             "type": {
               "name": "SensorErrorEventInit"
             }
@@ -83314,8 +84964,16 @@
         "type_": "extendedattribute"
       }
     ],
-    "inheritsFrom": "ErrorEvent",
+    "inheritsFrom": "Event",
     "members": [
+      {
+        "isReadOnly": true,
+        "name": "error",
+        "type": {
+          "name": "DOMException"
+        },
+        "type_": "attribute"
+      }
     ],
     "name": "SensorErrorEvent",
     "type_": "interface"
@@ -83326,7 +84984,7 @@
       {
         "name": "error",
         "type": {
-          "name": "any"
+          "name": "DOMException"
         }
       }
     ],
@@ -83422,7 +85080,10 @@
       {
         "name": "reading",
         "type": {
-          "name": "SensorReading"
+          "name": "SensorReading",
+          "params": [
+            "nullable"
+          ]
         }
       }
     ],
@@ -83444,13 +85105,6 @@
     ],
     "members": [
       {
-        "attrs": [
-          {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "ServiceWorkerClientAttributes"
-          }
-        ],
         "isReadOnly": true,
         "name": "url",
         "type": {
@@ -83459,13 +85113,6 @@
         "type_": "attribute"
       },
       {
-        "attrs": [
-          {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "ServiceWorkerClientAttributes"
-          }
-        ],
         "isReadOnly": true,
         "name": "frameType",
         "type": {
@@ -83474,13 +85121,6 @@
         "type_": "attribute"
       },
       {
-        "attrs": [
-          {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "ServiceWorkerClientAttributes"
-          }
-        ],
         "isReadOnly": true,
         "name": "id",
         "type": {
@@ -83588,11 +85228,6 @@
         ],
         "attrs": [
           {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "ServiceWorkerClientsGetID"
-          },
-          {
             "name": "CallWith",
             "type_": "extendedattribute",
             "value": "ScriptState"
@@ -83650,11 +85285,6 @@
           }
         ],
         "attrs": [
-          {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "ServiceWorkerClientAttributes"
-          },
           {
             "name": "CallWith",
             "type_": "extendedattribute",
@@ -84288,6 +85918,130 @@
     "type_": "interface"
   },
   {
+    "attrs": [
+      {
+        "name": "RuntimeEnabled",
+        "type_": "extendedattribute",
+        "value": "ServiceWorkerNavigationPreload"
+      },
+      {
+        "name": "SecureContext",
+        "type_": "extendedattribute"
+      },
+      {
+        "identifiers": [
+          "Window",
+          "Worker"
+        ],
+        "name": "Exposed",
+        "type_": "extendedattribute"
+      }
+    ],
+    "members": [
+      {
+        "attrs": [
+          {
+            "name": "CallWith",
+            "type_": "extendedattribute",
+            "value": "ScriptState"
+          }
+        ],
+        "name": "enable",
+        "returnType": {
+          "name": "Promise",
+          "params": [
+            {
+              "name": "void"
+            }
+          ]
+        }
+      },
+      {
+        "attrs": [
+          {
+            "name": "CallWith",
+            "type_": "extendedattribute",
+            "value": "ScriptState"
+          }
+        ],
+        "name": "disable",
+        "returnType": {
+          "name": "Promise",
+          "params": [
+            {
+              "name": "void"
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          {
+            "name": "value",
+            "type": {
+              "name": "ByteString"
+            }
+          }
+        ],
+        "attrs": [
+          {
+            "name": "CallWith",
+            "type_": "extendedattribute",
+            "value": "ScriptState"
+          }
+        ],
+        "name": "setHeaderValue",
+        "returnType": {
+          "name": "Promise",
+          "params": [
+            {
+              "name": "void"
+            }
+          ]
+        }
+      },
+      {
+        "attrs": [
+          {
+            "name": "CallWith",
+            "type_": "extendedattribute",
+            "value": "ScriptState"
+          }
+        ],
+        "name": "getState",
+        "returnType": {
+          "name": "Promise",
+          "params": [
+            {
+              "name": "NavigationPreloadState"
+            }
+          ]
+        }
+      }
+    ],
+    "name": "NavigationPreloadManager",
+    "type_": "interface"
+  },
+  {
+    "members": [
+      {
+        "defaultValue": "false",
+        "name": "enabled",
+        "type": {
+          "name": "boolean"
+        }
+      },
+      {
+        "name": "headerValue",
+        "type": {
+          "name": "ByteString"
+        }
+      }
+    ],
+    "name": "NavigationPreloadState",
+    "type_": "dictionary"
+  },
+  {
     "isPartial": true,
     "members": [
       {
@@ -84418,8 +86172,6 @@
     "type_": "implements"
   },
   {
-    "attrs": [
-    ],
     "inheritsFrom": "EventTarget",
     "members": [
       {
@@ -84890,6 +86642,21 @@
         "type_": "attribute"
       },
       {
+        "attrs": [
+          {
+            "name": "RuntimeEnabled",
+            "type_": "extendedattribute",
+            "value": "ServiceWorkerNavigationPreload"
+          }
+        ],
+        "isReadOnly": true,
+        "name": "navigationPreload",
+        "type": {
+          "name": "NavigationPreloadManager"
+        },
+        "type_": "attribute"
+      },
+      {
         "isReadOnly": true,
         "name": "scope",
         "type": {
@@ -84962,11 +86729,6 @@
         "value": "ServiceWorker"
       },
       {
-        "name": "RuntimeEnabled",
-        "type_": "extendedattribute",
-        "value": "ServiceWorkerClientAttributes"
-      },
-      {
         "name": "ImplementedAs",
         "type_": "extendedattribute",
         "value": "ServiceWorkerWindowClient"
@@ -85019,11 +86781,6 @@
         ],
         "attrs": [
           {
-            "name": "RuntimeEnabled",
-            "type_": "extendedattribute",
-            "value": "ServiceWorkerWindowClientNavigate"
-          },
-          {
             "name": "CallWith",
             "type_": "extendedattribute",
             "value": "ScriptState"
@@ -85041,6 +86798,84 @@
       }
     ],
     "name": "WindowClient",
+    "type_": "interface"
+  },
+  {
+    "attrs": [
+      {
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RuntimeEnabled",
+        "type_": "extendedattribute",
+        "value": "ShapeDetection"
+      }
+    ],
+    "members": [
+      {
+        "isReadOnly": true,
+        "name": "boundingBox",
+        "type": {
+          "name": "DOMRect"
+        },
+        "type_": "attribute"
+      }
+    ],
+    "name": "DetectedFace",
+    "type_": "interface"
+  },
+  {
+    "attrs": [
+      {
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "ConstructorCallWith",
+        "type_": "extendedattribute",
+        "value": "ScriptState"
+      },
+      {
+        "name": "RuntimeEnabled",
+        "type_": "extendedattribute",
+        "value": "ShapeDetection"
+      }
+    ],
+    "members": [
+      {
+        "args": [
+          {
+            "name": "htmlImageElement",
+            "type": {
+              "name": "HTMLImageElement"
+            }
+          }
+        ],
+        "attrs": [
+          {
+            "name": "CallWith",
+            "type_": "extendedattribute",
+            "value": "ScriptState"
+          }
+        ],
+        "name": "detect",
+        "returnType": {
+          "name": "Promise",
+          "params": [
+            {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "DetectedObject"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "name": "FaceDetector",
     "type_": "interface"
   },
   {
@@ -85506,7 +87341,10 @@
         "isReadOnly": true,
         "name": "results",
         "type": {
-          "name": "SpeechRecognitionResultList"
+          "name": "SpeechRecognitionResultList",
+          "params": [
+            "nullable"
+          ]
         },
         "type_": "attribute"
       },
@@ -85514,7 +87352,10 @@
         "isReadOnly": true,
         "name": "interpretation",
         "type": {
-          "name": "Document"
+          "name": "Document",
+          "params": [
+            "nullable"
+          ]
         },
         "type_": "attribute"
       },
@@ -85522,7 +87363,10 @@
         "isReadOnly": true,
         "name": "emma",
         "type": {
-          "name": "Document"
+          "name": "Document",
+          "params": [
+            "nullable"
+          ]
         },
         "type_": "attribute"
       }
@@ -85542,7 +87386,10 @@
       {
         "name": "results",
         "type": {
-          "name": "SpeechRecognitionResultList"
+          "name": "SpeechRecognitionResultList",
+          "params": [
+            "nullable"
+          ]
         }
       }
     ],
@@ -86081,6 +87928,12 @@
     "isPartial": true,
     "members": [
       {
+        "attrs": [
+          {
+            "name": "Measure",
+            "type_": "extendedattribute"
+          }
+        ],
         "name": "srcObject",
         "type": {
           "name": "MediaProvider",
@@ -86095,8 +87948,6 @@
     "type_": "partialinterface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "attrs": [
@@ -86701,7 +88552,7 @@
   {
     "attrs": [
       {
-        "name": "RuntimeEnabled",
+        "name": "OriginTrialEnabled",
         "type_": "extendedattribute",
         "value": "WebVR"
       }
@@ -86736,7 +88587,7 @@
   {
     "attrs": [
       {
-        "name": "RuntimeEnabled",
+        "name": "OriginTrialEnabled",
         "type_": "extendedattribute",
         "value": "WebVR"
       }
@@ -86805,6 +88656,13 @@
         }
       },
       {
+        "attrs": [
+          {
+            "name": "DeprecateAs",
+            "type_": "extendedattribute",
+            "value": "VRDeprecatedGetPose"
+          }
+        ],
         "name": "getPose",
         "returnType": {
           "name": "VRPose"
@@ -86935,7 +88793,7 @@
   {
     "attrs": [
       {
-        "name": "RuntimeEnabled",
+        "name": "OriginTrialEnabled",
         "type_": "extendedattribute",
         "value": "WebVR"
       }
@@ -86999,7 +88857,7 @@
   {
     "attrs": [
       {
-        "name": "RuntimeEnabled",
+        "name": "OriginTrialEnabled",
         "type_": "extendedattribute",
         "value": "WebVR"
       },
@@ -87048,7 +88906,7 @@
   {
     "attrs": [
       {
-        "name": "RuntimeEnabled",
+        "name": "OriginTrialEnabled",
         "type_": "extendedattribute",
         "value": "WebVR"
       }
@@ -87058,7 +88916,10 @@
       {
         "name": "display",
         "type": {
-          "name": "VRDisplay"
+          "name": "VRDisplay",
+          "params": [
+            "nullable"
+          ]
         }
       },
       {
@@ -87074,7 +88935,7 @@
   {
     "attrs": [
       {
-        "name": "RuntimeEnabled",
+        "name": "OriginTrialEnabled",
         "type_": "extendedattribute",
         "value": "WebVR"
       }
@@ -87089,6 +88950,13 @@
         "type_": "attribute"
       },
       {
+        "attrs": [
+          {
+            "name": "DeprecateAs",
+            "type_": "extendedattribute",
+            "value": "VRDeprecatedFieldOfView"
+          }
+        ],
         "isReadOnly": true,
         "name": "fieldOfView",
         "type": {
@@ -87119,7 +88987,7 @@
   {
     "attrs": [
       {
-        "name": "RuntimeEnabled",
+        "name": "OriginTrialEnabled",
         "type_": "extendedattribute",
         "value": "WebVR"
       }
@@ -87160,7 +89028,7 @@
   {
     "attrs": [
       {
-        "name": "RuntimeEnabled",
+        "name": "OriginTrialEnabled",
         "type_": "extendedattribute",
         "value": "WebVR"
       },
@@ -87232,7 +89100,7 @@
   {
     "attrs": [
       {
-        "name": "RuntimeEnabled",
+        "name": "OriginTrialEnabled",
         "type_": "extendedattribute",
         "value": "WebVR"
       }
@@ -87249,30 +89117,32 @@
         }
       },
       {
+        "defaultValue": [
+          "[",
+          "]"
+        ],
         "name": "leftBounds",
         "type": {
           "name": "sequence",
           "params": [
             {
               "name": "float"
-            },
-            [
-              "nullable"
-            ]
+            }
           ]
         }
       },
       {
+        "defaultValue": [
+          "[",
+          "]"
+        ],
         "name": "rightBounds",
         "type": {
           "name": "sequence",
           "params": [
             {
               "name": "float"
-            },
-            [
-              "nullable"
-            ]
+            }
           ]
         }
       }
@@ -87283,7 +89153,7 @@
   {
     "attrs": [
       {
-        "name": "RuntimeEnabled",
+        "name": "OriginTrialEnabled",
         "type_": "extendedattribute",
         "value": "WebVR"
       }
@@ -87362,7 +89232,7 @@
   {
     "attrs": [
       {
-        "name": "RuntimeEnabled",
+        "name": "OriginTrialEnabled",
         "type_": "extendedattribute",
         "value": "WebVR"
       }
@@ -87418,6 +89288,32 @@
     "type_": "partialinterface"
   },
   {
+    "attrs": [
+      {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "optional": true,
+            "type": {
+              "name": "AnalyserOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      }
+    ],
     "inheritsFrom": "AudioNode",
     "members": [
       {
@@ -87545,7 +89441,65 @@
     "type_": "interface"
   },
   {
+    "inheritsFrom": "AudioNodeOptions",
+    "members": [
+      {
+        "defaultValue": "2048",
+        "name": "fftSize",
+        "type": {
+          "name": "unsigned long"
+        }
+      },
+      {
+        "defaultValue": "-30",
+        "name": "maxDecibels",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "defaultValue": "-100",
+        "name": "minDecibels",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "defaultValue": "0.8",
+        "name": "smoothingTimeConstant",
+        "type": {
+          "name": "float"
+        }
+      }
+    ],
+    "name": "AnalyserOptions",
+    "type_": "dictionary"
+  },
+  {
     "attrs": [
+      {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "type": {
+              "name": "AudioBufferOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      }
     ],
     "members": [
       {
@@ -87707,7 +89661,57 @@
     "type_": "callback"
   },
   {
+    "members": [
+      {
+        "defaultValue": "1",
+        "name": "numberOfChannels",
+        "type": {
+          "name": "unsigned long"
+        }
+      },
+      {
+        "isRequired": true,
+        "name": "length",
+        "type": {
+          "name": "unsigned long"
+        }
+      },
+      {
+        "name": "sampleRate",
+        "type": {
+          "name": "float"
+        }
+      }
+    ],
+    "name": "AudioBufferOptions",
+    "type_": "dictionary"
+  },
+  {
     "attrs": [
+      {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "optional": true,
+            "type": {
+              "name": "AudioBufferSourceOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      },
       {
         "name": "ActiveScriptWrappable",
         "type_": "extendedattribute"
@@ -87834,6 +89838,51 @@
     "type_": "interface"
   },
   {
+    "members": [
+      {
+        "name": "buffer",
+        "type": {
+          "name": "AudioBuffer",
+          "params": [
+            "nullable"
+          ]
+        }
+      },
+      {
+        "name": "detune",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "loop",
+        "type": {
+          "name": "boolean"
+        }
+      },
+      {
+        "name": "loopEnd",
+        "type": {
+          "name": "double"
+        }
+      },
+      {
+        "name": "loopStart",
+        "type": {
+          "name": "double"
+        }
+      },
+      {
+        "name": "playbackRate",
+        "type": {
+          "name": "float"
+        }
+      }
+    ],
+    "name": "AudioBufferSourceOptions",
+    "type_": "dictionary"
+  },
+  {
     "attrs": [
       {
         "name": "ActiveScriptWrappable",
@@ -87864,6 +89913,34 @@
     ],
     "inheritsFrom": "BaseAudioContext",
     "members": [
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "AudioContextClose"
+          },
+          {
+            "name": "CallWith",
+            "type_": "extendedattribute",
+            "value": "ScriptState"
+          },
+          {
+            "name": "ImplementedAs",
+            "type_": "extendedattribute",
+            "value": "closeContext"
+          }
+        ],
+        "name": "close",
+        "returnType": {
+          "name": "Promise",
+          "params": [
+            {
+              "name": "void"
+            }
+          ]
+        }
+      }
     ],
     "name": "AudioContext",
     "type_": "interface"
@@ -87884,37 +89961,7 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
-      {
-        "attrs": [
-          {
-            "name": "DeprecateAs",
-            "type_": "extendedattribute",
-            "value": "AudioListenerDopplerFactor"
-          }
-        ],
-        "name": "dopplerFactor",
-        "type": {
-          "name": "float"
-        },
-        "type_": "attribute"
-      },
-      {
-        "attrs": [
-          {
-            "name": "DeprecateAs",
-            "type_": "extendedattribute",
-            "value": "AudioListenerSpeedOfSound"
-          }
-        ],
-        "name": "speedOfSound",
-        "type": {
-          "name": "float"
-        },
-        "type_": "attribute"
-      },
       {
         "args": [
           {
@@ -87995,39 +90042,6 @@
           }
         ],
         "name": "setOrientation",
-        "returnType": {
-          "name": "void"
-        }
-      },
-      {
-        "args": [
-          {
-            "name": "x",
-            "type": {
-              "name": "float"
-            }
-          },
-          {
-            "name": "y",
-            "type": {
-              "name": "float"
-            }
-          },
-          {
-            "name": "z",
-            "type": {
-              "name": "float"
-            }
-          }
-        ],
-        "attrs": [
-          {
-            "name": "DeprecateAs",
-            "type_": "extendedattribute",
-            "value": "AudioListenerSetVelocity"
-          }
-        ],
-        "name": "setVelocity",
         "returnType": {
           "name": "void"
         }
@@ -88126,8 +90140,6 @@
     ]
   },
   {
-    "attrs": [
-    ],
     "inheritsFrom": "EventTarget",
     "members": [
       {
@@ -88455,8 +90467,30 @@
     "type_": "interface"
   },
   {
-    "attrs": [
+    "members": [
+      {
+        "name": "channelCount",
+        "type": {
+          "name": "unsigned long"
+        }
+      },
+      {
+        "name": "channelCountMode",
+        "type": {
+          "name": "ChannelCountMode"
+        }
+      },
+      {
+        "name": "channelInterpretation",
+        "type": {
+          "name": "ChannelInterpretation"
+        }
+      }
     ],
+    "name": "AudioNodeOptions",
+    "type_": "dictionary"
+  },
+  {
     "members": [
       {
         "name": "value",
@@ -88734,6 +90768,33 @@
     "type_": "interface"
   },
   {
+    "attrs": [
+      {
+        "name": "Exposed",
+        "type_": "extendedattribute",
+        "value": "AudioWorklet"
+      },
+      {
+        "identifiers": [
+          "Worklet",
+          "AudioWorklet"
+        ],
+        "name": "Global",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RuntimeEnabled",
+        "type_": "extendedattribute",
+        "value": "AudioWorklet"
+      }
+    ],
+    "inheritsFrom": "WorkletGlobalScope",
+    "members": [
+    ],
+    "name": "AudioWorkletGlobalScope",
+    "type_": "interface"
+  },
+  {
     "name": "AudioContextState",
     "type_": "enum",
     "value": [
@@ -88895,6 +90956,23 @@
         "name": "createBufferSource",
         "returnType": {
           "name": "AudioBufferSourceNode"
+        }
+      },
+      {
+        "attrs": [
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute"
+          },
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "AudioContextCreateConstantSource"
+          }
+        ],
+        "name": "createConstantSource",
+        "returnType": {
+          "name": "ConstantSourceNode"
         }
       },
       {
@@ -89252,34 +91330,6 @@
           {
             "name": "MeasureAs",
             "type_": "extendedattribute",
-            "value": "AudioContextClose"
-          },
-          {
-            "name": "CallWith",
-            "type_": "extendedattribute",
-            "value": "ScriptState"
-          },
-          {
-            "name": "ImplementedAs",
-            "type_": "extendedattribute",
-            "value": "closeContext"
-          }
-        ],
-        "name": "close",
-        "returnType": {
-          "name": "Promise",
-          "params": [
-            {
-              "name": "void"
-            }
-          ]
-        }
-      },
-      {
-        "attrs": [
-          {
-            "name": "MeasureAs",
-            "type_": "extendedattribute",
             "value": "AudioContextSuspend"
           },
           {
@@ -89424,6 +91474,32 @@
     ]
   },
   {
+    "attrs": [
+      {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "optional": true,
+            "type": {
+              "name": "BiquadFilterOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      }
+    ],
     "inheritsFrom": "AudioNode",
     "members": [
       {
@@ -89496,6 +91572,69 @@
     "type_": "interface"
   },
   {
+    "inheritsFrom": "AudioNodeOptions",
+    "members": [
+      {
+        "name": "type",
+        "type": {
+          "name": "BiquadFilterType"
+        }
+      },
+      {
+        "name": "Q",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "detune",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "frequency",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "gain",
+        "type": {
+          "name": "float"
+        }
+      }
+    ],
+    "name": "BiquadFilterOptions",
+    "type_": "dictionary"
+  },
+  {
+    "attrs": [
+      {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "optional": true,
+            "type": {
+              "name": "ChannelMergerOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      }
+    ],
     "inheritsFrom": "AudioNode",
     "members": [
     ],
@@ -89503,6 +91642,46 @@
     "type_": "interface"
   },
   {
+    "inheritsFrom": "AudioNodeOptions",
+    "members": [
+      {
+        "defaultValue": "6",
+        "name": "numberOfInputs",
+        "type": {
+          "name": "unsigned long"
+        }
+      }
+    ],
+    "name": "ChannelMergerOptions",
+    "type_": "dictionary"
+  },
+  {
+    "attrs": [
+      {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "optional": true,
+            "type": {
+              "name": "ChannelSplitterOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      }
+    ],
     "inheritsFrom": "AudioNode",
     "members": [
     ],
@@ -89510,6 +91689,153 @@
     "type_": "interface"
   },
   {
+    "inheritsFrom": "AudioNodeOptions",
+    "members": [
+      {
+        "defaultValue": "6",
+        "name": "numberOfOutputs",
+        "type": {
+          "name": "unsigned long"
+        }
+      }
+    ],
+    "name": "ChannelSplitterOptions",
+    "type_": "dictionary"
+  },
+  {
+    "attrs": [
+      {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "optional": true,
+            "type": {
+              "name": "ConstantSourceOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      },
+      {
+        "name": "ActiveScriptWrappable",
+        "type_": "extendedattribute"
+      }
+    ],
+    "inheritsFrom": "AudioSourceNode",
+    "members": [
+      {
+        "isReadOnly": true,
+        "name": "offset",
+        "type": {
+          "name": "AudioParam"
+        },
+        "type_": "attribute"
+      },
+      {
+        "args": [
+          {
+            "name": "when",
+            "optional": true,
+            "type": {
+              "name": "double"
+            }
+          }
+        ],
+        "attrs": [
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute"
+          }
+        ],
+        "name": "start",
+        "returnType": {
+          "name": "void"
+        }
+      },
+      {
+        "args": [
+          {
+            "name": "when",
+            "optional": true,
+            "type": {
+              "name": "double"
+            }
+          }
+        ],
+        "attrs": [
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute"
+          }
+        ],
+        "name": "stop",
+        "returnType": {
+          "name": "void"
+        }
+      },
+      {
+        "name": "onended",
+        "type": {
+          "name": "EventHandler"
+        },
+        "type_": "attribute"
+      }
+    ],
+    "name": "ConstantSourceNode",
+    "type_": "interface"
+  },
+  {
+    "members": [
+      {
+        "defaultValue": "1",
+        "name": "offset",
+        "type": {
+          "name": "float"
+        }
+      }
+    ],
+    "name": "ConstantSourceOptions",
+    "type_": "dictionary"
+  },
+  {
+    "attrs": [
+      {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "optional": true,
+            "type": {
+              "name": "ConvolverOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      }
+    ],
     "inheritsFrom": "AudioNode",
     "members": [
       {
@@ -89541,6 +91867,55 @@
     "type_": "interface"
   },
   {
+    "inheritsFrom": "AudioNodeOptions",
+    "members": [
+      {
+        "name": "buffer",
+        "type": {
+          "name": "AudioBuffer",
+          "params": [
+            "nullable"
+          ]
+        }
+      },
+      {
+        "defaultValue": "false",
+        "name": "disableNormalization",
+        "type": {
+          "name": "boolean"
+        }
+      }
+    ],
+    "name": "ConvolverOptions",
+    "type_": "dictionary"
+  },
+  {
+    "attrs": [
+      {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "optional": true,
+            "type": {
+              "name": "DelayOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      }
+    ],
     "inheritsFrom": "AudioNode",
     "members": [
       {
@@ -89556,6 +91931,52 @@
     "type_": "interface"
   },
   {
+    "inheritsFrom": "AudioNodeOptions",
+    "members": [
+      {
+        "defaultValue": "1",
+        "name": "maxDelayTime",
+        "type": {
+          "name": "double"
+        }
+      },
+      {
+        "name": "delayTime",
+        "type": {
+          "name": "double"
+        }
+      }
+    ],
+    "name": "DelayOptions",
+    "type_": "dictionary"
+  },
+  {
+    "attrs": [
+      {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "optional": true,
+            "type": {
+              "name": "DynamicsCompressorOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      }
+    ],
     "inheritsFrom": "AudioNode",
     "members": [
       {
@@ -89611,6 +92032,69 @@
     "type_": "interface"
   },
   {
+    "inheritsFrom": "AudioNodeOptions",
+    "members": [
+      {
+        "name": "attack",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "knee",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "ratio",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "release",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "threshold",
+        "type": {
+          "name": "float"
+        }
+      }
+    ],
+    "name": "DynamicsCompressorOptions",
+    "type_": "dictionary"
+  },
+  {
+    "attrs": [
+      {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "optional": true,
+            "type": {
+              "name": "GainOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      }
+    ],
     "inheritsFrom": "AudioNode",
     "members": [
       {
@@ -89626,6 +92110,44 @@
     "type_": "interface"
   },
   {
+    "inheritsFrom": "AudioNodeOptions",
+    "members": [
+      {
+        "name": "gain",
+        "type": {
+          "name": "float"
+        }
+      }
+    ],
+    "name": "GainOptions",
+    "type_": "dictionary"
+  },
+  {
+    "attrs": [
+      {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "type": {
+              "name": "IIRFilterOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      }
+    ],
     "inheritsFrom": "AudioNode",
     "members": [
       {
@@ -89665,6 +92187,62 @@
     "type_": "interface"
   },
   {
+    "inheritsFrom": "AudioNodeOptions",
+    "members": [
+      {
+        "isRequired": true,
+        "name": "feedforward",
+        "type": {
+          "name": "sequence",
+          "params": [
+            {
+              "name": "double"
+            }
+          ]
+        }
+      },
+      {
+        "isRequired": true,
+        "name": "feedback",
+        "type": {
+          "name": "sequence",
+          "params": [
+            {
+              "name": "double"
+            }
+          ]
+        }
+      }
+    ],
+    "name": "IIRFilterOptions",
+    "type_": "dictionary"
+  },
+  {
+    "attrs": [
+      {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "type": {
+              "name": "MediaElementAudioSourceOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      }
+    ],
     "inheritsFrom": "AudioSourceNode",
     "members": [
       {
@@ -89678,6 +92256,19 @@
     ],
     "name": "MediaElementAudioSourceNode",
     "type_": "interface"
+  },
+  {
+    "members": [
+      {
+        "isRequired": true,
+        "name": "mediaElement",
+        "type": {
+          "name": "HTMLMediaElement"
+        }
+      }
+    ],
+    "name": "MediaElementAudioSourceOptions",
+    "type_": "dictionary"
   },
   {
     "inheritsFrom": "AudioNode",
@@ -89695,6 +92286,31 @@
     "type_": "interface"
   },
   {
+    "attrs": [
+      {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "type": {
+              "name": "MediaStreamAudioSourceOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      }
+    ],
     "inheritsFrom": "AudioSourceNode",
     "members": [
       {
@@ -89715,6 +92331,19 @@
     ],
     "name": "MediaStreamAudioSourceNode",
     "type_": "interface"
+  },
+  {
+    "members": [
+      {
+        "isRequired": true,
+        "name": "mediaStream",
+        "type": {
+          "name": "MediaStream"
+        }
+      }
+    ],
+    "name": "MediaStreamAudioSourceOptions",
+    "type_": "dictionary"
   },
   {
     "inheritsFrom": "Event",
@@ -89899,6 +92528,30 @@
   {
     "attrs": [
       {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "optional": true,
+            "type": {
+              "name": "OscillatorOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      },
+      {
         "name": "ActiveScriptWrappable",
         "type_": "extendedattribute"
       }
@@ -90003,6 +92656,40 @@
     "type_": "interface"
   },
   {
+    "inheritsFrom": "AudioNodeOptions",
+    "members": [
+      {
+        "name": "type",
+        "type": {
+          "name": "OscillatorType"
+        }
+      },
+      {
+        "name": "detune",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "frequency",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "periodicWave",
+        "type": {
+          "name": "PeriodicWave",
+          "params": [
+            "nullable"
+          ]
+        }
+      }
+    ],
+    "name": "OscillatorOptions",
+    "type_": "dictionary"
+  },
+  {
     "name": "PanningModelType",
     "type_": "enum",
     "value": [
@@ -90022,8 +92709,28 @@
   {
     "attrs": [
       {
-        "name": "NoInterfaceObject",
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "optional": true,
+            "type": {
+              "name": "PannerOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
         "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
       }
     ],
     "inheritsFrom": "AudioNode",
@@ -90097,39 +92804,6 @@
           }
         ],
         "name": "setOrientation",
-        "returnType": {
-          "name": "void"
-        }
-      },
-      {
-        "args": [
-          {
-            "name": "x",
-            "type": {
-              "name": "float"
-            }
-          },
-          {
-            "name": "y",
-            "type": {
-              "name": "float"
-            }
-          },
-          {
-            "name": "z",
-            "type": {
-              "name": "float"
-            }
-          }
-        ],
-        "attrs": [
-          {
-            "name": "DeprecateAs",
-            "type_": "extendedattribute",
-            "value": "PannerNodeSetVelocity"
-          }
-        ],
-        "name": "setVelocity",
         "returnType": {
           "name": "void"
         }
@@ -90236,7 +92910,122 @@
     "type_": "interface"
   },
   {
+    "inheritsFrom": "AudioNodeOptions",
+    "members": [
+      {
+        "name": "panningModel",
+        "type": {
+          "name": "PanningModelType"
+        }
+      },
+      {
+        "name": "distanceModel",
+        "type": {
+          "name": "DistanceModelType"
+        }
+      },
+      {
+        "name": "positionX",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "positionY",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "positionZ",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "orientationX",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "orientationY",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "orientationZ",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "refDistance",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "maxDistance",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "rolloffFactor",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "coneInnerAngle",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "coneOuterAngle",
+        "type": {
+          "name": "float"
+        }
+      },
+      {
+        "name": "coneOuterGain",
+        "type": {
+          "name": "float"
+        }
+      }
+    ],
+    "name": "PannerOptions",
+    "type_": "dictionary"
+  },
+  {
     "attrs": [
+      {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "optional": true,
+            "type": {
+              "name": "PeriodicWaveOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      }
     ],
     "members": [
     ],
@@ -90253,6 +93042,35 @@
       }
     ],
     "name": "PeriodicWaveConstraints",
+    "type_": "dictionary"
+  },
+  {
+    "inheritsFrom": "PeriodicWaveConstraints",
+    "members": [
+      {
+        "name": "real",
+        "type": {
+          "name": "sequence",
+          "params": [
+            {
+              "name": "float"
+            }
+          ]
+        }
+      },
+      {
+        "name": "imag",
+        "type": {
+          "name": "sequence",
+          "params": [
+            {
+              "name": "float"
+            }
+          ]
+        }
+      }
+    ],
+    "name": "PeriodicWaveOptions",
     "type_": "dictionary"
   },
   {
@@ -90290,8 +93108,28 @@
   {
     "attrs": [
       {
-        "name": "NoInterfaceObject",
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "optional": true,
+            "type": {
+              "name": "StereoPannerOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
         "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
       }
     ],
     "inheritsFrom": "AudioNode",
@@ -90309,6 +93147,19 @@
     "type_": "interface"
   },
   {
+    "inheritsFrom": "AudioNodeOptions",
+    "members": [
+      {
+        "name": "pan",
+        "type": {
+          "name": "float"
+        }
+      }
+    ],
+    "name": "StereoPannerOptions",
+    "type_": "dictionary"
+  },
+  {
     "name": "OverSampleType",
     "type_": "enum",
     "value": [
@@ -90318,6 +93169,32 @@
     ]
   },
   {
+    "attrs": [
+      {
+        "args": [
+          {
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            }
+          },
+          {
+            "name": "options",
+            "optional": true,
+            "type": {
+              "name": "WaveShaperOptions"
+            }
+          }
+        ],
+        "name": "Constructor",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "RaisesException",
+        "type_": "extendedattribute",
+        "value": "Constructor"
+      }
+    ],
     "inheritsFrom": "AudioNode",
     "members": [
       {
@@ -90347,6 +93224,30 @@
     ],
     "name": "WaveShaperNode",
     "type_": "interface"
+  },
+  {
+    "inheritsFrom": "AudioNodeOptions",
+    "members": [
+      {
+        "name": "curve",
+        "type": {
+          "name": "sequence",
+          "params": [
+            {
+              "name": "float"
+            }
+          ]
+        }
+      },
+      {
+        "name": "oversample",
+        "type": {
+          "name": "OverSampleType"
+        }
+      }
+    ],
+    "name": "WaveShaperOptions",
+    "type_": "dictionary"
   },
   {
     "attrs": [
@@ -90433,6 +93334,258 @@
         "name": "webkitOfflineAudioContext",
         "type": {
           "name": "OfflineAudioContextConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioAnalyserNode"
+          }
+        ],
+        "name": "AnalyserNode",
+        "type": {
+          "name": "AnalyserNodeConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioAudioBuffer"
+          }
+        ],
+        "name": "AudioBuffer",
+        "type": {
+          "name": "AudioBufferConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioAudioBufferSourceNode"
+          }
+        ],
+        "name": "AudioBufferSourceNode",
+        "type": {
+          "name": "AudioBufferSourceNodeConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioBiquadFilterNode"
+          }
+        ],
+        "name": "BiquadFilterNode",
+        "type": {
+          "name": "BiquadFilterNodeConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioChannelMergerNode"
+          }
+        ],
+        "name": "ChannelMergerNode",
+        "type": {
+          "name": "ChannelMergerNodeConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioChannelSplitterNode"
+          }
+        ],
+        "name": "ChannelSplitterNode",
+        "type": {
+          "name": "ChannelSplitterNodeConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioConstantSourceNode"
+          }
+        ],
+        "name": "ConstantSourceNode",
+        "type": {
+          "name": "ConstantSourceNodeConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioConvolverNode"
+          }
+        ],
+        "name": "ConvolverNode",
+        "type": {
+          "name": "ConvolverNodeConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioDelayNode"
+          }
+        ],
+        "name": "DelayNode",
+        "type": {
+          "name": "DelayNodeConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioDynamicsCompressorNode"
+          }
+        ],
+        "name": "DynamicsCompressorNode",
+        "type": {
+          "name": "DynamicsCompressorNodeConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioGainNode"
+          }
+        ],
+        "name": "GainNode",
+        "type": {
+          "name": "GainNodeConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioIIRFilterNode"
+          }
+        ],
+        "name": "IIRFilterNode",
+        "type": {
+          "name": "IIRFilterNodeConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioMediaElementAudioSourceNode"
+          }
+        ],
+        "name": "MediaElementAudioSourceNode",
+        "type": {
+          "name": "MediaElementAudioSourceNodeConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioOscillatorNode"
+          }
+        ],
+        "name": "OscillatorNode",
+        "type": {
+          "name": "OscillatorNodeConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioPannerNode"
+          }
+        ],
+        "name": "PannerNode",
+        "type": {
+          "name": "PannerNodeConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioPeriodicWave"
+          }
+        ],
+        "name": "PeriodicWave",
+        "type": {
+          "name": "PeriodicWaveConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioStereoPannerNode"
+          }
+        ],
+        "name": "StereoPannerNode",
+        "type": {
+          "name": "StereoPannerNodeConstructor"
+        },
+        "type_": "attribute"
+      },
+      {
+        "attrs": [
+          {
+            "name": "MeasureAs",
+            "type_": "extendedattribute",
+            "value": "WebAudioWaveShaperNode"
+          }
+        ],
+        "name": "WaveShaperNode",
+        "type": {
+          "name": "WaveShaperNodeConstructor"
         },
         "type_": "attribute"
       }
@@ -93952,86 +97105,6 @@
       },
       {
         "isConst": true,
-        "name": "COMPRESSED_R11_EAC",
-        "type": {
-          "name": "GLenum"
-        },
-        "value": "0x9270"
-      },
-      {
-        "isConst": true,
-        "name": "COMPRESSED_SIGNED_R11_EAC",
-        "type": {
-          "name": "GLenum"
-        },
-        "value": "0x9271"
-      },
-      {
-        "isConst": true,
-        "name": "COMPRESSED_RG11_EAC",
-        "type": {
-          "name": "GLenum"
-        },
-        "value": "0x9272"
-      },
-      {
-        "isConst": true,
-        "name": "COMPRESSED_SIGNED_RG11_EAC",
-        "type": {
-          "name": "GLenum"
-        },
-        "value": "0x9273"
-      },
-      {
-        "isConst": true,
-        "name": "COMPRESSED_RGB8_ETC2",
-        "type": {
-          "name": "GLenum"
-        },
-        "value": "0x9274"
-      },
-      {
-        "isConst": true,
-        "name": "COMPRESSED_SRGB8_ETC2",
-        "type": {
-          "name": "GLenum"
-        },
-        "value": "0x9275"
-      },
-      {
-        "isConst": true,
-        "name": "COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2",
-        "type": {
-          "name": "GLenum"
-        },
-        "value": "0x9276"
-      },
-      {
-        "isConst": true,
-        "name": "COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2",
-        "type": {
-          "name": "GLenum"
-        },
-        "value": "0x9277"
-      },
-      {
-        "isConst": true,
-        "name": "COMPRESSED_RGBA8_ETC2_EAC",
-        "type": {
-          "name": "GLenum"
-        },
-        "value": "0x9278"
-      },
-      {
-        "isConst": true,
-        "name": "COMPRESSED_SRGB8_ALPHA8_ETC2_EAC",
-        "type": {
-          "name": "GLenum"
-        },
-        "value": "0x9279"
-      },
-      {
-        "isConst": true,
         "name": "TEXTURE_IMMUTABLE_FORMAT",
         "type": {
           "name": "GLenum"
@@ -94230,35 +97303,6 @@
             "optional": true,
             "type": {
               "name": "GLuint"
-            }
-          }
-        ],
-        "name": "getBufferSubData",
-        "returnType": {
-          "name": "void"
-        }
-      },
-      {
-        "args": [
-          {
-            "name": "target",
-            "type": {
-              "name": "GLenum"
-            }
-          },
-          {
-            "name": "srcByteOffset",
-            "type": {
-              "name": "GLintptr"
-            }
-          },
-          {
-            "name": "dstData",
-            "type": {
-              "name": "ArrayBuffer",
-              "params": [
-                "nullable"
-              ]
             }
           }
         ],
@@ -99456,8 +102500,6 @@
     "type_": "implements"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -99808,6 +102850,107 @@
     "members": [
       {
         "isConst": true,
+        "name": "COMPRESSED_R11_EAC",
+        "type": {
+          "name": "unsigned long"
+        },
+        "value": "0x9270"
+      },
+      {
+        "isConst": true,
+        "name": "COMPRESSED_SIGNED_R11_EAC",
+        "type": {
+          "name": "unsigned long"
+        },
+        "value": "0x9271"
+      },
+      {
+        "isConst": true,
+        "name": "COMPRESSED_RG11_EAC",
+        "type": {
+          "name": "unsigned long"
+        },
+        "value": "0x9272"
+      },
+      {
+        "isConst": true,
+        "name": "COMPRESSED_SIGNED_RG11_EAC",
+        "type": {
+          "name": "unsigned long"
+        },
+        "value": "0x9273"
+      },
+      {
+        "isConst": true,
+        "name": "COMPRESSED_RGB8_ETC2",
+        "type": {
+          "name": "unsigned long"
+        },
+        "value": "0x9274"
+      },
+      {
+        "isConst": true,
+        "name": "COMPRESSED_SRGB8_ETC2",
+        "type": {
+          "name": "unsigned long"
+        },
+        "value": "0x9275"
+      },
+      {
+        "isConst": true,
+        "name": "COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2",
+        "type": {
+          "name": "unsigned long"
+        },
+        "value": "0x9276"
+      },
+      {
+        "isConst": true,
+        "name": "COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2",
+        "type": {
+          "name": "unsigned long"
+        },
+        "value": "0x9277"
+      },
+      {
+        "isConst": true,
+        "name": "COMPRESSED_RGBA8_ETC2_EAC",
+        "type": {
+          "name": "unsigned long"
+        },
+        "value": "0x9278"
+      },
+      {
+        "isConst": true,
+        "name": "COMPRESSED_SRGB8_ALPHA8_ETC2_EAC",
+        "type": {
+          "name": "unsigned long"
+        },
+        "value": "0x9279"
+      }
+    ],
+    "name": "WebGLCompressedTextureETC",
+    "type_": "interface"
+  },
+  {
+    "attrs": [
+      {
+        "name": "NoInterfaceObject",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "DoNotCheckConstants",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "SetWrapperReferenceFrom",
+        "type_": "extendedattribute",
+        "value": "canvas"
+      }
+    ],
+    "members": [
+      {
+        "isConst": true,
         "name": "COMPRESSED_RGB_ETC1_WEBGL",
         "type": {
           "name": "unsigned long"
@@ -99922,6 +103065,59 @@
       }
     ],
     "name": "WebGLCompressedTextureS3TC",
+    "type_": "interface"
+  },
+  {
+    "attrs": [
+      {
+        "name": "NoInterfaceObject",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "DoNotCheckConstants",
+        "type_": "extendedattribute"
+      },
+      {
+        "name": "SetWrapperReferenceFrom",
+        "type_": "extendedattribute",
+        "value": "canvas"
+      }
+    ],
+    "members": [
+      {
+        "isConst": true,
+        "name": "COMPRESSED_SRGB_S3TC_DXT1_EXT",
+        "type": {
+          "name": "unsigned long"
+        },
+        "value": "0x8C4C"
+      },
+      {
+        "isConst": true,
+        "name": "COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT",
+        "type": {
+          "name": "unsigned long"
+        },
+        "value": "0x8C4D"
+      },
+      {
+        "isConst": true,
+        "name": "COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT",
+        "type": {
+          "name": "unsigned long"
+        },
+        "value": "0x8C4E"
+      },
+      {
+        "isConst": true,
+        "name": "COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT",
+        "type": {
+          "name": "unsigned long"
+        },
+        "value": "0x8C4F"
+      }
+    ],
+    "name": "WebGLCompressedTextureS3TCsRGB",
     "type_": "interface"
   },
   {
@@ -107391,6 +110587,23 @@
         "returnType": {
           "name": "void"
         }
+      },
+      {
+        "attrs": [
+          {
+            "name": "RuntimeEnabled",
+            "type_": "extendedattribute",
+            "value": "ExperimentalCanvasFeatures"
+          },
+          {
+            "name": "RaisesException",
+            "type_": "extendedattribute"
+          }
+        ],
+        "name": "commit",
+        "returnType": {
+          "name": "void"
+        }
       }
     ],
     "name": "WebGLRenderingContextBase",
@@ -107426,8 +110639,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -107512,8 +110723,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
     ],
     "name": "WebGLUniformLocation",
@@ -107638,7 +110847,10 @@
       {
         "name": "port",
         "type": {
-          "name": "MIDIPort"
+          "name": "MIDIPort",
+          "params": [
+            "nullable"
+          ]
         }
       }
     ],
@@ -107674,8 +110886,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -107767,7 +110977,10 @@
       {
         "name": "data",
         "type": {
-          "name": "Uint8Array"
+          "name": "Uint8Array",
+          "params": [
+            "nullable"
+          ]
         }
       }
     ],
@@ -107867,8 +111080,6 @@
     "type_": "interface"
   },
   {
-    "attrs": [
-    ],
     "members": [
       {
         "isReadOnly": true,
@@ -108801,7 +112012,6 @@
           },
           {
             "name": "eventInitDict",
-            "optional": true,
             "type": {
               "name": "USBConnectionEventInit"
             }
@@ -108819,6 +112029,12 @@
     "inheritsFrom": "Event",
     "members": [
       {
+        "attrs": [
+          {
+            "name": "SameObject",
+            "type_": "extendedattribute"
+          }
+        ],
         "isReadOnly": true,
         "name": "device",
         "type": {
@@ -108834,6 +112050,7 @@
     "inheritsFrom": "EventInit",
     "members": [
       {
+        "isRequired": true,
         "name": "device",
         "type": {
           "name": "USBDevice"
