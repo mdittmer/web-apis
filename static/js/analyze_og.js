@@ -128,7 +128,7 @@ function doAnalyses(inGraphs, exGraphs) {
 }
 
 // Convert datalist option value to a data retrieval URL. This is tightly
-// coupled to xhr('/list') callback below, and to server's data routing
+// coupled to xhr('/list/og') callback below, and to server's data routing
 // routing scheme.
 function optValueToURL(label) {
   return '/data/og/' + label.replace(/ /g, '/');
@@ -191,7 +191,7 @@ function addOpts(datalist) {
 // Get a list of environments the server has data for, and add them to a
 // <datalist>.
 var l = window.location;
-stdlib.xhr('/list', { responseType: 'json' }).then(function(arr) {
+stdlib.xhr('/list/og', { responseType: 'json' }).then(function(arr) {
   includeExcludeOpts = arr;
   addOpts(e('#environments'));
   if (!loadFromHash()) {

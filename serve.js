@@ -44,6 +44,7 @@ app.use(express.static('static'));
 
 var DATA_DIR = './data';
 var OG_DATA_DIR = './data/og';
+var IDL_DATA_DIR = './data/idl';
 var HTML_HEAD = '<html><head>' +
       '<meta name="viewport" content="width=500, initial-scale=1">' +
       '</head><body>';
@@ -152,7 +153,7 @@ function sendHTML(str, res) {
  * @param {Environment} info - The requested browser environment
  * @return {Buffer} - The requested data in a JSON string buffer
  */
-function getData(info) {
+function getOGData(info) {
   return fs.readFileSync(OG_DATA_DIR + '/' + info.getJSONFileName());
 }
 
@@ -182,7 +183,7 @@ app.post('/save', timeout('30s'), function(req, res) {
   });
 });
 
-app.get('/list', function(req, res) {
+app.get('/list/og', function(req, res) {
   glob('./data/og/window_*.json', function(err, files) {
     if (err) {
       console.error(err);
@@ -204,7 +205,7 @@ app.get('/list', function(req, res) {
 });
 
 app.get(
-    /^\/data\/og\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/?$/,
+  /^\/data\/og\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/[A-Za-z0-9.]+\/?$/,
   function(req, res) {
     var parts = req.url.split('/');
     var env = new Environment(parts.slice(3));
@@ -213,10 +214,42 @@ app.get(
       OG_DATA_DIR + '/' + env.getJSONFileName(),
       function(err) {
         if (err) sendJSON(null, res);
-        else sendJSON(getData(env), res);
+        else sendJSON(getOGData(env), res);
       }
     );
+  }
+);
+
+app.get('/list/idl', function(req, res) {
+  glob('./data/idl/**/all.json', function(err, files) {
+    if (err) {
+      console.error(err);
+      sendJSON([], res);
+      return;
+    }
+
+    sendJSON(files.map(function(file) {
+      var parts = file.split('/');
+      // Drop ".", "data", "idl", and "all.json".
+      parts = parts.slice(3, parts.length - 1);
+      return parts.join(' ');
+    }), res);
   });
+});
+
+app.get(
+  /^\/data\/idl(\/[A-Za-z0-9.]+)+\/?$/,
+  function(req, res) {
+    var parts = req.url.split('/');
+    parts = parts.slice(3);
+    var dir = parts.join('/');
+    var path = IDL_DATA_DIR + '/' + dir + '/all.json';
+    fs.stat(path, function(err) {
+      if (err) sendJSON(null, res);
+      else sendJSON(fs.readFileSync(path), res);
+    });
+  }
+);
 
 app.listen(8000, function() {
   console.log('Listening...');
