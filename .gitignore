@@ -2,5 +2,7 @@
 **/node_modules
 **/npm-debug.log*
 .user/*
+.idlcache/*
+.urlcache/*
 static/bundle
 dev_env.local.sh
