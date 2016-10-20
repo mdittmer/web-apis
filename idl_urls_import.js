@@ -287,7 +287,7 @@ function parse({url, data}) {
       if (res[0]) {
         console.log('Storing parse from', url, ';', idl.length,
                     'length string');
-        parses.push(res[1]);
+        parses = parses.concat(res[1]);
         try {
           webidl2.parse(idl);
         } catch (e) {
