@@ -76,11 +76,16 @@
       padding: 20px;
     }
     </style>
+    <link rel="stylesheet" type="text/css" href="http://cemerick.github.io/jsdifflib/diffview.css">
+    <script type="text/javascript" src="http://cemerick.github.io/jsdifflib/diffview.js"></script>
+    <script type="text/javascript" src="http://cemerick.github.io/jsdifflib/difflib.js"></script>
   </head>
   <body>
 
     <span>Configuration</span>
     <datalist id="sources">
+    </datalist>
+    <datalist id="interfaces">
     </datalist>
     <span style="display: block">
       <div>
@@ -90,10 +95,10 @@
 	    <input id="left-input" list="sources">
 	  </div></div>
         </div>
-        <!-- <div id="search">
-             <span>Search filter</span>
-             <input id="filter" type="search">
-             </div> -->
+        <div id="interface">
+          <span>Choose interface</span>
+          <input id="interface-input" list="interfaces">
+        </div>
         <div id="right">
           <span>Right</span>
           <div><div id="right-inputs">
