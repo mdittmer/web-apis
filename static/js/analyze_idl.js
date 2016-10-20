@@ -171,6 +171,8 @@ function diff(a, b) {
 }
 
 function analyze() {
+  if (!(uiData.left && uiData.right)) return;
+
   var iface = e('#interface-input').value;
   var lefts = uiData.left.find('name', iface).concat(
       uiData.left.find('implementer', iface));
