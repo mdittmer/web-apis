@@ -16,14 +16,13 @@
  */
 'use strict';
 
-// NOTE: Only to be invoked from blink_idl_urls_import.sh.
-
 const fs = require('fs');
 const request = require('hyperquest');
 const webidl2 = require('webidl2');
 const parser = require('webidl2-js');
 const stringify = require('ya-stdlib-js').stringify;
 const _ = require('lodash');
+const phantom = require('phantom');
 
 ['.urlcache', '.idlcache'].forEach(name => {
   try {
@@ -33,6 +32,209 @@ const _ = require('lodash');
     fs.mkdirSync(`./${name}`);
   }
 });
+
+const urlCacheDir = `${__dirname}/.urlcache`;
+const idlCacheDir = `${__dirname}/.idlcache`;
+
+function getCacheFileName(url) {
+  return url.replace(/[^a-zA-Z0-9]/g, '_');
+}
+
+function phantomizeURL(url) {
+  const path = `${urlCacheDir}/${getCacheFileName(url)}`;
+  try {
+    const stat = fs.statSync(path);
+    console.assert(stat.isFile());
+    return {phantomURL: `file://${path}`, isLocal: true};
+  } catch (e) {
+    return {phantomURL: url, isLocal: false};
+  }
+}
+
+class PhantomInstance {
+  constructor(limit) {
+    this.limit = limit || 10;
+    this.count = 0;
+    this.busy = false;
+    this.q = [];
+    this.instance = this.startInstance();
+    this.page = this.startPage();
+  }
+
+  destroy() {
+    console.log('Destroying phantom instance');
+    if (this.page) {
+      console.log('Phantom instance destroy: closing page');
+      this.closePage();
+    }
+    if (this.instance) {
+      console.log('Phantom instance destroy: exiting instance');
+      this.instance.then(instance => instance.exit());
+    }
+  }
+
+  restartInstance() {
+    console.log('Restarting phantom instance');
+    if (this.instance) {
+      console.log('Exiting stale phantom instance');
+      this.instance.then(instance => instance.exit());
+    }
+    this.instance = this.startInstance();
+    return this.instance;
+  }
+
+  startInstance() {
+    console.log('Starting phantom instance');
+    return phantom.create();
+  }
+
+  restartPage() {
+    console.log('Restarting phantom page');
+    if (this.page) {
+      console.log('Closing phantom page');
+      this.closePage();
+    }
+    this.page = this.startPage();
+    return this.page;
+  }
+
+  startPage() {
+    console.log('Starting phantom page');
+    return this.instance.then(instance => {
+      console.log('Creating phantom page');
+      return instance.createPage().then(page => {
+        this.closePage = page.close.bind(page);
+        console.log('Proxying page object');
+        return new Proxy(page, {
+          get: (target, property, receiver) => {
+            if (property !== 'close') {
+              console.log(`Page proxy passthru "${property}"`);
+              return target[property];
+            }
+            console.log('Page proxy swap "close" for "release"');
+            return this.release.bind(this);
+          }
+        });
+      });
+    });
+  }
+
+  get(url) {
+    if (!this.busy) {
+      console.log('Immediately acquiring phantom instance for', url);
+      return this.acquire(url);
+    }
+    console.log('Queuing acquire of phantom instance for', url);
+    return new Promise((resolve, reject) => {
+      this.q.push(_ => this.acquire(url).then(resolve));
+      console.log('Queued acquire of phantom instance for', url);
+    });
+  }
+
+  acquire(url) {
+    console.assert(!this.busy);
+    console.log('Acquiring phantom instance for', url);
+    this.busy = true;
+    return this.page.then(page => {
+      console.log('Opening', url, 'in phantom page');
+      return page.open(url).then(_ => this.page);
+    });
+  }
+
+  release() {
+    console.assert(this.busy);
+    console.log('Releasing phantom page');
+    this.count++;
+    if (this.count === this.limit) {
+      this.count = 0;
+      console.log('Phantom instance reached limit of', this.limit);
+      return this.restartInstance()
+          .then(this.restartPage.bind(this))
+          .then(this.onReleased.bind(this));
+    }
+    return this.restartPage().then(this.onReleased.bind(this));
+  }
+
+  onReleased() {
+    console.log('Phatom page released');
+    this.busy = false;
+    const next = this.q.shift();
+    if (next) next();
+  }
+}
+
+class PhantomManager {
+  constructor(numInstances) {
+    this.instances = new Array(numInstances);
+    for (let i = 0; i < numInstances; i++) {
+      this.instances[i] = new PhantomInstance(10);
+    }
+    this.nextIdx = 0;
+  }
+
+  destroy() {
+    console.log('Destroying phantom manager');
+    this.instances.forEach(instance => instance.destroy());
+  }
+
+  get(url) {
+    const idx = this.nextIdx;
+    this.nextIdx = (this.nextIdx + 1) % this.instances.length;
+    console.log('Provisioning phantom instance', idx,
+                'for url', url);
+    const ret = this.instances[idx].get(url);
+    ret.then(_ => {
+      console.log(url, 'got provisioned instance', idx);
+    });
+    return ret;
+  }
+}
+
+function phantomScrape(phantomManager, url) {
+  const {phantomURL, isLocal} = phantomizeURL(url);
+  const pagePromise = phantomManager.get(phantomURL);
+  let lastPromises = [];
+
+  // Cache remote URLs.
+  if (!isLocal) {
+    console.log('Caching', phantomURL);
+    lastPromises.push(pagePromise.then(page => {
+      return page.evaluate(function() {
+        return document.documentElement.outerHTML;
+      }).then(documentString => {
+        fs.writeFileSync(
+            `${urlCacheDir}/${getCacheFileName(phantomURL)}`, documentString
+            );
+        console.log('Wrote', phantomURL, 'to cache');
+      });
+    }));
+  }
+
+  // Scrape for <pre> tags.
+  const scrapePromise = pagePromise.then(page => {
+    console.log('Scraping', phantomURL, 'for <pre> tags');
+    return page.evaluate(function() {
+      var pres = document.querySelectorAll('pre');
+      var ret = new Array(pres.length);
+      for (var i = 0; i < pres.length; i++) {
+        ret[i] = pres[i].innerText;
+      }
+      return ret;
+    }).then(data => {
+      console.log('Scraped', data.length, '<pre> tags from', phantomURL);
+      return {url, data};
+    });
+  });
+  lastPromises.push(scrapePromise);
+
+  // Clean up phantom instance when caching and scraping are done.
+  Promise.all(lastPromises).then(_ => pagePromise.then(page => {
+    console.log('Cleaning up phantom page for', phantomURL);
+    page.close();
+  }));
+
+  return scrapePromise;
+}
 
 function loadURL(url) {
   return new Promise((resolve, reject) => {
@@ -69,523 +271,9 @@ function loadURL(url) {
   });
 }
 
-function tag(name, opt_close) {
-  return '<' + (opt_close ? '/' : '') + name + '[^>]*>';
-}
-function opt(str) {
-  return '(' + str + ')?';
-}
-
-function extractIDL({url, data}) {
-  let path = './.idlcache/' + url.replace(/[^a-zA-Z0-9]/g, '_');
-  try {
-    let stat = fs.statSync(path);
-    console.assert(stat.isFile());
-    console.log('Found cached IDLs for', url);
-    return {url, data: []};
-  } catch (e) {
-    console.log('Extracting IDLs from', url);
-    // TODO: This RegExp does not appear to be working.
-    let re = new RegExp(
-      tag('pre') +
-        opt(tag('code')) +
-        '([^<]*)' +
-        opt(tag('code', true)) +
-        tag('pre', true),
-      'g');
-    let idls = [];
-    let next = null;
-    while (next = re.exec(data)) idls.push(next[2]);
-    if (idls.length > 0) console.log('Found', idls.length, 'IDLs from', url);
-    return {url, data: idls};
-  }
-}
-
-let escapes = {
-  '&#8482;': '™',
-  '&euro;': '€',
-  '&#32;': ' ',
-  '&nbsp;': ' ',
-  '&#33;': '!',
-  '&#34;': '"',
-  '&quot;': '"',
-  '&#35;': '#',
-  '&#36;': '$',
-  '&#37;': '%',
-  '&#38;': '&',
-  '&amp;': '&',
-  '#39;': "'",
-  '&#40;': '(',
-  '&#41;': ')',
-  '&#42;': '*',
-  '&#43;': '+',
-  '&#44;': ',',
-  '&#45;': '-',
-  '&#46;': '.',
-  '&#47;': '/',
-  '&#48;': '0',
-  '&#49;': '1',
-  '&#50;': '2',
-  '&#51;': '3',
-  '&#52;': '4',
-  '&#53;': '5',
-  '&#54;': '6',
-  '&#55;': '7',
-  '&#56;': '8',
-  '&#57;': '9',
-  '&#58;': ':',
-  '&#59;': ';',
-  '&#60;': '<',
-  '&lt;': '<',
-  '&#61;': '=',
-  '&#62;': '>',
-  '&gt;': '>',
-  '&#63;': '?',
-  '&#64;': '@',
-  '&#65;': 'A',
-  '&#66;': 'B',
-  '&#67;': 'C',
-  '&#68;': 'D',
-  '&#69;': 'E',
-  '&#70;': 'F',
-  '&#71;': 'G',
-  '&#72;': 'H',
-  '&#73;': 'I',
-  '&#74;': 'J',
-  '&#75;': 'K',
-  '&#76;': 'L',
-  '&#77;': 'M',
-  '&#78;': 'N',
-  '&#79;': 'O',
-  '&#80;': 'P',
-  '&#81;': 'Q',
-  '&#82;': 'R',
-  '&#83;': 'S',
-  '&#84;': 'T',
-  '&#85;': 'U',
-  '&#86;': 'V',
-  '&#87;': 'W',
-  '&#88;': 'X',
-  '&#89;': 'Y',
-  '&#90;': 'Z',
-  '&#91;': '[',
-  '&#92;': '\\',
-  '&#93;': ']',
-  '&#94;': '^',
-  '&#95;': '_',
-  '&#96;': '`',
-  '&#97;': 'a',
-  '&#98;': 'b',
-  '&#99;': 'c',
-  '&#100;': 'd',
-  '&#101;': 'e',
-  '&#102;': 'f',
-  '&#103;': 'g',
-  '&#104;': 'h',
-  '&#105;': 'i',
-  '&#106;': 'j',
-  '&#107;': 'k',
-  '&#108;': 'l',
-  '&#109;': 'm',
-  '&#110;': 'n',
-  '&#111;': 'o',
-  '&#112;': 'p',
-  '&#113;': 'q',
-  '&#114;': 'r',
-  '&#115;': 's',
-  '&#116;': 't',
-  '&#117;': 'u',
-  '&#118;': 'v',
-  '&#119;': 'w',
-  '&#120;': 'x',
-  '&#121;': 'y',
-  '&#122;': 'z',
-  '&#123;': '{',
-  '&#124;': '|',
-  '&#125;': '}',
-  '&#126;': '~',
-  '&#160;': ' ',
-  '&#161;': '¡',
-  '&iexcl;': '¡',
-  '&#162;': '¢',
-  '&cent;': '¢',
-  '&#163;': '£',
-  '&pound;': '£',
-  '&#164;': '¤',
-  '&curren;': '¤',
-  '&#165;': '¥',
-  '&yen;': '¥',
-  '&#166;': '¦',
-  '&brvbar;': '¦',
-  '&#167;': '§',
-  '&sect;': '§',
-  '&#168;': '¨',
-  '&uml;': '¨',
-  '&#169;': '©',
-  '&copy;': '©',
-  '&#170;': 'ª',
-  '&ordf;': 'ª',
-  '&#171;': '«',
-  '&#172;': '¬',
-  '&not;': '¬',
-  '&#173;': '',
-  '&shy;': '',
-  '&#174;': '®',
-  '&reg;': '®',
-  '&#175;': '¯',
-  '&macr;': '¯',
-  '&#176;': '°',
-  '&deg;': '°',
-  '&#177;': '±',
-  '&plusmn;': '±',
-  '&#178;': '²',
-  '&sup2;': '²',
-  '&#179;': '³',
-  '&sup3;': '³',
-  '&#180;': '´',
-  '&acute;': '´',
-  '&#181;': 'µ',
-  '&micro;': 'µ',
-  '&#182;': '¶',
-  '&para;': '¶',
-  '&#183;': '·',
-  '&middot;': '·',
-  '&#184;': '¸',
-  '&cedil;': '¸',
-  '&#185;': '¹',
-  '&sup1;': '¹',
-  '&#186;': 'º',
-  '&ordm;': 'º',
-  '&#187;': '»',
-  '&raquo;': '»',
-  '&#188;': '¼',
-  '&frac14;': '¼',
-  '&#189;': '½',
-  '&frac12;': '½',
-  '&#190;': '¾',
-  '&frac34;': '¾',
-  '&#191;': '¿',
-  '&iquest;': '¿',
-  '&#192;': 'À',
-  '&Agrave;': 'À',
-  '&#193;': 'Á',
-  '&Aacute;': 'Á',
-  '&#194;': 'Â',
-  '&Acirc;': 'Â',
-  '&#195;': 'Ã',
-  '&Atilde;': 'Ã',
-  '&#196;': 'Ä',
-  '&Auml;': 'Ä',
-  '&#197': 'Å',
-  '&Aring;': 'Å',
-  '&#198;': 'Æ',
-  '&AElig;': 'Æ',
-  '&#199;': 'Ç',
-  '&Ccedil;': 'Ç',
-  '&#200;': 'È',
-  '&Egrave;': 'È',
-  '&#201;': 'É',
-  '&Eacute;': 'É',
-  '&#202;': 'Ê',
-  '&Ecirc;': 'Ê',
-  '&#203;': 'Ë',
-  '&Euml;': 'Ë',
-  '&#204;': 'Ì',
-  '&Igrave;': 'Ì',
-  '&#205;': 'Í',
-  '&Iacute;': 'Í',
-  '&#206;': 'Î',
-  '&Icirc;': 'Î',
-  '&#207;': 'Ï',
-  '&Iuml;': 'Ï',
-  '&#208;': 'Ð',
-  '&ETH;': 'Ð',
-  '&#209;': 'Ñ',
-  '&Ntilde;': 'Ñ',
-  '&#210;': 'Ò',
-  '&Ograve;': 'Ò',
-  '&#211;': 'Ó',
-  '&Oacute;': 'Ó',
-  '&#212;': 'Ô',
-  '&Ocirc;': 'Ô',
-  '&#213;': 'Õ',
-  '&Otilde;': 'Õ',
-  '&#214;': 'Ö',
-  '&Ouml;': 'Ö',
-  '&#215;': '×',
-  '&times;': '×',
-  '&#216;': 'Ø',
-  '&Oslash;': 'Ø',
-  '&#217;': 'Ù',
-  '&Ugrave;': 'Ù',
-  '&#218;': 'Ú',
-  '&Uacute;': 'Ú',
-  '&#219;': 'Û',
-  '&Ucirc;': 'Û',
-  '&#220;': 'Ü',
-  '&Uuml;': 'Ü',
-  '&#221;': 'Ý',
-  '&Yacute;': 'Ý',
-  '&#222;': 'Þ',
-  '&THORN;': 'Þ',
-  '&#223;': 'ß',
-  '&szlig;': 'ß',
-  '&#224;': 'à',
-  '&agrave;': 'à',
-  '&#225;': 'á',
-  '&aacute;': 'á',
-  '&#226;': 'â',
-  '&acirc;': 'â',
-  '&#227;': 'ã',
-  '&atilde;': 'ã',
-  '&#228;': 'ä',
-  '&auml;': 'ä',
-  '&#229;': 'å',
-  '&aring;': 'å',
-  '&#230;': 'æ',
-  '&aelig;': 'æ',
-  '&#231;': 'ç',
-  '&ccedil;': 'ç',
-  '&#232;': 'è',
-  '&egrave;': 'è',
-  '&#233;': 'é',
-  '&eacute;': 'é',
-  '&#234;': 'ê',
-  '&ecirc;': 'ê',
-  '&#235;': 'ë',
-  '&euml;': 'ë',
-  '&#236;': 'ì',
-  '&igrave;': 'ì',
-  '&#237': 'í',
-  '&iacute;': 'í',
-  '&#238;': 'î',
-  '&icirc;': 'î',
-  '&#239;': 'ï',
-  '&iuml;': 'ï',
-  '&#240;': 'ð',
-  '&eth;': 'ð',
-  '&#241;': 'ñ',
-  '&ntilde;': 'ñ',
-  '&#242;': 'ò',
-  '&ograve;': 'ò',
-  '&#243;': 'ó',
-  '&oacute;': 'ó',
-  '&#244;': 'ô',
-  '&ocirc;': 'ô',
-  '&#245;': 'õ',
-  '&otilde;': 'õ',
-  '&#246;': 'ö',
-  '&ouml;': 'ö',
-  '&#247;': '÷',
-  '&divide;': '÷',
-  '&#248;': 'ø',
-  '&oslash;': 'ø',
-  '&#249;': 'ù',
-  '&ugrave;': 'ù',
-  '&#250;': 'ú',
-  '&uacute;': 'ú',
-  '&#251;': 'û',
-  '&ucirc;': 'û',
-  '&#252;': 'ü',
-  '&uuml;': 'ü',
-  '&#253;': 'ý',
-  '&yacute;': 'ý',
-  '&#254;': 'þ',
-  '&thorn;': 'þ',
-  '&#255;': 'ÿ',
-  '&#256;': 'Ā',
-  '&#257;': 'ā',
-  '&#258;': 'Ă',
-  '&#259;': 'ă',
-  '&#260;': 'Ą',
-  '&#261;': 'ą',
-  '&#262;': 'Ć',
-  '&#263;': 'ć',
-  '&#264;': 'Ĉ',
-  '&#265;': 'ĉ',
-  '&#266;': 'Ċ',
-  '&#267;': 'ċ',
-  '&#268;': 'Č',
-  '&#269;': 'č',
-  '&#270;': 'Ď',
-  '&#271;': 'ď',
-  '&#272;': 'Đ',
-  '&#273;': 'đ',
-  '&#274;': 'Ē',
-  '&#275;': 'ē',
-  '&#276;': 'Ĕ',
-  '&#277;': 'ĕ',
-  '&#278;': 'Ė',
-  '&#279;': 'ė',
-  '&#280;': 'Ę',
-  '&#281;': 'ę',
-  '&#282;': 'Ě',
-  '&#283;': 'ě',
-  '&#284;': 'Ĝ',
-  '&#285;': 'ĝ',
-  '&#286;': 'Ğ',
-  '&#287;': 'ğ',
-  '&#288;': 'Ġ',
-  '&#289;': 'ġ',
-  '&#290;': 'Ģ',
-  '&#291;': 'ģ',
-  '&#292;': 'Ĥ',
-  '&#293;': 'ĥ',
-  '&#294;': 'Ħ',
-  '&#295;': 'ħ',
-  '&#296;': 'Ĩ',
-  '&#297;': 'ĩ',
-  '&#298;': 'Ī',
-  '&#299;': 'ī',
-  '&#300;': 'Ĭ',
-  '&#301;': 'ĭ',
-  '&#302;': 'Į',
-  '&#303;': 'į',
-  '&#304;': 'İ',
-  '&#305;': 'ı',
-  '&#306;': 'Ĳ',
-  '&#307;': 'ĳ',
-  '&#308;': 'Ĵ',
-  '&#309;': 'ĵ',
-  '&#310;': 'Ķ',
-  '&#311;': 'ķ',
-  '&#312;': 'ĸ',
-  '&#313;': 'Ĺ',
-  '&#314;': 'ĺ',
-  '&#315;': 'Ļ',
-  '&#316;': 'ļ',
-  '&#317;': 'Ľ',
-  '&#318;': 'ľ',
-  '&#319;': 'Ŀ',
-  '&#320;': 'ŀ',
-  '&#321;': 'Ł',
-  '&#322;': 'ł',
-  '&#323;': 'Ń',
-  '&#324;': 'ń',
-  '&#325;': 'Ņ',
-  '&#326;': 'ņ',
-  '&#327;': 'Ň',
-  '&#328;': 'ň',
-  '&#329;': 'ŉ',
-  '&#330;': 'Ŋ',
-  '&#331;': 'ŋ',
-  '&#332;': 'Ō',
-  '&#333;': 'ō',
-  '&#334;': 'Ŏ',
-  '&#335;': 'ŏ',
-  '&#336;': 'Ő',
-  '&#337;': 'ő',
-  '&#338;': 'Œ',
-  '&#339;': 'œ',
-  '&#340;': 'Ŕ',
-  '&#341;': 'ŕ',
-  '&#342;': 'Ŗ',
-  '&#343;': 'ŗ',
-  '&#344;': 'Ř',
-  '&#345;': 'ř',
-  '&#346;': 'Ś',
-  '&#347;': 'ś',
-  '&#348;': 'Ŝ',
-  '&#349;': 'ŝ',
-  '&#350;': 'Ş',
-  '&#351;': 'ş',
-  '&#352;': 'Š',
-  '&#353;': 'š',
-  '&#354;': 'Ţ',
-  '&#355;': 'ţ',
-  '&#356;': 'Ť',
-  '&#357;': 'ť',
-  '&#358;': 'Ŧ',
-  '&#359;': 'ŧ',
-  '&#360;': 'Ũ',
-  '&#361;': 'ũ',
-  '&#362;': 'Ū',
-  '&#363;': 'ū',
-  '&#364;': 'Ŭ',
-  '&#365;': 'ŭ',
-  '&#366;': 'Ů',
-  '&#367;': 'ů',
-  '&#368;': 'Ű',
-  '&#369;': 'ű',
-  '&#370;': 'Ų',
-  '&#371;': 'ų',
-  '&#372;': 'Ŵ',
-  '&#373;': 'ŵ',
-  '&#374;': 'Ŷ',
-  '&#375;': 'ŷ',
-  '&#376;': 'Ÿ',
-  '&#377;': 'Ź',
-  '&#378;': 'ź',
-  '&#379;': 'Ż',
-  '&#380;': 'ż',
-  '&#381;': 'Ž',
-  '&#382;': 'ž',
-  '&#383;': 'ſ',
-  '&#340;': 'Ŕ',
-  '&#341;': 'ŕ',
-  '&#342;': 'Ŗ',
-  '&#343;': 'ŗ',
-  '&#344;': 'Ř',
-  '&#345;': 'ř',
-  '&#346;': 'Ś',
-  '&#347;': 'ś',
-  '&#348;': 'Ŝ',
-  '&#349;': 'ŝ',
-  '&#350;': 'Ş',
-  '&#351;': 'ş',
-  '&#352;': 'Š',
-  '&#353;': 'š',
-  '&#354;': 'Ţ',
-  '&#355;': 'ţ',
-  '&#356;': 'Ť',
-  '&#577;': 'ť',
-  '&#358;': 'Ŧ',
-  '&#359;': 'ŧ',
-  '&#360;': 'Ũ',
-  '&#361;': 'ũ',
-  '&#362;': 'Ū',
-  '&#363;': 'ū',
-  '&#364;': 'Ŭ',
-  '&#365;': 'ŭ',
-  '&#366;': 'Ů',
-  '&#367;': 'ů',
-  '&#368;': 'Ű',
-  '&#369;': 'ű',
-  '&#370;': 'Ų',
-  '&#371;': 'ų',
-  '&#372;': 'Ŵ',
-  '&#373;': 'ŵ',
-  '&#374;': 'Ŷ',
-  '&#375;': 'ŷ',
-  '&#376;': 'Ÿ',
-  '&#377;': 'Ź',
-  '&#378;': 'ź',
-  '&#379;': 'Ż',
-  '&#380;': 'ż',
-  '&#381;': 'Ž',
-  '&#382;': 'ž',
-  '&#383;': 'ſ',
-};
-
-function unescape({url, data}) {
-  return {url, data: data.map(idl => {
-    let re = /&#?[a-zA-Z0-9]+;/g;
-    let next = null;
-    while ((next = re.exec(idl)) !== null) {
-      if (escapes[next[0]]) {
-        console.log('Unescaping', next[0], 'as', escapes[next[0]]);
-        idl = idl.replace(new RegExp(next[0], 'g'), escapes[next[0]]);
-      } else {
-        console.warn('Unknown escape sequence', next[0]);
-      }
-    }
-    return idl;
-  })};
-}
-
 function parse({url, data}) {
   if (!Array.isArray(data)) data = [data];
-  let path = './.idlcache/' + url.replace(/[^a-zA-Z0-9]/g, '_');
+  const path = `${idlCacheDir}/${getCacheFileName(url)}`;
   try {
     let stat = fs.statSync(path);
     console.assert(stat.isFile());
@@ -622,18 +310,20 @@ module.exports = {
   importHTTP: function(urls, path) {
     urls = _.uniq(urls).sort();
 
-    return Promise.all(
-      urls.map(
-        url => loadURL(url).then(extractIDL).then(unescape).then(parse).catch(e => {
-        console.error('Parse error:', e);
-        return {url, parses: []};
-      }))).then(data => {
-        fs.writeFileSync(path, stringify(data));
-        const count = data.reduce(
-          (acc, {url, parses}) => acc + parses.length, 0);
-        console.log('Wrote', count, 'IDL fragments from', data.length,
-                    'URLs to', path);
-      });
+    const phantomManager = new PhantomManager(Math.min(32, urls.length));
+
+    return Promise.all(urls.map(url => phantomScrape(phantomManager, url)
+        .then(parse).catch(e => {
+          console.error('Parse error:', e);
+          return {url, parses: []};
+        }))).then(data => {
+          fs.writeFileSync(path, stringify(data));
+          const count = data.reduce(
+              (acc, {url, parses}) => acc + parses.length, 0);
+          console.log('Wrote', count, 'IDL fragments from', data.length,
+                      'URLs to', path);
+          phantomManager.destroy();
+        });
   },
   importIDL: function(urls, path) {
     urls = _.uniq(urls).sort();
