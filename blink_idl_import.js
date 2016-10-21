@@ -27,7 +27,7 @@ function getLocalPath(relativePath) {
   return `${blinkSrcDir}/${relativePath}`;
 }
 function getURL(path) {
-  return `https://chromium.googlesource.com/chromium/blink/+/${blinkHash}/${path}`;
+  return `https://chromium.googlesource.com/chromium/src.git/+/${blinkHash}/${path}`;
 }
 
 var stringify = require('ya-stdlib-js').stringify;

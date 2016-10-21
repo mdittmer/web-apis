@@ -2,8 +2,7 @@
 
 NODE_PATH=${NODE_PATH:-.:./static/js}
 WEB_APIS_DIR=${WEB_APIS_DIR:-$(readlink -f $(dirname "$0"))}
-CHROMIUM_SRC_DIR=${CHROMIUM_SRC_DIR:-${HOME}/src/chromium/src}
-BLINK_SRC_DIR=${BLINK_SRC_DIR:-${CHROMIUM_SRC_DIR}/third_party/WebKit}
+BLINK_SRC_DIR=${BLINK_SRC_DIR:-${HOME}/src/blink/third_party/WebKit}
 
 if [[ ! -d ${WEB_APIS_DIR} ]]; then
     >&2 echo "ERROR: WEB_APIS_DIR=${WEB_APIS_DIR} is not a directory"
