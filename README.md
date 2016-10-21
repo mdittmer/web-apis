@@ -8,22 +8,21 @@ Playground for better understanding Web APIs. Data collection supported by
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [web-apis](#web-apis)
-  - [Serving locally](#serving-locally)
-  - [Javascript Object Graphs](#javascript-object-graphs)
-    - [Exploring data](#exploring-data)
-    - [Collecting data](#collecting-data)
-      - [Manual data collection setup](#manual-data-collection-setup)
-      - [Automated data collection](#automated-data-collection)
-        - [Setup: BrowserStack](#setup-browserstack)
-        - [Setup: SauceLabs](#setup-saucelabs)
+- [Serving locally](#serving-locally)
+- [Javascript Object Graphs](#javascript-object-graphs)
+  - [Exploring data](#exploring-data)
+  - [Collecting data](#collecting-data)
+    - [Manual data collection setup](#manual-data-collection-setup)
+    - [Automated data collection](#automated-data-collection)
+      - [Setup: BrowserStack](#setup-browserstack)
+      - [Setup: SauceLabs](#setup-saucelabs)
       - [Setup: Custom Selenium](#setup-custom-selenium)
       - [Gathering the data](#gathering-the-data)
-  - [Web IDL](#web-idl)
-    - [Exploring data](#exploring-data-1)
-    - [Bulk load](#bulk-load)
-      - [URL import example: Importing from URLs mentioned in caniuse.com's data](#url-import-example-importing-from-urls-mentioned-in-caniusecoms-data)
-      - [Local repository import example: Importing Blink's WebIDL](#local-repository-import-example-importing-blinks-webidl)
+- [Web IDL](#web-idl)
+  - [Exploring data](#exploring-data-1)
+  - [Bulk load](#bulk-load)
+    - [URL import example: Importing from URLs mentioned in caniuse.com's data](#url-import-example-importing-from-urls-mentioned-in-caniusecoms-data)
+    - [Local repository import example: Importing Blink's WebIDL](#local-repository-import-example-importing-blinks-webidl)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -135,7 +134,7 @@ to gather data from.
 
 Skip to *Gathering the data* below.
 
-#### Setup: Custom Selenium
+##### Setup: Custom Selenium
 
 Add the following to `dev_env.local.sh` in your local checkout:
 
@@ -153,7 +152,7 @@ you wish to gather data from.
 
 Skip to *Gathering the data* below.
 
-#### Gathering the data
+##### Gathering the data
 
 Make sure your development environment is up-to-date, then run the data
 gathering script:
