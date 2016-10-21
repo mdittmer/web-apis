@@ -3,15 +3,15 @@
 Playground for better understanding Web APIs. Data collection supported by
 [BrowserStack](https://www.browserstack.com).
 
-## Javascript Object Graphs
-
-Explore the object graph exposed by a browser's Javascript environment.
-
-### Serving locally
+## Serving locally
 
     $ npm install
     $ npm run rebuild
     $ npm run deploy
+
+## Javascript Object Graphs
+
+Explore the object graph exposed by a browser's Javascript environment.
 
 ### Exploring data
 
@@ -19,19 +19,21 @@ While serving locally `localhost:8000/analyze_og.html`. This tool allows you to
 select browser environments to include and exclude, and then look at the APIs
 and structures in the resulting environment.
 
-E.g., What APIs and structures exist...
+E.g., What APIs and structures exist in the set...
 
-- in `Safari 602.1.38 OSX 10.12` *AND*
+    (1) Safari 602.1.38 OSX 10.12
+    ∩
+    (2) Edge 14.14300 Windows 10.0
+    \
+    (3) Firefox 48.0 Windows 10.0
+    \
+    (4) Chrome 52.0.2743.116 OSX 10.11.6
 
-- in `Edge 14.14300 Windows 10.0` *AND*
-
-- *NOT* in `Firefox 48.0 Windows 10.0` *AND*
-
-- *NOT* in `Chrome 52.0.2743.116 OSX 10.11.6`
+I.e., in both `(1)` and `(2)`, but not in either `(3)` or `(4)`.
 
 ### Collecting data
 
-#### Manual data collection
+#### Manual data collection setup
 
 While serving locally visit `localhost:8000/index.html`. Use the buttons to
 collect and then save data about your environment.
@@ -140,6 +142,21 @@ Explore [WebIDL](https://heycam.github.io/webidl/) fragments.
 *NOTE*: Some of the scripts referenced in this section require [ag -- The
  Silver Searcher](https://github.com/ggreer/the_silver_searcher).
 
+### Exploring data
+
+While serving locally `localhost:8000/analyze_idl.html`. This tool allows you to
+select two WebIDL collections stored in `data/idl/...` , and then look at the
+diff between IDL fragments that have the same name.
+
+E.g., to view the difference between the `Node` interface linked in Blink's IDL
+files (i.e., the interface from the spec) and the `Node` interface in Blink's
+IDL files themselves: Enter "Left"=`blink linked`, "Choose interface"=`Node`,
+"Right"=`blink`.
+
+Each `<input>` element is bound to a dynamically updated `<datalist>` element,
+so using the dropdown and/or auto-complete allow you to see what IDL collections
+and interfaces are available.
+
 ### Bulk load
 
 Bulk loading from several repositories and collections of web standards has
@@ -153,9 +170,9 @@ directly. Import scripts cache URL fetches in `.urlcache/` and IDL parses in
 #### URL import example: Importing from URLs mentioned in caniuse.com's data
 
 This URL import is pretty straightforward. Simply invoke
-`caniuse_idl_urls_import.sh` by running somethingl like `zsh
-./caniuse_idl_urls_import.sh` or `bash ./caniuse_idl_urls_import.sh`. There
-will be lots of output, which should start with something like:
+`caniuse_idl_urls_import.sh` by running something like `zsh
+./caniuse_idl_urls_import.sh` or `bash ./caniuse_idl_urls_import.sh`. There will
+be lots of output, which should start with something like:
 
 ```
 Loading https://raw.githubusercontent.com/Fyrd/caniuse/master/fulldata-json/data-2.0.json
@@ -178,10 +195,13 @@ First, make sure you have a checkout of Blink:
 At a minimum, set the following environment variable(s):
 
 ```zsh
-# <chromium-root-directory>/src
 BLINK_SRC_DIR=/path/to/blink
 ```
 
 Next, run `blink_idl_import.sh` using something like `zsh
 ./blink_idl_import.sh` or `bash blink_idl_import.sh`. *NOTE*: This will
 overwrite `data/idl/blink/all.json`. Exactly one parse failure is expected.
+
+To also import from URLs linked in Blink's IDL files, run
+`blink_idl_urls_import.sh`. *NOTE*: This will yield a lot of logging messages
+and will overwrite `data/idl/blink/linked/all.json`.
