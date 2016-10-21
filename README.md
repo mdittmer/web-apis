@@ -15,18 +15,24 @@ Explore the object graph exposed by a browser's Javascript environment.
 
 ### Exploring data
 
-While serving locally `localhost:8000/analyze_og.html`. This tool allows you to
-select browser environments to include and exclude, and then look at the APIs
-and structures in the resulting environment.
+While serving locally visit `localhost:8000/analyze_og.html`. This tool
+allows you to select browser environments to include and exclude, and then
+look at the APIs and structures in the resulting environment.
 
 E.g., What APIs and structures exist in the set...
 
     (1) Safari 602.1.38 OSX 10.12
-    ∩
+
+        ∩
+
     (2) Edge 14.14300 Windows 10.0
-    \
+
+        \
+
     (3) Firefox 48.0 Windows 10.0
-    \
+
+        \
+
     (4) Chrome 52.0.2743.116 OSX 10.11.6
 
 I.e., in both `(1)` and `(2)`, but not in either `(3)` or `(4)`.
@@ -144,9 +150,9 @@ Explore [WebIDL](https://heycam.github.io/webidl/) fragments.
 
 ### Exploring data
 
-While serving locally `localhost:8000/analyze_idl.html`. This tool allows you to
-select two WebIDL collections stored in `data/idl/...` , and then look at the
-diff between IDL fragments that have the same name.
+While serving locally visit `localhost:8000/analyze_idl.html`. This tool
+allows you to select two WebIDL collections stored in `data/idl/...` , and
+then look at the diff between IDL fragments that have the same name.
 
 E.g., to view the difference between the `Node` interface linked in Blink's IDL
 files (i.e., the interface from the spec) and the `Node` interface in Blink's
