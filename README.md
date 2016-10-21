@@ -1,7 +1,31 @@
+
 # web-apis
 
 Playground for better understanding Web APIs. Data collection supported by
 [BrowserStack](https://www.browserstack.com).
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [web-apis](#web-apis)
+  - [Serving locally](#serving-locally)
+  - [Javascript Object Graphs](#javascript-object-graphs)
+    - [Exploring data](#exploring-data)
+    - [Collecting data](#collecting-data)
+      - [Manual data collection setup](#manual-data-collection-setup)
+      - [Automated data collection](#automated-data-collection)
+        - [Setup: BrowserStack](#setup-browserstack)
+        - [Setup: SauceLabs](#setup-saucelabs)
+      - [Setup: Custom Selenium](#setup-custom-selenium)
+      - [Gathering the data](#gathering-the-data)
+  - [Web IDL](#web-idl)
+    - [Exploring data](#exploring-data-1)
+    - [Bulk load](#bulk-load)
+      - [URL import example: Importing from URLs mentioned in caniuse.com's data](#url-import-example-importing-from-urls-mentioned-in-caniusecoms-data)
+      - [Local repository import example: Importing Blink's WebIDL](#local-repository-import-example-importing-blinks-webidl)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Serving locally
 
@@ -194,14 +218,22 @@ Wrote 38 IDL fragments from 222 URLs to /path/to/web-apis/./data/idl/caniuse/lin
 
 #### Local repository import example: Importing Blink's WebIDL
 
-First, make sure you have a checkout of Blink:
+First, make sure you have a checkout of Blink. You can either use an existing
+checkout of the Chromium source code (and point to `third_party/WebKit`) or do
+the following to checkout Chromium, keeping only the Blink source:
 
-    $ git clone https://chromium.googlesource.com/chromium/blink
+    $ mkdir blink
+    $ cd blink
+    $ git init
+    $ git remote add origin https://chromium.googlesource.com/chromium/src
+    $ git config core.sparsecheckout true
+    $ echo "third_party/WebKit/" >> .git/info/sparse-checkout
+    $ git pull --depth=1 origin master
 
 At a minimum, set the following environment variable(s):
 
 ```zsh
-BLINK_SRC_DIR=/path/to/blink
+BLINK_SRC_DIR=/path/to/blink/third_party/WebKit
 ```
 
 Next, run `blink_idl_import.sh` using something like `zsh
