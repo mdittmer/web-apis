@@ -236,6 +236,10 @@ At a minimum, set the following environment variable(s):
 BLINK_SRC_DIR=/path/to/blink/third_party/WebKit
 ```
 
+Continuing from Blink source checkout example:
+
+    $ export BLINK_SRC_DIR=$(pwd)/third_party/WebKit
+
 Next, run `blink_idl_import.sh` using something like `zsh
 ./blink_idl_import.sh` or `bash blink_idl_import.sh`. *NOTE*: This will
 overwrite `data/idl/blink/all.json`. Exactly one parse failure is expected.
