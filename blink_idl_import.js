@@ -56,7 +56,14 @@ data.forEach(function(datum) {
     if (res[0]) {
       parses.push({
         url: url,
-        parses: res[1],
+        parses: res[1].map(function(parse) {
+          if (!parse.toJSON) {
+            console.error('No toJSON for', parse.constructor.name, '\n  ',
+                          JSON.stringify(parse));
+            return parse;
+          }
+          return parse.toJSON();
+        }),
       });
     } else {
       errCount++;
@@ -65,6 +72,7 @@ data.forEach(function(datum) {
   } catch (e) {
     errCount++;
     console.warn('Exception thrown parsing', datum.path);
+    console.error(e);
   }
 });
 
