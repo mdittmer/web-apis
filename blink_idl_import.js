@@ -45,7 +45,7 @@ function loadFiles(arr) {
 
 var data = loadFiles(idlFiles);
 
-var parser = require('webidl2-js');
+var parser = require('webidl2-js').parser;
 
 var errCount = 0;
 var parses = [];
