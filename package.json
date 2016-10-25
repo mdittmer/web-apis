@@ -40,7 +40,7 @@
     "json-stable-stringify": "^1.0.1",
     "object-graph-js": "git://github.com/mdittmer/object-graph-js.git",
     "webidl2": "^2.0.11",
-    "webidl2-js": "git://github.com/mdittmer/webidl2-js.git#modeled",
+    "webidl2-js": "git://github.com/mdittmer/webidl2-js.git",
     "ya-stdlib-js": "git://github.com/mdittmer/ya-stdlib-js.git"
   },
   "devDependencies": {
