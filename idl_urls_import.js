@@ -210,8 +210,57 @@ function phantomScrape(phantomManager, url) {
     }));
   }
 
+  // Wait for a PhantomJS script injection return value to match predicate.
+  function waitFor(script, predicate) {
+    function wait(resolve, reject) {
+      pagePromise.then(page => {
+        console.log(`Waiting for ${predicate.toString()}`);
+        page.evaluate(script).then(value => {
+          console.log(`Got value of ${value}`);
+          if (predicate(value)) resolve(page);
+          else wait(resolve, reject);
+        });
+      });
+    }
+
+    return new Promise(wait);
+  }
+  // Wait for PhantomJS script injection return value to be same num times.
+  function waitForSame(script, num) {
+    return waitFor(
+        script,
+        (function() {
+          let prev = new Array(num);
+          let idx = 0;
+          let full = false;
+          return function(value) {
+            prev[idx] = value;
+            idx++;
+            if (idx === num) {
+              full = true;
+              idx = 0;
+            }
+            if (!full) return false;
+            for (var i = 0; i < prev.length; i++) {
+              if (value !== prev[i]) {
+                console.log(`previous ${i} = ${prev[i]}, not latest: ${value}`);
+                return false;
+              }
+            }
+            console.log(`previous ${num} are all latest value: ${value}`);
+            return true;
+          };
+        })()
+    );
+  }
+
   // Scrape for <pre> tags.
-  const scrapePromise = pagePromise.then(page => {
+  const scrapePromise = waitForSame(
+    // Wait for number of <pre> tags to stabalize. Tools like ReSpec and
+    // Bikeshed do some wonky things, even after DOM loaded. Experimentation
+    // suggests that this method of "waiting long enough" is pretty reliable.
+    function() { return document.querySelectorAll('pre').length; }, 10
+  ).then(page => {
     console.log('Scraping', phantomURL, 'for <pre> tags');
     return page.evaluate(function() {
       var pres = document.querySelectorAll('pre');
