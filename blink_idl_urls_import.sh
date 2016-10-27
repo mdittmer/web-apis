@@ -24,7 +24,9 @@ for IDL_FILE in ${IDL_FILES_ARR[@]}; do
   echo ${IDL_FILE}
   TMP_FILE=$(mktemp)
   echo "${TMP_FILE}" >> ${MASTER_FILE}
-  cat ${BLINK_SRC_DIR}/${IDL_FILE} | ag -o 'https?://[^/]+(/[^?#,.\n]*)?(\?[^#,.\n]*)?' >> ${TMP_FILE} &!
+  cat ${BLINK_SRC_DIR}/${IDL_FILE} | \
+    ag -o 'https?://[^/]+(/[^?#, \n]*)?(\?[^#, \n]*)?' | \
+    ag '(dev\.w3\.org|\.github\.io|khronos\.org)' >> ${TMP_FILE} &!
 done
 
 URLS=$(cat $(cat ${MASTER_FILE}) | sort | uniq)
