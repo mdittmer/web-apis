@@ -31,6 +31,10 @@ const phantomScrape = require('./phantom-scrape.js')({
   urlCacheDir,
   idlCacheDir,
 });
+const seleniumScrape = require('./selenium-scrape.js')({
+  urlCacheDir,
+  idlCacheDir,
+});
 
 function loadURL(url) {
   return new Promise((resolve, reject) => {
@@ -100,7 +104,7 @@ function parse({url, data}) {
 
     // if (parses.length === 0) throw new Error(`Expected parse success from ${url}`);
 
-    fs.writeFileSync(path, stringify({url, parses}));
+    if (parses.length > 0) fs.writeFileSync(path, stringify({url, parses}));
     return {url, parses};
   }
 }
@@ -110,14 +114,47 @@ module.exports = {
     urls = _.uniq(urls).sort();
 
     // TODO: Unify throttling over *-scrape interface.
-    const phantomFactory = function() {
-      return new phantomScrape.PhantomInstance(10);
-    };
-    const manager = new scraper.ScraperManager(
-        Math.min(32, urls.length), phantomFactory);
+    const phantomManager = (() => {
+      const instanceFactory = function() {
+        return new phantomScrape.Instance(10);
+      };
+      const scraperFactory = function() {
+        return new phantomScrape.Scraper();
+      };
+      return new scraper.ScraperManager({
+        numInstances: Math.min(32, urls.length),
+        instanceFactory,
+        scraperFactory,
+      });
+    })();
+    const seleniumManager = (() => {
+      const instanceFactory = function() {
+        return new seleniumScrape.Instance({browserName: 'chrome'});
+      };
+      const scraperFactory = function() {
+        return new seleniumScrape.Scraper();
+      };
+      return new scraper.ScraperManager({
+        numInstances: 4,
+        instanceFactory,
+        scraperFactory,
+      });
+    })();
 
-    return Promise.all(urls.map(url => phantomScrape.scrape(manager, url)
-        .then(parse).catch(e => {
+    return Promise.all(urls.map(url => phantomManager.scrape(url)
+        .then(parse).then(
+            ({url, parses}) => {
+              if (parses.length === 0) {
+                console.log('PhantomJS parsing failed. Trying selenium...');
+                return seleniumManager.scrape(url).then(parse);
+              }
+              return {url, parses};
+            },
+            err => {
+              console.log('PhantomJS parsing failed. Trying selenium...');
+              return seleniumManager.scrape(url).then(parse);
+            }
+        ).catch(e => {
           console.error('Parse error:', e);
           return {url, parses: []};
         }))).then(data => {
@@ -126,7 +163,8 @@ module.exports = {
               (acc, {url, parses}) => acc + parses.length, 0);
           console.log('Wrote', count, 'IDL fragments from', data.length,
                       'URLs to', path);
-          manager.destroy();
+          phantomManager.destroy();
+          seleniumManager.destroy();
         });
   },
   importIDL: function(urls, path) {
