@@ -1,4 +1,4 @@
- /**
+/**
  * @license
  * Copyright 2016 Google Inc. All Rights Reserved.
  *
@@ -16,86 +16,81 @@
  */
 'use strict';
 
-const process = require('process');
-const fs = require('fs');
-
-const By = require('selenium-webdriver').By;
-
-const host = process.argv.length === 3 ? process.argv[2] : process.env.SELENIUM_HOST;
-const hostModule = require(`./${host}.js`);
-const scrape = require('./scrape.js');
+const hostModule = require(`./selenium-host.js`);
 const scraper = require('./scraper.js');
 
-if (host !== 'browserstack' && host !== 'sauce' && host !== 'selenium_custom')
-  throw new Error(
-    `Required argument or  variable is missing or invalid:
-      node ${__filename} (browserstack|sauce|selenium_custom)
-          OR
-      SELENIUM_HOST=(browserstack|sauce|selenium_custom)`
-  );
-
-const nullLogger = scrape.getLogger({url: null});
-
-module.exports = opts => {
-  opts = Object.assign({
-    urlCacheDir: `${__dirname}/.urlcache`,
-    idlCacheDir: `${__dirname}/.idlcache`,
-  }, opts);
-  scrape.prepareToScrape(opts);
-  const urlCacheDir = opts.urlCacheDir;
-  const idlCacheDir = opts.idlCacheDir;
-
-  let managerId = 0;
-
-  class SeleniumInstance extends scraper.Instance {
-    constructor(opts) {
-      super(...arguments);
-      this.hostConfig = opts;
-    }
-
-    stopInstance() {
-      this.logger.log('Stopping selenium instance');
-      return this.instance.then(driver => driver.quit()).then(
-          super.stopInstance.bind(this, arguments)
-      );
-    }
-
-    startInstance() {
-      this.logger.log('Starting selenium instance');
-      return super.startInstance(...arguments).then(
-          _ => hostModule(this.hostConfig)
-      );
-    }
-
-    acquire(url) {
-      return super.acquire(...arguments).then(_ => {
-        this.logger.log('Acquiring selenium instance for', url);
-        return this.instance.then(driver => driver.get(url).then(_ => driver));
-      });
-    }
+class SeleniumInstance extends scraper.Instance {
+  constructor(opts) {
+    super(...arguments);
+    this.hostConfig = opts;
   }
 
-  // Handles are driver objects.
-  class SeleniumScraper extends scraper.Scraper {
-    savePageToCache({url, handle}) {
-      const logger = scrape.getLogger({scraper: this.constructor.name, url});
-      logger.log(`Caching URL ${url}`);
-      return handle.executeScript(
-          `return document.documentElement.outerHTML;`
-      ).then(docString => {
-        fs.writeFileSync(this.getCacheFileName(url), docString);
-        logger.log(`Cached URL ${url}`);
-      });
-    }
-
-    scrapePage({url, handle}) {
-      return handle.executeScript(
-          `return Array.from(document.querySelectorAll('pre')).map(function(pre) { return pre.innerText; });`
-      ).then(data => {
-        return {url, data};
-      });
-    }
+  stopInstance() {
+    this.logger.log('Stopping selenium instance');
+    return this.instance.then(driver => driver.quit()).then(
+      super.stopInstance.bind(this, arguments)
+    );
   }
 
-  return {host, Instance: SeleniumInstance, Scraper: SeleniumScraper};
-};
+  startInstance() {
+    this.logger.log('Starting selenium instance');
+    return super.startInstance(...arguments).then(
+      _ => hostModule(this.hostConfig)
+    );
+  }
+
+  acquire(url) {
+    return super.acquire(...arguments).then(_ => {
+      this.logger.log(`Acquiring selenium instance for ${url}`);
+      return this.instance.then(driver => driver.get(url).then(_ => driver));
+    });
+  }
+}
+
+// Handles are driver objects.
+class SeleniumScraper extends scraper.Scraper {
+  getPageContents({url, handle}) {
+    return super.getPageContents(...arguments).then(_ => {
+      this.logger.log('Getting page contents');
+      return this.executeScript({
+        handle,
+        script: function() { return document.documentElement.outerHTML; },
+      });
+    }).then(docString => {
+      this.logger.log('Returning page contents');
+      return docString;
+    });
+  }
+
+  scrapePage({url, handle}) {
+    return super.scrapePage(...arguments).then(
+      _ => this.waitForSame({
+        // Wait for number of <pre> tags to stabalize. Tools like ReSpec and
+        // Bikeshed do some wonky things, even after DOM loaded. Experimentation
+        // suggests that this method of "waiting long enough" is pretty reliable.
+        handle,
+        script: function() { return document.querySelectorAll('pre').length; },
+        num: 5,
+      })
+    ).then(_ => {
+      this.logger.log(`Scraping ${url} for <pre> tags`);
+      return this.executeScript({
+        handle,
+        script: function() {
+          return Array.from(document.querySelectorAll('pre')).map(
+            function(pre) { return pre.innerText; }
+          );
+        },
+      });
+    }).then(data => {
+      this.logger.log(`Scraped ${data.length} <pre> tags from ${url}`);
+      return {url, data};
+    });
+  }
+
+  executeScript({handle, script}) {
+    return handle.executeScript(script);
+  }
+}
+
+module.exports = {Instance: SeleniumInstance, Scraper: SeleniumScraper};

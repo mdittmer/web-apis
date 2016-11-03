@@ -21,19 +21,18 @@
 
 const fs = require('fs');
 const webdriver = require('selenium-webdriver');
-const scrape = require('./scrape.js');
-const host = require('./selenium-scrape.js').host;
-const hostModule = require(`./${host}.js`);
-const browsers = JSON.parse(fs.readFileSync(`./${host}_envs.json`));
+const hostModule = require(`./selenium-host.js`);
+const browsers = JSON.parse(fs.readFileSync(`./${hostModule.name}_envs.json`));
+const loggerModule = require('./logger.js');
+const throttle = require('./throttle.js');
 const NameRewriter = require('object-graph-js').NameRewriter;
 const stringify = require('ya-stdlib-js').stringify;
 
 const By = webdriver.By;
-const until = webdriver.until;
 
-scrape.throttle(5, browsers.map(browser => {
+throttle(5, browsers.map(browser => {
   return _ => {
-    const logger = scrape.getLogger(browser);
+    const logger = loggerModule.getLogger(browser);
     const timeout = 720000;
     const url = 'http://localhost:8000/';
     const config = Object.assign({

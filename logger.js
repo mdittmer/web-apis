@@ -16,15 +16,19 @@
  */
 'use strict';
 
-const webdriver = require('selenium-webdriver');
-
-const url = `http://localhost:4444/wd/hub`;
-
-function buildConfig(config) {
-  return new webdriver.Builder().withCapabilities(config).usingServer(url)
-    .build();
-}
-
-module.exports = function selenium_custom(inputConfig) {
-  return Promise.resolve(buildConfig(inputConfig));
+module.exports = {
+  getLogger: function getLogger(info) {
+    const infoStr = JSON.stringify(info);
+    return {
+      log: function() {
+        console.log(infoStr, ...arguments);
+      },
+      warn: function() {
+        console.warn(infoStr, ...arguments);
+      },
+      error: function() {
+        console.error(infoStr, ...arguments);
+      },
+    };
+  },
 };

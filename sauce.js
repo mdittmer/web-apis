@@ -43,6 +43,6 @@ function buildConfig(inputConfig) {
     .build();
 }
 
-module.exports = function(inputConfig) {
+module.exports = function sauce(inputConfig) {
   return Promise.resolve(buildConfig(inputConfig));
 };

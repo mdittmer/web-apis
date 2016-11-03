@@ -1,10 +1,20 @@
 #!/bin/zsh
 
-if [ -f ./dev_env.local.sh ]; then
+# Required local configuration:
+# SELENIUM_JAR=/path/to/selenium.jar
+# CHROME_DRIVER=/path/to/chromedriver.jar
+
+if [ -f ./selenium_custom_server.local.sh ]; then
   . ./selenium_custom_server.local.sh
 fi
 
-NUM_SELENIUM_NODES=${NUM_SELENIUM_NODES:-4}
+# Standalone configuration
+# java -jar -Dwebdriver.chrome.driver="${CHROME_DRIVER}" "${SELENIUM_JAR}" -role standalone 2>&1
+
+# Hub-and-node configuration
+NUM_SELENIUM_NODES=${NUM_SELENIUM_NODES:-2}
+NUM_SELENIUM_SESSIONS_PER_NODE=${NUM_SELENIUM_SESSIONS_PER_NODE:-1}
+NUM_SELENIUM_SESSIONS_TOTAL=$((${NUM_SELENIUM_NODES} * ${NUM_SELENIUM_SESSIONS_PER_NODE}))
 
 function stop() {
     echo "**** STOPPING SELENIUM"
@@ -28,14 +38,15 @@ trap stop INT
 
 echo "**** STARTING SELENIUM"
 echo "**** STARTING HUB"
-java -jar -Dwebdriver.chrome.driver="${CHROME_DRIVER}" "${SELENIUM_JAR}" -role hub 2>&1 &
+java -jar -Dwebdriver.chrome.driver="${CHROME_DRIVER}" "${SELENIUM_JAR}" -role hub -maxSession ${NUM_SELENIUM_SESSIONS_TOTAL} 2>&1 &
+
 HUB_PID=$!
 NODE_PIDS=()
 NODE_PORTS=()
 NODE_PORT=5566
 echo "**** STARTING NODES"
 for I in $(seq 1 ${NUM_SELENIUM_NODES}); do
-    java -jar -Dwebdriver.chrome.driver="${CHROME_DRIVER}" "${SELENIUM_JAR}" -role node -hub http://localhost:4444/grid/register -port $((${NODE_PORT} + ${I})) 2>&1 &
+    java -jar -Dwebdriver.chrome.driver="${CHROME_DRIVER}" "${SELENIUM_JAR}" -role node -hub http://localhost:4444/grid/register -port $((${NODE_PORT} + ${I})) -maxSession ${NUM_SELENIUM_SESSIONS_PER_NODE} 2>&1 &
     NODE_PIDS+=($!)
     echo "**** Started node ${I} with PID $!"
     NODE_PORTS+=($((${NODE_PORT} + ${I})))

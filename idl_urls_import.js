@@ -22,19 +22,49 @@ const webidl2 = require('webidl2');
 const parser = require('webidl2-js').parser;
 const stringify = require('ya-stdlib-js').stringify;
 const _ = require('lodash');
-const scrape = require('./scrape.js');
 const scraper = require('./scraper.js');
+const phantomScrape = require('./phantom-scrape.js');
+const seleniumScrape = require('./selenium-scrape.js');
 
 const urlCacheDir = `${__dirname}/.urlcache`;
 const idlCacheDir = `${__dirname}/.idlcache`;
-const phantomScrape = require('./phantom-scrape.js')({
-  urlCacheDir,
-  idlCacheDir,
-});
-const seleniumScrape = require('./selenium-scrape.js')({
-  urlCacheDir,
-  idlCacheDir,
-});
+
+function prepareToScrape() {
+  [urlCacheDir, idlCacheDir].forEach(path => {
+    try {
+      let stat = fs.statSync(path);
+      console.assert(stat.isDirectory());
+    } catch (e) {
+      fs.mkdirSync(path);
+    }
+  });
+}
+
+function getCacheFileName(url) {
+  return `${url.replace(/[^a-zA-Z0-9]/g, '_')}`;
+}
+
+function getUniqueURLs(urls) {
+  let urlMap = {};
+  urls.forEach(url => {
+    const match = url.match(/^(https?):\/\/(.*)$/);
+    console.assert(match);
+    let key = match[2];
+    // Canonicalize trailing slash: all URLs have slash.
+    if (key.charAt(key.length - 1) !== '/') key += '/';
+    const scheme = match[1];
+    urlMap[key] = urlMap[key] || [];
+    if (!urlMap[key].filter(s => s === scheme)[0]) {
+      urlMap[key].push(scheme);
+      urlMap[key].sort();
+    }
+  });
+  return Object.getOwnPropertyNames(urlMap).map(rest => {
+    // https comes after http in sorted order.
+    const scheme = urlMap[rest].pop();
+    return `${scheme}://${rest}`;
+  });
+}
 
 function loadURL(url) {
   return new Promise((resolve, reject) => {
@@ -73,12 +103,12 @@ function loadURL(url) {
 
 function parse({url, data}) {
   if (!Array.isArray(data)) data = [data];
-  const path = `${idlCacheDir}/${scrape.getCacheFileName(url)}`;
+  const idlCachePath = `${idlCacheDir}/${getCacheFileName(url)}`;
   try {
-    let stat = fs.statSync(path);
+    let stat = fs.statSync(idlCachePath);
     console.assert(stat.isFile());
     console.log('Found cached IDLs for', url);
-    return JSON.parse(fs.readFileSync(path).toString());
+    return JSON.parse(fs.readFileSync(idlCachePath).toString());
   } catch (e) {
     let parses = [];
     for (let idl of data) {
@@ -102,16 +132,21 @@ function parse({url, data}) {
       }
     }
 
-    // if (parses.length === 0) throw new Error(`Expected parse success from ${url}`);
+    if (parses.length === 0)
+      throw new Error(`Expected parse success from ${url}`);
 
-    if (parses.length > 0) fs.writeFileSync(path, stringify({url, parses}));
+    if (parses.length > 0)
+      fs.writeFileSync(idlCachePath, stringify({url, parses}));
+
     return {url, parses};
   }
 }
 
 module.exports = {
   importHTTP: function(urls, path) {
-    urls = _.uniq(urls).sort();
+    urls = getUniqueURLs(urls);
+
+    prepareToScrape();
 
     // TODO: Unify throttling over *-scrape interface.
     const phantomManager = (() => {
@@ -119,10 +154,10 @@ module.exports = {
         return new phantomScrape.Instance(10);
       };
       const scraperFactory = function() {
-        return new phantomScrape.Scraper();
+        return new phantomScrape.Scraper({urlCacheDir});
       };
       return new scraper.ScraperManager({
-        numInstances: Math.min(32, urls.length),
+        numInstances: Math.min(8, urls.length),
         instanceFactory,
         scraperFactory,
       });
@@ -132,7 +167,7 @@ module.exports = {
         return new seleniumScrape.Instance({browserName: 'chrome'});
       };
       const scraperFactory = function() {
-        return new seleniumScrape.Scraper();
+        return new seleniumScrape.Scraper({urlCacheDir});
       };
       return new scraper.ScraperManager({
         numInstances: 4,
@@ -141,31 +176,28 @@ module.exports = {
       });
     })();
 
-    return Promise.all(urls.map(url => phantomManager.scrape(url)
-        .then(parse).then(
-            ({url, parses}) => {
-              if (parses.length === 0) {
-                console.log('PhantomJS parsing failed. Trying selenium...');
-                return seleniumManager.scrape(url).then(parse);
-              }
-              return {url, parses};
-            },
-            err => {
-              console.log('PhantomJS parsing failed. Trying selenium...');
-              return seleniumManager.scrape(url).then(parse);
-            }
-        ).catch(e => {
-          console.error('Parse error:', e);
-          return {url, parses: []};
-        }))).then(data => {
-          fs.writeFileSync(path, stringify(data));
-          const count = data.reduce(
-              (acc, {url, parses}) => acc + parses.length, 0);
-          console.log('Wrote', count, 'IDL fragments from', data.length,
-                      'URLs to', path);
-          phantomManager.destroy();
-          seleniumManager.destroy();
-        });
+    return Promise.all(urls.map(url => phantomManager.scrape(url).then(
+      parse
+    ).catch(err => {
+      console.log(`PhantomJS parsing failed. on error:
+
+${err}
+
+Trying selenium...`);
+      return seleniumManager.scrape(url).then(parse);
+    }).catch(e => {
+      console.error('Parse error:', e);
+      return {url, parses: []};
+    }))).then(data => {
+      fs.writeFileSync(path, stringify(data));
+      const count = data.reduce(
+        (acc, {url, parses}) => acc + parses.length, 0
+      );
+      console.log('Wrote', count, 'IDL fragments from', data.length,
+                  'URLs to', path);
+      phantomManager.destroy();
+      seleniumManager.destroy();
+    });
   },
   importIDL: function(urls, path) {
     urls = _.uniq(urls).sort();
