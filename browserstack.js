@@ -56,7 +56,7 @@ function buildConfig(inputConfig) {
     .build();
 }
 
-module.exports = function(inputConfig) {
+module.exports = function browserstack(inputConfig) {
   if (base.build) return Promise.resolve(buildConfig(inputConfig));
   return new Promise((resolve, reject) => {
     git.long(hash => {

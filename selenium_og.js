@@ -19,84 +19,20 @@
 // Top-level NodeJS script for gathering JS Object Graph (og) data from a
 // Selenium WebDriver instance.
 
-const process = require('process');
-const host = process.argv.length === 3 ? process.argv[2] : process.env.SELENIUM_HOST;
-
-if (host !== 'browserstack' && host !== 'sauce' && host !== 'selenium_custom')
-  throw new Error(
-    `Required argument or  variable is missing or invalid:
-      node ${__filename} (browserstack|sauce|selenium_custom)
-          OR
-      SELENIUM_HOST=(browserstack|sauce|selenium_custom)`
-  );
-
 const fs = require('fs');
 const webdriver = require('selenium-webdriver');
-const hostModule = require(`./${host}.js`);
-const browsers = JSON.parse(fs.readFileSync(`./${host}_envs.json`));
+const hostModule = require(`./selenium-host.js`);
+const browsers = JSON.parse(fs.readFileSync(`./${hostModule.name}_envs.json`));
+const loggerModule = require('./logger.js');
+const throttle = require('./throttle.js');
 const NameRewriter = require('object-graph-js').NameRewriter;
 const stringify = require('ya-stdlib-js').stringify;
 
 const By = webdriver.By;
-const until = webdriver.until;
-
-function throttle(lim, promisers) {
-  if (lim <= 0) throw new Error('throttle(): Limit must be at least 1');
-  if (!Array.isArray(promisers))
-    throw new Error('throttle() expects array');
-  promisers.forEach(f => {
-    if (typeof f !== 'function')
-      throw new Error('throttle() expects array of promisers');
-  });
-  console.log('throttle()ing', promisers.length, 'promisers,', lim,
-              'at a time');
-  return new Promise(function(resolve, reject) {
-    let active = 0;
-    let idx = 0;
-    let res = new Array(promisers.length);
-    function next() {
-      if (idx === promisers.length || active === lim) {
-        console.log('throttle() wait');
-        return false;
-      }
-      const thisIdx = idx;
-      function resolveReject(val) {
-        console.log('throttle() promiser', thisIdx, 'complete');
-        res[thisIdx] = val;
-        active--;
-        if (idx === promisers.length && active === 0) {
-          console.log('All throttle() promisers complete. Resolving...');
-          resolve(res);
-        } else {
-          next();
-        }
-      }
-      console.log('Starting throttle() promiser', thisIdx, 'as active', active);
-      promisers[thisIdx]().then(resolveReject, resolveReject);
-      console.log('Started throttle() promiser', thisIdx, 'as active', active);
-      idx++;
-      active++;
-      return true;
-    }
-    while (next());
-  });
-}
-
-function getLogger(info) {
-  const infoStr = JSON.stringify(info);
-  return {
-    log: function() {
-      console.log(infoStr, ...arguments);
-    },
-    error: function() {
-      console.error(infoStr, ...arguments);
-    },
-  };
-}
 
 throttle(5, browsers.map(browser => {
   return _ => {
-    const logger = getLogger(browser);
+    const logger = loggerModule.getLogger(browser);
     const timeout = 720000;
     const url = 'http://localhost:8000/';
     const config = Object.assign({

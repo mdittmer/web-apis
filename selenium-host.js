@@ -16,15 +16,17 @@
  */
 'use strict';
 
-const webdriver = require('selenium-webdriver');
+const process = require('process');
 
-const url = `http://localhost:4444/wd/hub`;
+const host = process.argv.length === 3 ? process.argv[2] :
+  process.env.SELENIUM_HOST;
 
-function buildConfig(config) {
-  return new webdriver.Builder().withCapabilities(config).usingServer(url)
-    .build();
-}
+if (host !== 'browserstack' && host !== 'sauce' && host !== 'selenium_custom')
+  throw new Error(
+    `Required argument or  variable is missing or invalid:
+      node ${__filename} (browserstack|sauce|selenium_custom)
+          OR
+      SELENIUM_HOST=(browserstack|sauce|selenium_custom)`
+  );
 
-module.exports = function selenium_custom(inputConfig) {
-  return Promise.resolve(buildConfig(inputConfig));
-};
+module.exports = require(`./${host}.js`);

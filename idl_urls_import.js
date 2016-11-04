@@ -22,296 +22,86 @@ const webidl2 = require('webidl2');
 const parser = require('webidl2-js').parser;
 const stringify = require('ya-stdlib-js').stringify;
 const _ = require('lodash');
-const phantom = require('phantom');
-
-['.urlcache', '.idlcache'].forEach(name => {
-  try {
-    let stat = fs.statSync(`./${name}`);
-    console.assert(stat.isDirectory());
-  } catch (e) {
-    fs.mkdirSync(`./${name}`);
-  }
-});
+const scraper = require('./scraper.js');
+const phantomScrape = require('./phantom-scrape.js');
+const seleniumScrape = require('./selenium-scrape.js');
+const loggerModule = require('./logger.js');
 
 const urlCacheDir = `${__dirname}/.urlcache`;
 const idlCacheDir = `${__dirname}/.idlcache`;
 
-function getCacheFileName(url) {
-  return url.replace(/[^a-zA-Z0-9]/g, '_');
-}
-
-function phantomizeURL(url) {
-  const path = `${urlCacheDir}/${getCacheFileName(url)}`;
-  try {
-    const stat = fs.statSync(path);
-    console.assert(stat.isFile());
-    return {phantomURL: `file://${path}`, isLocal: true};
-  } catch (e) {
-    return {phantomURL: url, isLocal: false};
-  }
-}
-
-class PhantomInstance {
-  constructor(limit) {
-    this.limit = limit || 10;
-    this.count = 0;
-    this.busy = false;
-    this.q = [];
-    this.instance = this.startInstance();
-    this.page = this.startPage();
-  }
-
-  destroy() {
-    console.log('Destroying phantom instance');
-    if (this.page) {
-      console.log('Phantom instance destroy: closing page');
-      this.closePage();
+function prepareToScrape() {
+  [urlCacheDir, idlCacheDir].forEach(path => {
+    try {
+      let stat = fs.statSync(path);
+      console.assert(stat.isDirectory());
+    } catch (e) {
+      fs.mkdirSync(path);
     }
-    if (this.instance) {
-      console.log('Phantom instance destroy: exiting instance');
-      this.instance.then(instance => instance.exit());
-    }
-  }
-
-  restartInstance() {
-    console.log('Restarting phantom instance');
-    if (this.instance) {
-      console.log('Exiting stale phantom instance');
-      this.instance.then(instance => instance.exit());
-    }
-    this.instance = this.startInstance();
-    return this.instance;
-  }
-
-  startInstance() {
-    console.log('Starting phantom instance');
-    return phantom.create();
-  }
-
-  restartPage() {
-    console.log('Restarting phantom page');
-    if (this.page) {
-      console.log('Closing phantom page');
-      this.closePage();
-    }
-    this.page = this.startPage();
-    return this.page;
-  }
-
-  startPage() {
-    console.log('Starting phantom page');
-    return this.instance.then(instance => {
-      console.log('Creating phantom page');
-      return instance.createPage().then(page => {
-        this.closePage = page.close.bind(page);
-        console.log('Proxying page object');
-        return new Proxy(page, {
-          get: (target, property, receiver) => {
-            if (property !== 'close') {
-              console.log(`Page proxy passthru "${property}"`);
-              return target[property];
-            }
-            console.log('Page proxy swap "close" for "release"');
-            return this.release.bind(this);
-          }
-        });
-      });
-    });
-  }
-
-  get(url) {
-    if (!this.busy) {
-      console.log('Immediately acquiring phantom instance for', url);
-      return this.acquire(url);
-    }
-    console.log('Queuing acquire of phantom instance for', url);
-    return new Promise((resolve, reject) => {
-      this.q.push(_ => this.acquire(url).then(resolve));
-      console.log('Queued acquire of phantom instance for', url);
-    });
-  }
-
-  acquire(url) {
-    console.assert(!this.busy);
-    console.log('Acquiring phantom instance for', url);
-    this.busy = true;
-    return this.page.then(page => {
-      console.log('Opening', url, 'in phantom page');
-      return page.open(url).then(_ => this.page);
-    });
-  }
-
-  release() {
-    console.assert(this.busy);
-    console.log('Releasing phantom page');
-    this.count++;
-    if (this.count === this.limit) {
-      this.count = 0;
-      console.log('Phantom instance reached limit of', this.limit);
-      return this.restartInstance()
-          .then(this.restartPage.bind(this))
-          .then(this.onReleased.bind(this));
-    }
-    return this.restartPage().then(this.onReleased.bind(this));
-  }
-
-  onReleased() {
-    console.log('Phatom page released');
-    this.busy = false;
-    const next = this.q.shift();
-    if (next) next();
-  }
-}
-
-class PhantomManager {
-  constructor(numInstances) {
-    this.instances = new Array(numInstances);
-    for (let i = 0; i < numInstances; i++) {
-      this.instances[i] = new PhantomInstance(10);
-    }
-    this.nextIdx = 0;
-  }
-
-  destroy() {
-    console.log('Destroying phantom manager');
-    this.instances.forEach(instance => instance.destroy());
-  }
-
-  get(url) {
-    const idx = this.nextIdx;
-    this.nextIdx = (this.nextIdx + 1) % this.instances.length;
-    console.log('Provisioning phantom instance', idx,
-                'for url', url);
-    const ret = this.instances[idx].get(url);
-    ret.then(_ => {
-      console.log(url, 'got provisioned instance', idx);
-    });
-    return ret;
-  }
-}
-
-function phantomScrape(phantomManager, url) {
-  const {phantomURL, isLocal} = phantomizeURL(url);
-  const pagePromise = phantomManager.get(phantomURL);
-  let lastPromises = [];
-
-  // Cache remote URLs.
-  if (!isLocal) {
-    console.log('Caching', phantomURL);
-    lastPromises.push(pagePromise.then(page => {
-      return page.evaluate(function() {
-        return document.documentElement.outerHTML;
-      }).then(documentString => {
-        fs.writeFileSync(
-            `${urlCacheDir}/${getCacheFileName(phantomURL)}`, documentString
-            );
-        console.log('Wrote', phantomURL, 'to cache');
-      });
-    }));
-  }
-
-  // Wait for a PhantomJS script injection return value to match predicate.
-  function waitFor(script, predicate) {
-    function wait(resolve, reject) {
-      pagePromise.then(page => {
-        console.log(`Waiting for ${predicate.toString()}`);
-        page.evaluate(script).then(value => {
-          console.log(`Got value of ${value}`);
-          if (predicate(value)) resolve(page);
-          else wait(resolve, reject);
-        });
-      });
-    }
-
-    return new Promise(wait);
-  }
-  // Wait for PhantomJS script injection return value to be same num times.
-  function waitForSame(script, num) {
-    return waitFor(
-        script,
-        (function() {
-          let prev = new Array(num);
-          let idx = 0;
-          let full = false;
-          return function(value) {
-            prev[idx] = value;
-            idx++;
-            if (idx === num) {
-              full = true;
-              idx = 0;
-            }
-            if (!full) return false;
-            for (var i = 0; i < prev.length; i++) {
-              if (value !== prev[i]) {
-                console.log(`previous ${i} = ${prev[i]}, not latest: ${value}`);
-                return false;
-              }
-            }
-            console.log(`previous ${num} are all latest value: ${value}`);
-            return true;
-          };
-        })()
-    );
-  }
-
-  // Scrape for <pre> tags.
-  const scrapePromise = waitForSame(
-    // Wait for number of <pre> tags to stabalize. Tools like ReSpec and
-    // Bikeshed do some wonky things, even after DOM loaded. Experimentation
-    // suggests that this method of "waiting long enough" is pretty reliable.
-    function() { return document.querySelectorAll('pre').length; }, 10
-  ).then(page => {
-    console.log('Scraping', phantomURL, 'for <pre> tags');
-    return page.evaluate(function() {
-      var pres = document.querySelectorAll('pre');
-      var ret = new Array(pres.length);
-      for (var i = 0; i < pres.length; i++) {
-        ret[i] = pres[i].innerText;
-      }
-      return ret;
-    }).then(data => {
-      console.log('Scraped', data.length, '<pre> tags from', phantomURL);
-      return {url, data};
-    });
   });
-  lastPromises.push(scrapePromise);
+}
 
-  // Clean up phantom instance when caching and scraping are done.
-  Promise.all(lastPromises).then(_ => pagePromise.then(page => {
-    console.log('Cleaning up phantom page for', phantomURL);
-    page.close();
-  }));
+function getCacheFileName(url) {
+  return `${url.replace(/[^a-zA-Z0-9]/g, '_')}`;
+}
 
-  return scrapePromise;
+function getUniqueURLs(urls) {
+  let urlMap = {};
+  urls.forEach(url => {
+    const match = url.match(/^(https?):\/\/(.*)$/);
+    console.assert(match);
+    let key = match[2];
+    const scheme = match[1];
+    // Store all schemes for which we have seen this URL.
+    urlMap[key] = urlMap[key] || [];
+    if (!urlMap[key].filter(s => s === scheme)[0]) {
+      urlMap[key].push(scheme);
+      urlMap[key].sort();
+    }
+  });
+  Object.getOwnPropertyNames(urlMap).map(url => {
+    // Canonicalize trailing slash: drop URL without slash; assume all schemes
+    // across both URLs are legitimate.
+    if (urlMap[url + '/']) {
+      urlMap[url + '/'] = _.uniq(urlMap[url + '/'].concat(urlMap[url])).sort();
+      delete urlMap[url];
+    }
+  });
+  return Object.getOwnPropertyNames(urlMap).map(rest => {
+    // Preferred "https" comes after "http" in sorted order.
+    const scheme = urlMap[rest].pop();
+    return `${scheme}://${rest}`;
+  });
 }
 
 function loadURL(url) {
+  const logger = loggerModule.getLogger({loadURL: url});
   return new Promise((resolve, reject) => {
     let path = './.urlcache/' + url.replace(/[^a-zA-Z0-9]/g, '_');
     try {
       let stat = fs.statSync(path);
       console.assert(stat.isFile());
-      console.log('Found cached', url);
+      logger.log('Found cached', url);
       resolve({url, data: fs.readFileSync(path)});
     } catch (e) {
-      console.log('Loading', url);
+      logger.log('Loading', url);
       request(
         {uri: url},
         (err, res) => {
           if (err) {
-            console.error('Error loading', url, err);
+            logger.error('Error loading', url, err);
             reject(err);
             return;
           }
           let data;
           res.on('data', chunk => data = data ? data + chunk : chunk);
           res.on('end', () => {
-            console.log('Loaded', url);
+            logger.log('Loaded', url);
             fs.writeFileSync(path, data);
             resolve({url, data});
           });
           res.on('error', err => {
-            console.error('Error loading', url, err);
+            logger.error('Error loading', url, err);
             reject(err);
           });
         }
@@ -321,72 +111,173 @@ function loadURL(url) {
 }
 
 function parse({url, data}) {
+  const logger = loggerModule.getLogger({parse: url});
   if (!Array.isArray(data)) data = [data];
-  const path = `${idlCacheDir}/${getCacheFileName(url)}`;
+  const idlCachePath = `${idlCacheDir}/${getCacheFileName(url)}`;
   try {
-    let stat = fs.statSync(path);
+    let stat = fs.statSync(idlCachePath);
     console.assert(stat.isFile());
-    console.log('Found cached IDLs for', url);
-    return JSON.parse(fs.readFileSync(path).toString());
+    logger.log('Found cached IDLs for', url);
+    return JSON.parse(fs.readFileSync(idlCachePath).toString());
   } catch (e) {
     let parses = [];
     for (let idl of data) {
       if (typeof idl !== 'string') idl = idl.toString();
       let res = parser.parseString(idl);
       if (res[0]) {
-        console.log('Storing parse from', url, ';', idl.length,
-                    'length string');
+        logger.win('Storing parse from', url, ';', idl.length,
+                   'length string');
         parses = parses.concat(res[1]);
         try {
           webidl2.parse(idl);
         } catch (e) {
-          console.warn('webidl2 failed to parse good fragment from', url);
+          logger.warn('webidl2 failed to parse good fragment from', url);
         }
       } else {
-        console.warn(url, ':', idl.length, 'length string was not idl');
+        logger.warn(url, ':', idl.length, 'length string was not idl');
         try {
           webidl2.parse(idl);
-          console.assert(false, 'webidl2 parsed');
+          logger.assert(false, 'webidl2 parsed');
         } catch (e) {}
       }
     }
-    fs.writeFileSync(path, stringify({url, parses}));
+
+    if (parses.length === 0)
+      throw new Error(`Expected parse success from ${url}`);
+
+    if (parses.length > 0)
+      fs.writeFileSync(idlCachePath, stringify({url, parses}));
+
     return {url, parses};
   }
 }
 
 module.exports = {
   importHTTP: function(urls, path) {
-    urls = _.uniq(urls).sort();
+    const logger = loggerModule.getLogger({idl_urls_import: 'importHTTP'});
 
-    const phantomManager = new PhantomManager(Math.min(32, urls.length));
+    urls = getUniqueURLs(urls);
 
-    return Promise.all(urls.map(url => phantomScrape(phantomManager, url)
-        .then(parse).catch(e => {
-          console.error('Parse error:', e);
-          return {url, parses: []};
-        }))).then(data => {
-          fs.writeFileSync(path, stringify(data));
-          const count = data.reduce(
-              (acc, {url, parses}) => acc + parses.length, 0);
-          console.log('Wrote', count, 'IDL fragments from', data.length,
-                      'URLs to', path);
+    prepareToScrape();
+
+    // TODO: Unify throttling over *-scrape interface.
+    const phantomManager = (() => {
+      const instanceFactory = function() {
+        return new phantomScrape.Instance(10);
+      };
+      const scraperFactory = function() {
+        return new phantomScrape.Scraper({urlCacheDir});
+      };
+      return new scraper.ScraperManager({
+        numInstances: Math.min(8, urls.length),
+        instanceFactory,
+        scraperFactory,
+      });
+    })();
+    const seleniumManager = (() => {
+      const instanceFactory = function() {
+        return new seleniumScrape.Instance({browserName: 'chrome'});
+      };
+      const scraperFactory = function() {
+        return new seleniumScrape.Scraper({urlCacheDir});
+      };
+      return new scraper.ScraperManager({
+        numInstances: 8,
+        instanceFactory,
+        scraperFactory,
+      });
+    })();
+
+    logger.log(`Attempting to scrape and parse WebIDL from ${urls.length} URLs`);
+
+    let phantomFail = [];
+    let seleniumFail = [];
+    let phantomData = [];
+    let seleniumData = [];
+    return Promise.all(urls.map(url => phantomManager.scrape(url).then(parse).catch(
+      err => {
+        logger.log(`PhantomJS failed to scrape-and-parse ${url}`);
+        phantomFail.push(url);
+        return {url, parses: []};
+      }
+    ))).then(
+      data => {
+        logger.log(`Phantom failed on URLs: ${JSON.stringify(phantomFail)}`);
+        try {
           phantomManager.destroy();
-        });
+        } catch(err) {
+          logger.error('phantomManager.destroy() failed');
+          logger.error(err);
+        };
+        phantomData = data;
+        logger.log(`Trying Selenium on ${phantomFail.length} URLs`);
+        return Promise.all(phantomFail.map(url => seleniumManager.scrape(url).then(parse).catch(
+          err => {
+            logger.log(`Selenium failed to scrape-and-parse ${url}`);
+            seleniumFail.push(url);
+            return {url, parses: []};
+          }
+        )));
+      }
+    ).then(data => {
+      logger.log(`Selenium failed on URLs: ${JSON.stringify(seleniumFail)}`);
+      seleniumManager.destroy();
+      seleniumData = data;
+      logger.log(`Data size is ${phantomData.length} PhantomJS URL scrapes + ${seleniumData.length} Selenium URL scrapes`);
+      const allData = phantomData.concat(seleniumData).sort((a, b) => {
+        if (a.url < b.url) {
+          return -1;
+        } else if (a.url > b.url) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+
+      logger.log(`Checking ${allData.length} URL scrapes against existing data`);
+      let prevData = null;
+      try {
+        let stat = fs.statSync(path);
+        prevData = JSON.parse(fs.readFileSync(path));
+      } catch (e) {
+        logger.warn(`No previous data found in ${path}`);
+      }
+
+      // Warn about potential data loss.
+      if (prevData) {
+        for (const prevDatum of prevData) {
+          const datum = allData.filter(d => d.url === prevDatum.url)[0];
+          if ((!datum) && prevDatum.parses.length > 0) {
+            logger.warn(`No data extracted from previously known URL ${prevDatum.url}`);
+          } else if (datum &&
+                     datum.parses.length < prevDatum.parses.length) {
+            logger.warn(`Number of parses decreased from ${prevDatum.parses.length} to ${datum.parses.length} for URL ${prevDatum.url}`);
+          }
+        }
+      }
+
+      logger.log(`Writing to ${path}...`);
+      fs.writeFileSync(path, stringify(allData));
+      const count = allData.reduce(
+        (acc, {url, parses}) => acc + parses.length, 0
+      );
+      logger.log(`Wrote ${count} IDL fragments from ${allData.length} URLs to ${path}`);
+    });
   },
   importIDL: function(urls, path) {
+    const logger = loggerModule.getLogger({idl_urls_import: 'importIDL'});
     urls = _.uniq(urls).sort();
 
     return Promise.all(
       urls.map(url => loadURL(url).then(parse).catch(e => {
-        console.error('Parse error:', e);
+        logger.error('Parse error:', e);
         return {url, parses: []};
       }))).then(data => {
         fs.writeFileSync(path, stringify(data));
         const count = data.reduce(
           (acc, {url, parses}) => acc + parses.length, 0);
-        console.log('Wrote', count, 'IDL fragments from', data.length,
-                    'URLs to', path);
+        logger.log('Wrote', count, 'IDL fragments from', data.length,
+                   'URLs to', path);
       });
   },
 };
