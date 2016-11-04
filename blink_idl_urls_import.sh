@@ -26,9 +26,12 @@ for IDL_FILE in ${IDL_FILES_ARR[@]}; do
   echo "${TMP_FILE}" >> ${MASTER_FILE}
   cat ${BLINK_SRC_DIR}/${IDL_FILE} | \
     ag -o 'https?://[^/]+(/[^?#, \n]*)?(\?[^#, \n]*)?' | \
-    ag '(dev\.w3\.org|\.github\.io|khronos\.org)' >> ${TMP_FILE} &!
+    ag '(dev\.w3\.org|\.github\.io|khronos\.org)' | \
+    ag -v 'web\.archive\.org' >> ${TMP_FILE} &!
 done
 
+# TODO: In theory, this could be racey, but we don't appear to be losing
+# anything in practice.
 URLS=$(cat $(cat ${MASTER_FILE}) | sort | uniq)
 
 export WEB_APIS_DIR
