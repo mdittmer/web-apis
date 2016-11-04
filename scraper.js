@@ -20,7 +20,7 @@ const fs = require('fs');
 const loggerModule = require('./logger.js');
 
 const nullLogger = loggerModule.getLogger({url: null});
-const timeout = 20000;
+const timeout = 40000;
 
 let instanceId = 0;
 
@@ -30,12 +30,15 @@ class Instance {
     this.q = [];
     this.logger = nullLogger;
     this.instance = null;
+    this.timeoutRef = null;
   }
 
   withInstance(url, f) {
     let timeoutLogger = this.logger;
     let released = false;
+
     const maybeRelease = () => {
+      this.maybeCancelTimeout();
       if (!released) {
         released = true;
         this.release();
@@ -43,7 +46,9 @@ class Instance {
       }
       return false;
     };
-    setTimeout(() => {
+
+    this.timeoutRef = setTimeout(() => {
+      this.timeoutRef = null;
       const timedOut = maybeRelease();
       if (timedOut) {
         timeoutLogger.error(`Instance timed out after ${timeout}`);
@@ -65,12 +70,20 @@ class Instance {
     });
   }
 
+  maybeCancelTimeout() {
+    if (this.timeoutRef) {
+      clearTimeout(this.timeoutRef);
+      this.timeoutRef = null;
+    }
+  };
+
   destroy() {
     return this.destroyInstance();
   }
 
   destroyInstance() {
     this.logger.log('Destroying instance');
+    this.maybeCancelTimeout();
     return this.stopInstance();
   }
 
@@ -166,7 +179,7 @@ class ScraperManager {
   }
 
   withInstance(url, f) {
-    return this.getInstance().then(instance => instance.withInstance(url, f));
+    return this.getInstance(url).then(instance => instance.withInstance(url, f));
   }
 
   destroy() {

@@ -25,6 +25,7 @@ const _ = require('lodash');
 const scraper = require('./scraper.js');
 const phantomScrape = require('./phantom-scrape.js');
 const seleniumScrape = require('./selenium-scrape.js');
+const loggerModule = require('./logger.js');
 
 const urlCacheDir = `${__dirname}/.urlcache`;
 const idlCacheDir = `${__dirname}/.idlcache`;
@@ -50,49 +51,57 @@ function getUniqueURLs(urls) {
     const match = url.match(/^(https?):\/\/(.*)$/);
     console.assert(match);
     let key = match[2];
-    // Canonicalize trailing slash: all URLs have slash.
-    if (key.charAt(key.length - 1) !== '/') key += '/';
     const scheme = match[1];
+    // Store all schemes for which we have seen this URL.
     urlMap[key] = urlMap[key] || [];
     if (!urlMap[key].filter(s => s === scheme)[0]) {
       urlMap[key].push(scheme);
       urlMap[key].sort();
     }
   });
+  Object.getOwnPropertyNames(urlMap).map(url => {
+    // Canonicalize trailing slash: drop URL without slash; assume all schemes
+    // across both URLs are legitimate.
+    if (urlMap[url + '/']) {
+      urlMap[url + '/'] = _.uniq(urlMap[url + '/'].concat(urlMap[url])).sort();
+      delete urlMap[url];
+    }
+  });
   return Object.getOwnPropertyNames(urlMap).map(rest => {
-    // https comes after http in sorted order.
+    // Preferred "https" comes after "http" in sorted order.
     const scheme = urlMap[rest].pop();
     return `${scheme}://${rest}`;
   });
 }
 
 function loadURL(url) {
+  const logger = loggerModule.getLogger({loadURL: url});
   return new Promise((resolve, reject) => {
     let path = './.urlcache/' + url.replace(/[^a-zA-Z0-9]/g, '_');
     try {
       let stat = fs.statSync(path);
       console.assert(stat.isFile());
-      console.log('Found cached', url);
+      logger.log('Found cached', url);
       resolve({url, data: fs.readFileSync(path)});
     } catch (e) {
-      console.log('Loading', url);
+      logger.log('Loading', url);
       request(
         {uri: url},
         (err, res) => {
           if (err) {
-            console.error('Error loading', url, err);
+            logger.error('Error loading', url, err);
             reject(err);
             return;
           }
           let data;
           res.on('data', chunk => data = data ? data + chunk : chunk);
           res.on('end', () => {
-            console.log('Loaded', url);
+            logger.log('Loaded', url);
             fs.writeFileSync(path, data);
             resolve({url, data});
           });
           res.on('error', err => {
-            console.error('Error loading', url, err);
+            logger.error('Error loading', url, err);
             reject(err);
           });
         }
@@ -102,12 +111,13 @@ function loadURL(url) {
 }
 
 function parse({url, data}) {
+  const logger = loggerModule.getLogger({parse: url});
   if (!Array.isArray(data)) data = [data];
   const idlCachePath = `${idlCacheDir}/${getCacheFileName(url)}`;
   try {
     let stat = fs.statSync(idlCachePath);
     console.assert(stat.isFile());
-    console.log('Found cached IDLs for', url);
+    logger.log('Found cached IDLs for', url);
     return JSON.parse(fs.readFileSync(idlCachePath).toString());
   } catch (e) {
     let parses = [];
@@ -115,19 +125,19 @@ function parse({url, data}) {
       if (typeof idl !== 'string') idl = idl.toString();
       let res = parser.parseString(idl);
       if (res[0]) {
-        console.log('Storing parse from', url, ';', idl.length,
-                    'length string');
+        logger.win('Storing parse from', url, ';', idl.length,
+                   'length string');
         parses = parses.concat(res[1]);
         try {
           webidl2.parse(idl);
         } catch (e) {
-          console.warn('webidl2 failed to parse good fragment from', url);
+          logger.warn('webidl2 failed to parse good fragment from', url);
         }
       } else {
-        console.warn(url, ':', idl.length, 'length string was not idl');
+        logger.warn(url, ':', idl.length, 'length string was not idl');
         try {
           webidl2.parse(idl);
-          console.assert(false, 'webidl2 parsed');
+          logger.assert(false, 'webidl2 parsed');
         } catch (e) {}
       }
     }
@@ -144,6 +154,8 @@ function parse({url, data}) {
 
 module.exports = {
   importHTTP: function(urls, path) {
+    const logger = loggerModule.getLogger({idl_urls_import: 'importHTTP'});
+
     urls = getUniqueURLs(urls);
 
     prepareToScrape();
@@ -170,48 +182,107 @@ module.exports = {
         return new seleniumScrape.Scraper({urlCacheDir});
       };
       return new scraper.ScraperManager({
-        numInstances: 4,
+        numInstances: 8,
         instanceFactory,
         scraperFactory,
       });
     })();
 
-    return Promise.all(urls.map(url => phantomManager.scrape(url).then(
-      parse
-    ).catch(err => {
-      console.log(`PhantomJS parsing failed. on error:
+    logger.log(`Attempting to scrape and parse WebIDL from ${urls.length} URLs`);
 
-${err}
-
-Trying selenium...`);
-      return seleniumManager.scrape(url).then(parse);
-    }).catch(e => {
-      console.error('Parse error:', e);
-      return {url, parses: []};
-    }))).then(data => {
-      fs.writeFileSync(path, stringify(data));
-      const count = data.reduce(
-        (acc, {url, parses}) => acc + parses.length, 0
-      );
-      console.log('Wrote', count, 'IDL fragments from', data.length,
-                  'URLs to', path);
+    const teardownManagers = () => {
       phantomManager.destroy();
       seleniumManager.destroy();
-    });
+    };
+
+    let phantomFail = [];
+    let seleniumFail = [];
+    let phantomData = [];
+    let seleniumData = [];
+    return Promise.all(urls.map(url => phantomManager.scrape(url).then(parse).catch(
+        err => {
+          logger.log(`PhantomJS failed to scrape-and-parse ${url}`);
+          phantomFail.push(url);
+          return {url, parses: []};
+        }
+        ))).then(
+            data => {
+              logger.log(`Phantom failed on URLs: ${JSON.stringify(phantomFail)}`);
+              try {
+                phantomManager.destroy();
+              } catch(err) {
+                logger.error('phantomManager.destroy() failed');
+                logger.error(err);
+              };
+              phantomData = data;
+              logger.log(`Trying Selenium on ${phantomFail.length} URLs`);
+              return Promise.all(phantomFail.map(url => seleniumManager.scrape(url).then(parse).catch(
+                  err => {
+                    logger.log(`Selenium failed to scrape-and-parse ${url}`);
+                    seleniumFail.push(url);
+                    return {url, parses: []};
+                  }
+                  )));
+            }
+            ).then(data => {
+              logger.log(`Selenium failed on URLs: ${JSON.stringify(seleniumFail)}`);
+              seleniumManager.destroy();
+              seleniumData = data;
+              logger.log(`Data size is ${phantomData.length} PhantomJS URL scrapes + ${seleniumData.length} Selenium URL scrapes`);
+              const allData = phantomData.concat(seleniumData).sort((a, b) => {
+                if (a.url < b.url) {
+                  return -1;
+                } else if (a.url > b.url) {
+                  return 1;
+                } else {
+                  return 0;
+                }
+              });
+
+              logger.log(`Checking ${allData.length} URL scrapes against existing data`);
+              let prevData = null;
+              try {
+                let stat = fs.statSync(path);
+                prevData = JSON.parse(fs.readFileSync(path));
+              } catch (e) {
+                logger.warn(`No previous data found in ${path}`);
+              }
+
+              // Warn about potential data loss.
+              if (prevData) {
+                for (const prevDatum of prevData) {
+                  const datum = allData.filter(d => d.url === prevDatum.url)[0];
+                  if ((!datum) && prevDatum.parses.length > 0) {
+                    logger.warn(`No data extracted from previously known URL ${prevDatum.url}`);
+                  } else if (datum &&
+                      datum.parses.length < prevDatum.parses.length) {
+                    logger.warn(`Number of parses decreased from ${prevDatum.parses.length} to ${datum.parses.length} for URL ${prevDatum.url}`);
+                  }
+                }
+              }
+
+              logger.log(`Writing to ${path}...`);
+              fs.writeFileSync(path, stringify(allData));
+              const count = allData.reduce(
+                  (acc, {url, parses}) => acc + parses.length, 0
+                  );
+              logger.log(`Wrote ${count} IDL fragments from ${allData.length} URLs to ${path}`);
+            });
   },
   importIDL: function(urls, path) {
+    const logger = loggerModule.getLogger({idl_urls_import: 'importIDL'});
     urls = _.uniq(urls).sort();
 
     return Promise.all(
       urls.map(url => loadURL(url).then(parse).catch(e => {
-        console.error('Parse error:', e);
+        logger.error('Parse error:', e);
         return {url, parses: []};
       }))).then(data => {
         fs.writeFileSync(path, stringify(data));
         const count = data.reduce(
           (acc, {url, parses}) => acc + parses.length, 0);
-        console.log('Wrote', count, 'IDL fragments from', data.length,
-                    'URLs to', path);
+        logger.log('Wrote', count, 'IDL fragments from', data.length,
+                   'URLs to', path);
       });
   },
 };

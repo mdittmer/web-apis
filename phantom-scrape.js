@@ -61,7 +61,6 @@ class PhantomInstance extends scraper.Instance {
   restartPage() {
     this.logger.log('Restarting phantom page');
     if (this.page) {
-      this.logger.log('Closing phantom page');
       this.closePage();
     }
     this.page = this.startPage();
