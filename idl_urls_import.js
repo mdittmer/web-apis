@@ -190,84 +190,79 @@ module.exports = {
 
     logger.log(`Attempting to scrape and parse WebIDL from ${urls.length} URLs`);
 
-    const teardownManagers = () => {
-      phantomManager.destroy();
-      seleniumManager.destroy();
-    };
-
     let phantomFail = [];
     let seleniumFail = [];
     let phantomData = [];
     let seleniumData = [];
     return Promise.all(urls.map(url => phantomManager.scrape(url).then(parse).catch(
-        err => {
-          logger.log(`PhantomJS failed to scrape-and-parse ${url}`);
-          phantomFail.push(url);
-          return {url, parses: []};
+      err => {
+        logger.log(`PhantomJS failed to scrape-and-parse ${url}`);
+        phantomFail.push(url);
+        return {url, parses: []};
+      }
+    ))).then(
+      data => {
+        logger.log(`Phantom failed on URLs: ${JSON.stringify(phantomFail)}`);
+        try {
+          phantomManager.destroy();
+        } catch(err) {
+          logger.error('phantomManager.destroy() failed');
+          logger.error(err);
+        };
+        phantomData = data;
+        logger.log(`Trying Selenium on ${phantomFail.length} URLs`);
+        return Promise.all(phantomFail.map(url => seleniumManager.scrape(url).then(parse).catch(
+          err => {
+            logger.log(`Selenium failed to scrape-and-parse ${url}`);
+            seleniumFail.push(url);
+            return {url, parses: []};
+          }
+        )));
+      }
+    ).then(data => {
+      logger.log(`Selenium failed on URLs: ${JSON.stringify(seleniumFail)}`);
+      seleniumManager.destroy();
+      seleniumData = data;
+      logger.log(`Data size is ${phantomData.length} PhantomJS URL scrapes + ${seleniumData.length} Selenium URL scrapes`);
+      const allData = phantomData.concat(seleniumData).sort((a, b) => {
+        if (a.url < b.url) {
+          return -1;
+        } else if (a.url > b.url) {
+          return 1;
+        } else {
+          return 0;
         }
-        ))).then(
-            data => {
-              logger.log(`Phantom failed on URLs: ${JSON.stringify(phantomFail)}`);
-              try {
-                phantomManager.destroy();
-              } catch(err) {
-                logger.error('phantomManager.destroy() failed');
-                logger.error(err);
-              };
-              phantomData = data;
-              logger.log(`Trying Selenium on ${phantomFail.length} URLs`);
-              return Promise.all(phantomFail.map(url => seleniumManager.scrape(url).then(parse).catch(
-                  err => {
-                    logger.log(`Selenium failed to scrape-and-parse ${url}`);
-                    seleniumFail.push(url);
-                    return {url, parses: []};
-                  }
-                  )));
-            }
-            ).then(data => {
-              logger.log(`Selenium failed on URLs: ${JSON.stringify(seleniumFail)}`);
-              seleniumManager.destroy();
-              seleniumData = data;
-              logger.log(`Data size is ${phantomData.length} PhantomJS URL scrapes + ${seleniumData.length} Selenium URL scrapes`);
-              const allData = phantomData.concat(seleniumData).sort((a, b) => {
-                if (a.url < b.url) {
-                  return -1;
-                } else if (a.url > b.url) {
-                  return 1;
-                } else {
-                  return 0;
-                }
-              });
+      });
 
-              logger.log(`Checking ${allData.length} URL scrapes against existing data`);
-              let prevData = null;
-              try {
-                let stat = fs.statSync(path);
-                prevData = JSON.parse(fs.readFileSync(path));
-              } catch (e) {
-                logger.warn(`No previous data found in ${path}`);
-              }
+      logger.log(`Checking ${allData.length} URL scrapes against existing data`);
+      let prevData = null;
+      try {
+        let stat = fs.statSync(path);
+        prevData = JSON.parse(fs.readFileSync(path));
+      } catch (e) {
+        logger.warn(`No previous data found in ${path}`);
+      }
 
-              // Warn about potential data loss.
-              if (prevData) {
-                for (const prevDatum of prevData) {
-                  const datum = allData.filter(d => d.url === prevDatum.url)[0];
-                  if ((!datum) && prevDatum.parses.length > 0) {
-                    logger.warn(`No data extracted from previously known URL ${prevDatum.url}`);
-                  } else if (datum &&
-                      datum.parses.length < prevDatum.parses.length) {
-                    logger.warn(`Number of parses decreased from ${prevDatum.parses.length} to ${datum.parses.length} for URL ${prevDatum.url}`);
-                  }
-                }
-              }
+      // Warn about potential data loss.
+      if (prevData) {
+        for (const prevDatum of prevData) {
+          const datum = allData.filter(d => d.url === prevDatum.url)[0];
+          if ((!datum) && prevDatum.parses.length > 0) {
+            logger.warn(`No data extracted from previously known URL ${prevDatum.url}`);
+          } else if (datum &&
+                     datum.parses.length < prevDatum.parses.length) {
+            logger.warn(`Number of parses decreased from ${prevDatum.parses.length} to ${datum.parses.length} for URL ${prevDatum.url}`);
+          }
+        }
+      }
 
-              logger.log(`Writing to ${path}...`);
-              fs.writeFileSync(path, stringify(allData));
-              const count = allData.reduce(
-                  (acc, {url, parses}) => acc + parses.length, 0
-                  );
-              logger.log(`Wrote ${count} IDL fragments from ${allData.length} URLs to ${path}`);
-            });
+      logger.log(`Writing to ${path}...`);
+      fs.writeFileSync(path, stringify(allData));
+      const count = allData.reduce(
+        (acc, {url, parses}) => acc + parses.length, 0
+      );
+      logger.log(`Wrote ${count} IDL fragments from ${allData.length} URLs to ${path}`);
+    });
   },
   importIDL: function(urls, path) {
     const logger = loggerModule.getLogger({idl_urls_import: 'importIDL'});

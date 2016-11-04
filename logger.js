@@ -56,11 +56,11 @@ module.exports = {
           let args = [colors.info(infoStr), color(prefixConfig[key])];
           for (var i = 0; i < arguments.length; i++) {
             if (typeof arguments[i] === 'string')
-            args.push(color(arguments[i]));
+              args.push(color(arguments[i]));
             else if (typeof arguments[i].toString === 'function')
-            args.push(color(arguments[i].toString()));
+              args.push(color(arguments[i].toString()));
             else
-            args.push(color(JSON.stringify(arguments[i])));
+              args.push(color(JSON.stringify(arguments[i])));
           }
           log.apply(this, args);
         } catch (err) {
