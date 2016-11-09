@@ -19,9 +19,13 @@
 // NOTE: Only to be invoked from blink_idl_import.sh.
 
 var env = require('process').env;
+var processor = require('./process_idl.js');
+var loggerModule = require('./logger.js');
 var idlFiles = env.IDL_FILES.split('\n');
 var blinkSrcDir = env.BLINK_SRC_DIR;
 var blinkHash = env.BLINK_COMMIT_HASH;
+
+const logger = loggerModule.getLogger({platform: 'blink', target: 'idl'});
 
 function getLocalPath(relativePath) {
   return `${blinkSrcDir}/${relativePath}`;
@@ -65,17 +69,24 @@ data.forEach(function(datum) {
       });
     } else {
       errCount++;
-      console.warn('Incomplete parse from', datum.path);
+      logger.warn('Incomplete parse from', datum.path);
     }
   } catch (e) {
     errCount++;
-    console.warn('Exception thrown parsing', datum.path);
-    console.error(e);
+    logger.warn('Exception thrown parsing', datum.path);
+    logger.error(e);
   }
 });
 
-fs.writeFileSync(env.WEB_APIS_DIR + '/data/idl/blink/all.json',
-                 stringify(parses));
+var allPath = env.WEB_APIS_DIR + '/data/idl/blink/all.json';
+var processedPath = env.WEB_APIS_DIR + '/data/idl/blink/processed.json';
 
-console.log('Wrote', parses.length, 'IDL fragments from', idlFiles.length,
+fs.writeFileSync(allPath, stringify(parses));
+
+logger.win('Wrote', parses.length, 'IDL fragments from', idlFiles.length,
             'files. Encountered', errCount, 'errors');
+
+processor.processParses(parses, processedPath);
+
+logger.win('Processed', parses.length, 'IDL fragments from', idlFiles.length,
+            'files.');
