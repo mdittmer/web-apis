@@ -18,11 +18,105 @@
 
 const stdlib = require('ya-stdlib-js');
 const _ = require('lodash');
+const jsonPrune = require('json-prune');
 const serialize = require('simple-serialization');
 const jsonModule = serialize.JSON;
 const webidl2 = require('webidl2-js');
 const ast = webidl2.ast;
 const DB = webidl2.DB;
+const html = require('./html-entities.es6.js');
+
+// Get an element from the DOM.
+function e(selector) {
+  return document.querySelector(selector);
+}
+
+class DOMLogger {
+  constructor(opts) {
+    this.init(opts || {});
+  }
+
+  init(opts) {
+    Object.assign(this, {
+      maxEntries: 20,
+      nextHTML: [],
+      raf: this.raf_.bind(this),
+      prefixes: {
+        log: 'LOGG',
+        info: 'INFO',
+        warn: 'WARN',
+        error: 'ERRR',
+      },
+      colors: {
+        log: 'grey',
+        info: 'white',
+        warn: 'yellow',
+        error: 'red',
+      },
+    }, opts);
+  }
+
+  raf_() {
+    let htmlStr = '';
+    for (let i = 0; i < this.maxEntries; i++) {
+      if (this.nextHTML.length === 0) break;
+      htmlStr += this.nextHTML.shift();
+    }
+    this.e.innerHTML += htmlStr;
+    if (this.nextHTML.length > 0) requestAnimationFrame(this.raf);
+  }
+
+  replacer(value, defaultValue) {
+    if (Array.isArray(value) || value === null ||
+        typeof value !== 'object') {
+      // console.log('Array.isArray(value)', Array.isArray(value));
+      // console.log('value === null', value === null);
+      // console.log("typeof value !== 'object'", typeof value !== 'object');
+      return defaultValue;
+    }
+    const keys = Object.keys(value).sort();
+    const newKeys = keys.slice(0, 10);
+    let ret = {};
+    for (const key of newKeys) {
+      ret[key] = value[key];
+    }
+    if (newKeys.length < keys.length) console.log(`Pruned object with ${keys.length} keys`, value);
+    if (newKeys.length < keys.length) ret['-pruned-'] = true;
+    return ret;
+  }
+
+  argToString(arg) {
+    if (typeof arg === 'string') return arg;
+    if (arg === undefined) return html.toHTMLContentString('undefined');
+
+    if (typeof arg === 'object')
+      return html.toHTMLContentString(jsonPrune(this.replacer(arg, arg), {
+        replacer: this.replacer,
+        depthDecr: 8,
+        arrayMaxLength: 4,
+      }));
+
+    return html.toHTMLContentString(arg.toString());
+  }
+
+  log_(content, prefix = 'LOG', color = 'grey') {
+    if (this.nextHTML.length === 0) requestAnimationFrame(this.raf);
+    this.nextHTML.push(
+      `<span style="color:${color}">${prefix}  ${content.map(arg => this.argToString(arg)).join(' ')}</span>\n`
+    );
+  }
+
+  assert(cond, msg) {
+    if (!cond) this.error(`Assertion failure: ${msg || '<no message>'}`);
+  }
+}
+['log', 'info', 'warn', 'error'].forEach(name => {
+  DOMLogger.prototype[name] = function(...content) {
+    return this.log_(content, this.prefixes[name], this.colors[name]);
+  };
+});
+
+const logger = new DOMLogger({e: e('#output')});
 
 /*
 class ParseDB {
@@ -31,7 +125,7 @@ class ParseDB {
     if (json instanceof DB) {
       db.raw = json;
     } else {
-      console.assert(Array.isArray(json));
+      logger.assert(Array.isArray(json));
       db.raw = DB.fromJSON(json, {name: 'raw'});
     }
 
@@ -50,7 +144,7 @@ class ParseDB {
   }
 
   flatten() {
-    console.assert(this.raw instanceof DB);
+    logger.assert(this.raw instanceof DB);
     this.flat = new DB({name: 'flat'});
     this.raw.select(this.flattenEach.bind(this));
   }
@@ -64,7 +158,7 @@ class ParseDB {
   }
 
   concretize() {
-    console.assert(this.flat instanceof DB);
+    logger.assert(this.flat instanceof DB);
     this.concrete = this.initConcrete();
     this.flat.select(this.concretizeEach.bind(this));
   }
@@ -103,7 +197,7 @@ class ParseDB {
     if (!concrete) return concrete;
 
     const existing = this.concrete.find('name', concrete.name)[0];
-    console.assert(
+    logger.assert(
       (!existing) || existing === concrete,
       `Expect concretize handlers to deliver either new item or canonical item`
     );
@@ -118,7 +212,7 @@ class ParseDB {
     let existing = this.concrete.find('name', pi.name)[0];
     if (!existing) return pi;
 
-    console.assert(existing instanceof ast.PartialInterface);
+    logger.assert(existing instanceof ast.PartialInterface);
 
     return this.handleMemberMerge(existing, pi);
   }
@@ -180,7 +274,7 @@ class ParseDB {
     const waiters = this.needsImplementation[parse.name];
 
     for (const waiter of waiters) {
-      console.assert(
+      logger.assert(
         waiter.implemented === parse.name,
         `Expect implements waiters names to match providers`
       );
@@ -208,11 +302,6 @@ let data = {
   left: null,
   right: null,
 };
-
-// Get an element from the DOM.
-function e(selector) {
-  return document.querySelector(selector);
-}
 
 // String hash code.
 function hashCode(str) {
@@ -282,7 +371,7 @@ function getData(direction) {
           return `${parse.constructor.name}:${key}`;
         });
 
-        console.log('grouped', grouped);
+        logger.log('grouped', grouped);
 
         const mergePartialInterfaces = parses => {
           let newParse = jsonModule.deepClone(parses[0]);
@@ -326,13 +415,14 @@ function getData(direction) {
             if (grouped[key.substr('Partial'.length)])
               return;
 
-            console.warn(
+            logger.warn(
               `Orphaned partial: ${key}; falling back on sum of partials`
             );
             // Partials do not have non-partial equivalent. Create one and
             // process it now.
             parses = [new ast.Interface({
               name: key.split(':')[1],
+              members: [],
               url: 'none',
             })];
           }
@@ -343,7 +433,7 @@ function getData(direction) {
           const newParse = collectPartials(parses[0], key);
 
           if (parses.length > 1) {
-            console.warn(
+            logger.warn(
               `Multiple non-partial ${newParse.constructor.name} entities named ${newParse.name}; using entity from ${newParse.url}`
             );
           }
@@ -355,7 +445,7 @@ function getData(direction) {
         const gatherSuper = (newParse, parses, superName) => {
           if (parses.length > 0) {
             if (parses.length > 1) {
-              console.warn(
+              logger.warn(
                 `Multiple parses named ${superName}`, parses,
                 `Using parse from ${parses[0].url}`
               );
@@ -369,7 +459,7 @@ function getData(direction) {
               newParse.members.push(newMember);
             }
           } else {
-            console.warn(
+            logger.warn(
               `Missing super-interface ${superName} for interface ${newParse.name}`
             );
           }
@@ -418,7 +508,7 @@ function getData(direction) {
           concrete.push(gatherInheritance(parse));
         }
 
-        console.log(concrete);
+        logger.log(concrete);
 
 
 
@@ -533,5 +623,5 @@ stdlib.xhr('/list/idl', {responseType: 'json'}).then(function(arr) {
 });
 
 function analyze() {
-  console.log('analyze()');
+  logger.log('analyze()');
 }
