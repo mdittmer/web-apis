@@ -1,11 +1,6 @@
 [
   {
     "parses": [
-    ],
-    "url": "http://cwilso.github.io/web-midi-api/"
-  },
-  {
-    "parses": [
       {
         "isPartial": true,
         "members": [
@@ -2259,11 +2254,6 @@
       }
     ],
     "url": "http://dev.w3.org/csswg/css-fonts/"
-  },
-  {
-    "parses": [
-    ],
-    "url": "http://dev.w3.org/csswg/css-page/"
   },
   {
     "parses": [
@@ -23835,11 +23825,6 @@
   },
   {
     "parses": [
-    ],
-    "url": "http://mozvr.github.io/webvr-spec/webvr.html"
-  },
-  {
-    "parses": [
       {
         "inheritsFrom": "EventTarget",
         "members": [
@@ -25921,11 +25906,6 @@
   },
   {
     "parses": [
-    ],
-    "url": "http://w3c.github.io/selection-api/"
-  },
-  {
-    "parses": [
       {
         "members": [
           {
@@ -26377,11 +26357,6 @@
       }
     ],
     "url": "http://w3c.github.io/webcomponents/spec/custom/"
-  },
-  {
-    "parses": [
-    ],
-    "url": "http://webaudio.github.io/web-midi-api/"
   },
   {
     "parses": [
@@ -27150,16 +27125,6 @@
       }
     ],
     "url": "https://mikewest.github.io/cors-rfc1918/"
-  },
-  {
-    "parses": [
-    ],
-    "url": "https://mikewest.github.io/cors-rfc1918/"
-  },
-  {
-    "parses": [
-    ],
-    "url": "https://navidz.github.io/auxclick/"
   },
   {
     "parses": [
@@ -28141,14 +28106,6 @@
         "members": [
           {
             "isReadOnly": true,
-            "name": "frameType",
-            "type": {
-              "name": "FrameType"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
             "name": "id",
             "type": {
               "name": "DOMString"
@@ -28187,6 +28144,14 @@
           },
           {
             "isReadOnly": true,
+            "name": "reserved",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
             "name": "url",
             "type": {
               "name": "USVString"
@@ -28207,6 +28172,25 @@
         ],
         "inheritsFrom": "Client",
         "members": [
+          {
+            "attrs": [
+              {
+                "name": "SameObject",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "isReadOnly": true,
+            "name": "ancestorOrigins",
+            "type": {
+              "name": "FrozenArray",
+              "params": [
+                {
+                  "name": "USVString"
+                }
+              ]
+            },
+            "type_": "Attribute"
+          },
           {
             "attrs": [
               {
@@ -28268,16 +28252,6 @@
         ],
         "name": "WindowClient",
         "type_": "Interface"
-      },
-      {
-        "name": "FrameType",
-        "type_": "Enum",
-        "value": [
-          "auxiliary",
-          "top-level",
-          "nested",
-          "none"
-        ]
       },
       {
         "attrs": [
@@ -28395,6 +28369,13 @@
       },
       {
         "members": [
+          {
+            "defaultValue": "false",
+            "name": "includeReserved",
+            "type": {
+              "name": "boolean"
+            }
+          },
           {
             "defaultValue": "false",
             "name": "includeUncontrolled",
@@ -30233,14 +30214,6 @@
         "members": [
           {
             "isReadOnly": true,
-            "name": "frameType",
-            "type": {
-              "name": "FrameType"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
             "name": "id",
             "type": {
               "name": "DOMString"
@@ -30279,6 +30252,14 @@
           },
           {
             "isReadOnly": true,
+            "name": "reserved",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
             "name": "url",
             "type": {
               "name": "USVString"
@@ -30299,6 +30280,25 @@
         ],
         "inheritsFrom": "Client",
         "members": [
+          {
+            "attrs": [
+              {
+                "name": "SameObject",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "isReadOnly": true,
+            "name": "ancestorOrigins",
+            "type": {
+              "name": "FrozenArray",
+              "params": [
+                {
+                  "name": "USVString"
+                }
+              ]
+            },
+            "type_": "Attribute"
+          },
           {
             "attrs": [
               {
@@ -30360,16 +30360,6 @@
         ],
         "name": "WindowClient",
         "type_": "Interface"
-      },
-      {
-        "name": "FrameType",
-        "type_": "Enum",
-        "value": [
-          "auxiliary",
-          "top-level",
-          "nested",
-          "none"
-        ]
       },
       {
         "attrs": [
@@ -30487,6 +30477,13 @@
       },
       {
         "members": [
+          {
+            "defaultValue": "false",
+            "name": "includeReserved",
+            "type": {
+              "name": "boolean"
+            }
+          },
           {
             "defaultValue": "false",
             "name": "includeUncontrolled",
@@ -31597,16 +31594,6 @@
   },
   {
     "parses": [
-    ],
-    "url": "https://slightlyoff.github.io/ServiceWorker/spec/service_worker/"
-  },
-  {
-    "parses": [
-    ],
-    "url": "https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html"
-  },
-  {
-    "parses": [
       {
         "attrs": [
           {
@@ -32293,14 +32280,6 @@
         "members": [
           {
             "isReadOnly": true,
-            "name": "frameType",
-            "type": {
-              "name": "FrameType"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
             "name": "id",
             "type": {
               "name": "DOMString"
@@ -32339,6 +32318,14 @@
           },
           {
             "isReadOnly": true,
+            "name": "reserved",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
             "name": "url",
             "type": {
               "name": "USVString"
@@ -32359,6 +32346,25 @@
         ],
         "inheritsFrom": "Client",
         "members": [
+          {
+            "attrs": [
+              {
+                "name": "SameObject",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "isReadOnly": true,
+            "name": "ancestorOrigins",
+            "type": {
+              "name": "FrozenArray",
+              "params": [
+                {
+                  "name": "USVString"
+                }
+              ]
+            },
+            "type_": "Attribute"
+          },
           {
             "attrs": [
               {
@@ -32420,16 +32426,6 @@
         ],
         "name": "WindowClient",
         "type_": "Interface"
-      },
-      {
-        "name": "FrameType",
-        "type_": "Enum",
-        "value": [
-          "auxiliary",
-          "top-level",
-          "nested",
-          "none"
-        ]
       },
       {
         "attrs": [
@@ -32547,6 +32543,13 @@
       },
       {
         "members": [
+          {
+            "defaultValue": "false",
+            "name": "includeReserved",
+            "type": {
+              "name": "boolean"
+            }
+          },
           {
             "defaultValue": "false",
             "name": "includeUncontrolled",
@@ -34385,14 +34388,6 @@
         "members": [
           {
             "isReadOnly": true,
-            "name": "frameType",
-            "type": {
-              "name": "FrameType"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
             "name": "id",
             "type": {
               "name": "DOMString"
@@ -34431,6 +34426,14 @@
           },
           {
             "isReadOnly": true,
+            "name": "reserved",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
             "name": "url",
             "type": {
               "name": "USVString"
@@ -34451,6 +34454,25 @@
         ],
         "inheritsFrom": "Client",
         "members": [
+          {
+            "attrs": [
+              {
+                "name": "SameObject",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "isReadOnly": true,
+            "name": "ancestorOrigins",
+            "type": {
+              "name": "FrozenArray",
+              "params": [
+                {
+                  "name": "USVString"
+                }
+              ]
+            },
+            "type_": "Attribute"
+          },
           {
             "attrs": [
               {
@@ -34512,16 +34534,6 @@
         ],
         "name": "WindowClient",
         "type_": "Interface"
-      },
-      {
-        "name": "FrameType",
-        "type_": "Enum",
-        "value": [
-          "auxiliary",
-          "top-level",
-          "nested",
-          "none"
-        ]
       },
       {
         "attrs": [
@@ -34639,6 +34651,13 @@
       },
       {
         "members": [
+          {
+            "defaultValue": "false",
+            "name": "includeReserved",
+            "type": {
+              "name": "boolean"
+            }
+          },
           {
             "defaultValue": "false",
             "name": "includeUncontrolled",
@@ -40693,14 +40712,6 @@
         "members": [
           {
             "isReadOnly": true,
-            "name": "frameType",
-            "type": {
-              "name": "FrameType"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
             "name": "id",
             "type": {
               "name": "DOMString"
@@ -40739,6 +40750,14 @@
           },
           {
             "isReadOnly": true,
+            "name": "reserved",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
             "name": "url",
             "type": {
               "name": "USVString"
@@ -40759,6 +40778,25 @@
         ],
         "inheritsFrom": "Client",
         "members": [
+          {
+            "attrs": [
+              {
+                "name": "SameObject",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "isReadOnly": true,
+            "name": "ancestorOrigins",
+            "type": {
+              "name": "FrozenArray",
+              "params": [
+                {
+                  "name": "USVString"
+                }
+              ]
+            },
+            "type_": "Attribute"
+          },
           {
             "attrs": [
               {
@@ -40820,16 +40858,6 @@
         ],
         "name": "WindowClient",
         "type_": "Interface"
-      },
-      {
-        "name": "FrameType",
-        "type_": "Enum",
-        "value": [
-          "auxiliary",
-          "top-level",
-          "nested",
-          "none"
-        ]
       },
       {
         "attrs": [
@@ -40947,6 +40975,13 @@
       },
       {
         "members": [
+          {
+            "defaultValue": "false",
+            "name": "includeReserved",
+            "type": {
+              "name": "boolean"
+            }
+          },
           {
             "defaultValue": "false",
             "name": "includeUncontrolled",
@@ -42785,14 +42820,6 @@
         "members": [
           {
             "isReadOnly": true,
-            "name": "frameType",
-            "type": {
-              "name": "FrameType"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
             "name": "id",
             "type": {
               "name": "DOMString"
@@ -42831,6 +42858,14 @@
           },
           {
             "isReadOnly": true,
+            "name": "reserved",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
             "name": "url",
             "type": {
               "name": "USVString"
@@ -42851,6 +42886,25 @@
         ],
         "inheritsFrom": "Client",
         "members": [
+          {
+            "attrs": [
+              {
+                "name": "SameObject",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "isReadOnly": true,
+            "name": "ancestorOrigins",
+            "type": {
+              "name": "FrozenArray",
+              "params": [
+                {
+                  "name": "USVString"
+                }
+              ]
+            },
+            "type_": "Attribute"
+          },
           {
             "attrs": [
               {
@@ -42912,16 +42966,6 @@
         ],
         "name": "WindowClient",
         "type_": "Interface"
-      },
-      {
-        "name": "FrameType",
-        "type_": "Enum",
-        "value": [
-          "auxiliary",
-          "top-level",
-          "nested",
-          "none"
-        ]
       },
       {
         "attrs": [
@@ -43039,6 +43083,13 @@
       },
       {
         "members": [
+          {
+            "defaultValue": "false",
+            "name": "includeReserved",
+            "type": {
+              "name": "boolean"
+            }
+          },
           {
             "defaultValue": "false",
             "name": "includeUncontrolled",
@@ -44167,17 +44218,6 @@
         ],
         "inheritsFrom": "Sensor",
         "members": [
-          {
-            "isReadOnly": true,
-            "name": "reading",
-            "type": {
-              "name": "AmbientLightSensorReading",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          }
         ],
         "name": "AmbientLightSensor",
         "type_": "Interface"
@@ -44214,6 +44254,7 @@
       {
         "members": [
           {
+            "isRequired": true,
             "name": "illuminance",
             "type": {
               "name": "unrestricted double"
@@ -44241,17 +44282,6 @@
         ],
         "inheritsFrom": "Sensor",
         "members": [
-          {
-            "isReadOnly": true,
-            "name": "reading",
-            "type": {
-              "name": "AmbientLightSensorReading",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          }
         ],
         "name": "AmbientLightSensor",
         "type_": "Interface"
@@ -44288,6 +44318,7 @@
       {
         "members": [
           {
+            "isRequired": true,
             "name": "illuminance",
             "type": {
               "name": "unrestricted double"
@@ -45709,11 +45740,6 @@
   },
   {
     "parses": [
-    ],
-    "url": "https://w3c.github.io/clipboard-apis/"
-  },
-  {
-    "parses": [
       {
         "attrs": [
           {
@@ -46028,8 +46054,7 @@
         "type_": "Enum",
         "value": [
           "temporary",
-          "persistent-license",
-          "persistent-usage-record"
+          "persistent-license"
         ]
       },
       {
@@ -46545,11 +46570,6 @@
       }
     ],
     "url": "https://w3c.github.io/frame-timing/"
-  },
-  {
-    "parses": [
-    ],
-    "url": "https://w3c.github.io/gamepad/"
   },
   {
     "parses": [
@@ -47741,25 +47761,25 @@
           {
             "name": "brightness",
             "type": {
-              "name": "unsigned long"
+              "name": "double"
             }
           },
           {
             "name": "colorTemperature",
             "type": {
-              "name": "unsigned long"
+              "name": "double"
             }
           },
           {
             "name": "contrast",
             "type": {
-              "name": "unsigned long"
+              "name": "double"
             }
           },
           {
             "name": "exposureCompensation",
             "type": {
-              "name": "unsigned long"
+              "name": "double"
             }
           },
           {
@@ -47783,19 +47803,19 @@
           {
             "name": "imageHeight",
             "type": {
-              "name": "unsigned long"
+              "name": "double"
             }
           },
           {
             "name": "imageWidth",
             "type": {
-              "name": "unsigned long"
+              "name": "double"
             }
           },
           {
             "name": "iso",
             "type": {
-              "name": "unsigned long"
+              "name": "double"
             }
           },
           {
@@ -47818,13 +47838,13 @@
           {
             "name": "saturation",
             "type": {
-              "name": "unsigned long"
+              "name": "double"
             }
           },
           {
             "name": "sharpness",
             "type": {
-              "name": "unsigned long"
+              "name": "double"
             }
           },
           {
@@ -47836,7 +47856,7 @@
           {
             "name": "zoom",
             "type": {
-              "name": "unsigned long"
+              "name": "double"
             }
           }
         ],
@@ -47849,7 +47869,7 @@
             "isReadOnly": true,
             "name": "current",
             "type": {
-              "name": "long"
+              "name": "double"
             },
             "type_": "Attribute"
           },
@@ -47857,7 +47877,7 @@
             "isReadOnly": true,
             "name": "max",
             "type": {
-              "name": "long"
+              "name": "double"
             },
             "type_": "Attribute"
           },
@@ -47865,7 +47885,7 @@
             "isReadOnly": true,
             "name": "min",
             "type": {
-              "name": "long"
+              "name": "double"
             },
             "type_": "Attribute"
           },
@@ -47873,7 +47893,7 @@
             "isReadOnly": true,
             "name": "step",
             "type": {
-              "name": "long"
+              "name": "double"
             },
             "type_": "Attribute"
           }
@@ -47905,14 +47925,14 @@
       {
         "members": [
           {
-            "defaultValue": "0.0",
+            "defaultValue": "0",
             "name": "x",
             "type": {
               "name": "float"
             }
           },
           {
-            "defaultValue": "0.0",
+            "defaultValue": "0",
             "name": "y",
             "type": {
               "name": "float"
@@ -52246,6 +52266,302 @@
           "back_forward",
           "prerender"
         ]
+      },
+      {
+        "attrs": [
+          {
+            "name": "Exposed",
+            "type_": "ExtendedAttribute",
+            "value": "Window"
+          }
+        ],
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "connectEnd",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "connectStart",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "domComplete",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "domContentLoadedEventEnd",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "domContentLoadedEventStart",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "domInteractive",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "domLoading",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "domainLookupEnd",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "domainLookupStart",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "fetchStart",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "loadEventEnd",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "loadEventStart",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "navigationStart",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "redirectEnd",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "redirectStart",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "requestStart",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "responseEnd",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "responseStart",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "secureConnectionStart",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "unloadEventEnd",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "unloadEventStart",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "mapPattern": [
+              "attribute"
+            ],
+            "type_": "Serializer"
+          }
+        ],
+        "name": "PerformanceTiming",
+        "type_": "Interface"
+      },
+      {
+        "attrs": [
+          {
+            "name": "Exposed",
+            "type_": "ExtendedAttribute",
+            "value": "Window"
+          }
+        ],
+        "members": [
+          {
+            "isConst": true,
+            "name": "TYPE_BACK_FORWARD",
+            "type": {
+              "name": "unsigned short"
+            },
+            "value": "2"
+          },
+          {
+            "isConst": true,
+            "name": "TYPE_NAVIGATE",
+            "type": {
+              "name": "unsigned short"
+            },
+            "value": "0"
+          },
+          {
+            "isConst": true,
+            "name": "TYPE_RELOAD",
+            "type": {
+              "name": "unsigned short"
+            },
+            "value": "1"
+          },
+          {
+            "isConst": true,
+            "name": "TYPE_RESERVED",
+            "type": {
+              "name": "unsigned short"
+            },
+            "value": "255"
+          },
+          {
+            "isReadOnly": true,
+            "name": "redirectCount",
+            "type": {
+              "name": "unsigned short"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "type",
+            "type": {
+              "name": "unsigned short"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "mapPattern": [
+              "attribute"
+            ],
+            "type_": "Serializer"
+          }
+        ],
+        "name": "PerformanceNavigation",
+        "type_": "Interface"
+      },
+      {
+        "attrs": [
+          {
+            "name": "Exposed",
+            "type_": "ExtendedAttribute",
+            "value": "Window"
+          }
+        ],
+        "isPartial": true,
+        "members": [
+          {
+            "attrs": [
+              {
+                "name": "SameObject",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "isReadOnly": true,
+            "name": "navigation",
+            "type": {
+              "name": "PerformanceNavigation"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "attrs": [
+              {
+                "name": "SameObject",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "isReadOnly": true,
+            "name": "timing",
+            "type": {
+              "name": "PerformanceTiming"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "Performance",
+        "type_": "PartialInterface"
       }
     ],
     "url": "https://w3c.github.io/navigation-timing/"
@@ -53467,11 +53783,6 @@
   },
   {
     "parses": [
-    ],
-    "url": "https://w3c.github.io/pointerlock/"
-  },
-  {
-    "parses": [
       {
         "isPartial": true,
         "members": [
@@ -53985,11 +54296,6 @@
   },
   {
     "parses": [
-    ],
-    "url": "https://w3c.github.io/push-api/"
-  },
-  {
-    "parses": [
       {
         "isPartial": true,
         "members": [
@@ -54681,16 +54987,6 @@
       }
     ],
     "url": "https://w3c.github.io/push-api/."
-  },
-  {
-    "parses": [
-    ],
-    "url": "https://w3c.github.io/push-api/."
-  },
-  {
-    "parses": [
-    ],
-    "url": "https://w3c.github.io/quota-api/"
   },
   {
     "parses": [
@@ -60918,152 +61214,119 @@
       {
         "members": [
           {
-            "isRequired": true,
-            "name": "id",
+            "name": "services",
             "type": {
-              "name": "USVString"
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "BluetoothServiceUUID"
+                }
+              ]
             }
           }
         ],
-        "name": "CredentialData",
+        "name": "BluetoothScanFilter",
         "type_": "Dictionary"
       },
       {
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "id",
-            "type": {
-              "name": "USVString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "type",
-            "type": {
-              "name": "DOMString"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "Credential",
-        "type_": "Interface"
-      },
-      {
-        "implemented": "Transferable",
-        "implementer": "Credential",
-        "type_": "Implements"
-      },
-      {
-        "inheritsFrom": "CredentialData",
-        "members": [
-          {
-            "name": "iconURL",
-            "type": {
-              "name": "USVString"
-            }
-          },
-          {
-            "name": "name",
-            "type": {
-              "name": "USVString"
-            }
-          }
-        ],
-        "name": "SiteBoundCredentialData",
-        "type_": "Dictionary"
-      },
-      {
-        "inheritsFrom": "Credential",
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "iconURL",
-            "type": {
-              "name": "USVString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "name",
-            "type": {
-              "name": "USVString"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "SiteBoundCredential",
-        "type_": "Interface"
-      },
-      {
-        "inheritsFrom": "SiteBoundCredentialData",
         "members": [
           {
             "isRequired": true,
-            "name": "password",
+            "name": "filters",
             "type": {
-              "name": "USVString"
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "BluetoothScanFilter"
+                }
+              ]
+            }
+          },
+          {
+            "defaultValue": [
+              "[",
+              "]"
+            ],
+            "name": "optionalServices",
+            "type": {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "BluetoothServiceUUID"
+                }
+              ]
             }
           }
         ],
-        "name": "PasswordCredentialData",
+        "name": "RequestDeviceOptions",
         "type_": "Dictionary"
-      },
-      {
-        "name": "CredentialBodyType",
-        "type": {
-          "type_": "UnionType",
-          "types": [
-            {
-              "name": "FormData"
-            },
-            {
-              "name": "URLSearchParams"
-            }
-          ]
-        },
-        "type_": "Typedef"
       },
       {
         "attrs": [
           {
-            "args": [
-              {
-                "name": "data",
-                "type": {
-                  "name": "PasswordCredentialData"
-                }
-              }
-            ],
-            "name": "Constructor",
+            "name": "NoInterfaceObject",
             "type_": "ExtendedAttribute"
-          },
-          {
-            "args": [
-              {
-                "name": "form",
-                "type": {
-                  "name": "HTMLFormElement"
-                }
-              }
-            ],
-            "name": "Constructor",
-            "type_": "ExtendedAttribute"
-          },
-          {
-            "name": "Exposed",
-            "type_": "ExtendedAttribute",
-            "value": "Window"
           }
         ],
-        "inheritsFrom": "SiteBoundCredential",
         "members": [
           {
-            "name": "additionalData",
+            "args": [
+              {
+                "name": "options",
+                "type": {
+                  "name": "RequestDeviceOptions"
+                }
+              }
+            ],
+            "name": "requestDevice",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "BluetoothDevice"
+                }
+              ]
+            }
+          }
+        ],
+        "name": "Bluetooth",
+        "type_": "Interface"
+      },
+      {
+        "name": "VendorIDSource",
+        "type_": "Enum",
+        "value": [
+          "bluetooth",
+          "usb"
+        ]
+      },
+      {
+        "inheritsFrom": "ServiceEventHandlers",
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "adData",
             "type": {
-              "name": "CredentialBodyType",
+              "name": "BluetoothAdvertisingData"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "connectGATT",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "BluetoothGATTRemoteServer"
+                }
+              ]
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "deviceClass",
+            "type": {
+              "name": "unsigned long",
               "params": [
                 "nullable"
               ]
@@ -61071,68 +61334,27 @@
             "type_": "Attribute"
           },
           {
-            "name": "idName",
+            "isReadOnly": true,
+            "name": "gattServer",
             "type": {
-              "name": "USVString"
+              "name": "BluetoothGATTRemoteServer",
+              "params": [
+                "nullable"
+              ]
             },
             "type_": "Attribute"
           },
-          {
-            "name": "passwordName",
-            "type": {
-              "name": "USVString"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "PasswordCredential",
-        "type_": "Interface"
-      },
-      {
-        "inheritsFrom": "SiteBoundCredentialData",
-        "members": [
-          {
-            "name": "protocol",
-            "type": {
-              "name": "DOMString"
-            }
-          },
-          {
-            "isRequired": true,
-            "name": "provider",
-            "type": {
-              "name": "USVString"
-            }
-          }
-        ],
-        "name": "FederatedCredentialData",
-        "type_": "Dictionary"
-      },
-      {
-        "attrs": [
-          {
-            "args": [
-              {
-                "name": "data",
-                "type": {
-                  "name": "FederatedCredentialData"
-                }
-              }
-            ],
-            "name": "Constructor",
-            "type_": "ExtendedAttribute"
-          },
-          {
-            "name": "Exposed",
-            "type_": "ExtendedAttribute",
-            "value": "Window"
-          }
-        ],
-        "inheritsFrom": "SiteBoundCredential",
-        "members": [
           {
             "isReadOnly": true,
-            "name": "protocol",
+            "name": "instanceID",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "name",
             "type": {
               "name": "DOMString",
               "params": [
@@ -61143,58 +61365,408 @@
           },
           {
             "isReadOnly": true,
-            "name": "provider",
+            "name": "paired",
             "type": {
-              "name": "USVString"
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "productID",
+            "type": {
+              "name": "unsigned long",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "productVersion",
+            "type": {
+              "name": "unsigned long",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "uuids",
+            "type": {
+              "name": "UUID",
+              "params": [
+                "array"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "vendorID",
+            "type": {
+              "name": "unsigned long",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "vendorIDSource",
+            "type": {
+              "name": "VendorIDSource",
+              "params": [
+                "nullable"
+              ]
             },
             "type_": "Attribute"
           }
         ],
-        "name": "FederatedCredential",
+        "name": "BluetoothDevice",
         "type_": "Interface"
       },
       {
-        "isPartial": true,
+        "attrs": [
+          {
+            "name": "NoInterfaceObject",
+            "type_": "ExtendedAttribute"
+          }
+        ],
         "members": [
           {
             "isReadOnly": true,
-            "name": "credentials",
+            "name": "appearance",
             "type": {
-              "name": "CredentialsContainer"
+              "name": "unsigned short",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "manufacturerData",
+            "type": {
+              "name": "Map"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "rssi",
+            "type": {
+              "name": "byte",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "serviceData",
+            "type": {
+              "name": "Map"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "txPower",
+            "type": {
+              "name": "byte",
+              "params": [
+                "nullable"
+              ]
             },
             "type_": "Attribute"
           }
         ],
-        "name": "Navigator",
-        "type_": "PartialInterface"
+        "name": "BluetoothAdvertisingData",
+        "type_": "Interface"
       },
       {
+        "inheritsFrom": "ServiceEventHandlers",
         "members": [
+          {
+            "isReadOnly": true,
+            "name": "connected",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "device",
+            "type": {
+              "name": "BluetoothDevice"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "disconnect",
+            "returnType": {
+              "name": "void"
+            }
+          },
           {
             "args": [
               {
-                "name": "options",
-                "optional": true,
+                "name": "service",
                 "type": {
-                  "name": "CredentialRequestOptions"
+                  "name": "BluetoothServiceUUID"
                 }
               }
             ],
-            "name": "get",
+            "name": "getPrimaryService",
             "returnType": {
               "name": "Promise",
               "params": [
                 {
-                  "name": "Credential",
+                  "name": "BluetoothGATTService"
+                }
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "service",
+                "optional": true,
+                "type": {
+                  "name": "BluetoothServiceUUID"
+                }
+              }
+            ],
+            "name": "getPrimaryServices",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "sequence",
                   "params": [
-                    "nullable"
+                    {
+                      "name": "BluetoothGATTService"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "name": "BluetoothGATTRemoteServer",
+        "type_": "Interface"
+      },
+      {
+        "inheritsFrom": "ServiceEventHandlers",
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "device",
+            "type": {
+              "name": "BluetoothDevice"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+                "name": "characteristic",
+                "type": {
+                  "name": "BluetoothCharacteristicUUID"
+                }
+              }
+            ],
+            "name": "getCharacteristic",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "BluetoothGATTCharacteristic"
+                }
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "characteristic",
+                "optional": true,
+                "type": {
+                  "name": "BluetoothCharacteristicUUID"
+                }
+              }
+            ],
+            "name": "getCharacteristics",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "BluetoothGATTCharacteristic"
+                    }
                   ]
                 }
               ]
             }
           },
           {
-            "name": "requireUserMediation",
+            "args": [
+              {
+                "name": "service",
+                "type": {
+                  "name": "BluetoothServiceUUID"
+                }
+              }
+            ],
+            "name": "getIncludedService",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "BluetoothGATTService"
+                }
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "service",
+                "optional": true,
+                "type": {
+                  "name": "BluetoothServiceUUID"
+                }
+              }
+            ],
+            "name": "getIncludedServices",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "BluetoothGATTService"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "isPrimary",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "uuid",
+            "type": {
+              "name": "UUID"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "BluetoothGATTService",
+        "type_": "Interface"
+      },
+      {
+        "inheritsFrom": "CharacteristicEventHandlers",
+        "members": [
+          {
+            "args": [
+              {
+                "name": "descriptor",
+                "type": {
+                  "name": "BluetoothDescriptorUUID"
+                }
+              }
+            ],
+            "name": "getDescriptor",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "BluetoothGATTDescriptor"
+                }
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "descriptor",
+                "optional": true,
+                "type": {
+                  "name": "BluetoothDescriptorUUID"
+                }
+              }
+            ],
+            "name": "getDescriptors",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "BluetoothGATTDescriptor"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "instanceID",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "properties",
+            "type": {
+              "name": "CharacteristicProperties"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "readValue",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "ArrayBuffer"
+                }
+              ]
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "service",
+            "type": {
+              "name": "BluetoothGATTService"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "startNotifications",
             "returnType": {
               "name": "Promise",
               "params": [
@@ -61205,545 +61777,419 @@
             }
           },
           {
-            "args": [
-              {
-                "name": "credential",
-                "type": {
-                  "name": "Credential"
-                }
-              }
-            ],
-            "name": "store",
+            "name": "stopNotifications",
             "returnType": {
               "name": "Promise",
               "params": [
                 {
-                  "name": "Credential"
+                  "name": "void"
+                }
+              ]
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "uuid",
+            "type": {
+              "name": "UUID"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "value",
+            "type": {
+              "name": "ArrayBuffer",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+                "name": "value",
+                "type": {
+                  "name": "BufferSource"
+                }
+              }
+            ],
+            "name": "writeValue",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "void"
                 }
               ]
             }
           }
         ],
-        "name": "CredentialsContainer",
+        "name": "BluetoothGATTCharacteristic",
         "type_": "Interface"
       },
       {
         "members": [
           {
-            "name": "federated",
-            "type": {
-              "name": "FederatedCredentialRequestOptions"
-            }
-          },
-          {
-            "defaultValue": "false",
-            "name": "password",
+            "isReadOnly": true,
+            "name": "authenticatedSignedWrites",
             "type": {
               "name": "boolean"
-            }
+            },
+            "type_": "Attribute"
           },
           {
-            "defaultValue": "false",
-            "name": "unmediated",
+            "isReadOnly": true,
+            "name": "broadcast",
             "type": {
               "name": "boolean"
-            }
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "indicate",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "notify",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "read",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "reliableWrite",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "writableAuxiliaries",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "write",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "writeWithoutResponse",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
           }
         ],
-        "name": "CredentialRequestOptions",
-        "type_": "Dictionary"
+        "name": "CharacteristicProperties",
+        "type_": "Interface"
       },
       {
         "members": [
           {
-            "name": "protocols",
+            "isReadOnly": true,
+            "name": "characteristic",
             "type": {
-              "name": "sequence",
+              "name": "BluetoothGATTCharacteristic"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "readValue",
+            "returnType": {
+              "name": "Promise",
               "params": [
                 {
-                  "name": "DOMString"
+                  "name": "ArrayBuffer"
                 }
               ]
             }
           },
           {
-            "name": "providers",
+            "isReadOnly": true,
+            "name": "uuid",
             "type": {
-              "name": "sequence",
+              "name": "UUID"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "value",
+            "type": {
+              "name": "ArrayBuffer",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+                "name": "value",
+                "type": {
+                  "name": "BufferSource"
+                }
+              }
+            ],
+            "name": "writeValue",
+            "returnType": {
+              "name": "Promise",
               "params": [
                 {
-                  "name": "USVString"
+                  "name": "void"
                 }
               ]
             }
           }
         ],
-        "name": "FederatedCredentialRequestOptions",
-        "type_": "Dictionary"
+        "name": "BluetoothGATTDescriptor",
+        "type_": "Interface"
       },
       {
-        "name": "RequestCredentialsMode",
-        "type_": "Enum",
-        "value": [
-          "omit",
-          "same-origin",
-          "include",
-          "password"
-        ]
+        "attrs": [
+          {
+            "name": "NoInterfaceObject",
+            "type_": "ExtendedAttribute"
+          }
+        ],
+        "inheritsFrom": "EventTarget",
+        "members": [
+          {
+            "name": "oncharacteristicvaluechanged",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "CharacteristicEventHandlers",
+        "type_": "Interface"
       },
       {
-        "name": "CredentialInfo",
+        "attrs": [
+          {
+            "name": "NoInterfaceObject",
+            "type_": "ExtendedAttribute"
+          }
+        ],
+        "inheritsFrom": "CharacteristicEventHandlers",
+        "members": [
+          {
+            "name": "onserviceadded",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onservicechanged",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onserviceremoved",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "ServiceEventHandlers",
+        "type_": "Interface"
+      },
+      {
+        "name": "UUID",
+        "type": {
+          "name": "DOMString"
+        },
+        "type_": "Typedef"
+      },
+      {
+        "members": [
+          {
+            "args": [
+              {
+                "name": "alias",
+                "type": {
+                  "name": "unsigned long"
+                }
+              }
+            ],
+            "isStatic": true,
+            "name": "canonicalUUID",
+            "returnType": {
+              "name": "UUID"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "name",
+                "type": {
+                  "type_": "UnionType",
+                  "types": [
+                    {
+                      "name": "DOMString"
+                    },
+                    {
+                      "name": "unsigned long"
+                    }
+                  ]
+                }
+              }
+            ],
+            "isStatic": true,
+            "name": "getCharacteristic",
+            "returnType": {
+              "name": "UUID"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "name",
+                "type": {
+                  "type_": "UnionType",
+                  "types": [
+                    {
+                      "name": "DOMString"
+                    },
+                    {
+                      "name": "unsigned long"
+                    }
+                  ]
+                }
+              }
+            ],
+            "isStatic": true,
+            "name": "getDescriptor",
+            "returnType": {
+              "name": "UUID"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "name",
+                "type": {
+                  "type_": "UnionType",
+                  "types": [
+                    {
+                      "name": "DOMString"
+                    },
+                    {
+                      "name": "unsigned long"
+                    }
+                  ]
+                }
+              }
+            ],
+            "isStatic": true,
+            "name": "getService",
+            "returnType": {
+              "name": "UUID"
+            }
+          }
+        ],
+        "name": "BluetoothUUID",
+        "type_": "Interface"
+      },
+      {
+        "name": "BluetoothServiceUUID",
         "type": {
           "type_": "UnionType",
           "types": [
             {
-              "name": "PasswordCredential"
+              "name": "DOMString"
             },
             {
-              "name": "RequestCredentials"
+              "name": "unsigned long"
             }
           ]
         },
         "type_": "Typedef"
       },
       {
-        "isPartial": true,
-        "members": [
-          {
-            "name": "credentials",
-            "type": {
-              "name": "CredentialInfo"
-            }
-          }
-        ],
-        "name": "RequestInit",
-        "type_": "Dictionary"
-      },
-      {
-        "members": [
-        ],
-        "name": "ExampleCredentialRequestOptions",
-        "type_": "Dictionary"
-      },
-      {
-        "isPartial": true,
-        "members": [
-          {
-            "name": "example",
-            "type": {
-              "name": "ExampleCredentialRequestOptions",
-              "params": [
-                "nullable"
-              ]
-            }
-          }
-        ],
-        "name": "CredentialRequestOptions",
-        "type_": "Dictionary"
-      },
-      {
-        "members": [
-          {
-            "isRequired": true,
-            "name": "id",
-            "type": {
-              "name": "USVString"
-            }
-          }
-        ],
-        "name": "CredentialData",
-        "type_": "Dictionary"
-      },
-      {
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "id",
-            "type": {
-              "name": "USVString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "type",
-            "type": {
+        "name": "BluetoothCharacteristicUUID",
+        "type": {
+          "type_": "UnionType",
+          "types": [
+            {
               "name": "DOMString"
             },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "Credential",
-        "type_": "Interface"
+            {
+              "name": "unsigned long"
+            }
+          ]
+        },
+        "type_": "Typedef"
       },
       {
-        "implemented": "Transferable",
-        "implementer": "Credential",
+        "name": "BluetoothDescriptorUUID",
+        "type": {
+          "type_": "UnionType",
+          "types": [
+            {
+              "name": "DOMString"
+            },
+            {
+              "name": "unsigned long"
+            }
+          ]
+        },
+        "type_": "Typedef"
+      },
+      {
+        "implemented": "NavigatorBluetooth",
+        "implementer": "Navigator",
         "type_": "Implements"
       },
       {
-        "inheritsFrom": "CredentialData",
-        "members": [
-          {
-            "name": "iconURL",
-            "type": {
-              "name": "USVString"
-            }
-          },
-          {
-            "name": "name",
-            "type": {
-              "name": "USVString"
-            }
-          }
-        ],
-        "name": "SiteBoundCredentialData",
-        "type_": "Dictionary"
-      },
-      {
-        "inheritsFrom": "Credential",
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "iconURL",
-            "type": {
-              "name": "USVString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "name",
-            "type": {
-              "name": "USVString"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "SiteBoundCredential",
-        "type_": "Interface"
-      },
-      {
-        "inheritsFrom": "SiteBoundCredentialData",
-        "members": [
-          {
-            "isRequired": true,
-            "name": "password",
-            "type": {
-              "name": "USVString"
-            }
-          }
-        ],
-        "name": "PasswordCredentialData",
-        "type_": "Dictionary"
-      },
-      {
-        "name": "CredentialBodyType",
-        "type": {
-          "type_": "UnionType",
-          "types": [
-            {
-              "name": "FormData"
-            },
-            {
-              "name": "URLSearchParams"
-            }
-          ]
-        },
-        "type_": "Typedef"
-      },
-      {
         "attrs": [
           {
-            "args": [
-              {
-                "name": "data",
-                "type": {
-                  "name": "PasswordCredentialData"
-                }
-              }
-            ],
-            "name": "Constructor",
+            "name": "NoInterfaceObject",
             "type_": "ExtendedAttribute"
-          },
-          {
-            "args": [
-              {
-                "name": "form",
-                "type": {
-                  "name": "HTMLFormElement"
-                }
-              }
-            ],
-            "name": "Constructor",
-            "type_": "ExtendedAttribute"
-          },
-          {
-            "name": "Exposed",
-            "type_": "ExtendedAttribute",
-            "value": "Window"
           }
         ],
-        "inheritsFrom": "SiteBoundCredential",
-        "members": [
-          {
-            "name": "additionalData",
-            "type": {
-              "name": "CredentialBodyType",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "idName",
-            "type": {
-              "name": "USVString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "passwordName",
-            "type": {
-              "name": "USVString"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "PasswordCredential",
-        "type_": "Interface"
-      },
-      {
-        "inheritsFrom": "SiteBoundCredentialData",
-        "members": [
-          {
-            "name": "protocol",
-            "type": {
-              "name": "DOMString"
-            }
-          },
-          {
-            "isRequired": true,
-            "name": "provider",
-            "type": {
-              "name": "USVString"
-            }
-          }
-        ],
-        "name": "FederatedCredentialData",
-        "type_": "Dictionary"
-      },
-      {
-        "attrs": [
-          {
-            "args": [
-              {
-                "name": "data",
-                "type": {
-                  "name": "FederatedCredentialData"
-                }
-              }
-            ],
-            "name": "Constructor",
-            "type_": "ExtendedAttribute"
-          },
-          {
-            "name": "Exposed",
-            "type_": "ExtendedAttribute",
-            "value": "Window"
-          }
-        ],
-        "inheritsFrom": "SiteBoundCredential",
         "members": [
           {
             "isReadOnly": true,
-            "name": "protocol",
+            "name": "bluetooth",
             "type": {
-              "name": "DOMString",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "provider",
-            "type": {
-              "name": "USVString"
+              "name": "Bluetooth"
             },
             "type_": "Attribute"
           }
         ],
-        "name": "FederatedCredential",
+        "name": "NavigatorBluetooth",
         "type_": "Interface"
-      },
-      {
-        "isPartial": true,
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "credentials",
-            "type": {
-              "name": "CredentialsContainer"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "Navigator",
-        "type_": "PartialInterface"
-      },
-      {
-        "members": [
-          {
-            "args": [
-              {
-                "name": "options",
-                "optional": true,
-                "type": {
-                  "name": "CredentialRequestOptions"
-                }
-              }
-            ],
-            "name": "get",
-            "returnType": {
-              "name": "Promise",
-              "params": [
-                {
-                  "name": "Credential",
-                  "params": [
-                    "nullable"
-                  ]
-                }
-              ]
-            }
-          },
-          {
-            "name": "requireUserMediation",
-            "returnType": {
-              "name": "Promise",
-              "params": [
-                {
-                  "name": "void"
-                }
-              ]
-            }
-          },
-          {
-            "args": [
-              {
-                "name": "credential",
-                "type": {
-                  "name": "Credential"
-                }
-              }
-            ],
-            "name": "store",
-            "returnType": {
-              "name": "Promise",
-              "params": [
-                {
-                  "name": "Credential"
-                }
-              ]
-            }
-          }
-        ],
-        "name": "CredentialsContainer",
-        "type_": "Interface"
-      },
-      {
-        "members": [
-          {
-            "name": "federated",
-            "type": {
-              "name": "FederatedCredentialRequestOptions"
-            }
-          },
-          {
-            "defaultValue": "false",
-            "name": "password",
-            "type": {
-              "name": "boolean"
-            }
-          },
-          {
-            "defaultValue": "false",
-            "name": "unmediated",
-            "type": {
-              "name": "boolean"
-            }
-          }
-        ],
-        "name": "CredentialRequestOptions",
-        "type_": "Dictionary"
-      },
-      {
-        "members": [
-          {
-            "name": "protocols",
-            "type": {
-              "name": "sequence",
-              "params": [
-                {
-                  "name": "DOMString"
-                }
-              ]
-            }
-          },
-          {
-            "name": "providers",
-            "type": {
-              "name": "sequence",
-              "params": [
-                {
-                  "name": "USVString"
-                }
-              ]
-            }
-          }
-        ],
-        "name": "FederatedCredentialRequestOptions",
-        "type_": "Dictionary"
-      },
-      {
-        "name": "RequestCredentialsMode",
-        "type_": "Enum",
-        "value": [
-          "omit",
-          "same-origin",
-          "include",
-          "password"
-        ]
-      },
-      {
-        "name": "CredentialInfo",
-        "type": {
-          "type_": "UnionType",
-          "types": [
-            {
-              "name": "PasswordCredential"
-            },
-            {
-              "name": "RequestCredentials"
-            }
-          ]
-        },
-        "type_": "Typedef"
-      },
-      {
-        "isPartial": true,
-        "members": [
-          {
-            "name": "credentials",
-            "type": {
-              "name": "CredentialInfo"
-            }
-          }
-        ],
-        "name": "RequestInit",
-        "type_": "Dictionary"
       }
     ],
     "url": "https://w3c.github.io/webappsec-credential-management/"
@@ -61751,398 +62197,802 @@
   {
     "parses": [
       {
-        "name": "SecurityPolicyViolationEventDisposition",
-        "type_": "Enum",
-        "value": [
-          "enforce",
-          "report"
-        ]
+        "isPartial": true,
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "webkitRelativePath",
+            "type": {
+              "name": "USVString"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "File",
+        "type_": "PartialInterface"
       },
       {
-        "attrs": [
+        "isPartial": true,
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "webkitEntries",
+            "type": {
+              "name": "FrozenArray",
+              "params": [
+                {
+                  "name": "FileSystemEntry"
+                }
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "webkitdirectory",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "HTMLInputElement",
+        "type_": "PartialInterface"
+      },
+      {
+        "isPartial": true,
+        "members": [
+          {
+            "name": "webkitGetAsEntry",
+            "returnType": {
+              "name": "FileSystemEntry",
+              "params": [
+                "nullable"
+              ]
+            }
+          }
+        ],
+        "name": "DataTransferItem",
+        "type_": "PartialInterface"
+      },
+      {
+        "members": [
           {
             "args": [
               {
-                "name": "type",
+                "name": "err",
                 "type": {
-                  "name": "DOMString"
-                }
-              },
-              {
-                "name": "eventInitDict",
-                "optional": true,
-                "type": {
-                  "name": "SecurityPolicyViolationEventInit"
+                  "name": "DOMException"
                 }
               }
             ],
-            "name": "Constructor",
-            "type_": "ExtendedAttribute"
+            "name": "handleEvent",
+            "returnType": {
+              "name": "void"
+            }
           }
         ],
-        "inheritsFrom": "Event",
+        "name": "ErrorCallback",
+        "type_": "Callback"
+      },
+      {
         "members": [
           {
             "isReadOnly": true,
-            "name": "blockedURI",
+            "name": "filesystem",
             "type": {
-              "name": "DOMString"
+              "name": "FileSystem"
             },
             "type_": "Attribute"
           },
           {
             "isReadOnly": true,
-            "name": "columnNumber",
+            "name": "fullPath",
             "type": {
-              "name": "long"
+              "name": "USVString"
             },
             "type_": "Attribute"
           },
-          {
-            "isReadOnly": true,
-            "name": "disposition",
-            "type": {
-              "name": "SecurityPolicyViolationEventDisposition"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "documentURI",
-            "type": {
-              "name": "DOMString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "effectiveDirective",
-            "type": {
-              "name": "DOMString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "lineNumber",
-            "type": {
-              "name": "long"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "originalPolicy",
-            "type": {
-              "name": "DOMString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "referrer",
-            "type": {
-              "name": "DOMString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "sourceFile",
-            "type": {
-              "name": "DOMString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "statusCode",
-            "type": {
-              "name": "unsigned short"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "violatedDirective",
-            "type": {
-              "name": "DOMString"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "SecurityPolicyViolationEvent",
-        "type_": "Interface"
-      },
-      {
-        "inheritsFrom": "EventInit",
-        "members": [
-          {
-            "name": "blockedURI",
-            "type": {
-              "name": "DOMString"
-            }
-          },
-          {
-            "name": "columnNumber",
-            "type": {
-              "name": "long"
-            }
-          },
-          {
-            "name": "disposition",
-            "type": {
-              "name": "SecurityPolicyViolationEventDisposition"
-            }
-          },
-          {
-            "name": "documentURI",
-            "type": {
-              "name": "DOMString"
-            }
-          },
-          {
-            "name": "effectiveDirective",
-            "type": {
-              "name": "DOMString"
-            }
-          },
-          {
-            "name": "lineNumber",
-            "type": {
-              "name": "long"
-            }
-          },
-          {
-            "name": "originalPolicy",
-            "type": {
-              "name": "DOMString"
-            }
-          },
-          {
-            "name": "referrer",
-            "type": {
-              "name": "DOMString"
-            }
-          },
-          {
-            "name": "sourceFile",
-            "type": {
-              "name": "DOMString"
-            }
-          },
-          {
-            "name": "statusCode",
-            "type": {
-              "name": "unsigned short"
-            }
-          },
-          {
-            "name": "violatedDirective",
-            "type": {
-              "name": "DOMString"
-            }
-          }
-        ],
-        "name": "SecurityPolicyViolationEventInit",
-        "type_": "Dictionary"
-      },
-      {
-        "name": "SecurityPolicyViolationEventDisposition",
-        "type_": "Enum",
-        "value": [
-          "enforce",
-          "report"
-        ]
-      },
-      {
-        "attrs": [
           {
             "args": [
               {
-                "name": "type",
+                "name": "successCallback",
+                "optional": true,
                 "type": {
-                  "name": "DOMString"
+                  "name": "FileSystemEntryCallback"
                 }
               },
               {
-                "name": "eventInitDict",
+                "name": "errorCallback",
                 "optional": true,
                 "type": {
-                  "name": "SecurityPolicyViolationEventInit"
+                  "name": "ErrorCallback"
                 }
               }
             ],
-            "name": "Constructor",
-            "type_": "ExtendedAttribute"
-          }
-        ],
-        "inheritsFrom": "Event",
-        "members": [
+            "name": "getParent",
+            "returnType": {
+              "name": "void"
+            }
+          },
           {
             "isReadOnly": true,
-            "name": "blockedURI",
+            "name": "isDirectory",
             "type": {
-              "name": "DOMString"
+              "name": "boolean"
             },
             "type_": "Attribute"
           },
           {
             "isReadOnly": true,
-            "name": "columnNumber",
+            "name": "isFile",
             "type": {
-              "name": "long"
+              "name": "boolean"
             },
             "type_": "Attribute"
           },
           {
             "isReadOnly": true,
-            "name": "disposition",
+            "name": "name",
             "type": {
-              "name": "SecurityPolicyViolationEventDisposition"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "documentURI",
-            "type": {
-              "name": "DOMString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "effectiveDirective",
-            "type": {
-              "name": "DOMString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "lineNumber",
-            "type": {
-              "name": "long"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "originalPolicy",
-            "type": {
-              "name": "DOMString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "referrer",
-            "type": {
-              "name": "DOMString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "sourceFile",
-            "type": {
-              "name": "DOMString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "statusCode",
-            "type": {
-              "name": "unsigned short"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "violatedDirective",
-            "type": {
-              "name": "DOMString"
+              "name": "USVString"
             },
             "type_": "Attribute"
           }
         ],
-        "name": "SecurityPolicyViolationEvent",
+        "name": "FileSystemEntry",
         "type_": "Interface"
       },
       {
-        "inheritsFrom": "EventInit",
+        "inheritsFrom": "FileSystemEntry",
         "members": [
           {
-            "name": "blockedURI",
-            "type": {
-              "name": "DOMString"
+            "name": "createReader",
+            "returnType": {
+              "name": "FileSystemDirectoryReader"
             }
           },
           {
-            "name": "columnNumber",
-            "type": {
-              "name": "long"
+            "args": [
+              {
+                "name": "path",
+                "optional": true,
+                "type": {
+                  "name": "USVString",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "options",
+                "optional": true,
+                "type": {
+                  "name": "FileSystemFlags"
+                }
+              },
+              {
+                "name": "successCallback",
+                "optional": true,
+                "type": {
+                  "name": "FileSystemEntryCallback"
+                }
+              },
+              {
+                "name": "errorCallback",
+                "optional": true,
+                "type": {
+                  "name": "ErrorCallback"
+                }
+              }
+            ],
+            "name": "getDirectory",
+            "returnType": {
+              "name": "void"
             }
           },
           {
-            "name": "disposition",
-            "type": {
-              "name": "SecurityPolicyViolationEventDisposition"
-            }
-          },
-          {
-            "name": "documentURI",
-            "type": {
-              "name": "DOMString"
-            }
-          },
-          {
-            "name": "effectiveDirective",
-            "type": {
-              "name": "DOMString"
-            }
-          },
-          {
-            "name": "lineNumber",
-            "type": {
-              "name": "long"
-            }
-          },
-          {
-            "name": "originalPolicy",
-            "type": {
-              "name": "DOMString"
-            }
-          },
-          {
-            "name": "referrer",
-            "type": {
-              "name": "DOMString"
-            }
-          },
-          {
-            "name": "sourceFile",
-            "type": {
-              "name": "DOMString"
-            }
-          },
-          {
-            "name": "statusCode",
-            "type": {
-              "name": "unsigned short"
-            }
-          },
-          {
-            "name": "violatedDirective",
-            "type": {
-              "name": "DOMString"
+            "args": [
+              {
+                "name": "path",
+                "optional": true,
+                "type": {
+                  "name": "USVString",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "options",
+                "optional": true,
+                "type": {
+                  "name": "FileSystemFlags"
+                }
+              },
+              {
+                "name": "successCallback",
+                "optional": true,
+                "type": {
+                  "name": "FileSystemEntryCallback"
+                }
+              },
+              {
+                "name": "errorCallback",
+                "optional": true,
+                "type": {
+                  "name": "ErrorCallback"
+                }
+              }
+            ],
+            "name": "getFile",
+            "returnType": {
+              "name": "void"
             }
           }
         ],
-        "name": "SecurityPolicyViolationEventInit",
+        "name": "FileSystemDirectoryEntry",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+          {
+            "defaultValue": "false",
+            "name": "create",
+            "type": {
+              "name": "boolean"
+            }
+          },
+          {
+            "defaultValue": "false",
+            "name": "exclusive",
+            "type": {
+              "name": "boolean"
+            }
+          }
+        ],
+        "name": "FileSystemFlags",
         "type_": "Dictionary"
+      },
+      {
+        "members": [
+          {
+            "args": [
+              {
+                "name": "entry",
+                "type": {
+                  "name": "FileSystemEntry"
+                }
+              }
+            ],
+            "name": "handleEvent",
+            "returnType": {
+              "name": "void"
+            }
+          }
+        ],
+        "name": "FileSystemEntryCallback",
+        "type_": "Callback"
+      },
+      {
+        "members": [
+          {
+            "args": [
+              {
+                "name": "successCallback",
+                "type": {
+                  "name": "FileSystemEntriesCallback"
+                }
+              },
+              {
+                "name": "errorCallback",
+                "optional": true,
+                "type": {
+                  "name": "ErrorCallback"
+                }
+              }
+            ],
+            "name": "readEntries",
+            "returnType": {
+              "name": "void"
+            }
+          }
+        ],
+        "name": "FileSystemDirectoryReader",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+          {
+            "args": [
+              {
+                "name": "entries",
+                "type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "FileSystemEntry"
+                    }
+                  ]
+                }
+              }
+            ],
+            "name": "handleEvent",
+            "returnType": {
+              "name": "void"
+            }
+          }
+        ],
+        "name": "FileSystemEntriesCallback",
+        "type_": "Callback"
+      },
+      {
+        "inheritsFrom": "FileSystemEntry",
+        "members": [
+          {
+            "args": [
+              {
+                "name": "successCallback",
+                "type": {
+                  "name": "FileCallback"
+                }
+              },
+              {
+                "name": "errorCallback",
+                "optional": true,
+                "type": {
+                  "name": "ErrorCallback"
+                }
+              }
+            ],
+            "name": "file",
+            "returnType": {
+              "name": "void"
+            }
+          }
+        ],
+        "name": "FileSystemFileEntry",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+          {
+            "args": [
+              {
+                "name": "file",
+                "type": {
+                  "name": "File"
+                }
+              }
+            ],
+            "name": "handleEvent",
+            "returnType": {
+              "name": "void"
+            }
+          }
+        ],
+        "name": "FileCallback",
+        "type_": "Callback"
+      },
+      {
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "name",
+            "type": {
+              "name": "USVString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "root",
+            "type": {
+              "name": "FileSystemDirectoryEntry"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "FileSystem",
+        "type_": "Interface"
+      },
+      {
+        "isPartial": true,
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "webkitRelativePath",
+            "type": {
+              "name": "USVString"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "File",
+        "type_": "PartialInterface"
+      },
+      {
+        "isPartial": true,
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "webkitEntries",
+            "type": {
+              "name": "FrozenArray",
+              "params": [
+                {
+                  "name": "FileSystemEntry"
+                }
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "webkitdirectory",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "HTMLInputElement",
+        "type_": "PartialInterface"
+      },
+      {
+        "isPartial": true,
+        "members": [
+          {
+            "name": "webkitGetAsEntry",
+            "returnType": {
+              "name": "FileSystemEntry",
+              "params": [
+                "nullable"
+              ]
+            }
+          }
+        ],
+        "name": "DataTransferItem",
+        "type_": "PartialInterface"
+      },
+      {
+        "members": [
+          {
+            "args": [
+              {
+                "name": "err",
+                "type": {
+                  "name": "DOMException"
+                }
+              }
+            ],
+            "name": "handleEvent",
+            "returnType": {
+              "name": "void"
+            }
+          }
+        ],
+        "name": "ErrorCallback",
+        "type_": "Callback"
+      },
+      {
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "filesystem",
+            "type": {
+              "name": "FileSystem"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "fullPath",
+            "type": {
+              "name": "USVString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+                "name": "successCallback",
+                "optional": true,
+                "type": {
+                  "name": "FileSystemEntryCallback"
+                }
+              },
+              {
+                "name": "errorCallback",
+                "optional": true,
+                "type": {
+                  "name": "ErrorCallback"
+                }
+              }
+            ],
+            "name": "getParent",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "isDirectory",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "isFile",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "name",
+            "type": {
+              "name": "USVString"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "FileSystemEntry",
+        "type_": "Interface"
+      },
+      {
+        "inheritsFrom": "FileSystemEntry",
+        "members": [
+          {
+            "name": "createReader",
+            "returnType": {
+              "name": "FileSystemDirectoryReader"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "path",
+                "optional": true,
+                "type": {
+                  "name": "USVString",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "options",
+                "optional": true,
+                "type": {
+                  "name": "FileSystemFlags"
+                }
+              },
+              {
+                "name": "successCallback",
+                "optional": true,
+                "type": {
+                  "name": "FileSystemEntryCallback"
+                }
+              },
+              {
+                "name": "errorCallback",
+                "optional": true,
+                "type": {
+                  "name": "ErrorCallback"
+                }
+              }
+            ],
+            "name": "getDirectory",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "path",
+                "optional": true,
+                "type": {
+                  "name": "USVString",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "options",
+                "optional": true,
+                "type": {
+                  "name": "FileSystemFlags"
+                }
+              },
+              {
+                "name": "successCallback",
+                "optional": true,
+                "type": {
+                  "name": "FileSystemEntryCallback"
+                }
+              },
+              {
+                "name": "errorCallback",
+                "optional": true,
+                "type": {
+                  "name": "ErrorCallback"
+                }
+              }
+            ],
+            "name": "getFile",
+            "returnType": {
+              "name": "void"
+            }
+          }
+        ],
+        "name": "FileSystemDirectoryEntry",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+          {
+            "defaultValue": "false",
+            "name": "create",
+            "type": {
+              "name": "boolean"
+            }
+          },
+          {
+            "defaultValue": "false",
+            "name": "exclusive",
+            "type": {
+              "name": "boolean"
+            }
+          }
+        ],
+        "name": "FileSystemFlags",
+        "type_": "Dictionary"
+      },
+      {
+        "members": [
+          {
+            "args": [
+              {
+                "name": "entry",
+                "type": {
+                  "name": "FileSystemEntry"
+                }
+              }
+            ],
+            "name": "handleEvent",
+            "returnType": {
+              "name": "void"
+            }
+          }
+        ],
+        "name": "FileSystemEntryCallback",
+        "type_": "Callback"
+      },
+      {
+        "members": [
+          {
+            "args": [
+              {
+                "name": "successCallback",
+                "type": {
+                  "name": "FileSystemEntriesCallback"
+                }
+              },
+              {
+                "name": "errorCallback",
+                "optional": true,
+                "type": {
+                  "name": "ErrorCallback"
+                }
+              }
+            ],
+            "name": "readEntries",
+            "returnType": {
+              "name": "void"
+            }
+          }
+        ],
+        "name": "FileSystemDirectoryReader",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+          {
+            "args": [
+              {
+                "name": "entries",
+                "type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "FileSystemEntry"
+                    }
+                  ]
+                }
+              }
+            ],
+            "name": "handleEvent",
+            "returnType": {
+              "name": "void"
+            }
+          }
+        ],
+        "name": "FileSystemEntriesCallback",
+        "type_": "Callback"
+      },
+      {
+        "inheritsFrom": "FileSystemEntry",
+        "members": [
+          {
+            "args": [
+              {
+                "name": "successCallback",
+                "type": {
+                  "name": "FileCallback"
+                }
+              },
+              {
+                "name": "errorCallback",
+                "optional": true,
+                "type": {
+                  "name": "ErrorCallback"
+                }
+              }
+            ],
+            "name": "file",
+            "returnType": {
+              "name": "void"
+            }
+          }
+        ],
+        "name": "FileSystemFileEntry",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+          {
+            "args": [
+              {
+                "name": "file",
+                "type": {
+                  "name": "File"
+                }
+              }
+            ],
+            "name": "handleEvent",
+            "returnType": {
+              "name": "void"
+            }
+          }
+        ],
+        "name": "FileCallback",
+        "type_": "Callback"
+      },
+      {
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "name",
+            "type": {
+              "name": "USVString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "root",
+            "type": {
+              "name": "FileSystemDirectoryEntry"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "FileSystem",
+        "type_": "Interface"
       }
     ],
     "url": "https://w3c.github.io/webappsec-csp/"
@@ -62150,44 +63000,578 @@
   {
     "parses": [
       {
-        "isPartial": true,
-        "members": [
+        "args": [
           {
-            "attrs": [
-              {
-                "name": "CEReactions",
-                "type_": "ExtendedAttribute"
-              }
-            ],
-            "name": "csp",
+            "name": "entries",
             "type": {
-              "name": "DOMString"
-            },
-            "type_": "Attribute"
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "IntersectionObserverEntry"
+                }
+              ]
+            }
+          },
+          {
+            "name": "observer",
+            "type": {
+              "name": "IntersectionObserver"
+            }
           }
         ],
-        "name": "HTMLIFrameElement",
-        "type_": "PartialInterface"
+        "name": "IntersectionObserverCallback",
+        "returnType": {
+          "name": "void"
+        },
+        "type_": "Callback"
       },
       {
-        "isPartial": true,
-        "members": [
+        "attrs": [
           {
-            "attrs": [
+            "args": [
               {
-                "name": "CEReactions",
-                "type_": "ExtendedAttribute"
+                "name": "callback",
+                "type": {
+                  "name": "IntersectionObserverCallback"
+                }
+              },
+              {
+                "name": "options",
+                "optional": true,
+                "type": {
+                  "name": "IntersectionObserverInit"
+                }
               }
             ],
-            "name": "csp",
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          },
+          {
+            "name": "Exposed",
+            "type_": "ExtendedAttribute",
+            "value": "Window"
+          }
+        ],
+        "members": [
+          {
+            "name": "disconnect",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "Element"
+                }
+              }
+            ],
+            "name": "observe",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "root",
+            "type": {
+              "name": "Element",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "rootMargin",
             "type": {
               "name": "DOMString"
             },
             "type_": "Attribute"
+          },
+          {
+            "name": "takeRecords",
+            "returnType": {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "IntersectionObserverEntry"
+                }
+              ]
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "thresholds",
+            "type": {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "double"
+                }
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "Element"
+                }
+              }
+            ],
+            "name": "unobserve",
+            "returnType": {
+              "name": "void"
+            }
           }
         ],
-        "name": "HTMLIFrameElement",
-        "type_": "PartialInterface"
+        "name": "IntersectionObserver",
+        "type_": "Interface"
+      },
+      {
+        "attrs": [
+          {
+            "args": [
+              {
+                "name": "intersectionObserverEntryInit",
+                "type": {
+                  "name": "IntersectionObserverEntryInit"
+                }
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+        ],
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "boundingClientRect",
+            "type": {
+              "name": "DOMRectReadOnly"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "intersectionRatio",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "intersectionRect",
+            "type": {
+              "name": "DOMRectReadOnly"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "rootBounds",
+            "type": {
+              "name": "DOMRectReadOnly"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "target",
+            "type": {
+              "name": "Element"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "time",
+            "type": {
+              "name": "DOMHighResTimeStamp"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "IntersectionObserverEntry",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+          {
+            "isRequired": true,
+            "name": "boundingClientRect",
+            "type": {
+              "name": "DOMRectInit"
+            }
+          },
+          {
+            "isRequired": true,
+            "name": "intersectionRect",
+            "type": {
+              "name": "DOMRectInit"
+            }
+          },
+          {
+            "isRequired": true,
+            "name": "rootBounds",
+            "type": {
+              "name": "DOMRectInit"
+            }
+          },
+          {
+            "isRequired": true,
+            "name": "target",
+            "type": {
+              "name": "Element"
+            }
+          },
+          {
+            "isRequired": true,
+            "name": "time",
+            "type": {
+              "name": "DOMHighResTimeStamp"
+            }
+          }
+        ],
+        "name": "IntersectionObserverEntryInit",
+        "type_": "Dictionary"
+      },
+      {
+        "members": [
+          {
+            "defaultValue": "null",
+            "name": "root",
+            "type": {
+              "name": "Element",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "defaultValue": "0px",
+            "name": "rootMargin",
+            "type": {
+              "name": "DOMString"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "threshold",
+            "type": {
+              "type_": "UnionType",
+              "types": [
+                {
+                  "name": "double"
+                },
+                {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "double"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "name": "IntersectionObserverInit",
+        "type_": "Dictionary"
+      },
+      {
+        "args": [
+          {
+            "name": "entries",
+            "type": {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "IntersectionObserverEntry"
+                }
+              ]
+            }
+          },
+          {
+            "name": "observer",
+            "type": {
+              "name": "IntersectionObserver"
+            }
+          }
+        ],
+        "name": "IntersectionObserverCallback",
+        "returnType": {
+          "name": "void"
+        },
+        "type_": "Callback"
+      },
+      {
+        "attrs": [
+          {
+            "args": [
+              {
+                "name": "callback",
+                "type": {
+                  "name": "IntersectionObserverCallback"
+                }
+              },
+              {
+                "name": "options",
+                "optional": true,
+                "type": {
+                  "name": "IntersectionObserverInit"
+                }
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          },
+          {
+            "name": "Exposed",
+            "type_": "ExtendedAttribute",
+            "value": "Window"
+          }
+        ],
+        "members": [
+          {
+            "name": "disconnect",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "Element"
+                }
+              }
+            ],
+            "name": "observe",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "root",
+            "type": {
+              "name": "Element",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "rootMargin",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "takeRecords",
+            "returnType": {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "IntersectionObserverEntry"
+                }
+              ]
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "thresholds",
+            "type": {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "double"
+                }
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "Element"
+                }
+              }
+            ],
+            "name": "unobserve",
+            "returnType": {
+              "name": "void"
+            }
+          }
+        ],
+        "name": "IntersectionObserver",
+        "type_": "Interface"
+      },
+      {
+        "attrs": [
+          {
+            "args": [
+              {
+                "name": "intersectionObserverEntryInit",
+                "type": {
+                  "name": "IntersectionObserverEntryInit"
+                }
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+        ],
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "boundingClientRect",
+            "type": {
+              "name": "DOMRectReadOnly"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "intersectionRatio",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "intersectionRect",
+            "type": {
+              "name": "DOMRectReadOnly"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "rootBounds",
+            "type": {
+              "name": "DOMRectReadOnly"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "target",
+            "type": {
+              "name": "Element"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "time",
+            "type": {
+              "name": "DOMHighResTimeStamp"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "IntersectionObserverEntry",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+          {
+            "isRequired": true,
+            "name": "boundingClientRect",
+            "type": {
+              "name": "DOMRectInit"
+            }
+          },
+          {
+            "isRequired": true,
+            "name": "intersectionRect",
+            "type": {
+              "name": "DOMRectInit"
+            }
+          },
+          {
+            "isRequired": true,
+            "name": "rootBounds",
+            "type": {
+              "name": "DOMRectInit"
+            }
+          },
+          {
+            "isRequired": true,
+            "name": "target",
+            "type": {
+              "name": "Element"
+            }
+          },
+          {
+            "isRequired": true,
+            "name": "time",
+            "type": {
+              "name": "DOMHighResTimeStamp"
+            }
+          }
+        ],
+        "name": "IntersectionObserverEntryInit",
+        "type_": "Dictionary"
+      },
+      {
+        "members": [
+          {
+            "defaultValue": "null",
+            "name": "root",
+            "type": {
+              "name": "Element",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "defaultValue": "0px",
+            "name": "rootMargin",
+            "type": {
+              "name": "DOMString"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "threshold",
+            "type": {
+              "type_": "UnionType",
+              "types": [
+                {
+                  "name": "double"
+                },
+                {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "double"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "name": "IntersectionObserverInit",
+        "type_": "Dictionary"
       }
     ],
     "url": "https://w3c.github.io/webappsec-csp/embedded/"
@@ -62195,192 +63579,554 @@
   {
     "parses": [
       {
-        "members": [
+        "attrs": [
           {
-            "name": "calculateNotSoSecretResult",
-            "returnType": {
-              "name": "Promise",
-              "params": [
-                {
-                  "name": "double"
-                }
-              ]
-            }
-          },
-          {
-            "attrs": [
-              {
-                "name": "SecureContext",
-                "type_": "ExtendedAttribute"
-              }
+            "identifiers": [
+              "Window"
             ],
-            "name": "calculateSecretResult",
-            "returnType": {
-              "name": "Promise",
-              "params": [
-                {
-                  "name": "double"
-                }
-              ]
-            }
-          },
-          {
-            "attrs": [
-              {
-                "name": "SecureContext",
-                "type_": "ExtendedAttribute"
-              }
-            ],
-            "name": "getSecretBoolean",
-            "returnType": {
-              "name": "boolean"
-            }
+            "name": "Exposed",
+            "type_": "ExtendedAttribute"
           }
         ],
-        "name": "ExampleFeature",
+        "isPartial": true,
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "mediaSession",
+            "type": {
+              "name": "MediaSession"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "Navigator",
+        "type_": "PartialInterface"
+      },
+      {
+        "attrs": [
+          {
+            "name": "Exposed",
+            "type_": "ExtendedAttribute",
+            "value": "Window"
+          }
+        ],
+        "inheritsFrom": "EventHandler",
+        "members": [
+          {
+            "name": "metadata",
+            "type": {
+              "name": "MediaMetadata",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onnexttrack",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onpause",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onplay",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onplaypause",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onprevioustrack",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onseekbackward",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onseekforward",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "MediaSession",
         "type_": "Interface"
       },
       {
         "attrs": [
           {
-            "name": "SecureContext",
+            "args": [
+              {
+                "name": "init",
+                "optional": true,
+                "type": {
+                  "name": "MediaMetadataInit"
+                }
+              }
+            ],
+            "name": "Constructor",
             "type_": "ExtendedAttribute"
           }
         ],
         "members": [
           {
-            "name": "doAmazingThing",
-            "returnType": {
-              "name": "Promise",
+            "isReadOnly": true,
+            "name": "album",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "artist",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "attrs": [
+              {
+                "name": "SameObject",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "isReadOnly": true,
+            "name": "artwork",
+            "type": {
+              "name": "FrozenArray",
               "params": [
                 {
-                  "name": "any"
+                  "name": "MediaImage"
+                }
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "title",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "MediaMetadata",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+          {
+            "defaultValue": "",
+            "name": "album",
+            "type": {
+              "name": "DOMString"
+            }
+          },
+          {
+            "defaultValue": "",
+            "name": "artist",
+            "type": {
+              "name": "DOMString"
+            }
+          },
+          {
+            "defaultValue": [
+              "[",
+              "]"
+            ],
+            "name": "artwork",
+            "type": {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "MediaImageInit"
                 }
               ]
             }
-          }
-        ],
-        "name": "SecureFeature",
-        "type_": "Interface"
-      },
-      {
-        "isPartial": true,
-        "members": [
+          },
           {
-            "isReadOnly": true,
-            "name": "isSecureContext",
+            "defaultValue": "",
+            "name": "title",
             "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
+              "name": "DOMString"
+            }
           }
         ],
-        "name": "WindowOrWorkerGlobalScope",
-        "type_": "PartialInterface"
-      },
-      {
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "isSecureContext",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "GlobalSecureContext",
-        "type_": "Interface"
-      },
-      {
-        "implemented": "GlobalSecureContext",
-        "implementer": "Window",
-        "type_": "Implements"
-      },
-      {
-        "implemented": "GlobalSecureContext",
-        "implementer": "WorkerGlobalScope",
-        "type_": "Implements"
+        "name": "MediaMetadataInit",
+        "type_": "Dictionary"
       },
       {
         "attrs": [
           {
-            "name": "SecureContext",
+            "args": [
+              {
+                "name": "init",
+                "optional": true,
+                "type": {
+                  "name": "MediaImageInit"
+                }
+              }
+            ],
+            "name": "Constructor",
             "type_": "ExtendedAttribute"
           }
         ],
         "members": [
           {
-            "name": "getTheSecretDouble",
-            "returnType": {
-              "name": "Promise",
-              "params": [
-                {
-                  "name": "double"
-                }
-              ]
-            }
+            "isReadOnly": true,
+            "name": "sizes",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "src",
+            "type": {
+              "name": "USVString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "type",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
           }
         ],
-        "name": "SensitiveFeature",
+        "name": "MediaImage",
         "type_": "Interface"
       },
       {
         "members": [
           {
-            "attrs": [
-              {
-                "name": "SecureContext",
-                "type_": "ExtendedAttribute"
-              }
-            ],
-            "name": "doThatPowerfulThing",
-            "returnType": {
-              "name": "void"
+            "defaultValue": "",
+            "name": "sizes",
+            "type": {
+              "name": "DOMString"
+            }
+          },
+          {
+            "defaultValue": "",
+            "name": "src",
+            "type": {
+              "name": "USVString"
+            }
+          },
+          {
+            "defaultValue": "",
+            "name": "type",
+            "type": {
+              "name": "DOMString"
             }
           }
         ],
-        "name": "AnotherSensitiveFeature",
-        "type_": "Interface"
+        "name": "MediaImageInit",
+        "type_": "Dictionary"
       },
       {
+        "attrs": [
+          {
+            "identifiers": [
+              "Window"
+            ],
+            "name": "Exposed",
+            "type_": "ExtendedAttribute"
+          }
+        ],
         "isPartial": true,
         "members": [
           {
             "isReadOnly": true,
-            "name": "isSecureContext",
+            "name": "mediaSession",
             "type": {
-              "name": "boolean"
+              "name": "MediaSession"
             },
             "type_": "Attribute"
           }
         ],
-        "name": "WindowOrWorkerGlobalScope",
+        "name": "Navigator",
         "type_": "PartialInterface"
+      },
+      {
+        "attrs": [
+          {
+            "name": "Exposed",
+            "type_": "ExtendedAttribute",
+            "value": "Window"
+          }
+        ],
+        "inheritsFrom": "EventHandler",
+        "members": [
+          {
+            "name": "metadata",
+            "type": {
+              "name": "MediaMetadata",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onnexttrack",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onpause",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onplay",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onplaypause",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onprevioustrack",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onseekbackward",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onseekforward",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "MediaSession",
+        "type_": "Interface"
+      },
+      {
+        "attrs": [
+          {
+            "args": [
+              {
+                "name": "init",
+                "optional": true,
+                "type": {
+                  "name": "MediaMetadataInit"
+                }
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+        ],
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "album",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "artist",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "attrs": [
+              {
+                "name": "SameObject",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "isReadOnly": true,
+            "name": "artwork",
+            "type": {
+              "name": "FrozenArray",
+              "params": [
+                {
+                  "name": "MediaImage"
+                }
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "title",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "MediaMetadata",
+        "type_": "Interface"
       },
       {
         "members": [
           {
-            "isReadOnly": true,
-            "name": "isSecureContext",
+            "defaultValue": "",
+            "name": "album",
             "type": {
-              "name": "boolean"
+              "name": "DOMString"
+            }
+          },
+          {
+            "defaultValue": "",
+            "name": "artist",
+            "type": {
+              "name": "DOMString"
+            }
+          },
+          {
+            "defaultValue": [
+              "[",
+              "]"
+            ],
+            "name": "artwork",
+            "type": {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "MediaImageInit"
+                }
+              ]
+            }
+          },
+          {
+            "defaultValue": "",
+            "name": "title",
+            "type": {
+              "name": "DOMString"
+            }
+          }
+        ],
+        "name": "MediaMetadataInit",
+        "type_": "Dictionary"
+      },
+      {
+        "attrs": [
+          {
+            "args": [
+              {
+                "name": "init",
+                "optional": true,
+                "type": {
+                  "name": "MediaImageInit"
+                }
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+        ],
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "sizes",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "src",
+            "type": {
+              "name": "USVString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "type",
+            "type": {
+              "name": "DOMString"
             },
             "type_": "Attribute"
           }
         ],
-        "name": "GlobalSecureContext",
+        "name": "MediaImage",
         "type_": "Interface"
       },
       {
-        "implemented": "GlobalSecureContext",
-        "implementer": "Window",
-        "type_": "Implements"
-      },
-      {
-        "implemented": "GlobalSecureContext",
-        "implementer": "WorkerGlobalScope",
-        "type_": "Implements"
+        "members": [
+          {
+            "defaultValue": "",
+            "name": "sizes",
+            "type": {
+              "name": "DOMString"
+            }
+          },
+          {
+            "defaultValue": "",
+            "name": "src",
+            "type": {
+              "name": "USVString"
+            }
+          },
+          {
+            "defaultValue": "",
+            "name": "type",
+            "type": {
+              "name": "DOMString"
+            }
+          }
+        ],
+        "name": "MediaImageInit",
+        "type_": "Dictionary"
       }
     ],
     "url": "https://w3c.github.io/webappsec-secure-contexts/"
@@ -64002,6 +65748,218 @@
           }
         ],
         "name": "DocumentOrShadowRoot",
+        "type_": "PartialInterface"
+      },
+      {
+        "inheritsFrom": "DocumentFragment",
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "host",
+            "type": {
+              "name": "Element"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "attrs": [
+              {
+                "name": "TreatNullAs",
+                "type_": "ExtendedAttribute",
+                "value": "EmptyString"
+              }
+            ],
+            "name": "innerHTML",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "ShadowRoot",
+        "type_": "Interface"
+      },
+      {
+        "isPartial": true,
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "assignedSlot",
+            "type": {
+              "name": "HTMLSlotElement",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+                "name": "shadowRootInitDict",
+                "type": {
+                  "name": "ShadowRootInit"
+                }
+              }
+            ],
+            "name": "attachShadow",
+            "returnType": {
+              "name": "ShadowRoot"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "shadowRoot",
+            "type": {
+              "name": "ShadowRoot",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "slot",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "Element",
+        "type_": "PartialInterface"
+      },
+      {
+        "members": [
+          {
+            "defaultValue": "false",
+            "name": "delegatesFocus",
+            "type": {
+              "name": "boolean"
+            }
+          },
+          {
+            "isRequired": true,
+            "name": "mode",
+            "type": {
+              "name": "ShadowRootMode"
+            }
+          }
+        ],
+        "name": "ShadowRootInit",
+        "type_": "Dictionary"
+      },
+      {
+        "name": "ShadowRootMode",
+        "type_": "Enum",
+        "value": [
+          "open",
+          "closed"
+        ]
+      },
+      {
+        "isPartial": true,
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "assignedSlot",
+            "type": {
+              "name": "HTMLSlotElement",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "Text",
+        "type_": "PartialInterface"
+      },
+      {
+        "inheritsFrom": "HTMLElement",
+        "members": [
+          {
+            "args": [
+              {
+                "name": "options",
+                "optional": true,
+                "type": {
+                  "name": "AssignedNodesOptions"
+                }
+              }
+            ],
+            "name": "assignedNodes",
+            "returnType": {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "Node"
+                }
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "HTMLSlotElement",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+          {
+            "defaultValue": "false",
+            "name": "flatten",
+            "type": {
+              "name": "boolean"
+            }
+          }
+        ],
+        "name": "AssignedNodesOptions",
+        "type_": "Dictionary"
+      },
+      {
+        "isPartial": true,
+        "members": [
+          {
+            "defaultValue": "false",
+            "name": "scoped",
+            "type": {
+              "name": "boolean"
+            }
+          }
+        ],
+        "name": "EventInit",
+        "type_": "Dictionary"
+      },
+      {
+        "isPartial": true,
+        "members": [
+          {
+            "name": "deepPath",
+            "returnType": {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "EventTarget"
+                }
+              ]
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "scoped",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "Event",
         "type_": "PartialInterface"
       }
     ],
@@ -68690,679 +70648,287 @@
   {
     "parses": [
       {
-        "inheritsFrom": "EventTarget",
-        "members": [
-          {
-            "args": [
-              {
-                "name": "handle",
-                "type": {
-                  "name": "long"
-                }
-              }
-            ],
-            "name": "cancelAnimationFrame",
-            "returnType": {
-              "name": "void"
-            }
-          },
-          {
-            "attrs": [
-              {
-                "name": "SameObject",
-                "type_": "ExtendedAttribute"
-              }
-            ],
-            "isReadOnly": true,
-            "name": "capabilities",
-            "type": {
-              "name": "VRDisplayCapabilities"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "depthFar",
-            "type": {
-              "name": "double"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "depthNear",
-            "type": {
-              "name": "double"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "displayId",
-            "type": {
-              "name": "unsigned long"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "displayName",
-            "type": {
-              "name": "DOMString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "exitPresent",
-            "returnType": {
-              "name": "Promise",
-              "params": [
-                {
-                  "name": "void"
-                }
-              ]
-            }
-          },
-          {
-            "args": [
-              {
-                "name": "whichEye",
-                "type": {
-                  "name": "VREye"
-                }
-              }
-            ],
-            "name": "getEyeParameters",
-            "returnType": {
-              "name": "VREyeParameters"
-            }
-          },
-          {
-            "args": [
-              {
-                "name": "frameData",
-                "type": {
-                  "name": "VRFrameData"
-                }
-              }
-            ],
-            "name": "getFrameData",
-            "returnType": {
-              "name": "boolean"
-            }
-          },
-          {
-            "name": "getLayers",
-            "returnType": {
-              "name": "sequence",
-              "params": [
-                {
-                  "name": "VRLayer"
-                }
-              ]
-            }
-          },
-          {
-            "attrs": [
-              {
-                "name": "NewObject",
-                "type_": "ExtendedAttribute"
-              }
-            ],
-            "name": "getPose",
-            "returnType": {
-              "name": "VRPose"
-            }
-          },
-          {
-            "isReadOnly": true,
-            "name": "isConnected",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "isPresenting",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "args": [
-              {
-                "name": "callback",
-                "type": {
-                  "name": "FrameRequestCallback"
-                }
-              }
-            ],
-            "name": "requestAnimationFrame",
-            "returnType": {
-              "name": "long"
-            }
-          },
-          {
-            "args": [
-              {
-                "name": "layers",
-                "type": {
-                  "name": "sequence",
-                  "params": [
-                    {
-                      "name": "VRLayerInit"
-                    }
-                  ]
-                }
-              }
-            ],
-            "name": "requestPresent",
-            "returnType": {
-              "name": "Promise",
-              "params": [
-                {
-                  "name": "void"
-                }
-              ]
-            }
-          },
-          {
-            "name": "resetPose",
-            "returnType": {
-              "name": "void"
-            }
-          },
-          {
-            "isReadOnly": true,
-            "name": "stageParameters",
-            "type": {
-              "name": "VRStageParameters",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "submitFrame",
-            "returnType": {
-              "name": "void"
-            }
-          }
-        ],
-        "name": "VRDisplay",
-        "type_": "Interface"
-      },
-      {
-        "name": "VRSource",
-        "type": {
-          "type_": "UnionType",
-          "types": [
-            {
-              "name": "HTMLCanvasElement"
-            },
-            {
-              "name": "OffscreenCanvas"
-            }
-          ]
-        },
-        "type_": "Typedef"
-      },
-      {
-        "attrs": [
-          {
-            "args": [
-              {
-                "name": "layer",
-                "optional": true,
-                "type": {
-                  "name": "VRLayerInit"
-                }
-              }
-            ],
-            "name": "Constructor",
-            "type_": "ExtendedAttribute"
-          }
-        ],
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "leftBounds",
-            "type": {
-              "name": "sequence",
-              "params": [
-                {
-                  "name": "float"
-                }
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "rightBounds",
-            "type": {
-              "name": "sequence",
-              "params": [
-                {
-                  "name": "float"
-                }
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "source",
-            "type": {
-              "name": "VRSource",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "VRLayer",
-        "type_": "Interface"
-      },
-      {
-        "members": [
-          {
-            "defaultValue": [
-              "[",
-              "]"
-            ],
-            "name": "leftBounds",
-            "type": {
-              "name": "sequence",
-              "params": [
-                {
-                  "name": "float"
-                }
-              ]
-            }
-          },
-          {
-            "defaultValue": [
-              "[",
-              "]"
-            ],
-            "name": "rightBounds",
-            "type": {
-              "name": "sequence",
-              "params": [
-                {
-                  "name": "float"
-                }
-              ]
-            }
-          },
-          {
-            "defaultValue": "null",
-            "name": "source",
-            "type": {
-              "name": "VRSource",
-              "params": [
-                "nullable"
-              ]
-            }
-          }
-        ],
-        "name": "VRLayerInit",
-        "type_": "Dictionary"
-      },
-      {
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "canPresent",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "hasExternalDisplay",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "hasOrientation",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "hasPosition",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "maxLayers",
-            "type": {
-              "name": "unsigned long"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "VRDisplayCapabilities",
-        "type_": "Interface"
-      },
-      {
-        "name": "VREye",
-        "type_": "Enum",
-        "value": [
-          "left",
-          "right"
-        ]
-      },
-      {
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "downDegrees",
-            "type": {
-              "name": "double"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "leftDegrees",
-            "type": {
-              "name": "double"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "rightDegrees",
-            "type": {
-              "name": "double"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "upDegrees",
-            "type": {
-              "name": "double"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "VRFieldOfView",
-        "type_": "Interface"
-      },
-      {
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "angularAcceleration",
-            "type": {
-              "name": "Float32Array",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "angularVelocity",
-            "type": {
-              "name": "Float32Array",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "linearAcceleration",
-            "type": {
-              "name": "Float32Array",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "linearVelocity",
-            "type": {
-              "name": "Float32Array",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "orientation",
-            "type": {
-              "name": "Float32Array",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "position",
-            "type": {
-              "name": "Float32Array",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "VRPose",
-        "type_": "Interface"
-      },
-      {
-        "attrs": [
-          {
-            "name": "Constructor",
-            "type_": "ExtendedAttribute"
-          }
-        ],
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "leftProjectionMatrix",
-            "type": {
-              "name": "Float32Array"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "leftViewMatrix",
-            "type": {
-              "name": "Float32Array"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "pose",
-            "type": {
-              "name": "VRPose"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "rightProjectionMatrix",
-            "type": {
-              "name": "Float32Array"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "rightViewMatrix",
-            "type": {
-              "name": "Float32Array"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "timestamp",
-            "type": {
-              "name": "DOMHighResTimeStamp"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "VRFrameData",
-        "type_": "Interface"
-      },
-      {
-        "members": [
-          {
-            "attrs": [
-              {
-                "name": "SameObject",
-                "type_": "ExtendedAttribute"
-              }
-            ],
-            "isReadOnly": true,
-            "name": "fieldOfView",
-            "type": {
-              "name": "VRFieldOfView"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "offset",
-            "type": {
-              "name": "Float32Array"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "renderHeight",
-            "type": {
-              "name": "unsigned long"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "renderWidth",
-            "type": {
-              "name": "unsigned long"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "VREyeParameters",
-        "type_": "Interface"
-      },
-      {
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "sittingToStandingTransform",
-            "type": {
-              "name": "Float32Array"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "sizeX",
-            "type": {
-              "name": "float"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "sizeZ",
-            "type": {
-              "name": "float"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "VRStageParameters",
-        "type_": "Interface"
-      },
-      {
         "isPartial": true,
         "members": [
           {
-            "isReadOnly": true,
-            "name": "activeVRDisplays",
-            "type": {
-              "name": "FrozenArray",
-              "params": [
-                {
-                  "name": "VRDisplay"
+            "args": [
+              {
+                "name": "options",
+                "optional": true,
+                "type": {
+                  "name": "MIDIOptions"
                 }
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "getVRDisplays",
+              }
+            ],
+            "name": "requestMIDIAccess",
             "returnType": {
               "name": "Promise",
               "params": [
                 {
-                  "name": "sequence",
-                  "params": [
-                    {
-                      "name": "VRDisplay"
-                    }
-                  ]
+                  "name": "MIDIAccess"
                 }
               ]
             }
-          },
-          {
-            "isReadOnly": true,
-            "name": "vrEnabled",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
           }
         ],
         "name": "Navigator",
         "type_": "PartialInterface"
       },
       {
-        "name": "VRDisplayEventReason",
+        "members": [
+          {
+            "name": "software",
+            "type": {
+              "name": "boolean"
+            }
+          },
+          {
+            "name": "sysex",
+            "type": {
+              "name": "boolean"
+            }
+          }
+        ],
+        "name": "MIDIOptions",
+        "type_": "Dictionary"
+      },
+      {
+        "members": [
+          {
+            "isReadOnly": true,
+            "keyType": {
+              "name": "DOMString"
+            },
+            "type_": "MapLike",
+            "valueType": {
+              "name": "MIDIInput"
+            }
+          }
+        ],
+        "name": "MIDIInputMap",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+          {
+            "isReadOnly": true,
+            "keyType": {
+              "name": "DOMString"
+            },
+            "type_": "MapLike",
+            "valueType": {
+              "name": "MIDIOutput"
+            }
+          }
+        ],
+        "name": "MIDIOutputMap",
+        "type_": "Interface"
+      },
+      {
+        "inheritsFrom": "EventTarget",
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "inputs",
+            "type": {
+              "name": "MIDIInputMap"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onstatechange",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "outputs",
+            "type": {
+              "name": "MIDIOutputMap"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "sysexEnabled",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "MIDIAccess",
+        "type_": "Interface"
+      },
+      {
+        "name": "MIDIPortType",
         "type_": "Enum",
         "value": [
-          "mounted",
-          "navigation",
-          "requested",
-          "unmounted"
+          "input",
+          "output"
         ]
+      },
+      {
+        "name": "MIDIPortDeviceState",
+        "type_": "Enum",
+        "value": [
+          "disconnected",
+          "connected"
+        ]
+      },
+      {
+        "name": "MIDIPortConnectionState",
+        "type_": "Enum",
+        "value": [
+          "open",
+          "closed",
+          "pending"
+        ]
+      },
+      {
+        "inheritsFrom": "EventTarget",
+        "members": [
+          {
+            "name": "close",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "MIDIPort"
+                }
+              ]
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "connection",
+            "type": {
+              "name": "MIDIPortConnectionState"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "id",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "manufacturer",
+            "type": {
+              "name": "DOMString",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "name",
+            "type": {
+              "name": "DOMString",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onstatechange",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "state",
+            "type": {
+              "name": "MIDIPortDeviceState"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "type",
+            "type": {
+              "name": "MIDIPortType"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "version",
+            "type": {
+              "name": "DOMString",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "MIDIPort",
+        "type_": "Interface"
+      },
+      {
+        "inheritsFrom": "MIDIPort",
+        "members": [
+          {
+            "name": "onmidimessage",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "MIDIInput",
+        "type_": "Interface"
+      },
+      {
+        "inheritsFrom": "MIDIPort",
+        "members": [
+          {
+            "name": "clear",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "data",
+                "type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "octet"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "timestamp",
+                "optional": true,
+                "type": {
+                  "name": "DOMHighResTimeStamp"
+                }
+              }
+            ],
+            "name": "send",
+            "returnType": {
+              "name": "void"
+            }
+          }
+        ],
+        "name": "MIDIOutput",
+        "type_": "Interface"
       },
       {
         "attrs": [
@@ -69376,8 +70942,9 @@
               },
               {
                 "name": "eventInitDict",
+                "optional": true,
                 "type": {
-                  "name": "VRDisplayEventInit"
+                  "name": "MIDIMessageEventInit"
                 }
               }
             ],
@@ -69389,806 +70956,28 @@
         "members": [
           {
             "isReadOnly": true,
-            "name": "display",
+            "name": "data",
             "type": {
-              "name": "VRDisplay"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "reason",
-            "type": {
-              "name": "VRDisplayEventReason",
-              "params": [
-                "nullable"
-              ]
+              "name": "Uint8Array"
             },
             "type_": "Attribute"
           }
         ],
-        "name": "VRDisplayEvent",
+        "name": "MIDIMessageEvent",
         "type_": "Interface"
       },
       {
         "inheritsFrom": "EventInit",
         "members": [
           {
-            "isRequired": true,
-            "name": "display",
+            "name": "data",
             "type": {
-              "name": "VRDisplay"
-            }
-          },
-          {
-            "name": "reason",
-            "type": {
-              "name": "VRDisplayEventReason"
+              "name": "Uint8Array"
             }
           }
         ],
-        "name": "VRDisplayEventInit",
+        "name": "MIDIMessageEventInit",
         "type_": "Dictionary"
-      },
-      {
-        "isPartial": true,
-        "members": [
-          {
-            "name": "onvrdisplayactivate",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "onvrdisplayblur",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "onvrdisplayconnect",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "onvrdisplaydeactivate",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "onvrdisplaydisconnect",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "onvrdisplayfocus",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "onvrdisplaypresentchange",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "Window",
-        "type_": "PartialInterface"
-      },
-      {
-        "isPartial": true,
-        "members": [
-          {
-            "name": "allowvr",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "HTMLIFrameElement",
-        "type_": "PartialInterface"
-      },
-      {
-        "isPartial": true,
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "displayId",
-            "type": {
-              "name": "unsigned long"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "Gamepad",
-        "type_": "PartialInterface"
-      },
-      {
-        "inheritsFrom": "EventTarget",
-        "members": [
-          {
-            "args": [
-              {
-                "name": "handle",
-                "type": {
-                  "name": "long"
-                }
-              }
-            ],
-            "name": "cancelAnimationFrame",
-            "returnType": {
-              "name": "void"
-            }
-          },
-          {
-            "attrs": [
-              {
-                "name": "SameObject",
-                "type_": "ExtendedAttribute"
-              }
-            ],
-            "isReadOnly": true,
-            "name": "capabilities",
-            "type": {
-              "name": "VRDisplayCapabilities"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "depthFar",
-            "type": {
-              "name": "double"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "depthNear",
-            "type": {
-              "name": "double"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "displayId",
-            "type": {
-              "name": "unsigned long"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "displayName",
-            "type": {
-              "name": "DOMString"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "exitPresent",
-            "returnType": {
-              "name": "Promise",
-              "params": [
-                {
-                  "name": "void"
-                }
-              ]
-            }
-          },
-          {
-            "args": [
-              {
-                "name": "whichEye",
-                "type": {
-                  "name": "VREye"
-                }
-              }
-            ],
-            "name": "getEyeParameters",
-            "returnType": {
-              "name": "VREyeParameters"
-            }
-          },
-          {
-            "args": [
-              {
-                "name": "frameData",
-                "type": {
-                  "name": "VRFrameData"
-                }
-              }
-            ],
-            "name": "getFrameData",
-            "returnType": {
-              "name": "boolean"
-            }
-          },
-          {
-            "name": "getLayers",
-            "returnType": {
-              "name": "sequence",
-              "params": [
-                {
-                  "name": "VRLayer"
-                }
-              ]
-            }
-          },
-          {
-            "attrs": [
-              {
-                "name": "NewObject",
-                "type_": "ExtendedAttribute"
-              }
-            ],
-            "name": "getPose",
-            "returnType": {
-              "name": "VRPose"
-            }
-          },
-          {
-            "isReadOnly": true,
-            "name": "isConnected",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "isPresenting",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "args": [
-              {
-                "name": "callback",
-                "type": {
-                  "name": "FrameRequestCallback"
-                }
-              }
-            ],
-            "name": "requestAnimationFrame",
-            "returnType": {
-              "name": "long"
-            }
-          },
-          {
-            "args": [
-              {
-                "name": "layers",
-                "type": {
-                  "name": "sequence",
-                  "params": [
-                    {
-                      "name": "VRLayerInit"
-                    }
-                  ]
-                }
-              }
-            ],
-            "name": "requestPresent",
-            "returnType": {
-              "name": "Promise",
-              "params": [
-                {
-                  "name": "void"
-                }
-              ]
-            }
-          },
-          {
-            "name": "resetPose",
-            "returnType": {
-              "name": "void"
-            }
-          },
-          {
-            "isReadOnly": true,
-            "name": "stageParameters",
-            "type": {
-              "name": "VRStageParameters",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "submitFrame",
-            "returnType": {
-              "name": "void"
-            }
-          }
-        ],
-        "name": "VRDisplay",
-        "type_": "Interface"
-      },
-      {
-        "name": "VRSource",
-        "type": {
-          "type_": "UnionType",
-          "types": [
-            {
-              "name": "HTMLCanvasElement"
-            },
-            {
-              "name": "OffscreenCanvas"
-            }
-          ]
-        },
-        "type_": "Typedef"
-      },
-      {
-        "attrs": [
-          {
-            "args": [
-              {
-                "name": "layer",
-                "optional": true,
-                "type": {
-                  "name": "VRLayerInit"
-                }
-              }
-            ],
-            "name": "Constructor",
-            "type_": "ExtendedAttribute"
-          }
-        ],
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "leftBounds",
-            "type": {
-              "name": "sequence",
-              "params": [
-                {
-                  "name": "float"
-                }
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "rightBounds",
-            "type": {
-              "name": "sequence",
-              "params": [
-                {
-                  "name": "float"
-                }
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "source",
-            "type": {
-              "name": "VRSource",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "VRLayer",
-        "type_": "Interface"
-      },
-      {
-        "members": [
-          {
-            "defaultValue": [
-              "[",
-              "]"
-            ],
-            "name": "leftBounds",
-            "type": {
-              "name": "sequence",
-              "params": [
-                {
-                  "name": "float"
-                }
-              ]
-            }
-          },
-          {
-            "defaultValue": [
-              "[",
-              "]"
-            ],
-            "name": "rightBounds",
-            "type": {
-              "name": "sequence",
-              "params": [
-                {
-                  "name": "float"
-                }
-              ]
-            }
-          },
-          {
-            "defaultValue": "null",
-            "name": "source",
-            "type": {
-              "name": "VRSource",
-              "params": [
-                "nullable"
-              ]
-            }
-          }
-        ],
-        "name": "VRLayerInit",
-        "type_": "Dictionary"
-      },
-      {
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "canPresent",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "hasExternalDisplay",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "hasOrientation",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "hasPosition",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "maxLayers",
-            "type": {
-              "name": "unsigned long"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "VRDisplayCapabilities",
-        "type_": "Interface"
-      },
-      {
-        "name": "VREye",
-        "type_": "Enum",
-        "value": [
-          "left",
-          "right"
-        ]
-      },
-      {
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "downDegrees",
-            "type": {
-              "name": "double"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "leftDegrees",
-            "type": {
-              "name": "double"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "rightDegrees",
-            "type": {
-              "name": "double"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "upDegrees",
-            "type": {
-              "name": "double"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "VRFieldOfView",
-        "type_": "Interface"
-      },
-      {
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "angularAcceleration",
-            "type": {
-              "name": "Float32Array",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "angularVelocity",
-            "type": {
-              "name": "Float32Array",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "linearAcceleration",
-            "type": {
-              "name": "Float32Array",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "linearVelocity",
-            "type": {
-              "name": "Float32Array",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "orientation",
-            "type": {
-              "name": "Float32Array",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "position",
-            "type": {
-              "name": "Float32Array",
-              "params": [
-                "nullable"
-              ]
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "VRPose",
-        "type_": "Interface"
-      },
-      {
-        "attrs": [
-          {
-            "name": "Constructor",
-            "type_": "ExtendedAttribute"
-          }
-        ],
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "leftProjectionMatrix",
-            "type": {
-              "name": "Float32Array"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "leftViewMatrix",
-            "type": {
-              "name": "Float32Array"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "pose",
-            "type": {
-              "name": "VRPose"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "rightProjectionMatrix",
-            "type": {
-              "name": "Float32Array"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "rightViewMatrix",
-            "type": {
-              "name": "Float32Array"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "timestamp",
-            "type": {
-              "name": "DOMHighResTimeStamp"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "VRFrameData",
-        "type_": "Interface"
-      },
-      {
-        "members": [
-          {
-            "attrs": [
-              {
-                "name": "SameObject",
-                "type_": "ExtendedAttribute"
-              }
-            ],
-            "isReadOnly": true,
-            "name": "fieldOfView",
-            "type": {
-              "name": "VRFieldOfView"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "offset",
-            "type": {
-              "name": "Float32Array"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "renderHeight",
-            "type": {
-              "name": "unsigned long"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "renderWidth",
-            "type": {
-              "name": "unsigned long"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "VREyeParameters",
-        "type_": "Interface"
-      },
-      {
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "sittingToStandingTransform",
-            "type": {
-              "name": "Float32Array"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "sizeX",
-            "type": {
-              "name": "float"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "sizeZ",
-            "type": {
-              "name": "float"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "VRStageParameters",
-        "type_": "Interface"
-      },
-      {
-        "isPartial": true,
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "activeVRDisplays",
-            "type": {
-              "name": "FrozenArray",
-              "params": [
-                {
-                  "name": "VRDisplay"
-                }
-              ]
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "getVRDisplays",
-            "returnType": {
-              "name": "Promise",
-              "params": [
-                {
-                  "name": "sequence",
-                  "params": [
-                    {
-                      "name": "VRDisplay"
-                    }
-                  ]
-                }
-              ]
-            }
-          },
-          {
-            "isReadOnly": true,
-            "name": "vrEnabled",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "Navigator",
-        "type_": "PartialInterface"
-      },
-      {
-        "name": "VRDisplayEventReason",
-        "type_": "Enum",
-        "value": [
-          "mounted",
-          "navigation",
-          "requested",
-          "unmounted"
-        ]
       },
       {
         "attrs": [
@@ -70202,8 +70991,9 @@
               },
               {
                 "name": "eventInitDict",
+                "optional": true,
                 "type": {
-                  "name": "VRDisplayEventInit"
+                  "name": "MIDIConnectionEventInit"
                 }
               }
             ],
@@ -70215,139 +71005,31 @@
         "members": [
           {
             "isReadOnly": true,
-            "name": "display",
+            "name": "port",
             "type": {
-              "name": "VRDisplay"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "isReadOnly": true,
-            "name": "reason",
-            "type": {
-              "name": "VRDisplayEventReason",
-              "params": [
-                "nullable"
-              ]
+              "name": "MIDIPort"
             },
             "type_": "Attribute"
           }
         ],
-        "name": "VRDisplayEvent",
+        "name": "MIDIConnectionEvent",
         "type_": "Interface"
       },
       {
         "inheritsFrom": "EventInit",
         "members": [
           {
-            "isRequired": true,
-            "name": "display",
+            "name": "port",
             "type": {
-              "name": "VRDisplay"
-            }
-          },
-          {
-            "name": "reason",
-            "type": {
-              "name": "VRDisplayEventReason"
+              "name": "MIDIPort"
             }
           }
         ],
-        "name": "VRDisplayEventInit",
+        "name": "MIDIConnectionEventInit",
         "type_": "Dictionary"
-      },
-      {
-        "isPartial": true,
-        "members": [
-          {
-            "name": "onvrdisplayactivate",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "onvrdisplayblur",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "onvrdisplayconnect",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "onvrdisplaydeactivate",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "onvrdisplaydisconnect",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "onvrdisplayfocus",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "name": "onvrdisplaypresentchange",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "Window",
-        "type_": "PartialInterface"
-      },
-      {
-        "isPartial": true,
-        "members": [
-          {
-            "name": "allowvr",
-            "type": {
-              "name": "boolean"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "HTMLIFrameElement",
-        "type_": "PartialInterface"
-      },
-      {
-        "isPartial": true,
-        "members": [
-          {
-            "isReadOnly": true,
-            "name": "displayId",
-            "type": {
-              "name": "unsigned long"
-            },
-            "type_": "Attribute"
-          }
-        ],
-        "name": "Gamepad",
-        "type_": "PartialInterface"
       }
     ],
     "url": "https://w3c.github.io/webvr/"
-  },
-  {
-    "parses": [
-    ],
-    "url": "https://webaudio.github.io/web-audio-api/"
   },
   {
     "parses": [
@@ -71443,6 +72125,52 @@
         "type_": "Interface"
       },
       {
+        "inheritsFrom": "AudioNode",
+        "members": [
+          {
+            "name": "onended",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+                "defaultValue": "0",
+                "name": "when",
+                "optional": true,
+                "type": {
+                  "name": "double"
+                }
+              }
+            ],
+            "name": "start",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "defaultValue": "0",
+                "name": "when",
+                "optional": true,
+                "type": {
+                  "name": "double"
+                }
+              }
+            ],
+            "name": "stop",
+            "returnType": {
+              "name": "void"
+            }
+          }
+        ],
+        "name": "AudioScheduledSourceNode",
+        "type_": "Interface"
+      },
+      {
         "attrs": [
           {
             "args": [
@@ -71724,7 +72452,7 @@
             "type_": "ExtendedAttribute"
           }
         ],
-        "inheritsFrom": "AudioNode",
+        "inheritsFrom": "AudioScheduledSourceNode",
         "members": [
           {
             "name": "buffer",
@@ -71766,13 +72494,6 @@
             "type_": "Attribute"
           },
           {
-            "name": "onended",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
             "isReadOnly": true,
             "name": "playbackRate",
             "type": {
@@ -71783,17 +72504,13 @@
           {
             "args": [
               {
-                "defaultValue": "0",
                 "name": "when",
-                "optional": true,
                 "type": {
                   "name": "double"
                 }
               },
               {
-                "defaultValue": "0",
                 "name": "offset",
-                "optional": true,
                 "type": {
                   "name": "double"
                 }
@@ -71807,22 +72524,6 @@
               }
             ],
             "name": "start",
-            "returnType": {
-              "name": "void"
-            }
-          },
-          {
-            "args": [
-              {
-                "defaultValue": "0",
-                "name": "when",
-                "optional": true,
-                "type": {
-                  "name": "double"
-                }
-              }
-            ],
-            "name": "stop",
             "returnType": {
               "name": "void"
             }
@@ -71903,7 +72604,7 @@
             "type_": "ExtendedAttribute"
           }
         ],
-        "inheritsFrom": "AudioNode",
+        "inheritsFrom": "AudioScheduledSourceNode",
         "members": [
           {
             "isReadOnly": true,
@@ -71912,45 +72613,6 @@
               "name": "AudioParam"
             },
             "type_": "Attribute"
-          },
-          {
-            "name": "onended",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
-            "args": [
-              {
-                "defaultValue": "0",
-                "name": "when",
-                "optional": true,
-                "type": {
-                  "name": "double"
-                }
-              }
-            ],
-            "name": "start",
-            "returnType": {
-              "name": "void"
-            }
-          },
-          {
-            "args": [
-              {
-                "defaultValue": "0",
-                "name": "when",
-                "optional": true,
-                "type": {
-                  "name": "double"
-                }
-              }
-            ],
-            "name": "stop",
-            "returnType": {
-              "name": "void"
-            }
           }
         ],
         "name": "ConstantSourceNode",
@@ -72252,7 +72914,7 @@
       {
         "members": [
           {
-            "name": "playbackTime",
+            "name": "currentTime",
             "type": {
               "name": "double"
             }
@@ -73600,7 +74262,7 @@
             "type_": "ExtendedAttribute"
           }
         ],
-        "inheritsFrom": "AudioNode",
+        "inheritsFrom": "AudioScheduledSourceNode",
         "members": [
           {
             "isReadOnly": true,
@@ -73619,13 +74281,6 @@
             "type_": "Attribute"
           },
           {
-            "name": "onended",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
             "args": [
               {
                 "name": "periodicWave",
@@ -73635,38 +74290,6 @@
               }
             ],
             "name": "setPeriodicWave",
-            "returnType": {
-              "name": "void"
-            }
-          },
-          {
-            "args": [
-              {
-                "defaultValue": "0",
-                "name": "when",
-                "optional": true,
-                "type": {
-                  "name": "double"
-                }
-              }
-            ],
-            "name": "start",
-            "returnType": {
-              "name": "void"
-            }
-          },
-          {
-            "args": [
-              {
-                "defaultValue": "0",
-                "name": "when",
-                "optional": true,
-                "type": {
-                  "name": "double"
-                }
-              }
-            ],
-            "name": "stop",
             "returnType": {
               "name": "void"
             }
@@ -82425,11 +83048,6 @@
       }
     ],
     "url": "https://wicg.github.io/webusb/"
-  },
-  {
-    "parses": [
-    ],
-    "url": "https://www.khronos.org/bugzilla/show_bug.cgi?id=1172"
   },
   {
     "parses": [
