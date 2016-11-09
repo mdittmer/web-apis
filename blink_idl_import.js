@@ -45,7 +45,12 @@ function loadFiles(arr) {
 
 var data = loadFiles(idlFiles);
 
-var parser = require('webidl2-js').parser;
+var serialize = require('simple-serialization');
+var parserModule = require('webidl2-js');
+var parser = parserModule.parser;
+var toJSON = function(json) {
+  return serialize.JSON.toJSON(json, parserModule.ast.registry);
+};
 
 var errCount = 0;
 var parses = [];
@@ -56,14 +61,7 @@ data.forEach(function(datum) {
     if (res[0]) {
       parses.push({
         url: url,
-        parses: res[1].map(function(parse) {
-          if (!parse.toJSON) {
-            console.error('No toJSON for', parse.constructor.name, '\n  ',
-                          JSON.stringify(parse));
-            return parse;
-          }
-          return parse.toJSON();
-        }),
+        parses: res[1].map(toJSON),
       });
     } else {
       errCount++;
