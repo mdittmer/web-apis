@@ -20,7 +20,8 @@ const stdlib = require('ya-stdlib-js');
 const _ = require('lodash');
 const webidl2 = require('webidl2-js');
 const ast = webidl2.ast;
-const DB = webidl2.DB;
+const serialize = require('simple-serialization');
+const jsonModule = serialize.JSON;
 
 let data = {
   sources: [],
@@ -55,12 +56,37 @@ function updateHash() {
       '&i=' + encodeURIComponent(e('#interface-input').value);
 }
 
+function loadFromHash() {
+  const hash = window.location.hash;
+  if (!hash) return false;
+
+  let values = {};
+  ['l', 'r', 'i'].forEach(function(name) {
+    values[name] =
+        decodeURIComponent(hash.match(new RegExp(name + '=([^&]*)'))[1]);
+  });
+  [{key: 'l', name: 'left'}, {key: 'r', name: 'right'}].forEach(
+    o => {
+      const hash = parseInt(values[o.key], 10);
+      const name = data.sources.filter(function(name) {
+        return hashCode(name) === hash;
+      })[0] || '';
+      const input = e('#' + o.name + '-input');
+      input.value = name;
+    }
+  );
+
+  e('#interface-input').value = values.i;
+
+  return true;
+}
+
 function getData(direction) {
   const value = e('#' + direction + '-input').value;
   return stdlib.xhr(optValueToURL(value), {responseType: 'json'}).then(
       function(json) {
         if (json === null) return;
-        data[direction] = DB.fromJSON(json);
+        data[direction] = jsonModule.fromJSON(json);
       }
   );
 }
@@ -91,6 +117,9 @@ function optValueToURL(label) {
   return '/data/idl/' + label.replace(/ /g, '/');
 }
 
+function setupDefaults() {
+}
+
 e('#left-input').addEventListener('input', function() {
   updateHash();
   getData('left').then(updateInterfaces).then(analyze, analyze);
@@ -102,6 +131,19 @@ e('#right-input').addEventListener('input', function() {
 e('#interface-input').addEventListener('input', function() {
   updateHash();
   analyze();
+});
+
+// Get a list of sources the server has data for, and add them to a
+// <datalist>.
+stdlib.xhr('/list/idl', {responseType: 'json'}).then(function(arr) {
+  data.sources = arr;
+  addOpts(e('#sources'), data.sources);
+  if (!loadFromHash()) {
+    setupDefaults();
+    updateHash();
+  }
+  Promise.all([getData('left'), getData('right')])
+      .then(updateInterfaces).then(analyze);
 });
 
 function analyze() {

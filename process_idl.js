@@ -23,6 +23,7 @@ const jsonModule = serialize.JSON;
 const webidl2 = require('webidl2-js');
 const ast = webidl2.ast;
 const loggerModule = require('./logger.js');
+const stringify = require('ya-stdlib-js').stringify;
 
 function loadParses(json) {
   let asts = [];
@@ -211,11 +212,13 @@ function gatherInheritance(deduped, parse) {
 function processParses(data, outPath) {
   fs.writeFileSync(
     outPath,
-    concretizeParses(
-      dedupParses(
-        groupParses(
-          loadParses(
-            data
+    stringify(
+      concretizeParses(
+        dedupParses(
+          groupParses(
+            loadParses(
+              data
+            )
           )
         )
       )
@@ -224,19 +227,7 @@ function processParses(data, outPath) {
 }
 
 function processFile(inPath, outPath) {
-  processParses(JSON.parse(fs.readFileSync(inPath)));
-  fs.writeFileSync(
-    outPath,
-    concretizeParses(
-      dedupParses(
-        groupParses(
-          loadParses(
-
-          )
-        )
-      )
-    )
-  );
+  return processParses(JSON.parse(fs.readFileSync(inPath)), outPath);
 }
 
 module.exports = {processFile, processParses};

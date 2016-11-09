@@ -221,7 +221,7 @@ app.get(
 );
 
 app.get('/list/idl', function(req, res) {
-  glob('./data/idl/**/all.json', function(err, files) {
+  glob('./data/idl/**/processed.json', function(err, files) {
     if (err) {
       console.error(err);
       sendJSON([], res);
@@ -230,7 +230,7 @@ app.get('/list/idl', function(req, res) {
 
     sendJSON(files.map(function(file) {
       var parts = file.split('/');
-      // Drop ".", "data", "idl", and "all.json".
+      // Drop ".", "data", "idl", and "processed.json".
       parts = parts.slice(3, parts.length - 1);
       return parts.join(' ');
     }), res);
@@ -243,10 +243,13 @@ app.get(
     var parts = req.url.split('/');
     parts = parts.slice(3);
     var dir = parts.join('/');
-    var path = IDL_DATA_DIR + '/' + dir + '/all.json';
+    var path = IDL_DATA_DIR + '/' + dir + '/processed.json';
     fs.stat(path, function(err) {
       if (err) sendJSON(null, res);
-      else sendJSON(fs.readFileSync(path), res);
+      else {
+        console.log(`Reading ${path}`);
+        sendJSON(fs.readFileSync(path), res);
+      }
     });
   }
 );
