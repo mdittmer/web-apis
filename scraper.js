@@ -20,7 +20,7 @@ const fs = require('fs');
 const loggerModule = require('./logger.js');
 
 const nullLogger = loggerModule.getLogger({url: null});
-const timeout = 40000;
+const timeout = 80000;
 
 let instanceId = 0;
 
@@ -222,8 +222,15 @@ class Scraper {
 
   scrape({url, handle}) {
     const cachedURL = this.isURLCached(url) ? this.getCachedURL(url) : null;
-    if (!cachedURL) this.savePageToCache({url, handle});
-    return this.scrapePage({url, handle});
+    const scrape = this.scrapePage({url, handle});
+
+    if (!cachedURL)
+    return scrape.then(ret => {
+      this.savePageToCache({url, handle});
+      return ret;
+    });
+
+    return scrape;
   }
 
   isURLCached(url) {
