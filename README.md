@@ -9,7 +9,6 @@ Playground for better understanding Web APIs. Data collection supported by
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Serving locally (for development)](#serving-locally-for-development)
-- [Development and deployment](#development-and-deployment)
 - [Javascript Object Graphs](#javascript-object-graphs)
   - [Exploring data](#exploring-data)
   - [Collecting data](#collecting-data)
@@ -23,37 +22,17 @@ Playground for better understanding Web APIs. Data collection supported by
   - [Exploring data](#exploring-data-1)
   - [Bulk load](#bulk-load)
     - [URL import example: Importing from URLs mentioned in Blink's data](#url-import-example-importing-from-urls-mentioned-in-blinks-data)
-    - [Environment setup](#environment-setup)
-    - [Collecting the data](#collecting-the-data)
+      - [Environment setup](#environment-setup)
+      - [Collecting the data](#collecting-the-data)
     - [Local repository import example: Importing Blink's WebIDL](#local-repository-import-example-importing-blinks-webidl)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Serving locally (for development)
 
-    $ npm install
+    $ . ./dev_env.sh
     $ npm run rebuild
     $ npm run serve
-
-## Development and deployment
-
-Most shell-level development variables can be set using:
-
-    $ . ./dev_env.sh
-
-Assets that require preprocessing are built using `webpack`. `npm` scripts
-are provided for live development and for deployment. To deploy `webpack`
-such that it will watch dependencies and rebuild assets, run:
-
-    $ npm run develop
-
-This will continue to run until it is interrupted or killed.
-
-To build assets that are optimized for production, run:
-
-    $ npm run deploy
-
-This will build once, then exit.
 
 ## Javascript Object Graphs
 
