@@ -18,8 +18,7 @@
 
 const process = require('process');
 
-const host = process.argv.length === 3 ? process.argv[2] :
-  process.env.SELENIUM_HOST;
+const host = process.env.SELENIUM_HOST;
 
 if (host !== 'browserstack' && host !== 'sauce' && host !== 'selenium_custom')
   throw new Error(

@@ -20,6 +20,9 @@
 
 const env = require('process').env;
 
-require('./idl_urls_import.js').importHTTP(
-  env.URLS.split('\n'), env.WEB_APIS_DIR + '/data/idl/blink/linked/all.json'
+const allPath = `${env.WEB_APIS_DIR}/data/idl/blink/linked/all.json`;
+const processedPath = `${env.WEB_APIS_DIR}/data/idl/blink/linked/processed.json`;
+
+require('./idl_urls_import.js').importHTTP(env.URLS.split('\n'), allPath).then(
+  data => require('./process_idl.js').processParses(data, processedPath)
 );

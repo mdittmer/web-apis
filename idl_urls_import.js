@@ -160,20 +160,6 @@ module.exports = {
 
     prepareToScrape();
 
-    // TODO: Unify throttling over *-scrape interface.
-    const phantomManager = (() => {
-      const instanceFactory = function() {
-        return new phantomScrape.Instance(10);
-      };
-      const scraperFactory = function() {
-        return new phantomScrape.Scraper({urlCacheDir});
-      };
-      return new scraper.ScraperManager({
-        numInstances: Math.min(8, urls.length),
-        instanceFactory,
-        scraperFactory,
-      });
-    })();
     const seleniumManager = (() => {
       const instanceFactory = function() {
         return new seleniumScrape.Instance({browserName: 'chrome'});
@@ -182,7 +168,7 @@ module.exports = {
         return new seleniumScrape.Scraper({urlCacheDir});
       };
       return new scraper.ScraperManager({
-        numInstances: 8,
+        numInstances: 16,
         instanceFactory,
         scraperFactory,
       });
@@ -190,41 +176,22 @@ module.exports = {
 
     logger.log(`Attempting to scrape and parse WebIDL from ${urls.length} URLs`);
 
-    let phantomFail = [];
     let seleniumFail = [];
-    let phantomData = [];
     let seleniumData = [];
-    return Promise.all(urls.map(url => phantomManager.scrape(url).then(parse).catch(
+    return Promise.all(urls.map(url => seleniumManager.scrape(url).then(parse).catch(
       err => {
-        logger.log(`PhantomJS failed to scrape-and-parse ${url}`);
-        phantomFail.push(url);
+        logger.error(
+          `Selenium failed to scrape-and-parse ${url}: ${err}: ${err.stack}`
+        );
+        seleniumFail.push(url);
         return {url, parses: []};
       }
-    ))).then(
-      data => {
-        logger.log(`Phantom failed on URLs: ${JSON.stringify(phantomFail)}`);
-        try {
-          phantomManager.destroy();
-        } catch(err) {
-          logger.error('phantomManager.destroy() failed');
-          logger.error(err);
-        };
-        phantomData = data;
-        logger.log(`Trying Selenium on ${phantomFail.length} URLs`);
-        return Promise.all(phantomFail.map(url => seleniumManager.scrape(url).then(parse).catch(
-          err => {
-            logger.log(`Selenium failed to scrape-and-parse ${url}`);
-            seleniumFail.push(url);
-            return {url, parses: []};
-          }
-        )));
-      }
-    ).then(data => {
+    ))).then(data => {
       logger.log(`Selenium failed on URLs: ${JSON.stringify(seleniumFail)}`);
       seleniumManager.destroy();
       seleniumData = data;
-      logger.log(`Data size is ${phantomData.length} PhantomJS URL scrapes + ${seleniumData.length} Selenium URL scrapes`);
-      const allData = phantomData.concat(seleniumData).sort((a, b) => {
+      logger.log(`Data size is ${seleniumData.length} Selenium URL scrapes`);
+      const allData = seleniumData.sort((a, b) => {
         if (a.url < b.url) {
           return -1;
         } else if (a.url > b.url) {
@@ -250,7 +217,7 @@ module.exports = {
           if ((!datum) && prevDatum.parses.length > 0) {
             logger.warn(`No data extracted from previously known URL ${prevDatum.url}`);
           } else if (datum &&
-                     datum.parses.length < prevDatum.parses.length) {
+              datum.parses.length < prevDatum.parses.length) {
             logger.warn(`Number of parses decreased from ${prevDatum.parses.length} to ${datum.parses.length} for URL ${prevDatum.url}`);
           }
         }
@@ -259,9 +226,11 @@ module.exports = {
       logger.log(`Writing to ${path}...`);
       fs.writeFileSync(path, stringify(allData));
       const count = allData.reduce(
-        (acc, {url, parses}) => acc + parses.length, 0
-      );
+          (acc, {url, parses}) => acc + parses.length, 0
+          );
       logger.log(`Wrote ${count} IDL fragments from ${allData.length} URLs to ${path}`);
+
+      return allData;
     });
   },
   importIDL: function(urls, path) {
@@ -278,6 +247,8 @@ module.exports = {
           (acc, {url, parses}) => acc + parses.length, 0);
         logger.log('Wrote', count, 'IDL fragments from', data.length,
                    'URLs to', path);
+
+        return data;
       });
   },
 };

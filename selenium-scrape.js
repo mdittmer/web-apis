@@ -47,6 +47,9 @@ class SeleniumInstance extends scraper.Instance {
   }
 }
 
+const pageLoadWait = 9000;
+const pageLoadWaitSkew = 2000;
+
 // Handles are driver objects.
 class SeleniumScraper extends scraper.Scraper {
   getPageContents({url, handle}) {
@@ -64,15 +67,13 @@ class SeleniumScraper extends scraper.Scraper {
 
   scrapePage({url, handle}) {
     return super.scrapePage(...arguments).then(
-      _ => this.waitForSame({
-        // Wait for number of <pre> tags to stabalize. Tools like ReSpec and
-        // Bikeshed do some wonky things, even after DOM loaded. Experimentation
-        // suggests that this method of "waiting long enough" is pretty reliable.
-        handle,
-        script: function() { return document.querySelectorAll('pre').length; },
-        num: 5,
-      })
-    ).then(_ => {
+      () => {
+        const wait =
+            pageLoadWait + Math.floor(Math.random() * pageLoadWaitSkew);
+        this.logger.log(`Waiting ${wait}ms for page to settle`);
+        return handle.sleep(wait);
+      }
+    ).then(() => {
       this.logger.log(`Scraping ${url} for <pre> tags`);
       return this.executeScript({
         handle,

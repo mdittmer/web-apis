@@ -17,6 +17,7 @@
 'use strict';
 
 const colors = require('colors/safe');
+const jsonPrune = require('json-prune');
 
 const config = {
   silly: {color: 'rainbow', prefix: '<:-D'},
@@ -42,6 +43,26 @@ Object.getOwnPropertyNames(config).forEach(key => {
 
 colors.setTheme(colorsConfig);
 
+function replacer(value, defaultValue) {
+  if (Array.isArray(value) || value === null || typeof value !== 'object')
+    return defaultValue;
+
+  const keys = Object.keys(value).sort();
+  const newKeys = keys.slice(0, 10);
+  let ret = {};
+  for (const key of newKeys) {
+    ret[key] = value[key];
+  }
+  if (newKeys.length < keys.length) ret['-pruned-'] = true;
+  return ret;
+}
+
+const jsonPruneConfig = {
+  replacer: replacer,
+  depthDecr: 8,
+  arrayMaxLength: 4,
+};
+
 module.exports = {
   getLogger: function getLogger(info) {
     const infoStr = JSON.stringify(info) + '\n ';
@@ -55,12 +76,17 @@ module.exports = {
         try {
           let args = [colors.info(infoStr), color(prefixConfig[key])];
           for (var i = 0; i < arguments.length; i++) {
-            if (typeof arguments[i] === 'string')
+            const typeOf = typeof arguments[i];
+            if (typeOf === 'string')
               args.push(color(arguments[i]));
+            else if (typeOf === 'object')
+              args.push(color(
+                jsonPrune(replacer(arguments[i]), jsonPruneConfig)
+              ));
             else if (typeof arguments[i].toString === 'function')
               args.push(color(arguments[i].toString()));
             else
-              args.push(color(JSON.stringify(arguments[i])));
+              throw new Error(`Unprocessed logging element ${arguments[i]}`);
           }
           log.apply(this, args);
         } catch (err) {
