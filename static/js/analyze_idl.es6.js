@@ -30,6 +30,10 @@ function e(selector) {
   return document.querySelector(selector);
 }
 
+function ce(tagName) {
+  return document.createElement(tagName);
+}
+
 class DOMLogger {
   constructor(opts) {
     this.init(opts || {});
@@ -75,9 +79,6 @@ class DOMLogger {
   replacer(value, defaultValue) {
     if (Array.isArray(value) || value === null ||
         typeof value !== 'object') {
-      // console.log('Array.isArray(value)', Array.isArray(value));
-      // console.log('value === null', value === null);
-      // console.log("typeof value !== 'object'", typeof value !== 'object');
       return defaultValue;
     }
     const keys = Object.keys(value).sort();
@@ -86,7 +87,6 @@ class DOMLogger {
     for (const key of newKeys) {
       ret[key] = value[key];
     }
-    if (newKeys.length < keys.length) console.log(`Pruned object with ${keys.length} keys`, value);
     if (newKeys.length < keys.length) ret['-pruned-'] = true;
     return ret;
   }
@@ -129,6 +129,7 @@ let data = {
   interfaces: [],
   left: null,
   right: null,
+  checkers: checkers.slice(),
 };
 
 // String hash code.
@@ -147,9 +148,15 @@ function hashCode(str) {
 
 function updateHash() {
   window.location.hash = 'l=' +
-      encodeURIComponent(hashCode(e('#left-input').value)) +
-      '&r=' + encodeURIComponent(hashCode(e('#right-input').value)) +
-      '&i=' + encodeURIComponent(e('#interface-input').value);
+    encodeURIComponent(hashCode(e('#left-input').value)) +
+    '&r=' + encodeURIComponent(hashCode(e('#right-input').value)) +
+    '&i=' + encodeURIComponent(e('#interface-input').value) +
+    '&c=' + encodeURIComponent(
+      checkers.concat([{name: 'custom'}]).map(checker => checker.name).filter(
+        name => e(`#checker-${name}`).checked
+      ).join(',')
+    ) +
+    '&ckr=' + encodeURIComponent(e('#custom-checker-code').value || '');
 }
 
 function loadFromHash() {
@@ -157,9 +164,9 @@ function loadFromHash() {
   if (!hash) return false;
 
   let values = {};
-  ['l', 'r', 'i'].forEach(function(name) {
+  ['l', 'r', 'i', 'c', 'ckr'].forEach(function(name) {
     values[name] =
-        decodeURIComponent(hash.match(new RegExp(name + '=([^&]*)'))[1]);
+      decodeURIComponent(hash.match(new RegExp(name + '=([^&]*)'))[1]);
   });
   [{key: 'l', name: 'left'}, {key: 'r', name: 'right'}].forEach(
     o => {
@@ -174,6 +181,14 @@ function loadFromHash() {
 
   e('#interface-input').value = values.i;
 
+  const enabledCheckers = values.c.split(',');
+  checkers.concat([{name: 'custom'}]).forEach(checker => {
+    e(`#checker-${checker.name}`).checked =
+      !!enabledCheckers.filter(name => name === checker.name)[0];
+  });
+
+  e('#custom-checker-code').value = values.ckr;
+
   return true;
 }
 
@@ -182,11 +197,11 @@ function getData(direction) {
 
   const value = e('#' + direction + '-input').value;
   return stdlib.xhr(optValueToURL(value), {responseType: 'json'}).then(
-      function(json) {
-        if (json !== null) data[direction] = jsonModule.fromJSON(json);
+    function(json) {
+      if (json !== null) data[direction] = jsonModule.fromJSON(json);
 
-        e('#status-value').textContent = 'Idle';
-      }
+      e('#status-value').textContent = 'Idle';
+    }
   );
 }
 
@@ -206,10 +221,39 @@ function updateInterfaces() {
   e('#status-value').textContent = 'Done';
 }
 
+function loadCustomCheckerCode() {
+  if (!e('#checker-custom').checked) return null;
+  let f = null;
+
+  console.log('Value', e('#custom-checker-code').value);
+  try {
+    eval(`f = ${e('#custom-checker-code').value}`);
+  } catch (e) {
+    console.error(e);
+  }
+
+  return f;
+}
+
+// Update list of checkers that are enabled.
+function updateCheckers() {
+  const loadedCheckers = checkers.filter(
+    checker => e(`#checker-${checker.name}`).checked
+  );
+
+  if (e('#checker-custom').checked) {
+    const customCode = loadCustomCheckerCode();
+    if (customCode) data.checkers = [customCode].concat(loadedCheckers);
+    else data.checkers = loadedCheckers;
+  } else {
+    data.checkers = loadedCheckers;
+  }
+}
+
 // Add <option>s to the given <datalist>.
 function addOpts(datalist, dataOpts) {
   for (let i = 0; i < dataOpts.length; i++) {
-    let opt = document.createElement('option');
+    let opt = ce('option');
     opt.value = dataOpts[i];
     datalist.appendChild(opt);
   }
@@ -238,6 +282,40 @@ e('#interface-input').addEventListener('input', function() {
   analyze();
 });
 
+e('#custom-checker-code').addEventListener('input', function() {
+  const customCode = loadCustomCheckerCode();
+  if (customCode && e('#checker-custom').checked) {
+    updateHash();
+    updateCheckers();
+    analyze();
+  }
+});
+
+function onCheckersChanged() {
+  updateHash();
+  updateCheckers();
+  analyze();
+}
+checkers.forEach(checker => {
+  const id = `checker-${checker.name}`;
+  const span = ce('span');
+  const input = ce('input');
+  const label = ce('label');
+
+  input.setAttribute('id', id);
+  input.setAttribute('type', 'checkbox');
+  input.checked = true;
+  label.setAttribute('for', id);
+  label.textContent = checker.name;
+
+  span.appendChild(input);
+  span.appendChild(label);
+  e('#checkers').appendChild(span);
+
+  input.addEventListener('change', onCheckersChanged);
+});
+e('#checker-custom').addEventListener('change', onCheckersChanged);
+
 // Get a list of sources the server has data for, and add them to a
 // <datalist>.
 e('#status-value').textContent = 'Loading sources';
@@ -249,7 +327,7 @@ stdlib.xhr('/list/idl', {responseType: 'json'}).then(function(arr) {
     updateHash();
   }
   Promise.all([getData('left'), getData('right')])
-      .then(updateInterfaces).then(analyze);
+    .then(updateInterfaces).then(updateCheckers).then(analyze);
 });
 
 function analyze() {
@@ -283,7 +361,7 @@ function analyze() {
 
   logger.info(`Analyzing ${name}`);
 
-  for (const checker of checkers) {
+  for (const checker of data.checkers) {
     try {
       checker(logger, left, right);
     } catch (err) {

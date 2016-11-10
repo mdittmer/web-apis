@@ -32,6 +32,11 @@
       color: white;
       background-color: black;
     }
+
+    textarea {
+      height: 5em;
+      font-family: Menlo, Consolas, "DejaVu Sans Mono", monospace;
+    }
     /* Very simple alternating flex layout. ">" selectors are expensive, but
     ** this page is small enough for it to not matter. */
     body {
@@ -111,7 +116,9 @@
 
     <div>
       <span>Custom checker</span>
-      <textarea id="custom-checker-code"></textarea>
+      <textarea id="custom-checker-code">function custom(logger, left, right) {
+  logger.info('Invoking custom checker');
+}</textarea>
     </div>
 
     <div id="status">
