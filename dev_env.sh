@@ -15,3 +15,4 @@ if [ -f ./dev_env.local.sh ]; then
 fi
 
 npm install
+npm update

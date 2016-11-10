@@ -8,7 +8,8 @@ Playground for better understanding Web APIs. Data collection supported by
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [Serving locally](#serving-locally)
+- [Serving locally (for development)](#serving-locally-for-development)
+- [Development and deployment](#development-and-deployment)
 - [Javascript Object Graphs](#javascript-object-graphs)
   - [Exploring data](#exploring-data)
   - [Collecting data](#collecting-data)
@@ -21,16 +22,38 @@ Playground for better understanding Web APIs. Data collection supported by
 - [Web IDL](#web-idl)
   - [Exploring data](#exploring-data-1)
   - [Bulk load](#bulk-load)
-    - [URL import example: Importing from URLs mentioned in caniuse.com's data](#url-import-example-importing-from-urls-mentioned-in-caniusecoms-data)
+    - [URL import example: Importing from URLs mentioned in Blink's data](#url-import-example-importing-from-urls-mentioned-in-blinks-data)
+    - [Environment setup](#environment-setup)
+    - [Collecting the data](#collecting-the-data)
     - [Local repository import example: Importing Blink's WebIDL](#local-repository-import-example-importing-blinks-webidl)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Serving locally
+## Serving locally (for development)
 
     $ npm install
     $ npm run rebuild
+    $ npm run serve
+
+## Development and deployment
+
+Most shell-level development variables can be set using:
+
+    $ . ./dev_env.sh
+
+Assets that require preprocessing are built using `webpack`. `npm` scripts
+are provided for live development and for deployment. To deploy `webpack`
+such that it will watch dependencies and rebuild assets, run:
+
+    $ npm run develop
+
+This will continue to run until it is interrupted or killed.
+
+To build assets that are optimized for production, run:
+
     $ npm run deploy
+
+This will build once, then exit.
 
 ## Javascript Object Graphs
 
@@ -196,30 +219,48 @@ from markup fetched from URLs, rather than operating over `.idl` files
 directly. Import scripts cache URL fetches in `.urlcache/` and IDL parses in
 `.idlcache/`.
 
-#### URL import example: Importing from URLs mentioned in caniuse.com's data
+#### URL import example: Importing from URLs mentioned in Blink's data
 
-This URL import is pretty straightforward. Simply invoke
-`caniuse_idl_urls_import.sh` by running something like `zsh
-./caniuse_idl_urls_import.sh` or `bash ./caniuse_idl_urls_import.sh`. There will
-be lots of output, which should start with something like:
+This import example requires the `unbuffer` and Selenium WebDriver with
+ChromeDriver.
 
+#### Environment setup
+
+Make sure you have `unbuffer` installed. If you're unsure, look for non-empty
+output from:
+
+    $ which unbuffer
+
+Also, make sure you have Selenium WebDriver and ChromeDriver installed. Take
+note of the `jar` file associated with each. Add the following to
+`selenium_custom_server.local.sh` in your local checkout:
+
+```zsh
+SELENIUM_JAR=/path/to/selenium/web-driver/jar
+CHROME_DRIVER=/path/to/chrome-driver
+
+export SELENIUM_JAR
+export CHROME_DRIVER
 ```
-Loading https://raw.githubusercontent.com/Fyrd/caniuse/master/fulldata-json/data-2.0.json
-```
 
-and end with something like:
+Now run (and leave running) `selenium_custom_server.sh` with something like
+`zsh selenium_custom_server.sh` or `bash selenium_custom_server.sh`.
 
-```
-Wrote 38 IDL fragments from 222 URLs to /path/to/web-apis/./data/idl/caniuse/linked/all.json
-```
+#### Collecting the data
 
-*NOTE*: This will overwrite `data/idl/caniuse/linked/all.json`.
+Invoke `blink_idl_urls_import.sh` by running something like `zsh
+./blink_idl_urls_import.sh` or `bash ./blink_idl_urls_import.sh`. There will
+be lots of output, most of which is also written to
+`data/idl/blink/linked/log`.
+
+*NOTE*: This will overwrite
+ `data/idl/caniuse/linked/{all.json|processed.json|log}`.
 
 #### Local repository import example: Importing Blink's WebIDL
 
 First, make sure you have a checkout of Blink. You can either use an existing
-checkout of the Chromium source code (and point to `third_party/WebKit`) or do
-the following to checkout Chromium, keeping only the Blink source:
+checkout of the Chromium source code (and point to `third_party/WebKit`) or
+do the following to checkout Chromium, keeping only the Blink source:
 
     $ mkdir blink
     $ cd blink

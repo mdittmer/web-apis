@@ -37,4 +37,4 @@ URLS=$(cat $(cat ${MASTER_FILE}) | sort | uniq)
 export WEB_APIS_DIR
 export URLS
 
-node --max_old_space_size=16384 ${WEB_APIS_DIR}/blink_idl_urls_import.js
+unbuffer node --max_old_space_size=16384 "${WEB_APIS_DIR}/blink_idl_urls_import.js" 2>&1 | tee "${WEB_APIS_DIR}/data/idl/blink/linked/log"
