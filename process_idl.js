@@ -149,6 +149,10 @@ function concretizeParses(deduped) {
   let concrete = [];
 
   for (const parse of deduped) {
+    // Do not process Implements statements directly; they are gathered as a part
+    // of the inheritance for their assocaited Interface.
+    if (parse instanceof ast.Implements) continue;
+
     concrete.push(gatherInheritance(deduped, parse));
   }
 
