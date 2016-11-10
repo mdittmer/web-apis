@@ -20,15 +20,27 @@ const fs = require('fs');
 const _ = require('lodash');
 const serialize = require('simple-serialization');
 const jsonModule = serialize.JSON;
+const deepClone = jsonModule.deepClone;
 const webidl2 = require('webidl2-js');
 const ast = webidl2.ast;
 const loggerModule = require('./logger.js');
 const stringify = require('ya-stdlib-js').stringify;
 
-function loadParses(json) {
+function fromString(str) {
+  return jsonModule.fromJSON(
+    JSON.parse(str),
+    ast.registry
+  );
+}
+
+function toString(o) {
+  return stringify(jsonModule.toJSON(o, ast.registry));
+}
+
+function loadParses(parses) {
   let asts = [];
 
-  jsonModule.fromJSON(json).forEach(item => {
+  parses.forEach(item => {
     item.parses.forEach(parse => {
       parse.url = item.url;
       asts.push(parse);
@@ -76,7 +88,7 @@ function dedupParses(grouped) {
     if (key.indexOf('Implements') === 0) {
       const groupedImplements = _.groupBy(parses, parse => parse.implemented);
       _.forOwn(groupedImplements, implementsGroup => {
-        deduped.push(jsonModule.deepClone(implementsGroup[0]));
+        deduped.push(deepClone(implementsGroup[0]));
       });
       return;
     }
@@ -99,14 +111,14 @@ function dedupParses(grouped) {
 }
 
 function mergePartialInterfaces(parses) {
-  let newParse = jsonModule.deepClone(parses[0]);
+  let newParse = deepClone(parses[0]);
   let i = 0;
   for (const member of newParse.members) {
     member.from = `partial${i}::${parses[i].url}`;
   }
   for (i = 1; i < parses.length; i++) {
     for (const member of parses[i].members) {
-      let newMember = jsonModule.deepClone(member);
+      let newMember = deepClone(member);
       newMember.from = `partial${i}::${parses[i].url}`;
       newParse.members.push(newMember);
     }
@@ -115,7 +127,7 @@ function mergePartialInterfaces(parses) {
 }
 
 function collectPartials(grouped, parse, key) {
-  let newParse = jsonModule.deepClone(parse);
+  let newParse = deepClone(parse);
 
   const partialKey = `Partial${key}`;
   const partialGroup = grouped[partialKey];
@@ -159,7 +171,7 @@ function gatherSuper(deduped, newParse, parses, superName) {
     const gatheredInherited = gatherInheritance(deduped, parses[0]);
 
     for (const member of gatheredInherited.members) {
-      let newMember = jsonModule.deepClone(member);
+      let newMember = deepClone(member);
       if (!newMember.from) newMember.from = superName;
       newParse.members.push(newMember);
     }
@@ -176,7 +188,7 @@ function gatherInheritance(deduped, parse) {
   const key = `${parse.constructor.name}:${parse.name || parse.implementer}`;
   if (gatheredInheritances[key]) return gatheredInheritances[key];
 
-  let newParse = jsonModule.deepClone(parse);
+  let newParse = deepClone(parse);
   gatheredInheritances[key] = newParse;
 
   if (!parse.name) return newParse;
@@ -212,7 +224,7 @@ function gatherInheritance(deduped, parse) {
 function processParses(data, outPath) {
   fs.writeFileSync(
     outPath,
-    stringify(
+    toString(
       concretizeParses(
         dedupParses(
           groupParses(
@@ -227,7 +239,10 @@ function processParses(data, outPath) {
 }
 
 function processFile(inPath, outPath) {
-  return processParses(JSON.parse(fs.readFileSync(inPath)), outPath);
+  return processParses(
+    fromString(fs.readFileSync(inPath)),
+    outPath
+  );
 }
 
 module.exports = {processFile, processParses};

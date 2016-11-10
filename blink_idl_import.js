@@ -52,9 +52,6 @@ var data = loadFiles(idlFiles);
 var serialize = require('simple-serialization');
 var parserModule = require('webidl2-js');
 var parser = parserModule.parser;
-var toJSON = function(json) {
-  return serialize.JSON.toJSON(json, parserModule.ast.registry);
-};
 
 var errCount = 0;
 var parses = [];
@@ -65,7 +62,7 @@ data.forEach(function(datum) {
     if (res[0]) {
       parses.push({
         url: url,
-        parses: res[1].map(toJSON),
+        parses: res[1],
       });
     } else {
       errCount++;
@@ -81,7 +78,12 @@ data.forEach(function(datum) {
 var allPath = env.WEB_APIS_DIR + '/data/idl/blink/all.json';
 var processedPath = env.WEB_APIS_DIR + '/data/idl/blink/processed.json';
 
-fs.writeFileSync(allPath, stringify(parses));
+fs.writeFileSync(
+  allPath,
+  stringify(
+    serialize.JSON.toJSON(parses, parserModule.ast.registry)
+  )
+);
 
 logger.win('Wrote', parses.length, 'IDL fragments from', idlFiles.length,
             'files. Encountered', errCount, 'errors');
