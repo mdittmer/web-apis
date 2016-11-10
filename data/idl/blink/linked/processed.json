@@ -2961,42 +2961,6 @@
     "url": "http://dev.w3.org/csswg/css-font-loading/"
   },
   {
-    "implemented": "FontFaceSource",
-    "implementer": "Document",
-    "type_": "Implements",
-    "url": "http://dev.w3.org/csswg/css-font-loading/"
-  },
-  {
-    "implemented": "FontFaceSource",
-    "implementer": "Document",
-    "type_": "Implements",
-    "url": "http://dev.w3.org/csswg/css-font-loading/"
-  },
-  {
-    "implemented": "FontFaceSource",
-    "implementer": "WorkerGlobalScope",
-    "type_": "Implements",
-    "url": "http://dev.w3.org/csswg/css-font-loading/"
-  },
-  {
-    "implemented": "FontFaceSource",
-    "implementer": "WorkerGlobalScope",
-    "type_": "Implements",
-    "url": "http://dev.w3.org/csswg/css-font-loading/"
-  },
-  {
-    "implemented": "FontFaceSource",
-    "implementer": "WorkerGlobalScope",
-    "type_": "Implements",
-    "url": "http://dev.w3.org/csswg/css-font-loading/"
-  },
-  {
-    "implemented": "FontFaceSource",
-    "implementer": "WorkerGlobalScope",
-    "type_": "Implements",
-    "url": "http://dev.w3.org/csswg/css-font-loading/"
-  },
-  {
     "attrs": [
       {
         "args": [
@@ -3510,12 +3474,6 @@
     ],
     "name": "LinkStyle",
     "type_": "Interface",
-    "url": "http://dev.w3.org/csswg/cssom-1/"
-  },
-  {
-    "implemented": "LinkStyle",
-    "implementer": "ProcessingInstruction",
-    "type_": "Implements",
     "url": "http://dev.w3.org/csswg/cssom-1/"
   },
   {
@@ -5473,18 +5431,6 @@
     "url": "http://dev.w3.org/csswg/cssom-1/"
   },
   {
-    "implemented": "ElementCSSInlineStyle",
-    "implementer": "HTMLElement",
-    "type_": "Implements",
-    "url": "http://dev.w3.org/csswg/cssom-1/"
-  },
-  {
-    "implemented": "ElementCSSInlineStyle",
-    "implementer": "SVGElement",
-    "type_": "Implements",
-    "url": "http://dev.w3.org/csswg/cssom-1/"
-  },
-  {
     "members": [
       {
         "args": [
@@ -6342,36 +6288,6 @@
     ],
     "name": "GeometryUtils",
     "type_": "Interface",
-    "url": "http://dev.w3.org/csswg/cssom-view/"
-  },
-  {
-    "implemented": "GeometryUtils",
-    "implementer": "Text",
-    "type_": "Implements",
-    "url": "http://dev.w3.org/csswg/cssom-view/"
-  },
-  {
-    "implemented": "GeometryUtils",
-    "implementer": "Element",
-    "type_": "Implements",
-    "url": "http://dev.w3.org/csswg/cssom-view/"
-  },
-  {
-    "implemented": "GeometryUtils",
-    "implementer": "Element",
-    "type_": "Implements",
-    "url": "http://dev.w3.org/csswg/cssom-view/"
-  },
-  {
-    "implemented": "GeometryUtils",
-    "implementer": "CSSPseudoElement",
-    "type_": "Implements",
-    "url": "http://dev.w3.org/csswg/cssom-view/"
-  },
-  {
-    "implemented": "GeometryUtils",
-    "implementer": "CSSPseudoElement",
-    "type_": "Implements",
     "url": "http://dev.w3.org/csswg/cssom-view/"
   },
   {
@@ -11910,12 +11826,6 @@
     "url": "http://heycam.github.io/webidl/"
   },
   {
-    "implemented": "identifier_B",
-    "implementer": "identifier_A",
-    "type_": "Implements",
-    "url": "http://heycam.github.io/webidl/"
-  },
-  {
     "members": [
       {
         "args": [
@@ -13207,30 +13117,6 @@
     "url": "http://heycam.github.io/webidl/"
   },
   {
-    "implemented": "SomeFunctionality",
-    "implementer": "Window",
-    "type_": "Implements",
-    "url": "http://heycam.github.io/webidl/"
-  },
-  {
-    "implemented": "SomeFunctionality",
-    "implementer": "Window",
-    "type_": "Implements",
-    "url": "http://heycam.github.io/webidl/"
-  },
-  {
-    "implemented": "SomeFunctionality",
-    "implementer": "Window",
-    "type_": "Implements",
-    "url": "http://heycam.github.io/webidl/"
-  },
-  {
-    "implemented": "SomeFunctionality",
-    "implementer": "Window",
-    "type_": "Implements",
-    "url": "http://heycam.github.io/webidl/"
-  },
-  {
     "members": [
     ],
     "name": "Gizmo",
@@ -13242,30 +13128,6 @@
     ],
     "name": "MoreFunctionality",
     "type_": "Interface",
-    "url": "http://heycam.github.io/webidl/"
-  },
-  {
-    "implemented": "MoreFunctionality",
-    "implementer": "SomeFunctionality",
-    "type_": "Implements",
-    "url": "http://heycam.github.io/webidl/"
-  },
-  {
-    "implemented": "SomeFunctionality",
-    "implementer": "Gizmo",
-    "type_": "Implements",
-    "url": "http://heycam.github.io/webidl/"
-  },
-  {
-    "implemented": "SomeFunctionality",
-    "implementer": "Gizmo",
-    "type_": "Implements",
-    "url": "http://heycam.github.io/webidl/"
-  },
-  {
-    "implemented": "B",
-    "implementer": "A",
-    "type_": "Implements",
     "url": "http://heycam.github.io/webidl/"
   },
   {
@@ -13375,18 +13237,6 @@
     "url": "http://heycam.github.io/webidl/"
   },
   {
-    "implemented": "E",
-    "implementer": "C",
-    "type_": "Implements",
-    "url": "http://heycam.github.io/webidl/"
-  },
-  {
-    "implemented": "E",
-    "implementer": "C",
-    "type_": "Implements",
-    "url": "http://heycam.github.io/webidl/"
-  },
-  {
     "members": [
       {
         "from": "H",
@@ -13437,18 +13287,6 @@
     ],
     "name": "I",
     "type_": "Interface",
-    "url": "http://heycam.github.io/webidl/"
-  },
-  {
-    "implemented": "H",
-    "implementer": "F",
-    "type_": "Implements",
-    "url": "http://heycam.github.io/webidl/"
-  },
-  {
-    "implemented": "H",
-    "implementer": "F",
-    "type_": "Implements",
     "url": "http://heycam.github.io/webidl/"
   },
   {
@@ -13526,12 +13364,6 @@
     ],
     "name": "Observable",
     "type_": "Interface",
-    "url": "http://heycam.github.io/webidl/"
-  },
-  {
-    "implemented": "Observable",
-    "implementer": "Entry",
-    "type_": "Implements",
     "url": "http://heycam.github.io/webidl/"
   },
   {
@@ -15177,12 +15009,6 @@
     "url": "http://heycam.github.io/webidl/"
   },
   {
-    "implemented": "Mixin",
-    "implementer": "B2",
-    "type_": "Implements",
-    "url": "http://heycam.github.io/webidl/"
-  },
-  {
     "members": [
       {
         "from": "Mixin",
@@ -15262,12 +15088,6 @@
     ],
     "name": "Iterable",
     "type_": "Interface",
-    "url": "http://heycam.github.io/webidl/"
-  },
-  {
-    "implemented": "A",
-    "implementer": "B",
-    "type_": "Implements",
     "url": "http://heycam.github.io/webidl/"
   },
   {
@@ -15480,12 +15300,6 @@
     ],
     "name": "ServiceWorker",
     "type_": "Interface",
-    "url": "http://mkruisselbrink.github.io/ServiceWorker/spec/service_worker/"
-  },
-  {
-    "implemented": "AbstractWorker",
-    "implementer": "ServiceWorker",
-    "type_": "Implements",
     "url": "http://mkruisselbrink.github.io/ServiceWorker/spec/service_worker/"
   },
   {
@@ -19607,30 +19421,6 @@
     ],
     "name": "NavigatorBudget",
     "type_": "Interface",
-    "url": "https://beverloo.github.io/budget-api/"
-  },
-  {
-    "implemented": "NavigatorBudget",
-    "implementer": "Navigator",
-    "type_": "Implements",
-    "url": "https://beverloo.github.io/budget-api/"
-  },
-  {
-    "implemented": "NavigatorBudget",
-    "implementer": "Navigator",
-    "type_": "Implements",
-    "url": "https://beverloo.github.io/budget-api/"
-  },
-  {
-    "implemented": "NavigatorBudget",
-    "implementer": "Navigator",
-    "type_": "Implements",
-    "url": "https://beverloo.github.io/budget-api/"
-  },
-  {
-    "implemented": "NavigatorBudget",
-    "implementer": "WorkerNavigator",
-    "type_": "Implements",
     "url": "https://beverloo.github.io/budget-api/"
   },
   {
@@ -40042,12 +39832,6 @@
     "url": "https://w3c.github.io/webappsec/specs/credentialmanagement/"
   },
   {
-    "implemented": "Transferable",
-    "implementer": "Credential",
-    "type_": "Implements",
-    "url": "https://w3c.github.io/webappsec/specs/credentialmanagement/"
-  },
-  {
     "inheritsFrom": "CredentialData",
     "members": [
       {
@@ -56320,30 +56104,6 @@
     "url": "https://webbluetoothcg.github.io/web-bluetooth/"
   },
   {
-    "implemented": "EventTarget",
-    "implementer": "Bluetooth",
-    "type_": "Implements",
-    "url": "https://webbluetoothcg.github.io/web-bluetooth/"
-  },
-  {
-    "implemented": "EventTarget",
-    "implementer": "Bluetooth",
-    "type_": "Implements",
-    "url": "https://webbluetoothcg.github.io/web-bluetooth/"
-  },
-  {
-    "implemented": "EventTarget",
-    "implementer": "Bluetooth",
-    "type_": "Implements",
-    "url": "https://webbluetoothcg.github.io/web-bluetooth/"
-  },
-  {
-    "implemented": "EventTarget",
-    "implementer": "Bluetooth",
-    "type_": "Implements",
-    "url": "https://webbluetoothcg.github.io/web-bluetooth/"
-  },
-  {
     "members": [
       {
         "from": "AllowedBluetoothDevice",
@@ -56509,30 +56269,6 @@
     ],
     "name": "ValueEventInit",
     "type_": "Dictionary",
-    "url": "https://webbluetoothcg.github.io/web-bluetooth/"
-  },
-  {
-    "implemented": "EventTarget",
-    "implementer": "BluetoothDevice",
-    "type_": "Implements",
-    "url": "https://webbluetoothcg.github.io/web-bluetooth/"
-  },
-  {
-    "implemented": "EventTarget",
-    "implementer": "BluetoothDevice",
-    "type_": "Implements",
-    "url": "https://webbluetoothcg.github.io/web-bluetooth/"
-  },
-  {
-    "implemented": "EventTarget",
-    "implementer": "BluetoothDevice",
-    "type_": "Implements",
-    "url": "https://webbluetoothcg.github.io/web-bluetooth/"
-  },
-  {
-    "implemented": "EventTarget",
-    "implementer": "BluetoothDevice",
-    "type_": "Implements",
     "url": "https://webbluetoothcg.github.io/web-bluetooth/"
   },
   {
@@ -57031,24 +56767,6 @@
     "url": "https://webbluetoothcg.github.io/web-bluetooth/"
   },
   {
-    "implemented": "EventTarget",
-    "implementer": "BluetoothRemoteGATTService",
-    "type_": "Implements",
-    "url": "https://webbluetoothcg.github.io/web-bluetooth/"
-  },
-  {
-    "implemented": "EventTarget",
-    "implementer": "BluetoothRemoteGATTService",
-    "type_": "Implements",
-    "url": "https://webbluetoothcg.github.io/web-bluetooth/"
-  },
-  {
-    "implemented": "EventTarget",
-    "implementer": "BluetoothRemoteGATTService",
-    "type_": "Implements",
-    "url": "https://webbluetoothcg.github.io/web-bluetooth/"
-  },
-  {
     "members": [
       {
         "args": [
@@ -57202,18 +56920,6 @@
     ],
     "name": "BluetoothRemoteGATTCharacteristic",
     "type_": "Interface",
-    "url": "https://webbluetoothcg.github.io/web-bluetooth/"
-  },
-  {
-    "implemented": "EventTarget",
-    "implementer": "BluetoothRemoteGATTCharacteristic",
-    "type_": "Implements",
-    "url": "https://webbluetoothcg.github.io/web-bluetooth/"
-  },
-  {
-    "implemented": "EventTarget",
-    "implementer": "BluetoothRemoteGATTCharacteristic",
-    "type_": "Implements",
     "url": "https://webbluetoothcg.github.io/web-bluetooth/"
   },
   {
@@ -57534,12 +57240,6 @@
     "url": "https://wicg.github.io/shape-detection-api/"
   },
   {
-    "implemented": "DetectedObject",
-    "implementer": "DetectedFace",
-    "type_": "Implements",
-    "url": "https://wicg.github.io/shape-detection-api/"
-  },
-  {
     "attrs": [
       {
         "name": "Constructor",
@@ -57612,12 +57312,6 @@
     ],
     "name": "DetectedBarcode",
     "type_": "Interface",
-    "url": "https://wicg.github.io/shape-detection-api/"
-  },
-  {
-    "implemented": "DetectedObject",
-    "implementer": "DetectedBarcode",
-    "type_": "Implements",
     "url": "https://wicg.github.io/shape-detection-api/"
   },
   {
@@ -57746,12 +57440,6 @@
     ],
     "name": "USB",
     "type_": "Interface",
-    "url": "https://wicg.github.io/webusb/"
-  },
-  {
-    "implemented": "EventTarget",
-    "implementer": "USB",
-    "type_": "Implements",
     "url": "https://wicg.github.io/webusb/"
   },
   {
@@ -59052,12 +58740,6 @@
     "url": "https://www.khronos.org/registry/typedarray/specs/latest/"
   },
   {
-    "implemented": "Transferable",
-    "implementer": "ArrayBuffer",
-    "type_": "Implements",
-    "url": "https://www.khronos.org/registry/typedarray/specs/latest/"
-  },
-  {
     "attrs": [
       {
         "name": "NoInterfaceObject",
@@ -59331,12 +59013,6 @@
     ],
     "name": "Uint8ClampedArray",
     "type_": "Interface",
-    "url": "https://www.khronos.org/registry/typedarray/specs/latest/"
-  },
-  {
-    "implemented": "ArrayBufferView",
-    "implementer": "Uint8ClampedArray",
-    "type_": "Implements",
     "url": "https://www.khronos.org/registry/typedarray/specs/latest/"
   },
   {
@@ -59771,12 +59447,6 @@
     ],
     "name": "DataView",
     "type_": "Interface",
-    "url": "https://www.khronos.org/registry/typedarray/specs/latest/"
-  },
-  {
-    "implemented": "ArrayBufferView",
-    "implementer": "DataView",
-    "type_": "Implements",
     "url": "https://www.khronos.org/registry/typedarray/specs/latest/"
   },
   {
@@ -73261,12 +72931,6 @@
     ],
     "name": "WebGLRenderingContext",
     "type_": "Interface",
-    "url": "https://www.khronos.org/registry/webgl/specs/latest/1.0/"
-  },
-  {
-    "implemented": "WebGLRenderingContextBase",
-    "implementer": "WebGLRenderingContext",
-    "type_": "Implements",
     "url": "https://www.khronos.org/registry/webgl/specs/latest/1.0/"
   }
 ]
