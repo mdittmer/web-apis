@@ -224,7 +224,7 @@ directly. Import scripts cache URL fetches in `.urlcache/` and IDL parses in
 This import example requires the `unbuffer` and Selenium WebDriver with
 ChromeDriver.
 
-#### Environment setup
+##### Environment setup
 
 Make sure you have `unbuffer` installed. If you're unsure, look for non-empty
 output from:
@@ -246,7 +246,7 @@ export CHROME_DRIVER
 Now run (and leave running) `selenium_custom_server.sh` with something like
 `zsh selenium_custom_server.sh` or `bash selenium_custom_server.sh`.
 
-#### Collecting the data
+##### Collecting the data
 
 Invoke `blink_idl_urls_import.sh` by running something like `zsh
 ./blink_idl_urls_import.sh` or `bash ./blink_idl_urls_import.sh`. There will
@@ -255,6 +255,11 @@ be lots of output, most of which is also written to
 
 *NOTE*: This will overwrite
  `data/idl/caniuse/linked/{all.json|processed.json|log}`.
+
+This will also take a long time; minutes, not hours. If it hangs completely,
+try setting and exporting `NUM_SELENIUM_SESSIONS_PER_NODE` and
+`NUM_SELENIUM_NODES` in `selenium_custom_server.local.sh`.
+
 
 #### Local repository import example: Importing Blink's WebIDL
 
