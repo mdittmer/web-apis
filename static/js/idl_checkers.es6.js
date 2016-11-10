@@ -26,12 +26,6 @@ function check(logger, cond, pass, fail) {
 }
 
 function extendedAttributes(logger, left, right) {
-  if (!left.attrs) {
-    logger.warn(`Left ${left.constructor.name} has no extended attributes`);
-  }
-  if (!right.attrs) {
-    logger.warn(`Right ${left.constructor.name} has no extended attributes`);
-  }
   const diff = _.differenceWith(left.attrs || [], right.attrs || [], _.isEqual);
   check(
     logger, diff.length === 0,
@@ -69,14 +63,6 @@ module.exports = [
   },
   function topLevelMemberNames(logger, left, right) {
     logger.info('Checking top-level member names');
-
-    if (!left.members) {
-      logger.warn(`Left has no members`);
-    }
-
-    if (!right.members) {
-      logger.warn(`Right has no members`);
-    }
 
     eachKey(logger, left.members || [], right.members || [], 'name');
   }
