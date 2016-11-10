@@ -18,10 +18,111 @@
 
 const stdlib = require('ya-stdlib-js');
 const _ = require('lodash');
+const jsonPrune = require('json-prune');
 const webidl2 = require('webidl2-js');
 const ast = webidl2.ast;
 const serialize = require('simple-serialization');
 const jsonModule = serialize.JSON;
+const checkers = require('./idl_checkers.es6.js');
+
+// Get an element from the DOM.
+function e(selector) {
+  return document.querySelector(selector);
+}
+
+class DOMLogger {
+  constructor(opts) {
+    this.init(opts || {});
+  }
+
+  init(opts) {
+    Object.assign(this, {
+      maxEntries: 20,
+      nextHTML: [],
+      raf: this.raf_.bind(this),
+      prefixes: {
+        win: 'YESS',
+        log: 'LOGG',
+        info: 'INFO',
+        warn: 'WARN',
+        error: 'ERRR',
+      },
+      colors: {
+        win: 'green',
+        log: 'grey',
+        info: 'white',
+        warn: 'yellow',
+        error: 'red',
+      },
+    }, opts);
+  }
+
+  clear() {
+    this.e.innerHTML = '';
+    this.nextHTML = [];
+  }
+
+  raf_() {
+    let htmlStr = '';
+    for (let i = 0; i < this.maxEntries; i++) {
+      if (this.nextHTML.length === 0) break;
+      htmlStr += this.nextHTML.shift();
+    }
+    this.e.innerHTML += htmlStr;
+    if (this.nextHTML.length > 0) requestAnimationFrame(this.raf);
+  }
+
+  replacer(value, defaultValue) {
+    if (Array.isArray(value) || value === null ||
+        typeof value !== 'object') {
+      // console.log('Array.isArray(value)', Array.isArray(value));
+      // console.log('value === null', value === null);
+      // console.log("typeof value !== 'object'", typeof value !== 'object');
+      return defaultValue;
+    }
+    const keys = Object.keys(value).sort();
+    const newKeys = keys.slice(0, 10);
+    let ret = {};
+    for (const key of newKeys) {
+      ret[key] = value[key];
+    }
+    if (newKeys.length < keys.length) console.log(`Pruned object with ${keys.length} keys`, value);
+    if (newKeys.length < keys.length) ret['-pruned-'] = true;
+    return ret;
+  }
+
+  argToString(arg) {
+    if (typeof arg === 'string') return arg;
+    if (arg === undefined) return html.toHTMLContentString('undefined');
+
+    if (typeof arg === 'object')
+      return html.toHTMLContentString(jsonPrune(this.replacer(arg, arg), {
+        replacer: this.replacer,
+        depthDecr: 8,
+        arrayMaxLength: 4,
+      }));
+
+    return html.toHTMLContentString(arg.toString());
+  }
+
+  log_(content, prefix = 'LOG', color = 'grey') {
+    if (this.nextHTML.length === 0) requestAnimationFrame(this.raf);
+    this.nextHTML.push(
+      `<span style="color:${color}">${prefix}  ${content.map(arg => this.argToString(arg)).join(' ')}</span>\n`
+    );
+  }
+
+  assert(cond, msg) {
+    if (!cond) this.error(`Assertion failure: ${msg || '<no message>'}`);
+  }
+}
+['win', 'log', 'info', 'warn', 'error'].forEach(name => {
+  DOMLogger.prototype[name] = function(...content) {
+    return this.log_(content, this.prefixes[name], this.colors[name]);
+  };
+});
+
+const logger = new DOMLogger({e: e('#output')});
 
 let data = {
   sources: [],
@@ -29,11 +130,6 @@ let data = {
   left: null,
   right: null,
 };
-
-// Get an element from the DOM.
-function e(selector) {
-  return document.querySelector(selector);
-}
 
 // String hash code.
 function hashCode(str) {
@@ -82,23 +178,32 @@ function loadFromHash() {
 }
 
 function getData(direction) {
+  e('#status-value').textContent = 'Loading data';
+
   const value = e('#' + direction + '-input').value;
   return stdlib.xhr(optValueToURL(value), {responseType: 'json'}).then(
       function(json) {
-        if (json === null) return;
-        data[direction] = jsonModule.fromJSON(json);
+        if (json !== null) data[direction] = jsonModule.fromJSON(json);
+
+        e('#status-value').textContent = 'Idle';
       }
   );
 }
 
 // Update list of potential interfaces in <datalist>.
 function updateInterfaces() {
+  e('#status-value').textContent = 'Updating interfaces';
+
   // No interface update if data not loaded yet.
   if (!data.left) return;
 
   const datalist = e('#interfaces');
   datalist.innerHTML = '';
-  addOpts(datalist, data.left.data.map(item => item.name || item.implementer));
+  addOpts(
+    datalist, _.uniq(data.left.map(parse => parse.name || parse.implementer))
+  );
+
+  e('#status-value').textContent = 'Done';
 }
 
 // Add <option>s to the given <datalist>.
@@ -135,6 +240,7 @@ e('#interface-input').addEventListener('input', function() {
 
 // Get a list of sources the server has data for, and add them to a
 // <datalist>.
+e('#status-value').textContent = 'Loading sources';
 stdlib.xhr('/list/idl', {responseType: 'json'}).then(function(arr) {
   data.sources = arr;
   addOpts(e('#sources'), data.sources);
@@ -147,5 +253,43 @@ stdlib.xhr('/list/idl', {responseType: 'json'}).then(function(arr) {
 });
 
 function analyze() {
-  console.log('analyze()');
+  e('#status-value').textContent = 'Analyzing';
+
+  logger.clear();
+
+  const name = e('#interface-input').value;
+  if (!name) {
+    logger.log(`No parse selected`);
+    return;
+  }
+
+  const left = data.left.filter(
+    parse => parse.name === name || parse.implementer === name
+  )[0];
+  if (!left) {
+    logger.clear();
+    logger.error('No left');
+    return;
+  }
+
+  const right = data.right.filter(
+    parse => parse.name === name || parse.implementer === name
+  )[0];
+  if (!right) {
+    logger.clear();
+    logger.error('No right');
+    return;
+  }
+
+  logger.info(`Analyzing ${name}`);
+
+  for (const checker of checkers) {
+    try {
+      checker(logger, left, right);
+    } catch (err) {
+      logger.error(`${checker.name} ${err}: ${err.stack}`);
+    }
+  }
+
+  e('#status-value').textContent = 'Idle';
 }
