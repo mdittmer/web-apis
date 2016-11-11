@@ -20,17 +20,22 @@ const fs = require('fs');
 const loggerModule = require('./logger.js');
 
 const nullLogger = loggerModule.getLogger({url: null});
-const timeout = 80000;
+const defaultTimeout = 80000;
 
 let instanceId = 0;
 
 class Instance {
   constructor(opts) {
+    this.init(opts || {});
+  }
+
+  init(opts) {
     this.busy = false;
     this.q = [];
     this.logger = nullLogger;
     this.instance = null;
     this.timeoutRef = null;
+    this.timeout = opts.timeout || defaultTimeout;
   }
 
   withInstance(url, f) {
@@ -51,9 +56,9 @@ class Instance {
       this.timeoutRef = null;
       const timedOut = maybeRelease();
       if (timedOut) {
-        timeoutLogger.error(`Instance timed out after ${timeout}`);
+        timeoutLogger.error(`Instance timed out after ${this.timeout}`);
       }
-    }, timeout);
+    }, this.timeout);
 
     return this.getURL(url).then(handle => {
       // Use URL-getting logger state for timeouts.
@@ -84,7 +89,8 @@ class Instance {
   destroyInstance() {
     this.logger.log('Destroying instance');
     this.maybeCancelTimeout();
-    return this.stopInstance();
+    if (this.instance) return this.stopInstance();
+    else return Promise.resolve(null);
   }
 
   restartInstance() {
@@ -184,8 +190,16 @@ class ScraperManager {
 
   destroy() {
     this.logger.log('Destroying manager');
-    return Promise.all(
-        this.instances.forEach(instance => instance.destroy()));
+
+    return new Promise((resolve, reject) => {
+      let p = Promise.resolve(null);
+      for (let i = 0; i < this.instances.length; i++) {
+        p = p.then(() => this.instances[i].destroy());
+      }
+      resolve(p);
+    });
+    // return Promise.all(
+    //     this.instances.forEach(instance => instance.destroy()));
   }
 
   getInstance(url) {
@@ -226,8 +240,7 @@ class Scraper {
 
     if (!cachedURL)
     return scrape.then(ret => {
-      this.savePageToCache({url, handle});
-      return ret;
+      return this.savePageToCache({url, handle}).then(() => ret);
     });
 
     return scrape;

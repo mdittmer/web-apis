@@ -18,6 +18,7 @@
 
 const fs = require('fs');
 const request = require('hyperquest');
+const process = require('process');
 const webidl2 = require('webidl2');
 const parser = require('webidl2-js').parser;
 const stringify = require('ya-stdlib-js').stringify;
@@ -27,8 +28,15 @@ const phantomScrape = require('./phantom-scrape.js');
 const seleniumScrape = require('./selenium-scrape.js');
 const loggerModule = require('./logger.js');
 
+
 const urlCacheDir = `${__dirname}/.urlcache`;
 const idlCacheDir = `${__dirname}/.idlcache`;
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error(reason);
+  if (reason.stack) console.error(reason.stack);
+  throw reason;
+});
 
 function prepareToScrape() {
   [urlCacheDir, idlCacheDir].forEach(path => {
@@ -43,6 +51,12 @@ function prepareToScrape() {
 
 function getCacheFileName(url) {
   return `${url.replace(/[^a-zA-Z0-9]/g, '_')}`;
+}
+
+function clearCache(url) {
+  const fileName = getCacheFileName(url);
+  try { fs.unlinkSync(`${urlCacheDir}/${fileName}`); } catch (e) {}
+  try { fs.unlinkSync(`${idlCacheDir}/${fileName}`); } catch (e) {}
 }
 
 function getUniqueURLs(urls) {
@@ -72,6 +86,16 @@ function getUniqueURLs(urls) {
     const scheme = urlMap[rest].pop();
     return `${scheme}://${rest}`;
   });
+}
+
+function urlSort(a, b) {
+  if (a.url < b.url) {
+    return -1;
+  } else if (a.url > b.url) {
+    return 1;
+  } else {
+    return 0;
+  }
 }
 
 function loadURL(url) {
@@ -160,77 +184,155 @@ module.exports = {
 
     prepareToScrape();
 
-    const seleniumManager = (() => {
+    const seleniumManagerFactory = (opts) => {
+      opts = opts || {};
       const instanceFactory = function() {
-        return new seleniumScrape.Instance({browserName: 'chrome'});
+        return new seleniumScrape.Instance({
+          timeout: opts.timeout || 80000,
+          capabilities: {browserName: 'chrome'},
+        });
       };
       const scraperFactory = function() {
-        return new seleniumScrape.Scraper({urlCacheDir});
+        return new seleniumScrape.Scraper({
+          pageLoadWait: opts.pageLoadWait || 9000,
+          urlCacheDir,
+        });
       };
       return new scraper.ScraperManager({
-        numInstances: 16,
+        numInstances: opts.numInstances || 8,
         instanceFactory,
         scraperFactory,
       });
-    })();
+    };
+
+    let seleniumManager = seleniumManagerFactory();
 
     logger.log(`Attempting to scrape and parse WebIDL from ${urls.length} URLs`);
 
+    const scrapeURLs = (manager, urls, errs) => {
+      return Promise.all(urls.map(url => seleniumManager.scrape(url).then(parse).catch(
+          err => {
+            logger.error(
+                `${manager.constructor.name} failed to scrape-and-parse ${url}: ${err}: ${err.stack}`
+                );
+            if (errs) errs.push(url);
+            return {url, parses: []};
+          }
+          )));
+    };
+
     let seleniumFail = [];
     let seleniumData = [];
-    return Promise.all(urls.map(url => seleniumManager.scrape(url).then(parse).catch(
-      err => {
-        logger.error(
-          `Selenium failed to scrape-and-parse ${url}: ${err}: ${err.stack}`
-        );
-        seleniumFail.push(url);
-        return {url, parses: []};
-      }
-    ))).then(data => {
+    return scrapeURLs(seleniumManager, urls, seleniumFail).then(data => {
       logger.log(`Selenium failed on URLs: ${JSON.stringify(seleniumFail)}`);
       seleniumManager.destroy();
       seleniumData = data;
       logger.log(`Data size is ${seleniumData.length} Selenium URL scrapes`);
-      const allData = seleniumData.sort((a, b) => {
-        if (a.url < b.url) {
-          return -1;
-        } else if (a.url > b.url) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
+      let allData = seleniumData.sort(urlSort);
 
       logger.log(`Checking ${allData.length} URL scrapes against existing data`);
       let prevData = null;
       try {
-        let stat = fs.statSync(path);
         prevData = JSON.parse(fs.readFileSync(path));
       } catch (e) {
         logger.warn(`No previous data found in ${path}`);
       }
 
-      // Warn about potential data loss.
+      let retryURLs = [];
       if (prevData) {
         for (const prevDatum of prevData) {
           const datum = allData.filter(d => d.url === prevDatum.url)[0];
           if ((!datum) && prevDatum.parses.length > 0) {
             logger.warn(`No data extracted from previously known URL ${prevDatum.url}`);
+            retryURLs.push(prevDatum.url);
           } else if (datum &&
               datum.parses.length < prevDatum.parses.length) {
             logger.warn(`Number of parses decreased from ${prevDatum.parses.length} to ${datum.parses.length} for URL ${prevDatum.url}`);
+            retryURLs.push(prevDatum.url);
           }
         }
       }
 
-      logger.log(`Writing to ${path}...`);
-      fs.writeFileSync(path, stringify(allData));
-      const count = allData.reduce(
-          (acc, {url, parses}) => acc + parses.length, 0
-          );
-      logger.log(`Wrote ${count} IDL fragments from ${allData.length} URLs to ${path}`);
+      seleniumManager = seleniumManagerFactory({
+        numInstances: 8,
+        pageLoadWait: 29000,
+        timeout: 160000,
+      });
 
-      return allData;
+      logger.log(`Retrying scrape of ${retryURLs.length} URLs`);
+
+      retryURLs.forEach(url => clearCache(url));
+
+      return scrapeURLs(seleniumManager, retryURLs, seleniumFail).then(data => {
+        seleniumManager.destroy();
+
+        for (const url of retryURLs) {
+          const firstDatum = allData.filter(d => d.url === url)[0];
+          const secondDatum = allData.filter(d => d.url === url)[0];
+
+          // No data this time; no change.
+          if (!secondDatum) {
+            logger.warn(`No data extracted on second pass from URL ${prevDatum.url}`);
+            continue;
+          }
+
+          // No data last time; data this time. Store it!
+          if (!firstDatum) {
+            allData.push(secondDatum);
+            allData = allData.sort(urlSort);
+            continue;
+          }
+
+          // Check new parse counts against first pass, and possibly previously
+          // stored data.
+          const firstParses = firstDatum.parses;
+          const secondParses = secondDatum.parses;
+          if (secondParses.length < firstParses.length) {
+            logger.warn(`Number of parses decreased on second pass from ${firstParses.length} to ${secondParses.length} for URL ${url}`);
+            continue;
+          }
+
+          if (secondParses.length === firstParses.length) {
+            logger.win(`Decreased parse count of ${firstParses.length} appears to be accurate for URL ${url}`);
+            continue;
+          }
+
+          if (secondParses.length > firstParses.length) {
+            const prevDatum = prevData.filter(d => d.url === url)[0];
+            if (!prevDatum) {
+              logger.win(`Second parse yielded parse count of ${firstParses.length}, which appears to be accurate for URL ${url}`);
+              continue;
+            }
+            const prevParses = prevDatum.parses;
+            if (secondParses.length < prevParses.length) {
+              logger.warn(`Number of parses decreased less on second pass from ${prevParses.length} to ${secondParses.length} for URL ${url}`);
+              continue;
+            }
+
+            if (secondParses.length === prevParses.length) {
+              logger.win(`Original parse count of ${prevParses.length} appears to be accurate`);
+              continue;
+            }
+
+            if (secondParses.length > prevParses.length) {
+              logger.win(`Second parse yielded parse count increase from ${prevParses.length} ${secondParses.length}  for URL ${url}`);
+              allData.push(secondDatum);
+              allData = allData.sort(urlSort);
+              continue;
+            }
+          }
+
+          throw new Error('Unreachable: Second pass parse reporting');
+        }
+
+        fs.writeFileSync(path, stringify(allData));
+        const count = allData.reduce(
+            (acc, {url, parses}) => acc + parses.length, 0
+            );
+        logger.log(`Wrote ${count} IDL fragments from ${allData.length} URLs to ${path}`);
+
+        return allData;
+      });
     });
   },
   importIDL: function(urls, path) {

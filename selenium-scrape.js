@@ -20,9 +20,9 @@ const hostModule = require(`./selenium-host.js`);
 const scraper = require('./scraper.js');
 
 class SeleniumInstance extends scraper.Instance {
-  constructor(opts) {
-    super(...arguments);
-    this.hostConfig = opts;
+  init(opts) {
+    super.init(opts);
+    this.hostConfig = opts.capabilities;
   }
 
   stopInstance() {
@@ -47,11 +47,16 @@ class SeleniumInstance extends scraper.Instance {
   }
 }
 
-const pageLoadWait = 9000;
 const pageLoadWaitSkew = 2000;
 
 // Handles are driver objects.
 class SeleniumScraper extends scraper.Scraper {
+  init(opts) {
+    super.init(opts);
+    this.pageLoadWait = opts.pageLoadWait || 19000;
+  }
+
+
   getPageContents({url, handle}) {
     return super.getPageContents(...arguments).then(_ => {
       this.logger.log('Getting page contents');
@@ -69,7 +74,7 @@ class SeleniumScraper extends scraper.Scraper {
     return super.scrapePage(...arguments).then(
       () => {
         const wait =
-            pageLoadWait + Math.floor(Math.random() * pageLoadWaitSkew);
+            this.pageLoadWait + Math.floor(Math.random() * pageLoadWaitSkew);
         this.logger.log(`Waiting ${wait}ms for page to settle`);
         return handle.sleep(wait);
       }
