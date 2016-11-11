@@ -23,5 +23,5 @@ export BLINK_COMMIT_HASH
 export IDL_FILES
 
 pushd ${WEB_APIS_DIR}
-node ./blink_idl_import.js
+unbuffer node ./blink_idl_import.js 2>&1 | tee ./data/idl/blink/log
 popd
