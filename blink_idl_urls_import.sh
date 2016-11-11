@@ -26,7 +26,7 @@ for IDL_FILE in ${IDL_FILES_ARR[@]}; do
   echo "${TMP_FILE}" >> ${MASTER_FILE}
   cat ${BLINK_SRC_DIR}/${IDL_FILE} | \
     ag -o 'https?://[^/]+(/[^?#, \n]*)?(\?[^#, \n]*)?' | \
-    ag '(dev\.w3\.org|\.github\.io|khronos\.org)' | \
+    ag '(dev\.w3\.org|\.github\.io|spec\.whatwg\.org|khronos\.org)' | \
     ag -v 'web\.archive\.org' >> ${TMP_FILE} &!
 done
 
