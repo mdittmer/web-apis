@@ -331,8 +331,6 @@ stdlib.xhr('/list/idl', {responseType: 'json'}).then(function(arr) {
 });
 
 function analyze() {
-  e('#status-value').textContent = 'Analyzing';
-
   logger.clear();
 
   const name = e('#interface-input').value;
@@ -341,25 +339,42 @@ function analyze() {
     return;
   }
 
+  e('#status-value').textContent = 'Analyzing';
+
+  if (name === 'ANY') analyzeAllIDLs(logger);
+  else analyzeIDL(logger, name);
+
+  e('#status-value').textContent = 'Idle';
+}
+
+function analyzeAllIDLs(logger) {
+  for (const leftDatum of data.left) {
+    analyzeIDL(logger, leftDatum.name || leftDatum.implementer);
+  }
+}
+
+function analyzeIDL(logger, name) {
+  logger.info(`Analyzing ${name}`);
+
   const left = data.left.filter(
     parse => parse.name === name || parse.implementer === name
   )[0];
   if (!left) {
-    logger.clear();
-    logger.error('No left');
-    return;
+    logger.error(`No left named "${name}"`);
+  } else {
+    logger.info(`Loaded left ${name} from ${left.url}`);
   }
 
   const right = data.right.filter(
     parse => parse.name === name || parse.implementer === name
   )[0];
   if (!right) {
-    logger.clear();
-    logger.error('No right');
-    return;
+    logger.error(`No right named ${name}`);
+  } else {
+    logger.info(`Loaded right ${name} from ${right.url}`);
   }
 
-  logger.info(`Analyzing ${name}`);
+  if (!(left && right)) return;
 
   for (const checker of data.checkers) {
     try {
@@ -368,6 +383,4 @@ function analyze() {
       logger.error(`${checker.name} ${err}: ${err.stack}`);
     }
   }
-
-  e('#status-value').textContent = 'Idle';
 }
