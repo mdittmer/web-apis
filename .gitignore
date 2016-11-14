@@ -5,4 +5,4 @@
 .idlcache/*
 .urlcache/*
 static/bundle
-dev_env.local.sh
+*.local.sh
