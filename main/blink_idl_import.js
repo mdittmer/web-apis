@@ -19,8 +19,8 @@
 // NOTE: Only to be invoked from blink_idl_import.sh.
 
 var env = require('process').env;
-var processor = require('./process_idl.js');
-var loggerModule = require('./logger.js');
+var processor = require('../lib/idl/process_idl.es6.js');
+var loggerModule = require('../lib/logger.es6.js');
 var idlFiles = env.IDL_FILES.split('\n');
 var blinkSrcDir = env.BLINK_SRC_DIR;
 var blinkHash = env.BLINK_COMMIT_HASH;

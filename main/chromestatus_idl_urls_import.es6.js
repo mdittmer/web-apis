@@ -52,7 +52,7 @@ loadURL('https://www.chromestatus.com/features.json').then(data => {
       feature.spec_link && feature.spec_link.split('#')[0].split('?')[0]
   ).filter(link => link);
 
-  return require('./idl_urls_import.js').importHTTP(
+  return require('../lib/idl/idl_urls_import.es6.js').importHTTP(
     urls,
     require('process').env.WEB_APIS_DIR +
       '/data/idl/chromestatus/linked/all.json'

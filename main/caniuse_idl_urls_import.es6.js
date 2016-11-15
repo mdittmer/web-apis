@@ -56,7 +56,7 @@ loadURL(
     key => features[key].spec.split('#')[0].split('?')[0]
   ).filter(url => url);
 
-  return require('./idl_urls_import.js').importHTTP(
+  return require('../lib/idl/idl_urls_import.es6.js').importHTTP(
     urls,
     require('process').env.WEB_APIS_DIR +
       '/data/idl/caniuse/linked/all.json'

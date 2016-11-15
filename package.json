@@ -7,13 +7,13 @@
     "node": ">=6"
   },
   "scripts": {
-    "build": "webpack --config ./webpack.dev.config.js",
-    "deploy": "webpack --config ./webpack.prod.config.js",
+    "build": "webpack --config ./webpack.dev.config.es6.js",
+    "deploy": "webpack --config ./webpack.prod.config.es6.js",
     "deps": "echo nodepsrightnow",
-    "develop": "webpack --watch --progress --config ./webpack.prod.config.js",
-    "lint": "webpack --config ./webpack.strict.config.js",
+    "develop": "webpack --watch --progress --config ./webpack.prod.config.es6.js",
+    "lint": "webpack --config ./webpack.strict.config.es6.js",
     "postinstall": "npm run deps",
-    "rebuild": "npm run deps && webpack --config ./webpack.dev.config.js",
+    "rebuild": "npm run deps && webpack --config ./webpack.dev.config.es6.js",
     "repl": "node",
     "serve": "zsh scripts/serve.sh"
   },

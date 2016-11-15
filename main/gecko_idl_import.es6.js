@@ -71,6 +71,6 @@ const urls = [
     postfix
 );
 
-require('./idl_urls_import.js').importIDL(
+require('../lib/idl/idl_urls_import.es6.js').importIDL(
   urls, env.WEB_APIS_DIR + '/data/idl/gecko/all.json'
 );

@@ -1,7 +1,11 @@
 const _ = require('lodash');
 const webpack = require('webpack');
 
-const entries = ['main', 'analyze_og', 'analyze_idl.es6'];
+const entries = [
+  {inDir: 'og', name: 'main'},
+  {inDir: 'og', name: 'analyze_og'},
+  {inDir: 'idl', name: 'analyze_idl.es6'}
+];
 
 const isExternal = (module) => {
   const userRequest = module.userRequest;
@@ -18,8 +22,8 @@ const isExternal = (module) => {
 module.exports = {
   context: __dirname,
   entry: _.zipObject(
-    entries,
-    entries.map(entry => `./static/js/${entry}.js`)
+    entries.map(e => e.name),
+    entries.map(e => `${__dirname}/../lib/${e.inDir}/${e.name}.js`)
   ),
   output: {
     path: `./static/bundle`,

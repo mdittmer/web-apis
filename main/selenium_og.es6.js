@@ -21,10 +21,12 @@
 
 const fs = require('fs');
 const webdriver = require('selenium-webdriver');
-const hostModule = require(`./selenium-host.js`);
-const browsers = JSON.parse(fs.readFileSync(`./${hostModule.name}_envs.json`));
-const loggerModule = require('./logger.js');
-const throttle = require('./throttle.js');
+const hostModule = require(`../lib/remote/selenium/selenium-host.js`);
+const browsers = JSON.parse(
+  fs.readFileSync(`../data/selenium/${hostModule.name}_envs.json`)
+);
+const loggerModule = require('../lib/logger.es6.js');
+const throttle = require('../lib/throttle.es6.js');
 const NameRewriter = require('object-graph-js').NameRewriter;
 const stringify = require('ya-stdlib-js').stringify;
 
@@ -166,7 +168,7 @@ throttle(5, browsers.map(browser => {
             const envInfo = new NameRewriter().userAgentAsPlatformInfo(
               data.userAgent
             );
-            const path = `./data/og/${data.key}_${envInfo.browser.name}_${envInfo.browser.version}_${envInfo.platform.name}_${envInfo.platform.version}.json`;
+            const path = `../data/og/${data.key}_${envInfo.browser.name}_${envInfo.browser.version}_${envInfo.platform.name}_${envInfo.platform.version}.json`;
             logger.log('Saving data to', path);
             fs.writeFileSync(path, stringify(data));
           }

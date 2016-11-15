@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+WD=$(readlink -f $(dirname "$0"))
+
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
@@ -33,12 +35,12 @@ function stop() {
 trap stop INT
 
 warn "STARTING WEBPACK"
-webpack --watch --progress --config ./webpack.dev.config.js &
+webpack --watch --progress --config $WD/../config/webpack.dev.config.es6.js &
 WP_PID=$!
 win "WEBPACK STARTED (PID=${WP_PID})"
 
 warn "STARTING WEB SERVER"
-node ./serve.js &
+node $WD/../main/serve.js &
 WS_PID=$!
 win "WEB SERVER STARTED (PID=${WS_PID})"
 

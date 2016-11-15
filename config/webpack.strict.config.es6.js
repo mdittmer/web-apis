@@ -1,4 +1,4 @@
-let config = require('./webpack.dev.config.js');
+let config = require('./webpack.dev.config.es6.js');
 config.module = config.module || {};
 config.module.loaders = [{
   test: /\.js$/,
