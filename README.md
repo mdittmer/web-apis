@@ -30,7 +30,7 @@ Playground for better understanding Web APIs. Data collection supported by
 
 ## Serving locally (for development)
 
-    $ . ./dev_env.sh
+    $ . ./scripts/dev_env.sh
     $ npm run rebuild
     $ npm run serve
 
@@ -80,7 +80,7 @@ interface is also implemented [SauceLabs](https://saucelabs.com), and custom
 
 ##### Setup: BrowserStack
 
-Add the following to `dev_env.local.sh` in your local checkout:
+Add the following to `scripts/dev_env.local.sh` in your local checkout:
 
 ```zsh
 BROWSERSTACK_USERNAME="your_browserstack_username"
@@ -109,7 +109,7 @@ Skip to *Gathering the data* below.
 
 ##### Setup: SauceLabs
 
-Add the following to `dev_env.local.sh` in your local checkout:
+Add the following to `scripts/dev_env.local.sh` in your local checkout:
 
 ```zsh
 SAUCE_USERNAME="your_sauce_username"
@@ -138,7 +138,7 @@ Skip to *Gathering the data* below.
 
 ##### Setup: Custom Selenium
 
-Add the following to `dev_env.local.sh` in your local checkout:
+Add the following to `scripts/dev_env.local.sh` in your local checkout:
 
 ```zsh
 SELENIUM_HOST="selenium_custom"
@@ -159,7 +159,7 @@ Skip to *Gathering the data* below.
 Make sure your development environment is up-to-date, then run the data
 gathering script:
 
-    $ . ./dev_env.sh
+    $ . ./scripts/dev_env.sh
     $ node selenium_og.js
 
 *NOTE*: You can override `SELENIUM_HOST` with one of `browserstack`, `sauce`,
@@ -190,11 +190,11 @@ and interfaces are available.
 
 ### Bulk load
 
-Bulk loading from several repositories and collections of web standards has
-been scripted, but fidelity is not up-to-snuff in some collections. Each
-collection is imported using a `*_import.sh` script, each of which has a
-corresponding `.js` script. `*_urls_import.sh` scripts attempt to scrape IDL
-from markup fetched from URLs, rather than operating over `.idl` files
+Bulk loading from several repositories and collections of web standards has been
+scripted, but fidelity is not up-to-snuff in some collections. Each collection
+is imported using a `scripts/*_import.sh` script, each of which has a
+corresponding `.js` script. `scripts/*_urls_import.sh` scripts attempt to scrape
+IDL from markup fetched from URLs, rather than operating over `.idl` files
 directly. Import scripts cache URL fetches in `.urlcache/` and IDL parses in
 `.idlcache/`.
 
@@ -212,7 +212,7 @@ output from:
 
 Also, make sure you have Selenium WebDriver and ChromeDriver installed. Take
 note of the `jar` file associated with each. Add the following to
-`selenium_custom_server.local.sh` in your local checkout:
+`scripts/selenium_custom_server.local.sh` in your local checkout:
 
 ```zsh
 SELENIUM_JAR=/path/to/selenium/web-driver/jar
@@ -222,22 +222,23 @@ export SELENIUM_JAR
 export CHROME_DRIVER
 ```
 
-Now run (and leave running) `selenium_custom_server.sh` with something like
-`zsh selenium_custom_server.sh` or `bash selenium_custom_server.sh`.
+Now run (and leave running) `scripts/selenium_custom_server.sh` with something
+like `zsh scripts/selenium_custom_server.sh` or `bash
+scripts/selenium_custom_server.sh`.
 
 ##### Collecting the data
 
-Invoke `blink_idl_urls_import.sh` by running something like `zsh
-./blink_idl_urls_import.sh` or `bash ./blink_idl_urls_import.sh`. There will
-be lots of output, most of which is also written to
-`data/idl/blink/linked/log`.
+Invoke `scripts/blink_idl_urls_import.sh` by running something like `zsh
+scripts/blink_idl_urls_import.sh` or `bash
+scripts/blink_idl_urls_import.sh`. There will be lots of output, most of which
+is also written to `data/idl/blink/linked/log`.
 
 *NOTE*: This will overwrite
  `data/idl/caniuse/linked/{all.json|processed.json|log}`.
 
-This will also take a long time; minutes, not hours. If it hangs completely,
-try setting and exporting `NUM_SELENIUM_SESSIONS_PER_NODE` and
-`NUM_SELENIUM_NODES` in `selenium_custom_server.local.sh`.
+This will also take a long time; minutes, not hours. If it hangs completely, try
+setting and exporting `NUM_SELENIUM_SESSIONS_PER_NODE` and `NUM_SELENIUM_NODES`
+in `scripts/selenium_custom_server.local.sh`.
 
 
 #### Local repository import example: Importing Blink's WebIDL
@@ -264,10 +265,10 @@ Continuing from Blink source checkout example:
 
     $ export BLINK_SRC_DIR=$(pwd)/third_party/WebKit
 
-Next, run `blink_idl_import.sh` using something like `zsh
-./blink_idl_import.sh` or `bash blink_idl_import.sh`. *NOTE*: This will
-overwrite `data/idl/blink/all.json`. Exactly one parse failure is expected.
+Next, run `scripts/blink_idl_import.sh` using something like `zsh
+scripts/blink_idl_import.sh` or `bash scripts/blink_idl_import.sh`. *NOTE*: This
+will overwrite `data/idl/blink/all.json`. Exactly one parse failure is expected.
 
 To also import from URLs linked in Blink's IDL files, run
-`blink_idl_urls_import.sh`. *NOTE*: This will yield a lot of logging messages
+`scripts/blink_idl_urls_import.sh`. *NOTE*: This will yield a lot of logging messages
 and will overwrite `data/idl/blink/linked/all.json`.
