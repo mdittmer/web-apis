@@ -1,7 +1,9 @@
 #!/bin/zsh
 
-NODE_PATH=${NODE_PATH:-.:./static/js}
-WEB_APIS_DIR=${WEB_APIS_DIR:-$(readlink -f $(dirname "$0"))}
+WD=$(readlink -f $(dirname "$0"))
+
+WEB_APIS_DIR=${WEB_APIS_DIR:-$WD/..}
+NODE_PATH=${NODE_PATH:-$WEB_APIS_DIR}
 BLINK_SRC_DIR=${BLINK_SRC_DIR:-${HOME}/src/chromium/src/third_party/WebKit}
 
 if [[ ! -d ${WEB_APIS_DIR} ]]; then

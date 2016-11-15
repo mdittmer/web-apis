@@ -15,7 +15,7 @@
     "postinstall": "npm run deps",
     "rebuild": "npm run deps && webpack --config ./webpack.dev.config.js",
     "repl": "node",
-    "serve": "zsh serve.sh"
+    "serve": "zsh scripts/serve.sh"
   },
   "repository": {
     "type": "git",

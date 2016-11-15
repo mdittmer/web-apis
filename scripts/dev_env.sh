@@ -2,16 +2,18 @@
 
 # Source this file to setup development environment
 
-NODE_PATH=.:./static/js
-NODEJS_BIN=./node_modules/.bin
+WD=$(readlink -f $(dirname "$0"))
+
+NODE_PATH=$WD/..
+NODEJS_BIN=$WD/../node_modules/.bin
 PATH=$NODEJS_BIN:$PATH
 PATH=`awk -F: '{for(i=1;i<=NF;i++){if(!($i in a)){a[$i];printf s$i;s=":"}}}'<<<$PATH`
 
 export NODE_PATH
 export PATH
 
-if [ -f ./dev_env.local.sh ]; then
-  . ./dev_env.local.sh
+if [ -f $WD/dev_env.local.sh ]; then
+  . $WD/dev_env.local.sh
 fi
 
 npm install

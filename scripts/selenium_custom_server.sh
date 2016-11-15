@@ -4,8 +4,10 @@
 # SELENIUM_JAR=/path/to/selenium.jar
 # CHROME_DRIVER=/path/to/chromedriver.jar
 
-if [ -f ./selenium_custom_server.local.sh ]; then
-  . ./selenium_custom_server.local.sh
+WD=$(readlink -f $(dirname "$0")
+
+if [ -f $WD/selenium_custom_server.local.sh ]; then
+  . $WD/selenium_custom_server.local.sh
 fi
 
 # Standalone configuration
