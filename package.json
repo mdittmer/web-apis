@@ -35,9 +35,11 @@
   "homepage": "https://github.com/mdittmer/web-apis#readme",
   "dependencies": {
     "babel-runtime": "^6.11.6",
+    "blueimp-md5": "^2.5.0",
     "body-parser": "^1.15.2",
     "colors": "^1.1.2",
     "connect-timeout": "^1.7.0",
+    "expect": "^1.20.2",
     "express": "^4.14.0",
     "glob": "^7.1.1",
     "json-prune": "^1.0.1",
