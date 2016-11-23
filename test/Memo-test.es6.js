@@ -26,7 +26,7 @@ const oStr = JSON.stringify(o);
 
 describe('Memo', () => {
   it('Run runs', done => {
-    const stringifier = new Memo({f: o => Promise.resolve(JSON.stringify(o))});
+    const stringifier = new Memo({f: o => JSON.stringify(o)});
     stringifier.run(o).then(str => {
       atry(done, () => {
         expect(str).to.equal(oStr);
@@ -35,12 +35,25 @@ describe('Memo', () => {
   });
   it('Run invokes delegates', done => {
     const runThenDone = new Memo({
-      f: () => Promise.resolve(null),
+      f: () => null,
       delegates: [new Memo({f: () => {
         done();
-        return Promise.resolve(null);
+        return null;
       }})],
     });
+    runThenDone.run(o);
+  });
+  it('Repeated run behaves as pure function', done => {
+    let count = 0;
+    const runThenDone = new Memo({
+      f: () => new Promise(resolve => setTimeout(() => resolve(count++), 10)),
+      delegates: [new Memo({f: value => {
+        expect(value).to.equal(0);
+        if (count === 2) done();
+        return null;
+      }})],
+    });
+    runThenDone.run(o);
     runThenDone.run(o);
   });
   it('Run invokes delegates, but returns single output', done => {
@@ -54,12 +67,12 @@ describe('Memo', () => {
       });
     }
     const stringifyThenAnother = new Memo({
-      f: o => Promise.resolve(JSON.stringify(o)),
+      f: o => JSON.stringify(o),
       delegates: [new Memo({
         f: str => {
           output.secondInput = str;
           maybeCheck();
-          return Promise.resolve(null);
+          return null;
         },
       })],
     });
@@ -70,8 +83,8 @@ describe('Memo', () => {
   });
   it('RunAll returns tree of computations', done => {
     const stringifyCounter = new Memo({
-      f: o => Promise.resolve(JSON.stringify(o)),
-      delegates: [new Memo({f: str => Promise.resolve(str.length)})],
+      f: o => JSON.stringify(o),
+      delegates: [new Memo({f: str => str.length})],
     });
     stringifyCounter.runAll(o).then(result => {
       atry(done, () => {
@@ -84,17 +97,17 @@ describe('Memo', () => {
   });
   it('RunAll returns complex tree of computations', done => {
     const bigComputation = new Memo({
-      f: o => Promise.resolve(JSON.stringify(o)),
+      f: o => JSON.stringify(o),
       delegates: [
-        new Memo({f: str => Promise.resolve(str.length)}),
+        new Memo({f: str => str.length}),
         new Memo({
-          f: str => Promise.resolve(str.indexOf('foo')),
+          f: str => str.indexOf('foo'),
           delegates: [
             new Memo({
-              f: x => Promise.resolve(x % 2),
-              delegates: [new Memo({f: x => Promise.resolve(!!x)})]
+              f: x => x % 2,
+              delegates: [new Memo({f: x => !!x})]
             }),
-            new Memo({f: x => Promise.resolve(!!x)}),
+            new Memo({f: x => !!x}),
           ],
         }),
       ],
@@ -138,19 +151,19 @@ describe('Memo', () => {
   it('RunAll returns complex tree, pruned with uncaught errors', done => {
     const err = new Error('Thrown before x % 2, !!x...');
     const bigComputation = new Memo({
-      f: o => Promise.resolve(JSON.stringify(o)),
+      f: o => JSON.stringify(o),
       delegates: [
-        new Memo({f: str => Promise.resolve(str.length)}),
+        new Memo({f: str => str.length}),
         new Memo({
           f: str => {
             throw err;
           },
           delegates: [
             new Memo({
-              f: x => Promise.resolve(x % 2),
-              delegates: [new Memo({f: x => Promise.resolve(!!x)})]
+              f: x => x % 2,
+              delegates: [new Memo({f: x => !!x})]
             }),
-            new Memo({f: x => Promise.resolve(!!x)}),
+            new Memo({f: x => !!x}),
           ],
         }),
       ],
@@ -173,22 +186,22 @@ describe('Memo', () => {
     const msg = 'Thrown before x % 2, !!x...';
     const err = new Error(msg);
     const bigComputation = new Memo({
-      f: o => Promise.resolve(JSON.stringify(o)),
+      f: o => JSON.stringify(o),
       delegates: [
-        new Memo({f: str => Promise.resolve(str.length)}),
+        new Memo({f: str => str.length}),
         new Memo({
           f: str => {
             throw err;
           },
           delegates: [
             new Memo({
-              f: x => Promise.resolve(x % 2),
-              catch: err => Promise.resolve(err.message.length),
-              delegates: [new Memo({f: x => Promise.resolve(!!x)})]
+              f: x => x % 2,
+              catch: err => err.message.length,
+              delegates: [new Memo({f: x => !!x})]
             }),
             new Memo({
-              f: x => Promise.resolve(!!x),
-              catch: err => Promise.resolve(err.message),
+              f: x => !!x,
+              catch: err => err.message,
             }),
           ],
         }),

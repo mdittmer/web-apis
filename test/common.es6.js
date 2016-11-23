@@ -16,6 +16,14 @@
  */
 'use strict';
 
+const colors = require('colors/safe');
+const process = require('process');
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error(colors.error(' !!!! unhandledRejection'), reason, promise);
+  throw reason;
+});
+
 module.exports = {
   atry: (done, f) => {
     try {

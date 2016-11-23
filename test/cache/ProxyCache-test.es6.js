@@ -21,8 +21,8 @@ const Cache = require('../../lib/cache/Cache.es6.js');
 const ProxyCache = require('../../lib/cache/ProxyCache.es6.js');
 
 describe('ProxyCache', () => {
-  it('Default get() throws', () => {
-    expect(() => (new ProxyCache()).get('key')).to.throw(Error);
+  it('Default get() returns undefined', () => {
+    expect((new ProxyCache()).get('key')).to.equal(undefined);
   });
   it('Default put() throws', () => {
     expect(() => (new ProxyCache()).put('key', {})).to.throw(Error);
