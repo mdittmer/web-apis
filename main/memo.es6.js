@@ -26,8 +26,10 @@ const FileCache = require('../lib/cache/FileCache.es6.js');
 const FileReaderMemo = require('../lib/memo/FileReaderMemo.es6.js');
 const MCache = require('../lib/cache/MCache.es6.js');
 const Memo = require('../lib/memo/Memo.es6.js');
+const REStartEndMemo = require('../lib/memo/REStartEndMemo.es6.js');
 const REMatchMemo = require('../lib/memo/REMatchMemo.es6.js');
 const SplitCache = require('../lib/cache/SplitCache.es6.js');
+const html = require('../lib/web/html-entities.es6.js');
 
 process.on('unhandledRejection', (reason, promise) => {
   console.error(' !!!! unhandledRejection', reason, promise);
@@ -74,24 +76,50 @@ function amemo(...delegates) {
 }
 
 const pipeline = memo(
-    FileReaderMemo,
-    omemo(
-        REMatchMemo,
-        {createRE: () => /https?:\/\/[^/]+(\/[^?#, \n]*)?(\?[^#, \n]*)?/g},
-        fmemo(
-            Memo,
-            urls => urls.filter(url => !!url.match(specURLRegExp)),
-            amemo(omemo(
+  FileReaderMemo,
+  omemo(
+    REMatchMemo,
+    {createRE: () => /https?:\/\/[^/]+(\/[^?#, \n]*)?(\?[^#, \n]*)?/g},
+    fmemo(
+      Memo,
+      urls => urls.filter(url => !!url.match(specURLRegExp)),
+      amemo(
+        omemo(
+          Memo,
+          {
+            f: url => rpn(url).catch(() => ''),
+            getKey: url => url,
+            cache: pcache('spec-html')
+          },
+          omemo(
+            REStartEndMemo,
+            {
+              getStartRE: () => /<\s*pre(>|[^A-Za-z0-9-][^>]*>)/g,
+              getEndRE: () => /<\s*\/\s*pre\s*>/g,
+              cache: pcache('batched-pre-tags')
+            },
+            amemo(
+              omemo(
                 Memo,
                 {
-                  f: url => rpn(url).catch(() => ''),
-                  getKey: url => url,
-                  cache: pcache('spec-html')
-                }
-                /* TODO: Scrape <pre> tags, remove markup, parse IDL; fallback on other non-raw-scrape strategies */))
+                  f: preText => preText.replace(/<[^>]*>/g, ''),
+                  cache: pcache('pre-contents-tagless')
+                },
+                omemo(
+                  Memo,
+                  {
+                    f: html.fromHTMLContentString,
+                    cache: pcache('pre-contents-unescaped')
+                  }
+                )
+              )
             )
+          )
         )
-    );
+      )
+    )
+  )
+);
 
 let results = [];
 function runAll(path) {
