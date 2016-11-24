@@ -16,7 +16,6 @@
  */
 'use strict';
 
-const colors = require('colors/safe');
 const env = require('process').env;
 const gs = require('glob-stream');
 const process = require('process');
@@ -32,7 +31,7 @@ const SplitCache = require('../lib/cache/SplitCache.es6.js');
 const URLReaderMemo = require('../lib/idl/URLReaderMemo.es6.js');
 
 process.on('unhandledRejection', (reason, promise) => {
-  console.error(colors.error(' !!!! unhandledRejection'), reason, promise);
+  console.error(' !!!! unhandledRejection', reason, promise);
   throw reason;
 });
 
@@ -50,7 +49,7 @@ const argv = require('yargs')
     .help()
     .argv;
 
-const idlFileNameStream = gs.createStream(`${argv.b}/**/*.idl`, [], {});
+// const idlFileNameStream = gs.createStream(`${argv.b}/**/*.idl`, [], {});
 
 const specURLRegExp = new RegExp(argv.sre, 'g');
 
@@ -75,31 +74,127 @@ function amemo(...delegates) {
   return new ArrayMemo({delegatesFactory: () => delegates});
 }
 
-const pipeline = memo(FileReaderMemo, omemo(
+function sf(pre, f, post) {
+  return function() {
+    return Promise.resolve(f.call(this, pre(...arguments))).then(
+      value => post(value, ...arguments)
+    );
+  };
+}
+
+function preHint(hint) {
+  return typeof hint === 'string' ? (o, idx) => {
+    if (idx === undefined) return o[hint];
+    return o[hint][idx];
+  } : Array.isArray(hint) ? (o, idx) => {
+    const value = hint.reduce((o, key) => o[key], o);
+    if (idx === undefined) return value;
+    return value[idx];
+  } : hint ? hint : (o, idx) => o;
+}
+
+function postHint(hint) {
+  return typeof hint === 'string' ? (o, state, idx) => {
+    if (idx === undefined) {
+      state[hint] = o;
+    } else {
+      state[hint] = state[hint] || [];
+      state[hint][idx] = o;
+    }
+    return state;
+  } : Array.isArray(hint) ? (o, state, idx) => {
+    const key = hint.pop();
+    let innerState = hint.reduce((o, key) => o[key], state);
+    if (idx === undefined) {
+      innerState[key] = o;
+    } else {
+      innerState[key] = state[key] || [];
+      innerState[key][idx] = o;
+    }
+    return state;
+  } : hint ? hint : (o, state, idx) => state;
+}
+
+function sfmemo(Ctor, before, fun, after, ...delegates) {
+  const f = sf(preHint(before), fun, postHint(after));
+  return fmemo(Ctor, f, ...delegates);
+}
+
+function somemo(Ctor, before, after, opts, ...delegates) {
+  const f = sf(preHint(before), Ctor.prototype.f, postHint(after));
+  return omemo(Ctor, Object.assign({}, opts, {f}), ...delegates);
+}
+
+function sfomemo(Ctor, before, fun, after, opts, ...delegates) {
+  const f = sf(preHint(before), fun, postHint(after));
+  return fmemo(Ctor, Object.assign({}, opts, {f}), ...delegates);
+}
+
+// TODO: This is broken. ArrayMemo expects nothing but an array as its output
+// before dispatching to delegates.
+function samemo(before, after, ...delegates) {
+  const pre = preHint(before);
+  const post = postHint(after);
+  const postMemo = new Memo({
+    f:
+  return new ArrayMemo({
+    f: function() {
+      return ArrayMemo.prototype.f.call(this, pre(...arguments));
+    },
+    delegatesFactory: () => delegates
+  }, });
+}
+
+function safmemo(before, fun, after, ...delegates) {
+  const f = sf(preHint(before), fun, postHint(after));
+  return new ArrayMemo({f, delegatesFactory: () => delegates});
+}
+
+const pipeline = omemo(FileReaderMemo, {
+  f: sf(preHint('path'), FileReaderMemo.prototype.f, postHint('idlFile')),
+}, somemo(
     REMatchMemo,
+    'idlFile', 'urls',
     {createRE: () => /https?:\/\/[^/]+(\/[^?#, \n]*)?(\?[^#, \n]*)?/g},
-    fmemo(
+    sfmemo(
         Memo,
-        urls => urls.filter(url => !!url.match(specURLRegExp)),
-        amemo(
-            omemo(
-                Memo, {
+        'urls',
+        urls => {
+          console.log('FILTER URLS', urls, urls.filter(url => !!url.match(specURLRegExp)));
+          return urls.filter(url => !!url.match(specURLRegExp));
+        },
+        'specs',
+        samemo(
+            'specs',
+            undefined,
+            somemo(
+                Memo,
+                'specs',
+                (contents, state, idx) => {
+                  state.specs[idx] = {url: state.specs[idx], contents};
+
+                  console.log('STATE', state);
+
+                  return state;
+                },
+                {
                   f: url => rpn(url).catch(() => ''),
                   getKey: url => url,
                   cache: pcache('spec-html')
-                }/* TODO: Scrape <pre> tags, remove markup, parse IDL; fallback on other non-raw-scrape strategies */)
+                }
+                /* TODO: Scrape <pre> tags, remove markup, parse IDL; fallback on other non-raw-scrape strategies */)
             )
         )
     ));
 
 function runAll(path) {
-  pipeline.runAll(path);
+  pipeline.runAll({path});
 }
 
 
-// runAll(`${argv.b}/Source/core/dom/ArrayBuffer.idl`);
-// runAll(`${argv.b}/Source/core/dom/Int16Array.idl`);
+runAll(`${argv.b}/Source/core/dom/ArrayBuffer.idl`);
+runAll(`${argv.b}/Source/core/dom/Int16Array.idl`);
 
-idlFileNameStream.on('data', file => {
-  runAll(file.path);
-});
+// idlFileNameStream.on('data', file => {
+//   runAll(file.path);
+// });
