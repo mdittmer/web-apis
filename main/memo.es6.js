@@ -21,14 +21,13 @@ const gs = require('glob-stream');
 const process = require('process');
 const rpn = require('request-promise-native');
 
-const ArrayMemo = require('../lib/ArrayMemo.es6.js');
+const ArrayMemo = require('../lib/memo/ArrayMemo.es6.js');
 const FileCache = require('../lib/cache/FileCache.es6.js');
-const FileReaderMemo = require('../lib/idl/FileReaderMemo.es6.js');
+const FileReaderMemo = require('../lib/memo/FileReaderMemo.es6.js');
 const MCache = require('../lib/cache/MCache.es6.js');
-const Memo = require('../lib/Memo.es6.js');
-const REMatchMemo = require('../lib/idl/REMatchMemo.es6.js');
+const Memo = require('../lib/memo/Memo.es6.js');
+const REMatchMemo = require('../lib/memo/REMatchMemo.es6.js');
 const SplitCache = require('../lib/cache/SplitCache.es6.js');
-const URLReaderMemo = require('../lib/idl/URLReaderMemo.es6.js');
 
 process.on('unhandledRejection', (reason, promise) => {
   console.error(' !!!! unhandledRejection', reason, promise);

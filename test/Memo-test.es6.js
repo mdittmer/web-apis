@@ -19,7 +19,7 @@
 const expect = require('chai').expect;
 
 const atry = require('./common.es6.js').atry;
-const Memo = require('../lib/Memo.es6.js');
+const Memo = require('../lib/memo/Memo.es6.js');
 
 const o = {foo: 'bar'};
 const oStr = JSON.stringify(o);
