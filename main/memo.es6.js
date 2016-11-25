@@ -18,16 +18,18 @@
 
 const env = require('process').env;
 const gs = require('glob-stream');
+const parser = require('webidl2-js').parser;
 const process = require('process');
 const rpn = require('request-promise-native');
 
 const ArrayMemo = require('../lib/memo/ArrayMemo.es6.js');
 const FileCache = require('../lib/cache/FileCache.es6.js');
 const FileReaderMemo = require('../lib/memo/FileReaderMemo.es6.js');
+const JSONCache = require('../lib/cache/JSONCache.es6.js');
 const MCache = require('../lib/cache/MCache.es6.js');
 const Memo = require('../lib/memo/Memo.es6.js');
-const REStartEndMemo = require('../lib/memo/REStartEndMemo.es6.js');
 const REMatchMemo = require('../lib/memo/REMatchMemo.es6.js');
+const REStartEndMemo = require('../lib/memo/REStartEndMemo.es6.js');
 const SplitCache = require('../lib/cache/SplitCache.es6.js');
 const html = require('../lib/web/html-entities.es6.js');
 
@@ -58,7 +60,7 @@ function pcache(name) {
   const directory = `${__dirname}/../.cache/${name}`;
   return new SplitCache({
     first: new MCache(),
-    second: new FileCache({directory}),
+    second: new JSONCache({delegate: new FileCache({directory})}),
   });
 }
 
@@ -89,28 +91,44 @@ const pipeline = memo(
           {
             f: url => rpn(url).catch(() => ''),
             getKey: url => url,
-            cache: pcache('spec-html')
+            cache: pcache('spec-html'),
           },
           omemo(
             REStartEndMemo,
             {
               getStartRE: () => /<\s*pre(>|[^A-Za-z0-9-][^>]*>)/g,
               getEndRE: () => /<\s*\/\s*pre\s*>/g,
-              cache: pcache('batched-pre-tags')
+              cache: pcache('batched-pre-tags'),
             },
             amemo(
               omemo(
                 Memo,
                 {
                   f: preText => preText.replace(/<[^>]*>/g, ''),
-                  cache: pcache('pre-contents-tagless')
+                  cache: pcache('pre-contents-tagless'),
                 },
                 omemo(
                   Memo,
                   {
                     f: html.fromHTMLContentString,
-                    cache: pcache('pre-contents-unescaped')
-                  }
+                    cache: pcache('pre-contents-unescaped'),
+                  },
+                  omemo(
+                    Memo,
+                    {
+                      f: idlStr => {
+                        const res = parser.parseString(idlStr);
+                        return res[0] ? res[1] : [];
+                      },
+                      cache: pcache('webidl-parses'),
+                    },
+                    omemo(
+                      Memo,
+                      {
+                        catch: () => '',
+                      }
+                    )
+                  )
                 )
               )
             )
@@ -121,15 +139,29 @@ const pipeline = memo(
   )
 );
 
+// const urls = [];
+// const parses = {};
+// function consolidateOutput({path, output}) {
+//   const specs = output.delegates[0].delegates[0].delegates[0];
+//   const specURLs = specs.output;
+//   urls.push({path, specURLs});
+//   specURLs.forEach((url, idx) => {
+//     if (parses[url]) return;
+//     const specData = specs.delegates[idx];
+//     const specParses =
+//             specData.delegates[0].delegates[0].delegates[0].delegates[0].delegates[0].output;
+//     const parseData = specParses.reduce((acc, parts) => acc.concat(parts), []);
+//     if (parseData.length !== 0) parses[url] = parseData;
+//   });
+//   return {urls, parses};
+// }
+
 let results = [];
 function runAll(path) {
   pipeline.runAll(path).then(output => {
     console.log('OUTPUT', JSON.stringify(output, null, 2));
-    results.push(output);
-    return output;
   });
 }
-
 
 runAll(`${argv.b}/Source/core/dom/ArrayBuffer.idl`);
 runAll(`${argv.b}/Source/core/css/CSSRule.idl`);

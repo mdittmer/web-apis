@@ -16,10 +16,15 @@
  */
 'use strict';
 
+const chai = require('chai');
 const expect = require('chai').expect;
+const cap = require('chai-as-promised');
+chai.use(cap);
 
 const atry = require('./common.es6.js').atry;
+const Cache = require('../lib/cache/Cache.es6.js');
 const Memo = require('../lib/memo/Memo.es6.js');
+
 
 const o = {foo: 'bar'};
 const oStr = JSON.stringify(o);
@@ -44,17 +49,22 @@ describe('Memo', () => {
     runThenDone.run(o);
   });
   it('Repeated run behaves as pure function', done => {
-    let count = 0;
+    let value = 0;
     const runThenDone = new Memo({
-      f: () => new Promise(resolve => setTimeout(() => resolve(count++), 10)),
-      delegates: [new Memo({f: value => {
-        expect(value).to.equal(0);
-        if (count === 2) done();
-        return null;
-      }})],
+      f: () => new Promise(resolve => {
+        setTimeout(() => {
+          resolve(value++);
+        }, 10);
+      }),
     });
-    runThenDone.run(o);
-    runThenDone.run(o);
+
+    expect(runThenDone.run(o)).to.be.fulfilled.then(value => {
+      expect(value).to.equal(0);
+      expect(runThenDone.run(o)).to.be.fulfilled.then(value => {
+        expect(value).to.equal(0);
+        done();
+      });
+    });
   });
   it('Run invokes delegates, but returns single output', done => {
     let output = {};
@@ -195,13 +205,13 @@ describe('Memo', () => {
           },
           delegates: [
             new Memo({
-              f: x => x % 2,
               catch: err => err.message.length,
+              f: x => x % 2,
               delegates: [new Memo({f: x => !!x})]
             }),
             new Memo({
-              f: x => !!x,
               catch: err => err.message,
+              f: x => x,
             }),
           ],
         }),
@@ -219,9 +229,9 @@ describe('Memo', () => {
               error: err,
               delegates: [
                 {
-                  output: msg.length,
+                  output: msg.length % 2,
                   delegates: [{
-                    output: !!msg.length,
+                    output: !!(msg.length % 2),
                   }],
                 },
                 {output: msg},
