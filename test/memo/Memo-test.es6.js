@@ -21,13 +21,20 @@ const expect = require('chai').expect;
 const cap = require('chai-as-promised');
 chai.use(cap);
 
-const atry = require('./common.es6.js').atry;
-const Cache = require('../lib/cache/Cache.es6.js');
-const Memo = require('../lib/memo/Memo.es6.js');
+const atry = require('../common.es6.js').atry;
+const Cache = require('../../lib/cache/Cache.es6.js');
+const Memo = require('../../lib/memo/Memo.es6.js');
 
 
 const o = {foo: 'bar'};
 const oStr = JSON.stringify(o);
+
+class KeeperMemo extends Memo {
+  init(opts) {
+    super.init(opts);
+    this.keep = true;
+  }
+}
 
 describe('Memo', () => {
   it('Run runs', done => {
@@ -92,9 +99,9 @@ describe('Memo', () => {
     });
   });
   it('RunAll returns tree of computations', done => {
-    const stringifyCounter = new Memo({
+    const stringifyCounter = new KeeperMemo({
       f: o => JSON.stringify(o),
-      delegates: [new Memo({f: str => str.length})],
+      delegates: [new KeeperMemo({f: str => str.length})],
     });
     stringifyCounter.runAll(o).then(result => {
       atry(done, () => {
@@ -105,19 +112,77 @@ describe('Memo', () => {
       });
     });
   });
-  it('RunAll returns complex tree of computations', done => {
+  it('RunAll returns reduced tree of computations', done => {
+    const stringifyCounter = new Memo({
+      f: o => JSON.stringify(o),
+      delegates: [new KeeperMemo({f: str => str.length})],
+    });
+    stringifyCounter.runAll(o).then(result => {
+      atry(done, () => {
+        expect(result).to.eql({output: oStr.length});
+      });
+    });
+  });
+  it('RunAll preserves errors', done => {
+    const err = new Error('Thrown in memo.f');
+    const stringifyCounter = new Memo({
+      f: o => { throw err; },
+      delegates: [new KeeperMemo({
+        catch: err => err.message,
+        f: str => str.length,
+      })],
+    });
+    stringifyCounter.runAll(o).then(result => {
+      atry(done, () => {
+        expect(result).to.eql({
+          error: err,
+          delegates: [{output: err.message.length}],
+        });
+      });
+    });
+  });
+  it('RunAll returns reduced complex tree of computations', done => {
     const bigComputation = new Memo({
       f: o => JSON.stringify(o),
       delegates: [
-        new Memo({f: str => str.length}),
+        new KeeperMemo({f: str => str.length}),
         new Memo({
           f: str => str.indexOf('foo'),
           delegates: [
             new Memo({
               f: x => x % 2,
-              delegates: [new Memo({f: x => !!x})]
+              delegates: [new KeeperMemo({f: x => !!x})]
             }),
-            new Memo({f: x => !!x}),
+            new KeeperMemo({f: x => !!x}),
+          ],
+        }),
+      ],
+    });
+    bigComputation.runAll(o).then(result => {
+      atry(done, () => {
+        expect(result).to.eql([
+          {output: oStr.length},
+          [
+            {output: !!(oStr.indexOf('foo') % 2)},
+            {output: !!oStr.indexOf('foo')},
+          ],
+        ]);
+      });
+    });
+  });
+  it('RunAll returns complex tree of computations', done => {
+    const bigComputation = new KeeperMemo({
+      f: o => JSON.stringify(o),
+      delegates: [
+        new KeeperMemo({f: str => str.length}),
+        new KeeperMemo({
+          f: str => str.indexOf('foo'),
+          delegates: [
+            new KeeperMemo({
+              f: x => x % 2,
+              delegates: [new KeeperMemo({f: x => !!x})]
+            }),
+            new KeeperMemo({f: x => !!x}),
           ],
         }),
       ],
@@ -160,20 +225,20 @@ describe('Memo', () => {
   });
   it('RunAll returns complex tree, pruned with uncaught errors', done => {
     const err = new Error('Thrown before x % 2, !!x...');
-    const bigComputation = new Memo({
+    const bigComputation = new KeeperMemo({
       f: o => JSON.stringify(o),
       delegates: [
-        new Memo({f: str => str.length}),
-        new Memo({
+        new KeeperMemo({f: str => str.length}),
+        new KeeperMemo({
           f: str => {
             throw err;
           },
           delegates: [
-            new Memo({
+            new KeeperMemo({
               f: x => x % 2,
-              delegates: [new Memo({f: x => !!x})]
+              delegates: [new KeeperMemo({f: x => !!x})]
             }),
-            new Memo({f: x => !!x}),
+            new KeeperMemo({f: x => !!x}),
           ],
         }),
       ],
@@ -195,21 +260,21 @@ describe('Memo', () => {
   it('RunAll returns tree, including catchers', done => {
     const msg = 'Thrown before x % 2, !!x...';
     const err = new Error(msg);
-    const bigComputation = new Memo({
+    const bigComputation = new KeeperMemo({
       f: o => JSON.stringify(o),
       delegates: [
-        new Memo({f: str => str.length}),
-        new Memo({
+        new KeeperMemo({f: str => str.length}),
+        new KeeperMemo({
           f: str => {
             throw err;
           },
           delegates: [
-            new Memo({
+            new KeeperMemo({
               catch: err => err.message.length,
               f: x => x % 2,
-              delegates: [new Memo({f: x => !!x})]
+              delegates: [new KeeperMemo({f: x => !!x})]
             }),
-            new Memo({
+            new KeeperMemo({
               catch: err => err.message,
               f: x => x,
             }),
