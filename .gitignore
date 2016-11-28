@@ -3,6 +3,7 @@
 **/npm-debug.log*
 .user/*
 .log/*
+.coverage/*
 .*cache/*
 static/bundle
 *.local.sh

@@ -16,17 +16,15 @@
  */
 'use strict';
 
-const expect = require('chai').expect;
+const FileCache = require('../../../lib/cache/FileCache.es6.js');
+const JSONCache = require('../../../lib/cache/JSONCache.es6.js');
+const MCache = require('../../../lib/cache/MCache.es6.js');
+const MD5PutCache = require('../../../lib/cache/MD5PutCache.es6.js');
+const SplitCache = require('../../../lib/cache/SplitCache.es6.js');
 
-const FileCache = require('../../lib/cache/FileCache.es6.js');
-const JSONCache = require('../../lib/cache/JSONCache.es6.js');
-const MCache = require('../../lib/cache/MCache.es6.js');
-const MD5PutCache = require('../../lib/cache/MD5PutCache.es6.js');
-const SplitCache = require('../../lib/cache/SplitCache.es6.js');
-const common = require('./common.es6.js');
-
-const fuzz = common.fuzz;
-const testInDir = common.testInDir;
+// From ./common-helper
+const fuzz = cache.fuzz;
+const testInDir = cache.testInDir;
 
 describe('Integration: cache composition', () => {
   it('Fuzz: JSON(M)', () => {
@@ -52,6 +50,19 @@ describe('Integration: cache composition', () => {
         first: new MCache(),
         second: new JSONCache({delegate: new FileCache({dir})}),
       }));
+    });
+  });
+  it('Fuzz (with pause): JSON(File)', () => {
+    testInDir(function(dir) {
+      fuzz(new JSONCache({delegate: new FileCache({dir})}));
+    }, 500);
+  });
+  it('Fuzz (with pause): Split(M, JSON(File(M)))', () => {
+    testInDir(function(dir) {
+      fuzz(new SplitCache({
+        first: new MCache(),
+        second: new JSONCache({delegate: new FileCache({dir})}),
+      }), 500);
     });
   });
 });

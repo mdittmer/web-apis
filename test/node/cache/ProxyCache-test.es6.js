@@ -16,25 +16,24 @@
  */
 'use strict';
 
-const expect = require('chai').expect;
-const Cache = require('../../lib/cache/Cache.es6.js');
-const ProxyCache = require('../../lib/cache/ProxyCache.es6.js');
+const Cache = require('../../../lib/cache/Cache.es6.js');
+const ProxyCache = require('../../../lib/cache/ProxyCache.es6.js');
 
 describe('ProxyCache', () => {
   it('Default get() returns undefined', () => {
-    expect((new ProxyCache()).get('key')).to.equal(undefined);
+    expect((new ProxyCache()).get('key')).toBe(undefined);
   });
   it('Default put() throws', () => {
-    expect(() => (new ProxyCache()).put('key', {})).to.throw(Error);
+    expect(() => (new ProxyCache()).put('key', {})).toThrowError(Error);
   });
   it('Default get() through to delegate', () => {
     let getInvoked = false;
     (new ProxyCache({delegate: {get: () => getInvoked = true}})).get('key');
-    expect(getInvoked).to.be.true;
+    expect(getInvoked).toBe(true);
   });
   it('Default put() through to delegate', () => {
     let putInvoked = false;
     (new ProxyCache({delegate: {put: () => putInvoked = true}})).put('key', {});
-    expect(putInvoked).to.be.true;
+    expect(putInvoked).toBe(true);
   });
 });

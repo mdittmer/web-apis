@@ -16,16 +16,13 @@
  */
 'use strict';
 
-const expect = require('chai').expect;
-
-const atry = require('./common.es6.js').atry;
-const Provider = require('../lib/Provider.es6.js');
+const Provider = require('../../lib/Provider.es6.js');
 
 describe('Provider', () => {
   it('Returns result', done => {
     const promise = (new Provider()).withService(() => 'foo');
     promise.then(value => {
-      atry(done, () => expect(value).to.equal('foo'));
+      atry(done, () => expect(value).toBe('foo'));
     });
   });
   it('Rejects on throw', done => {
@@ -34,14 +31,14 @@ describe('Provider', () => {
       throw err;
     });
     promise.catch(caught => {
-      atry(done, () => expect(caught).to.equal(err));
+      atry(done, () => expect(caught).toBe(err));
     });
   });
   it('Rejects on reject', done => {
     const err = new Error('Rejected while using service');
     const promise = (new Provider()).withService(() => Promise.reject(err));
     promise.catch(caught => {
-      atry(done, () => expect(caught).to.equal(err));
+      atry(done, () => expect(caught).toBe(err));
     });
   });
 });

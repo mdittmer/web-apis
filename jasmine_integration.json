@@ -1,0 +1,11 @@
+{
+  "spec_dir": "test",
+  "spec_files": [
+    "node/**/*-integration*.js",
+    "any/**/*-integration*.js"
+  ],
+  "helpers": [
+    "node/**/*-helper*.js",
+    "any/**/*-helper*.js"
+  ]
+}

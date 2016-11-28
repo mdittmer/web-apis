@@ -16,14 +16,11 @@
  */
 'use strict';
 
-const expect = require('chai').expect;
-const Cache = require('../../lib/cache/Cache.es6.js');
+const process = require('process');
 
-describe('Cache', () => {
-  it('Default get() throws', () => {
-    expect(() => (new Cache()).get('key')).to.throw(Error);
-  });
-  it('Default put() throws', () => {
-    expect(() => (new Cache()).put('key', {})).to.throw(Error);
-  });
+process.on('unhandledRejection', (reason, promise) => {
+  console.error(' !!!');
+  console.error(' !!! UNHANDLED PROMISE REJECTION');
+  console.error(' !!!');
+  throw reason;
 });

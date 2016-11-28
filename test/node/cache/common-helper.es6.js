@@ -16,10 +16,9 @@
  */
 'use strict';
 
-const expect = require('chai').expect;
 const exec = require('child_process').exec;
 
-module.exports = {
+global.cache = {
   testInDir: f => {
     const dir = `./.${Math.random()}`;
     try {
@@ -30,7 +29,8 @@ module.exports = {
       throw err;
     }
   },
-  fuzz: cache => {
+  fuzz: (cache, wait) => {
+    const check = (key, value) => expect(cache.get(key)).toEqual(value);
     for (let i = 0; i < 20; i++) {
       let o = {};
       let current = o;
@@ -40,7 +40,11 @@ module.exports = {
         else current[k] = Math.random();
       }
       const key = cache.put(i.toString(), o);
-      expect(cache.get(key)).to.eql(o);
+      if (wait) {
+        setTimeout(check.bind(this, key, o), wait);
+      } else {
+        check(key, o);
+      }
     }
   }
 };

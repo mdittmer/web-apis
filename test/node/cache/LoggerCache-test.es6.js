@@ -16,8 +16,7 @@
  */
 'use strict';
 
-const expect = require('chai').expect;
-const LoggerCache = require('../../lib/cache/LoggerCache.es6.js');
+const LoggerCache = require('../../../lib/cache/LoggerCache.es6.js');
 
 describe('LoggerCache', () => {
   it('Log-on-put', () => {
@@ -26,7 +25,7 @@ describe('LoggerCache', () => {
       delegate: {put: key => key},
       logger: {log: () => logCalled = true},
     })).put('key', 'value');
-    expect(logCalled).to.equal(true);
+    expect(logCalled).toBe(true);
   });
   it('Log-on-get', () => {
     let logCalled = false;
@@ -34,7 +33,7 @@ describe('LoggerCache', () => {
       delegate: {get: () => 'value'},
       logger: {log: () => logCalled = true},
     })).get('key');
-    expect(logCalled).to.equal(true);
+    expect(logCalled).toBe(true);
   });
   it('Custom log-level', () => {
     let warnCalled = false;
@@ -43,13 +42,13 @@ describe('LoggerCache', () => {
       delegate: {get: () => 'value'},
       logger: {warn: () => warnCalled = true},
     })).get('key');
-    expect(warnCalled).to.equal(true);
+    expect(warnCalled).toBe(true);
   });
   it('Default logger', () => {
     const cache = new LoggerCache({
       delegate: {put: key => key, get: () => 'value'},
     });
-    expect(() => cache.put('key', 'value')).to.not.throw();
-    expect(() => cache.get('key')).to.not.throw();
+    expect(() => cache.put('key', 'value')).not.toThrow();
+    expect(() => cache.get('key')).not.toThrow();
   });
 });

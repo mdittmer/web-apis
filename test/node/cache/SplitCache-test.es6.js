@@ -16,10 +16,8 @@
  */
 'use strict';
 
-const expect = require('chai').expect;
-
-const MCache = require('../../lib/cache/MCache.es6.js');
-const SplitCache = require('../../lib/cache/SplitCache.es6.js');
+const MCache = require('../../../lib/cache/MCache.es6.js');
+const SplitCache = require('../../../lib/cache/SplitCache.es6.js');
 
 describe('SplitCache', () => {
   it('get(): consistent (M, M)', () => {
@@ -28,14 +26,14 @@ describe('SplitCache', () => {
     first.put('foo', 'bar');
     second.put('foo', 'baz');
     const splitCache = new SplitCache({first, second});
-    expect(splitCache.get('foo')).to.equal('bar');
+    expect(splitCache.get('foo')).toBe('bar');
   });
   it('get(): fallback on second (M, M)', () => {
     const first = new MCache();
     const second = new MCache();
     second.put('foo', 'bar');
     const splitCache = new SplitCache({first, second});
-    expect(splitCache.get('foo')).to.equal('bar');
+    expect(splitCache.get('foo')).toBe('bar');
   });
   it('put(): fallback on second, put back to first (M, M)', () => {
     const first = new MCache();
@@ -43,6 +41,6 @@ describe('SplitCache', () => {
     second.put('foo', 'bar');
     const splitCache = new SplitCache({first, second});
     splitCache.get('foo');
-    expect(first.get('foo')).to.equal('bar');
+    expect(first.get('foo')).toBe('bar');
   });
 });

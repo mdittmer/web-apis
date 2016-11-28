@@ -16,19 +16,14 @@
  */
 'use strict';
 
-const Logger = require('../lib/logger/Logger.es6.js');
-const debug = require('../lib/debug.es6.js');
-const logger = require('../lib/logger.es6.js');
+const MD5PutCache = require('../../../lib/cache/MD5PutCache.es6.js');
 
-logger.setLoggerFactory(() => Logger.null);
-
-module.exports = {
-  atry: (done, f) => {
-    try {
-      f();
-      done();
-    } catch (err) {
-      done(err);
-    }
-  }
-};
+describe('MD5PutCache', () => {
+  it('Known MD5 hash of "value"', () => {
+    expect((new MD5PutCache({
+      delegate: {put: key => key}
+    })).put(
+      'key', 'value'
+    )).toBe('key@2063c1608d6e0baf80249c42e2be5804');
+  });
+});

@@ -16,15 +16,7 @@
  */
 'use strict';
 
-const chai = require('chai');
-const expect = require('chai').expect;
-const cap = require('chai-as-promised');
-chai.use(cap);
-
-const atry = require('../common.es6.js').atry;
-const Cache = require('../../lib/cache/Cache.es6.js');
-const Memo = require('../../lib/memo/Memo.es6.js');
-
+const Memo = require('../../../lib/memo/Memo.es6.js');
 
 const o = {foo: 'bar'};
 const oStr = JSON.stringify(o);
@@ -41,7 +33,7 @@ describe('Memo', () => {
     const stringifier = new Memo({f: o => JSON.stringify(o)});
     stringifier.run(o).then(str => {
       atry(done, () => {
-        expect(str).to.equal(oStr);
+        expect(str).toBe(oStr);
       });
     });
   });
@@ -65,10 +57,10 @@ describe('Memo', () => {
       }),
     });
 
-    expect(runThenDone.run(o)).to.be.fulfilled.then(value => {
-      expect(value).to.equal(0);
-      expect(runThenDone.run(o)).to.be.fulfilled.then(value => {
-        expect(value).to.equal(0);
+    aexpect(done, runThenDone.run(o)).toBeFulfilled().then(value => {
+      expect(value).toBe(0);
+      aexpect(done, runThenDone.run(o)).toBeFulfilled().then(value => {
+        expect(value).toBe(0);
         done();
       });
     });
@@ -79,8 +71,8 @@ describe('Memo', () => {
       if (output.firstOutput === undefined) return;
       if (output.secondInput === undefined) return;
       atry(done, () => {
-        expect(output.firstOutput).to.equal(oStr);
-        expect(output.secondInput).to.equal(oStr);
+        expect(output.firstOutput).toBe(oStr);
+        expect(output.secondInput).toBe(oStr);
       });
     }
     const stringifyThenAnother = new Memo({
@@ -105,9 +97,9 @@ describe('Memo', () => {
     });
     stringifyCounter.runAll(o).then(result => {
       atry(done, () => {
-        expect(result).to.eql({
+        expect(result).toEqual({
           output: oStr,
-          delegates: [{output: oStr.length}],
+          delegates: [oStr.length],
         });
       });
     });
@@ -119,7 +111,7 @@ describe('Memo', () => {
     });
     stringifyCounter.runAll(o).then(result => {
       atry(done, () => {
-        expect(result).to.eql({output: oStr.length});
+        expect(result).toEqual(oStr.length);
       });
     });
   });
@@ -134,9 +126,9 @@ describe('Memo', () => {
     });
     stringifyCounter.runAll(o).then(result => {
       atry(done, () => {
-        expect(result).to.eql({
+        expect(result).toEqual({
           error: err,
-          delegates: [{output: err.message.length}],
+          delegates: [err.message.length],
         });
       });
     });
@@ -160,11 +152,11 @@ describe('Memo', () => {
     });
     bigComputation.runAll(o).then(result => {
       atry(done, () => {
-        expect(result).to.eql([
-          {output: oStr.length},
+        expect(result).toEqual([
+          oStr.length,
           [
-            {output: !!(oStr.indexOf('foo') % 2)},
-            {output: !!oStr.indexOf('foo')},
+            !!(oStr.indexOf('foo') % 2),
+            !!oStr.indexOf('foo'),
           ],
         ]);
       });
@@ -189,22 +181,18 @@ describe('Memo', () => {
     });
     bigComputation.runAll(o).then(result => {
       atry(done, () => {
-        expect(result).to.eql({
+        expect(result).toEqual({
           output: oStr,
           delegates: [
-            {
-              output: oStr.length,
-            },
+            oStr.length,
             {
               output: oStr.indexOf('foo'),
               delegates: [
                 {
                   output: oStr.indexOf('foo') % 2,
-                  delegates: [{
-                    output: !!(oStr.indexOf('foo') % 2),
-                  }],
+                  delegates: [!!(oStr.indexOf('foo') % 2)],
                 },
-                {output: !!oStr.indexOf('foo')},
+                !!oStr.indexOf('foo'),
               ],
             },
           ],
@@ -220,7 +208,7 @@ describe('Memo', () => {
       },
     });
     thrower.run(o).catch(thrown => {
-      atry(done, () => expect(thrown).to.equal(err));
+      atry(done, () => expect(thrown).toBe(err));
     });
   });
   it('RunAll returns complex tree, pruned with uncaught errors', done => {
@@ -245,12 +233,10 @@ describe('Memo', () => {
     });
     bigComputation.runAll(o).then(result => {
       atry(done, () => {
-        expect(result).to.eql({
+        expect(result).toEqual({
           output: oStr,
           delegates: [
-            {
-              output: oStr.length,
-            },
+            oStr.length,
             {error: err},
           ],
         });
@@ -284,22 +270,18 @@ describe('Memo', () => {
     });
     bigComputation.runAll(o).then(result => {
       atry(done, () => {
-        expect(result).to.eql({
+        expect(result).toEqual({
           output: oStr,
           delegates: [
-            {
-              output: oStr.length,
-            },
+            oStr.length,
             {
               error: err,
               delegates: [
                 {
                   output: msg.length % 2,
-                  delegates: [{
-                    output: !!(msg.length % 2),
-                  }],
+                  delegates: [!!(msg.length % 2)],
                 },
-                {output: msg},
+                msg,
               ],
             },
           ],

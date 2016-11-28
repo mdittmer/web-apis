@@ -16,17 +16,13 @@
  */
 'use strict';
 
-const expect = require('chai').expect;
-const JSONCache = require('../../lib/cache/JSONCache.es6.js');
-const MCache = require('../../lib/cache/MCache.es6.js');
-const MD5PutCache = require('../../lib/cache/MD5PutCache.es6.js');
+const Cache = require('../../../lib/cache/Cache.es6.js');
 
-describe('MD5PutCache', () => {
-  it('Known MD5 hash of "value"', () => {
-    expect((new MD5PutCache({
-      delegate: {put: key => key}
-    })).put(
-      'key', 'value'
-    )).to.equal('key@2063c1608d6e0baf80249c42e2be5804');
+describe('Cache', () => {
+  it('Default get() throws', () => {
+    expect(() => (() => new Cache()).get('key')).toThrowError(Error);
+  });
+  it('Default put() throws', () => {
+    expect(() => (new Cache()).put('key', {})).toThrowError(Error);
   });
 });

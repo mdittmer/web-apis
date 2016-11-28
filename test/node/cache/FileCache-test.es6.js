@@ -16,25 +16,25 @@
  */
 'use strict';
 
-const expect = require('chai').expect;
-const FileCache = require('../../lib/cache/FileCache.es6.js');
-const MCache = require('../../lib/cache/MCache.es6.js');
-const MD5PutCache = require('../../lib/cache/MD5PutCache.es6.js');
-const common = require('./common.es6.js');
-const testInDir = common.testInDir;
+const FileCache = require('../../../lib/cache/FileCache.es6.js');
+
+// From ./common-helper
+const testInDir = cache.testInDir;
 
 describe('FileCache', () => {
   it('Put', () => {
     testInDir(function(dir) {
       const cache = new FileCache({dir});
-      expect(cache.put('key', 'foo')).to.equal('key');
+      expect(cache.put('key', 'foo')).toBe('key');
     });
   });
-  it('Get', () => {
+  it('Get', done => {
     testInDir(function(dir) {
       const cache = new FileCache({dir});
-      cache.put('key', 'foo');
-      expect(cache.get('key')).to.equal('foo');
+      cache.put('key', 'foo', () => {
+        expect(cache.get('key')).toBe('foo');
+        done();
+      });
     });
   });
 });

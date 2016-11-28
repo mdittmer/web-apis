@@ -27,11 +27,19 @@ const FileCache = require('../lib/cache/FileCache.es6.js');
 const FileReaderMemo = require('../lib/memo/FileReaderMemo.es6.js');
 const JSONCache = require('../lib/cache/JSONCache.es6.js');
 const MCache = require('../lib/cache/MCache.es6.js');
-const Memo = require('../lib/memo/Memo.es6.js');
+let Memo = require('../lib/memo/Memo.es6.js');
 const REMatchMemo = require('../lib/memo/REMatchMemo.es6.js');
 const REStartEndMemo = require('../lib/memo/REStartEndMemo.es6.js');
 const SplitCache = require('../lib/cache/SplitCache.es6.js');
 const html = require('../lib/web/html-entities.es6.js');
+
+class KeeperMemo extends Memo {
+  init(opts) {
+    super.init(opts);
+    this.keep = true;
+  }
+}
+Memo = KeeperMemo;
 
 process.on('unhandledRejection', (reason, promise) => {
   console.error(' !!!! unhandledRejection', reason, promise);
@@ -89,7 +97,7 @@ const pipeline = memo(
         omemo(
           Memo,
           {
-            f: url => rpn(url).catch(() => ''),
+            f: uri => rpn({uri, followAllRedirects: true}).catch(() => ''),
             getKey: url => url,
             cache: pcache('spec-html'),
           },
