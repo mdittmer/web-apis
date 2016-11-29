@@ -27,19 +27,12 @@ const FileCache = require('../lib/cache/FileCache.es6.js');
 const FileReaderMemo = require('../lib/memo/FileReaderMemo.es6.js');
 const JSONCache = require('../lib/cache/JSONCache.es6.js');
 const MCache = require('../lib/cache/MCache.es6.js');
-let Memo = require('../lib/memo/Memo.es6.js');
 const REMatchMemo = require('../lib/memo/REMatchMemo.es6.js');
 const REStartEndMemo = require('../lib/memo/REStartEndMemo.es6.js');
 const SplitCache = require('../lib/cache/SplitCache.es6.js');
+const debug = require('../lib/debug.es6.js');
 const html = require('../lib/web/html-entities.es6.js');
-
-class KeeperMemo extends Memo {
-  init(opts) {
-    super.init(opts);
-    this.keep = true;
-  }
-}
-Memo = KeeperMemo;
+let Memo = require('../lib/memo/Memo.es6.js');
 
 process.on('unhandledRejection', (reason, promise) => {
   console.error(' !!!! unhandledRejection', reason, promise);
@@ -90,9 +83,12 @@ const pipeline = memo(
   omemo(
     REMatchMemo,
     {createRE: () => /https?:\/\/[^/]+(\/[^?#, \n]*)?(\?[^#, \n]*)?/g},
-    fmemo(
+    omemo(
       Memo,
-      urls => urls.filter(url => !!url.match(specURLRegExp)),
+      {
+        keep: true,
+        f: urls => urls.filter(url => !!url.match(specURLRegExp)),
+      },
       amemo(
         omemo(
           Memo,
@@ -124,18 +120,23 @@ const pipeline = memo(
                   omemo(
                     Memo,
                     {
-                      f: idlStr => {
+                      keep: true,
+                      f: function(idlStr) {
                         const res = parser.parseString(idlStr);
+                        const gist = idlStr.length <= 25 ? idlStr :
+                                idlStr.substr(0, 10).replace('\n', ' ') +
+                                ' ... ' +
+                                idlStr.substr(
+                                  idlStr.length - 10
+                                ).replace('\n', ' ');
+                        if (res[0])
+                          this.logger.win(`Parsed ${idlStr.length}-length IDL string: "${gist}"`);
+                        else
+                          this.logger.warn(`Failed to parse ${idlStr.length}-length string: "${gist}"`);
                         return res[0] ? res[1] : [];
                       },
                       cache: pcache('webidl-parses'),
-                    },
-                    omemo(
-                      Memo,
-                      {
-                        catch: () => '',
-                      }
-                    )
+                    }
                   )
                 )
               )
@@ -146,7 +147,7 @@ const pipeline = memo(
     )
   )
 );
-
+;
 // const urls = [];
 // const parses = {};
 // function consolidateOutput({path, output}) {
@@ -163,16 +164,85 @@ const pipeline = memo(
 //   });
 //   return {urls, parses};
 // }
+let urlsToFiles = {};
+let urlsToParses = {};
 
-let results = [];
-function runAll(path) {
-  pipeline.runAll(path).then(output => {
-    console.log('OUTPUT', JSON.stringify(output, null, 2));
-  });
+const gather = new Memo({
+  getKey: ({urlsToFiles, urlsToParses, output}) => {
+    return Memo.hashCode(Object.keys(urlsToFiles).sort().join('|')).toString();
+  },
+  f: ({file, urlsToFiles, urlsToParses, output}) => {
+    const urls = output.output;
+    let parses = output.delegates;
+    while (parses.length !== urls.length) {
+      if (parses.length !== 1) throw new Error('Malformed memo output');
+      parses = parses[0];
+    }
+    parses = parses.map(
+      (parsesFromURL, i) => parsesFromURL.reduce(
+        (acc, parseFromTag) => acc = acc.concat(parseFromTag),
+        []
+      )
+    );
+
+    for (let i = 0; i < urls.length; i++) {
+      const url = urls[i];
+      urlsToFiles[url] = urlsToFiles[url] || [];
+      urlsToFiles[url].push(file);
+      urlsToParses[urls[i]] = parses[i];
+    }
+
+    return {urlsToFiles, urlsToParses};
+  },
+});
+
+const store = new Memo({
+  getKey: ({label}) => {
+    return label;
+  },
+  cache: pcache('webidl-data'),
+  f: ({urlsToFiles, urlsToParses}) => {
+    let data = [];
+    const urls = Object.keys(urlsToFiles);
+    for (const url of urls) {
+      data.push({
+        url,
+        files: urlsToFiles[url],
+        parses: urlsToParses[url],
+      });
+    }
+    return data;
+  }
+});
+
+function runPipelineAndGather(file) {
+  return pipeline.runAll(`${argv.b}/${file}`).then(
+    output => {
+      return gather.run({file, urlsToFiles, urlsToParses, output});
+    }
+  );
 }
 
-runAll(`${argv.b}/Source/core/dom/ArrayBuffer.idl`);
-runAll(`${argv.b}/Source/core/css/CSSRule.idl`);
+debug.inspect(done => {
+  return Promise.all([
+    // runAll('https://www.khronos.org/registry/typedarray/specs/latest/'),
+    runPipelineAndGather('Source/core/dom/ArrayBuffer.idl'),
+    runPipelineAndGather('Source/core/css/CSSRule.idl'),
+  ]).then(results => {
+    if (results.length === 0) throw new Error('No IDL files processed');
+    const reference = results[0];
+    for (const result of results) {
+      if (result.urlsToFiles !== reference.urlsToFiles ||
+          result.urlsToParses !== reference.urlsToParses) {
+        throw new Error('Results were not collected into the same collection');
+      }
+    }
+    const urlsToFiles = reference.urlsToFiles;
+    const urlsToParses = reference.urlsToParses;
+    const label = 'blink-linked';
+    return store.run({label, urlsToFiles, urlsToParses});
+  }).then(done);
+});
 
 // idlFileNameStream.on('data', file => {
 //   runAll(file.path);
