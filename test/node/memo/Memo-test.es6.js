@@ -16,10 +16,12 @@
  */
 'use strict';
 
+const stringify = require('json-stable-stringify');
+
 const Memo = require('../../../lib/memo/Memo.es6.js');
 
 const o = {foo: 'bar'};
-const oStr = JSON.stringify(o);
+const oStr = stringify(o);
 
 class KeeperMemo extends Memo {
   init(opts) {
@@ -30,7 +32,7 @@ class KeeperMemo extends Memo {
 
 describe('Memo', () => {
   it('Run runs', done => {
-    const stringifier = new Memo({f: o => JSON.stringify(o)});
+    const stringifier = new Memo({f: o => stringify(o)});
     stringifier.run(o).then(str => {
       atry(done, () => {
         expect(str).toBe(oStr);
@@ -76,7 +78,7 @@ describe('Memo', () => {
       });
     }
     const stringifyThenAnother = new Memo({
-      f: o => JSON.stringify(o),
+      f: o => stringify(o),
       delegates: [new Memo({
         f: str => {
           output.secondInput = str;
@@ -92,7 +94,7 @@ describe('Memo', () => {
   });
   it('RunAll returns tree of computations', done => {
     const stringifyCounter = new KeeperMemo({
-      f: o => JSON.stringify(o),
+      f: o => stringify(o),
       delegates: [new KeeperMemo({f: str => str.length})],
     });
     stringifyCounter.runAll(o).then(result => {
@@ -106,7 +108,7 @@ describe('Memo', () => {
   });
   it('RunAll returns reduced tree of computations', done => {
     const stringifyCounter = new Memo({
-      f: o => JSON.stringify(o),
+      f: o => stringify(o),
       delegates: [new KeeperMemo({f: str => str.length})],
     });
     stringifyCounter.runAll(o).then(result => {
@@ -135,7 +137,7 @@ describe('Memo', () => {
   });
   it('RunAll returns reduced complex tree of computations', done => {
     const bigComputation = new Memo({
-      f: o => JSON.stringify(o),
+      f: o => stringify(o),
       delegates: [
         new KeeperMemo({f: str => str.length}),
         new Memo({
@@ -164,7 +166,7 @@ describe('Memo', () => {
   });
   it('RunAll returns complex tree of computations', done => {
     const bigComputation = new KeeperMemo({
-      f: o => JSON.stringify(o),
+      f: o => stringify(o),
       delegates: [
         new KeeperMemo({f: str => str.length}),
         new KeeperMemo({
@@ -214,7 +216,7 @@ describe('Memo', () => {
   it('RunAll returns complex tree, pruned with uncaught errors', done => {
     const err = new Error('Thrown before x % 2, !!x...');
     const bigComputation = new KeeperMemo({
-      f: o => JSON.stringify(o),
+      f: o => stringify(o),
       delegates: [
         new KeeperMemo({f: str => str.length}),
         new KeeperMemo({
@@ -247,7 +249,7 @@ describe('Memo', () => {
     const msg = 'Thrown before x % 2, !!x...';
     const err = new Error(msg);
     const bigComputation = new KeeperMemo({
-      f: o => JSON.stringify(o),
+      f: o => stringify(o),
       delegates: [
         new KeeperMemo({f: str => str.length}),
         new KeeperMemo({

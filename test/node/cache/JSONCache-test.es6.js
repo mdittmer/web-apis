@@ -16,6 +16,8 @@
  */
 'use strict';
 
+const stringify = require('json-stable-stringify');
+
 const JSONCache = require('../../../lib/cache/JSONCache.es6.js');
 
 describe('JSONCache', () => {
@@ -24,14 +26,14 @@ describe('JSONCache', () => {
   });
   it('Stringify empty object', () => {
     const v = (new JSONCache({
-      stringify: JSON.stringify,
+      stringify: stringify,
       delegate: {put: (key, o) => o},
     })).put('key', {});
     expect(v).toBe('{}');
   });
   it('Stringify complex object', () => {
     expect((new JSONCache({
-      stringify: JSON.stringify,
+      stringify: stringify,
       delegate: {put: (key, o) => o},
     })).put('key', {foo: ['bar', 'baz', {quz: 'quuz'}]})).toBe(
       '{"foo":["bar","baz",{"quz":"quuz"}]}'
@@ -39,7 +41,7 @@ describe('JSONCache', () => {
   });
   it('Parse simple object', () => {
     expect((new JSONCache({
-      stringify: JSON.stringify,
+      stringify: stringify,
       delegate: {get: (key) => '{"foo": "bar"}'},
     })).get('key')).toEqual({foo: 'bar'});
   });
