@@ -44,6 +44,4 @@ const argv = require('yargs')
 const blinkLinkedRunner = new BlinkLinkedRunner();
 blinkLinkedRunner.configure(argv);
 
-debug.inspect(done => {
-  blinkLinkedRunner.run().then(done);
-});
+blinkLinkedRunner.run();
