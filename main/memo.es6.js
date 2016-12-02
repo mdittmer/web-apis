@@ -16,10 +16,13 @@
  */
 'use strict';
 
+const path = require('path');
 const process = require('process');
+
 const env = process.env;
 
 const BlinkLinkedRunner = require('../lib/idl/BlinkLinkedRunner.es6.js');
+const IDLProcessRunner = require('../lib/idl/IDLProcessRunner.es6.js');
 const URLScrapeRunner = require('../lib/idl/URLScrapeRunner.es6.js');
 // const debug = require('../lib/debug.es6.js');
 
@@ -28,19 +31,20 @@ process.on('unhandledRejection', (reason, promise) => {
   throw reason;
 });
 
+// TODO: Consolidate repetition amongst commands.
 const yargs = require('yargs');
 const argv = yargs
   .command(
     'scrape-blink-linked [options]',
     'Scrape WebIDL from web specs linked to by Blink IDL files',
-         () => yargs
-           .alias('b', 'blink-dir')
-           .default('b', `${env.HOME}/src/chromium/src/third_party/WebKit`)
-           .describe('b', 'Chromium Blink source directory for IDL/URL scraping')
+    () => yargs
+      .default('blink-dir', `${env.HOME}/src/chromium/src/third_party/WebKit`)
+      .describe('blink-dir', 'Chromium Blink source directory for IDL/URL scraping')
+      .coerce('blink-dir', dir => path.resolve(dir))
 
-           .alias('sre', 'spec-reg-exp')
-           .default('sre', '(dev[.]w3[.]org|[.]github[.]io|spec[.]whatwg[.]org|css-houdini[.]org|csswg[.]org|khronos[.]org|dvcs.w3.org/hg/speech-api/raw-file/tip/webspeechapi[.]html)')
-           .describe('sre', 'Regular expression for identifying URLs as current web specification documents')
+      .default('spec-reg-exp', '(dev[.]w3[.]org|[.]github[.]io|spec[.]whatwg[.]org|css-houdini[.]org|csswg[.]org|khronos[.]org|dvcs.w3.org/hg/speech-api/raw-file/tip/webspeechapi[.]html)')
+      .describe('spec-reg-exp', 'Regular expression for identifying URLs as current web specification documents')
+      .coerce('spec-reg-exp', re => new RegExp(re, 'g'))
   )
   .command(
     'scrape-urls [urls..]',
@@ -60,17 +64,50 @@ const argv = yargs
         )
       )
   )
+  .command(
+    'process-idl [idl..]',
+    'Scrape WebIDL from web specs linked to by Blink IDL files',
+    () => yargs
+      .default('idl', [
+        `${__dirname}/../data/idl/blink/linked/auto.json`,
+        `${__dirname}/../data/idl/blink/linked/manual.json`,
+      ])
+      .describe('idl', 'Paths to IDL JSON blobs')
+      .coerce('idl', paths => paths.map(p => path.resolve(p)))
+      .demand(1, 'idl', 'At least one IDL JSON blobs required')
+  )
+  .command(
+    'process-idl-from-reference [reference] [idl..]',
+    'Scrape WebIDL from web specs linked to by Blink IDL files',
+    () => yargs
+      .default('reference', `${__dirname}/../data/idl/blink/auto.json`)
+      .describe('reference', 'Path to reference IDL JSON blob')
+      .coerce('reference', refPath => path.resolve(refPath))
+
+      .default('idl', [
+        `${__dirname}/../data/idl/blink/linked/auto.json`,
+        `${__dirname}/../data/idl/blink/linked/manual.json`,
+      ])
+      .describe('idl', 'Paths to IDL JSON blobs')
+      .coerce('idl', paths => paths.map(p => path.resolve(p)))
+      .demand(1, 'idl', 'At least one IDL JSON blobs required')
+  )
   .demand('command')
   .help()
   .argv;
 
 const command = argv._[0];
 
+console.log(argv);
+
 let runner;
 if (command === 'scrape-blink-linked') {
   runner = new BlinkLinkedRunner();
 } else if (command === 'scrape-urls') {
   runner = new URLScrapeRunner();
+} else if (command === 'process-idl' ||
+    command === 'process-idl-from-reference') {
+  runner = new IDLProcessRunner();
 } else {
   throw new Error(`Unknown command: ${command}`);
 }
