@@ -22,6 +22,7 @@ const process = require('process');
 const env = process.env;
 
 const BlinkLinkedRunner = require('../lib/idl/BlinkLinkedRunner.es6.js');
+const BlinkRunner = require('../lib/idl/BlinkRunner.es6.js');
 const IDLProcessRunner = require('../lib/idl/IDLProcessRunner.es6.js');
 const URLScrapeRunner = require('../lib/idl/URLScrapeRunner.es6.js');
 // const debug = require('../lib/debug.es6.js');
@@ -34,6 +35,14 @@ process.on('unhandledRejection', (reason, promise) => {
 // TODO: Consolidate repetition amongst commands.
 const yargs = require('yargs');
 const argv = yargs
+  .command(
+    'parse-blink [options]',
+    'Scrape WebIDL from web specs linked to by Blink IDL files',
+    () => yargs
+      .default('blink-dir', `${env.HOME}/src/chromium/src/third_party/WebKit`)
+      .describe('blink-dir', 'Chromium Blink source directory for IDL/URL scraping')
+      .coerce('blink-dir', dir => path.resolve(dir))
+  )
   .command(
     'scrape-blink-linked [options]',
     'Scrape WebIDL from web specs linked to by Blink IDL files',
@@ -66,7 +75,7 @@ const argv = yargs
   )
   .command(
     'process-idl [idl..]',
-    'Scrape WebIDL from web specs linked to by Blink IDL files',
+    'Process URL-grouped IDL from input files into concretized IDL',
     () => yargs
       .default('idl', [
         `${__dirname}/../data/idl/blink/linked/auto.json`,
@@ -78,9 +87,9 @@ const argv = yargs
   )
   .command(
     'process-idl-from-reference [reference] [idl..]',
-    'Scrape WebIDL from web specs linked to by Blink IDL files',
+    'Process URL-grouped IDL from input files into concretized IDL; use IDL reference file to resolve conflicts',
     () => yargs
-      .default('reference', `${__dirname}/../data/idl/blink/auto.json`)
+      .default('reference', `${__dirname}/../data/idl/blink/automatic.json`)
       .describe('reference', 'Path to reference IDL JSON blob')
       .coerce('reference', refPath => path.resolve(refPath))
 
@@ -101,7 +110,9 @@ const command = argv._[0];
 console.log(argv);
 
 let runner;
-if (command === 'scrape-blink-linked') {
+if (command === 'parse-blink') {
+  runner = new BlinkRunner();
+} else if (command === 'scrape-blink-linked') {
   runner = new BlinkLinkedRunner();
 } else if (command === 'scrape-urls') {
   runner = new URLScrapeRunner();
