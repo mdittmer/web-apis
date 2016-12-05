@@ -16,12 +16,20 @@
  */
 'use strict';
 
-var express = require('express');
 var bodyParser = require('body-parser');
+var express = require('express');
 var fs = require('fs');
-var jsonStableStringify = require('json-stable-stringify');
 var glob = require('glob');
+var jsonStableStringify = require('json-stable-stringify');
 var timeout = require('connect-timeout');
+var yargs = require('yargs');
+
+var argv = yargs
+    .default('port', 8000)
+    .describe('port', 'Port to listen for HTTP requests on')
+    .coerce('port', str => parseInt(str))
+    .help()
+    .argv;
 
 var jsonStableStringifyConfig = {
   space: '  ',
@@ -254,6 +262,6 @@ app.get(
   }
 );
 
-app.listen(8000, function() {
-  console.log('Listening...');
+app.listen(argv.port, function() {
+  console.log('Listening on port ' + argv.port.toString() + '...');
 });
