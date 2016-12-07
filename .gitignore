@@ -2,7 +2,8 @@
 **/node_modules
 **/npm-debug.log*
 .user/*
-.idlcache/*
-.urlcache/*
+.log/*
+.coverage/*
+.*cache/*
 static/bundle
 *.local.sh

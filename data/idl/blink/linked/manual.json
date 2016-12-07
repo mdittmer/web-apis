@@ -1,0 +1,5767 @@
+[
+  {
+    "parses": [
+      {
+	"attrs": [
+          {
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "EventTarget",
+	"members": [
+          {
+            "name": "abort",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "name": "continuous",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "grammars",
+            "type": {
+              "name": "SpeechGrammarList"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "interimResults",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "lang",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "maxAlternatives",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onaudioend",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onaudiostart",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onend",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onerror",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onnomatch",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onresult",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onsoundend",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onsoundstart",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onspeechend",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onspeechstart",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onstart",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "serviceURI",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "start",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "name": "stop",
+            "returnType": {
+              "name": "void"
+            }
+          }
+	],
+	"name": "SpeechRecognition",
+	"type_": "Interface"
+      },
+      {
+	"name": "ErrorCode",
+	"type_": "Enum",
+	"value": [
+          "no-speech",
+          "aborted",
+          "audio-capture",
+          "network",
+          "not-allowed",
+          "service-not-allowed",
+          "bad-grammar",
+          "language-not-supported"
+	]
+      },
+      {
+	"inheritsFrom": "Event",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "error",
+            "type": {
+              "name": "ErrorCode"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "message",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "SpeechRecognitionError",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "confidence",
+            "type": {
+              "name": "float"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "transcript",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "SpeechRecognitionAlternative",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "isFinal",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "index",
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "item",
+            "returnType": {
+              "name": "SpeechRecognitionAlternative"
+            },
+            "specials": [
+              "getter"
+            ]
+          },
+          {
+            "isReadOnly": true,
+            "name": "length",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "SpeechRecognitionResult",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "args": [
+              {
+		"name": "index",
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "item",
+            "returnType": {
+              "name": "SpeechRecognitionResult"
+            },
+            "specials": [
+              "getter"
+            ]
+          },
+          {
+            "isReadOnly": true,
+            "name": "length",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "SpeechRecognitionResultList",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "Event",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "emma",
+            "type": {
+              "name": "Document"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "interpretation",
+            "type": {
+              "name": "any"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "resultIndex",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "results",
+            "type": {
+              "name": "SpeechRecognitionResultList"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "SpeechRecognitionEvent",
+	"type_": "Interface"
+      },
+      {
+	"attrs": [
+          {
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"members": [
+          {
+            "name": "src",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "weight",
+            "type": {
+              "name": "float"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "SpeechGrammar",
+	"type_": "Interface"
+      },
+      {
+	"attrs": [
+          {
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"members": [
+          {
+            "args": [
+              {
+		"name": "string",
+		"type": {
+                  "name": "DOMString"
+		}
+              },
+              {
+		"name": "weight",
+		"optional": true,
+		"type": {
+                  "name": "float"
+		}
+              }
+            ],
+            "name": "addFromString",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "src",
+		"type": {
+                  "name": "DOMString"
+		}
+              },
+              {
+		"name": "weight",
+		"optional": true,
+		"type": {
+                  "name": "float"
+		}
+              }
+            ],
+            "name": "addFromURI",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "index",
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "item",
+            "returnType": {
+              "name": "SpeechGrammar"
+            },
+            "specials": [
+              "getter"
+            ]
+          },
+          {
+            "isReadOnly": true,
+            "name": "length",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "SpeechGrammarList",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "EventTarget",
+	"members": [
+          {
+            "name": "cancel",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "name": "getVoices",
+            "returnType": {
+              "name": "sequence",
+              "params": [
+		{
+                  "name": "SpeechSynthesisVoiceList"
+		}
+              ]
+            }
+          },
+          {
+            "name": "onvoiceschanged",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "pause",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "paused",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "pending",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "resume",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "utterance",
+		"type": {
+                  "name": "SpeechSynthesisUtterance"
+		}
+              }
+            ],
+            "name": "speak",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "speaking",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "SpeechSynthesis",
+	"type_": "Interface"
+      },
+      {
+	"attrs": [
+          {
+            "name": "NoInterfaceObject",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "speechSynthesis",
+            "type": {
+              "name": "SpeechSynthesis"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "SpeechSynthesisGetter",
+	"type_": "Interface"
+      },
+      {
+	"implemented": "SpeechSynthesisGetter",
+	"implementer": "Window",
+	"type_": "Implements"
+      },
+      {
+	"attrs": [
+          {
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          },
+          {
+            "args": [
+              {
+		"name": "text",
+		"type": {
+                  "name": "DOMString"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "EventTarget",
+	"members": [
+          {
+            "name": "lang",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onboundary",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onend",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onerror",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onmark",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onpause",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onresume",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onstart",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "pitch",
+            "type": {
+              "name": "float"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "rate",
+            "type": {
+              "name": "float"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "text",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "voice",
+            "type": {
+              "name": "SpeechSynthesisVoice"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "volume",
+            "type": {
+              "name": "float"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "SpeechSynthesisUtterance",
+	"type_": "Interface"
+      },
+      {
+	"name": "ErrorCode",
+	"type_": "Enum",
+	"value": [
+          "canceled",
+          "interrupted",
+          "audio-busy",
+          "audio-hardware",
+          "network",
+          "synthesis-unavailable",
+          "synthesis-failed",
+          "language-unavailable",
+          "voice-unavailable",
+          "text-too-long",
+          "invalid-argument"
+	]
+      },
+      {
+	"inheritsFrom": "Event",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "charIndex",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "elapsedTime",
+            "type": {
+              "name": "float"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "name",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "utterance",
+            "type": {
+              "name": "SpeechSynthesisUtterance"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "SpeechSynthesisEvent",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "SpeechSynthesisEvent",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "error",
+            "type": {
+              "name": "ErrorCode"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "SpeechSynthesisErrorEvent",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "default",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "lang",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "localService",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "name",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "voiceURI",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "SpeechSynthesisVoice",
+	"type_": "Interface"
+      }
+    ],
+    "url": "https://dvcs.w3.org/hg/speech-api/raw-file/tip/webspeechapi.html"
+  },
+  {
+    "parses": [
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "type",
+		"type": {
+                  "name": "DOMString"
+		}
+              },
+              {
+		"name": "eventInitDict",
+		"optional": true,
+		"type": {
+                  "name": "ClipboardEventInit"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "Event",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "clipboardData",
+            "type": {
+              "name": "DataTransfer",
+              "params": [
+		"nullable"
+              ]
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "ClipboardEvent",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "EventInit",
+	"members": [
+          {
+            "defaultValue": "null",
+            "name": "clipboardData",
+            "type": {
+              "name": "DataTransfer",
+              "params": [
+		"nullable"
+              ]
+            }
+          }
+	],
+	"name": "ClipboardEventInit",
+	"type_": "Dictionary"
+      }
+    ],
+    "url": "https://w3c.github.io/clipboard-apis/"
+  },
+  {
+    "parses": [
+      {
+	"inheritsFrom": "PerformanceEntry",
+	"members": [
+	],
+	"name": "PerformanceFrameTiming",
+	"type_": "Interface"
+      }
+    ],
+    "url": "http://wicg.github.io/frame-timing/"
+  },
+  {
+    "parses": [
+      {
+	"isPartial": true,
+	"members": [
+          {
+            "name": "exitPointerLock",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "name": "onpointerlockchange",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onpointerlockerror",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "Document",
+	"type_": "PartialInterface"
+      },
+      {
+	"isPartial": true,
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "pointerLockElement",
+            "type": {
+              "name": "Element",
+              "params": [
+		"nullable"
+              ]
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "DocumentOrShadowRoot",
+	"type_": "PartialInterface"
+      },
+      {
+	"isPartial": true,
+	"members": [
+          {
+            "name": "requestPointerLock",
+            "returnType": {
+              "name": "void"
+            }
+          }
+	],
+	"name": "Element",
+	"type_": "PartialInterface"
+      },
+      {
+	"isPartial": true,
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "movementX",
+            "type": {
+              "name": "long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "movementY",
+            "type": {
+              "name": "long"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "MouseEvent",
+	"type_": "PartialInterface"
+      },
+      {
+	"isPartial": true,
+	"members": [
+          {
+            "defaultValue": "0",
+            "name": "movementX",
+            "type": {
+              "name": "long"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "movementY",
+            "type": {
+              "name": "long"
+            }
+          }
+	],
+	"name": "MouseEventInit",
+	"type_": "Dictionary"
+      }
+    ],
+    "url": "https://w3c.github.io/pointerlock/"
+  },{
+    "parses": [
+      {
+	"name": "JSON",
+	"type": {
+          "name": "any"
+	},
+	"type_": "Typedef"
+      },
+      {
+	"name": "PushEncryptionKeyName",
+	"type_": "Enum",
+	"value": [
+          "p256dh",
+          "auth"
+	]
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "type",
+		"type": {
+                  "name": "DOMString"
+		}
+              },
+              {
+		"name": "eventInitDict",
+		"optional": true,
+		"type": {
+                  "name": "PushEventInit"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          },
+          {
+            "name": "Exposed",
+            "type_": "ExtendedAttribute",
+            "value": "ServiceWorker"
+          }
+	],
+	"inheritsFrom": "ExtendableEvent",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "data",
+            "type": {
+              "name": "PushMessageData",
+              "params": [
+		"nullable"
+              ]
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "PushEvent",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "ExtendableEventInit",
+	"members": [
+          {
+            "name": "data",
+            "type": {
+              "name": "PushMessageDataInit"
+            }
+          }
+	],
+	"name": "PushEventInit",
+	"type_": "Dictionary"
+      },
+      {
+	"members": [
+          {
+            "name": "getSubscription",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+		{
+                  "name": "PushSubscription",
+                  "params": [
+                    "nullable"
+                  ]
+		}
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "PushSubscriptionOptionsInit"
+		}
+              }
+            ],
+            "name": "permissionState",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+		{
+                  "name": "PushPermissionState"
+		}
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "PushSubscriptionOptionsInit"
+		}
+              }
+            ],
+            "name": "subscribe",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+		{
+                  "name": "PushSubscription"
+		}
+              ]
+            }
+          }
+	],
+	"name": "PushManager",
+	"type_": "Interface"
+      },
+      {
+	"attrs": [
+          {
+            "name": "Exposed",
+            "type_": "ExtendedAttribute",
+            "value": "ServiceWorker"
+          }
+	],
+	"members": [
+          {
+            "name": "arrayBuffer",
+            "returnType": {
+              "name": "ArrayBuffer"
+            }
+          },
+          {
+            "name": "blob",
+            "returnType": {
+              "name": "Blob"
+            }
+          },
+          {
+            "name": "json",
+            "returnType": {
+              "name": "JSON"
+            }
+          },
+          {
+            "name": "text",
+            "returnType": {
+              "name": "USVString"
+            }
+          }
+	],
+	"name": "PushMessageData",
+	"type_": "Interface"
+      },
+      {
+	"name": "PushMessageDataInit",
+	"type": {
+          "type_": "UnionType",
+          "types": [
+            {
+              "name": "BufferSource"
+            },
+            {
+              "name": "USVString"
+            }
+          ]
+	},
+	"type_": "Typedef"
+      },
+      {
+	"name": "PushPermissionState",
+	"type_": "Enum",
+	"value": [
+          "granted",
+          "denied",
+          "prompt"
+	]
+      },
+      {
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "endpoint",
+            "type": {
+              "name": "USVString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "name",
+		"type": {
+                  "name": "PushEncryptionKeyName"
+		}
+              }
+            ],
+            "name": "getKey",
+            "returnType": {
+              "name": "ArrayBuffer",
+              "params": [
+		"nullable"
+              ]
+            }
+          },
+          {
+            "attrs": [
+              {
+		"name": "SameObject",
+		"type_": "ExtendedAttribute"
+              }
+            ],
+            "isReadOnly": true,
+            "name": "options",
+            "type": {
+              "name": "PushSubscriptionOptions"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "unsubscribe",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+		{
+                  "name": "boolean"
+		}
+              ]
+            }
+          },
+          {
+            "type_": "Serializer"
+          }
+	],
+	"name": "PushSubscription",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "attrs": [
+              {
+		"name": "SameObject",
+		"type_": "ExtendedAttribute"
+              }
+            ],
+            "isReadOnly": true,
+            "name": "applicationServerKey",
+            "type": {
+              "name": "ArrayBuffer",
+              "params": [
+		"nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "userVisibleOnly",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "PushSubscriptionOptions",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "defaultValue": "null",
+            "name": "applicationServerKey",
+            "type": {
+              "name": "BufferSource",
+              "params": [
+		"nullable"
+              ]
+            }
+          },
+          {
+            "defaultValue": "false",
+            "name": "userVisibleOnly",
+            "type": {
+              "name": "boolean"
+            }
+          }
+	],
+	"name": "PushSubscriptionOptionsInit",
+	"type_": "Dictionary"
+      },
+      {
+	"isPartial": true,
+	"members": [
+          {
+            "name": "onpush",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onpushsubscriptionchange",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "ServiceWorkerGlobalScope",
+	"type_": "PartialInterface"
+      },
+      {
+	"isPartial": true,
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "pushManager",
+            "type": {
+              "name": "PushManager"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "ServiceWorkerRegistration",
+	"type_": "PartialInterface"
+      }
+    ],
+    "url": "https://w3c.github.io/push-api/"
+  },
+  {
+    "parses": [
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "type",
+		"type": {
+                  "name": "DOMString"
+		}
+              },
+              {
+		"name": "eventInitDict",
+		"optional": true,
+		"type": {
+                  "name": "BeforeEvictEventInit"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          },
+          {
+            "name": "Exposed",
+            "type_": "ExtendedAttribute",
+            "value": "ServiceWorker"
+          }
+	],
+	"inheritsFrom": "ExtendableEvent",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "requestedBytes",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "BeforeEvictEvent",
+	"type_": "Interface"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "type",
+		"type": {
+                  "name": "DOMString"
+		}
+              },
+              {
+		"name": "eventInitDict",
+		"optional": true,
+		"type": {
+                  "name": "EvictedEventInit"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          },
+          {
+            "name": "Exposed",
+            "type_": "ExtendedAttribute",
+            "value": "ServiceWorker"
+          }
+	],
+	"inheritsFrom": "ExtendableEvent",
+	"members": [
+	],
+	"name": "EvictedEvent",
+	"type_": "Interface"
+      },
+      {
+	"isPartial": true,
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "storageQuota",
+            "type": {
+              "name": "StorageQuota"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "Navigator",
+	"type_": "PartialInterface"
+      },
+      {
+	"isPartial": true,
+	"members": [
+          {
+            "name": "onbeforeevicted",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onevicted",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "ServiceWorkerGlobalScope",
+	"type_": "PartialInterface"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "type",
+		"type": {
+                  "name": "DOMString"
+		}
+              },
+              {
+		"name": "eventInitDict",
+		"optional": true,
+		"type": {
+                  "name": "StorageEventInit"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "Event",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "quota",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "usage",
+            "type": {
+              "name": "unsigned long long"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "StorageEvent",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "EventInit",
+	"members": [
+          {
+            "defaultValue": "0",
+            "name": "quota",
+            "type": {
+              "name": "unsigned long long"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "usage",
+            "type": {
+              "name": "unsigned long long"
+            }
+          }
+	],
+	"name": "StorageEventInit",
+	"type_": "Dictionary"
+      },
+      {
+	"members": [
+          {
+            "name": "quota",
+            "type": {
+              "name": "unsigned long long"
+            }
+          },
+          {
+            "name": "usage",
+            "type": {
+              "name": "unsigned long long"
+            }
+          }
+	],
+	"name": "StorageInfo",
+	"type_": "Dictionary"
+      },
+      {
+	"name": "StorageType",
+	"type_": "Enum",
+	"value": [
+          "temporary",
+          "persistent"
+	]
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "type",
+		"type": {
+                  "name": "StorageType"
+		}
+              },
+              {
+		"name": "rate",
+		"optional": true,
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "EventTarget",
+	"members": [
+          {
+            "name": "close",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "name": "onstoragechange",
+            "type": {
+              "name": "EventListener"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "rate",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "type",
+            "type": {
+              "name": "StorageType"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "StorageWatcher",
+	"type_": "Interface"
+      }
+    ],
+    "url": "https://w3c.github.io/quota-api/"
+  },
+  {
+    "parses": [
+      {
+	"isPartial": true,
+	"members": [
+          {
+            "name": "getSelection",
+            "returnType": {
+              "name": "Selection",
+              "params": [
+		"nullable"
+              ]
+            }
+          }
+	],
+	"name": "Document",
+	"type_": "PartialInterface"
+      },
+      {
+	"isPartial": true,
+	"members": [
+          {
+            "name": "onselectionchange",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onselectstart",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "GlobalEventHandlers",
+	"type_": "PartialInterface"
+      },
+      {
+	"members": [
+          {
+            "args": [
+              {
+		"name": "range",
+		"type": {
+                  "name": "Range"
+		}
+              }
+            ],
+            "name": "addRange",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "anchorNode",
+            "type": {
+              "name": "Node",
+              "params": [
+		"nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "anchorOffset",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "node",
+		"type": {
+                  "name": "Node",
+                  "params": [
+                    "nullable"
+                  ]
+		}
+              },
+              {
+		"defaultValue": "0",
+		"name": "offset",
+		"optional": true,
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "collapse",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "name": "collapseToEnd",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "name": "collapseToStart",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "node",
+		"type": {
+                  "name": "Node"
+		}
+              },
+              {
+		"defaultValue": "false",
+		"name": "allowPartialContainment",
+		"optional": true,
+		"type": {
+                  "name": "boolean"
+		}
+              }
+            ],
+            "name": "containsNode",
+            "returnType": {
+              "name": "boolean"
+            }
+          },
+          {
+            "attrs": [
+              {
+		"name": "CEReactions"
+              }
+            ],
+            "name": "deleteFromDocument",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "name": "empty",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "node",
+		"type": {
+                  "name": "Node"
+		}
+              },
+              {
+		"defaultValue": "0",
+		"name": "offset",
+		"optional": true,
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "extend",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "focusNode",
+            "type": {
+              "name": "Node",
+              "params": [
+		"nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "focusOffset",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "index",
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "getRangeAt",
+            "returnType": {
+              "name": "Range"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "isCollapsed",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "rangeCount",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "removeAllRanges",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "range",
+		"type": {
+                  "name": "Range"
+		}
+              }
+            ],
+            "name": "removeRange",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "node",
+		"type": {
+                  "name": "Node"
+		}
+              }
+            ],
+            "name": "selectAllChildren",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "anchorNode",
+		"type": {
+                  "name": "Node"
+		}
+              },
+              {
+		"name": "anchorOffset",
+		"type": {
+                  "name": "unsigned long"
+		}
+              },
+              {
+		"name": "focusNode",
+		"type": {
+                  "name": "Node"
+		}
+              },
+              {
+		"name": "focusOffset",
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "setBaseAndExtent",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "node",
+		"type": {
+                  "name": "Node",
+                  "params": [
+                    "nullable"
+                  ]
+		}
+              },
+              {
+		"defaultValue": "0",
+		"name": "offset",
+		"optional": true,
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "setPosition",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "type",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "returnType": {
+              "name": "DOMString"
+            },
+            "type_": "Stringifier"
+          }
+	],
+	"name": "Selection",
+	"type_": "Interface"
+      },
+      {
+	"isPartial": true,
+	"members": [
+          {
+            "name": "getSelection",
+            "returnType": {
+              "name": "Selection",
+              "params": [
+		"nullable"
+              ]
+            }
+          }
+	],
+	"name": "Window",
+	"type_": "PartialInterface"
+      }
+    ],
+    "url": "https://w3c.github.io/selection-api/"
+  },
+  {
+    "parses": [
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "AnalyserOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+          {
+            "name": "fftSize",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "frequencyBinCount",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "array",
+		"type": {
+                  "name": "Uint8Array"
+		}
+              }
+            ],
+            "name": "getByteFrequencyData",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "array",
+		"type": {
+                  "name": "Uint8Array"
+		}
+              }
+            ],
+            "name": "getByteTimeDomainData",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "array",
+		"type": {
+                  "name": "Float32Array"
+		}
+              }
+            ],
+            "name": "getFloatFrequencyData",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "array",
+		"type": {
+                  "name": "Float32Array"
+		}
+              }
+            ],
+            "name": "getFloatTimeDomainData",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "name": "maxDecibels",
+            "type": {
+              "name": "float"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "minDecibels",
+            "type": {
+              "name": "float"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "smoothingTimeConstant",
+            "type": {
+              "name": "float"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "AnalyserNode",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "AudioNodeOptions",
+	"members": [
+          {
+            "defaultValue": "2048",
+            "name": "fftSize",
+            "type": {
+              "name": "unsigned long"
+            }
+          },
+          {
+            "defaultValue": "-30",
+            "name": "maxDecibels",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "-100",
+            "name": "minDecibels",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "0.8",
+            "name": "smoothingTimeConstant",
+            "type": {
+              "name": "float"
+            }
+          }
+	],
+	"name": "AnalyserOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"type": {
+                  "name": "AudioBufferOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"members": [
+          {
+            "args": [
+              {
+		"name": "destination",
+		"type": {
+                  "name": "Float32Array"
+		}
+              },
+              {
+		"name": "channelNumber",
+		"type": {
+                  "name": "unsigned long"
+		}
+              },
+              {
+		"defaultValue": "0",
+		"name": "startInChannel",
+		"optional": true,
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "copyFromChannel",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "source",
+		"type": {
+                  "name": "Float32Array"
+		}
+              },
+              {
+		"name": "channelNumber",
+		"type": {
+                  "name": "unsigned long"
+		}
+              },
+              {
+		"defaultValue": "0",
+		"name": "startInChannel",
+		"optional": true,
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "copyToChannel",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "duration",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "channel",
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "getChannelData",
+            "returnType": {
+              "name": "Float32Array"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "length",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "numberOfChannels",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "sampleRate",
+            "type": {
+              "name": "float"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "AudioBuffer",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "isRequired": true,
+            "name": "length",
+            "type": {
+              "name": "unsigned long"
+            }
+          },
+          {
+            "defaultValue": "1",
+            "name": "numberOfChannels",
+            "type": {
+              "name": "unsigned long"
+            }
+          },
+          {
+            "name": "sampleRate",
+            "type": {
+              "name": "float"
+            }
+          }
+	],
+	"name": "AudioBufferOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "AudioBufferSourceOptions",
+		"type": {
+                  "name": "optional"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioScheduledSourceNode",
+	"members": [
+          {
+            "name": "buffer",
+            "type": {
+              "name": "AudioBuffer",
+              "params": [
+		"nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "detune",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "loop",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "loopEnd",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "loopStart",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "playbackRate",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"defaultValue": "0",
+		"name": "when",
+		"optional": true,
+		"type": {
+                  "name": "double"
+		}
+              },
+              {
+		"name": "offset",
+		"optional": true,
+		"type": {
+                  "name": "double"
+		}
+              },
+              {
+		"name": "duration",
+		"optional": true,
+		"type": {
+                  "name": "double"
+		}
+              }
+            ],
+            "name": "start",
+            "returnType": {
+              "name": "void"
+            }
+          }
+	],
+	"name": "AudioBufferSourceNode",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "name": "buffer",
+            "type": {
+              "name": "AudioBuffer",
+              "params": [
+		"nullable"
+              ]
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "detune",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "false",
+            "name": "loop",
+            "type": {
+              "name": "boolean"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "loopEnd",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "loopStart",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "defaultValue": "1",
+            "name": "playbackRate",
+            "type": {
+              "name": "float"
+            }
+          }
+	],
+	"name": "AudioBufferSourceOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "contextOptions",
+		"optional": true,
+		"type": {
+                  "name": "AudioContextOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          },
+          {
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "BaseAudioContext",
+	"members": [
+          {
+            "name": "close",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+		{
+                  "name": "void"
+		}
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "mediaElement",
+		"type": {
+                  "name": "HTMLMediaElement"
+		}
+              }
+            ],
+            "name": "createMediaElementSource",
+            "returnType": {
+              "name": "MediaElementAudioSourceNode"
+            }
+          },
+          {
+            "name": "createMediaStreamDestination",
+            "returnType": {
+              "name": "MediaStreamAudioDestinationNode"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "mediaStream",
+		"type": {
+                  "name": "MediaStream"
+		}
+              }
+            ],
+            "name": "createMediaStreamSource",
+            "returnType": {
+              "name": "MediaStreamAudioSourceNode"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "mediaStreamTrack",
+		"type": {
+                  "name": "AudioMediaStreamTrack"
+		}
+              }
+            ],
+            "name": "createMediaStreamTrackSource",
+            "returnType": {
+              "name": "MediaStreamTrackAudioSourceNode"
+            }
+          },
+          {
+            "name": "getOutputTimestamp",
+            "returnType": {
+              "name": "AudioTimestamp"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "outputLatency",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "suspend",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+		{
+                  "name": "void"
+		}
+              ]
+            }
+          }
+	],
+	"name": "AudioContext",
+	"type_": "Interface"
+      },
+      {
+	"attrs": [
+          {
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "BaseAudioContext",
+	"members": [
+	],
+	"name": "AudioContext",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "name": "currentTime",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "name": "sampleRate",
+            "type": {
+              "name": "float"
+            }
+          }
+	],
+	"name": "AudioContextInfo",
+	"type_": "Dictionary"
+      },
+      {
+	"name": "AudioContextLatencyCategory",
+	"type_": "Enum",
+	"value": [
+          "balanced",
+          "interactive",
+          "playback"
+	]
+      },
+      {
+	"members": [
+          {
+            "defaultValue": "interactive",
+            "name": "latencyHint",
+            "type": {
+              "types": [
+		{
+                  "name": "AudioContextLatencyCategory"
+		},
+		{
+                  "name": "double"
+		}
+              ]
+            }
+          }
+	],
+	"name": "AudioContextOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"name": "AudioContextState",
+	"type_": "Enum",
+	"value": [
+          "suspended",
+          "running",
+          "closed"
+	]
+      },
+      {
+	"inheritsFrom": "AudioNode",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "maxChannelCount",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "AudioDestinationNode",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "forwardX",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "forwardY",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "forwardZ",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "positionX",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "positionY",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "positionZ",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "x",
+		"type": {
+                  "name": "float"
+		}
+              },
+              {
+		"name": "y",
+		"type": {
+                  "name": "float"
+		}
+              },
+              {
+		"name": "z",
+		"type": {
+                  "name": "float"
+		}
+              },
+              {
+		"name": "xUp",
+		"type": {
+                  "name": "float"
+		}
+              },
+              {
+		"name": "yUp",
+		"type": {
+                  "name": "float"
+		}
+              },
+              {
+		"name": "zUp",
+		"type": {
+                  "name": "float"
+		}
+              }
+            ],
+            "name": "setOrientation",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "x",
+		"type": {
+                  "name": "float"
+		}
+              },
+              {
+		"name": "y",
+		"type": {
+                  "name": "float"
+		}
+              },
+              {
+		"name": "z",
+		"type": {
+                  "name": "float"
+		}
+              }
+            ],
+            "name": "setPosition",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "upX",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "upY",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "upZ",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "AudioListener",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "EventTarget",
+	"members": [
+          {
+            "name": "channelCount",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "channelCountMode",
+            "type": {
+              "name": "ChannelCountMode"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "channelInterpretation",
+            "type": {
+              "name": "ChannelInterpretation"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "destination",
+		"type": {
+                  "name": "AudioNode"
+		}
+              },
+              {
+		"defaultValue": "0",
+		"name": "output",
+		"optional": true,
+		"type": {
+                  "name": "unsigned long"
+		}
+              },
+              {
+		"defaultValue": "0",
+		"name": "input",
+		"optional": true,
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "connect",
+            "returnType": {
+              "name": "AudioNode"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "destination",
+		"type": {
+                  "name": "AudioParam"
+		}
+              },
+              {
+		"defaultValue": "0",
+		"name": "output",
+		"optional": true,
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "connect",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "context",
+            "type": {
+              "name": "BaseAudioContext"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "destination",
+		"type": {
+                  "name": "AudioNode"
+		}
+              },
+              {
+		"name": "output",
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "disconnect",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "destination",
+		"type": {
+                  "name": "AudioNode"
+		}
+              },
+              {
+		"name": "output",
+		"type": {
+                  "name": "unsigned long"
+		}
+              },
+              {
+		"name": "input",
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "disconnect",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "destination",
+		"type": {
+                  "name": "AudioNode"
+		}
+              }
+            ],
+            "name": "disconnect",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "destination",
+		"type": {
+                  "name": "AudioParam"
+		}
+              },
+              {
+		"name": "output",
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "disconnect",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "output",
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "disconnect",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "name": "disconnect",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "destination",
+		"type": {
+                  "name": "AudioParam"
+		}
+              }
+            ],
+            "name": "disconnect",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "numberOfInputs",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "numberOfOutputs",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "AudioNode",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "name": "channelCount",
+            "type": {
+              "name": "unsigned long"
+            }
+          },
+          {
+            "name": "channelCountMode",
+            "type": {
+              "name": "ChannelCountMode"
+            }
+          },
+          {
+            "name": "channelInterpretation",
+            "type": {
+              "name": "ChannelInterpretation"
+            }
+          }
+	],
+	"name": "AudioNodeOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"members": [
+          {
+            "args": [
+              {
+		"name": "cancelTime",
+		"type": {
+                  "name": "double"
+		}
+              }
+            ],
+            "name": "cancelAndHoldAtTime",
+            "returnType": {
+              "name": "AudioParam"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "cancelTime",
+		"type": {
+                  "name": "double"
+		}
+              }
+            ],
+            "name": "cancelScheduledValues",
+            "returnType": {
+              "name": "AudioParam"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "defaultValue",
+            "type": {
+              "name": "float"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "value",
+		"type": {
+                  "name": "float"
+		}
+              },
+              {
+		"name": "endTime",
+		"type": {
+                  "name": "double"
+		}
+              }
+            ],
+            "name": "exponentialRampToValueAtTime",
+            "returnType": {
+              "name": "AudioParam"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "value",
+		"type": {
+                  "name": "float"
+		}
+              },
+              {
+		"name": "endTime",
+		"type": {
+                  "name": "double"
+		}
+              }
+            ],
+            "name": "linearRampToValueAtTime",
+            "returnType": {
+              "name": "AudioParam"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "maxValue",
+            "type": {
+              "name": "float"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "minValue",
+            "type": {
+              "name": "float"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "target",
+		"type": {
+                  "name": "float"
+		}
+              },
+              {
+		"name": "startTime",
+		"type": {
+                  "name": "double"
+		}
+              },
+              {
+		"name": "timeConstant",
+		"type": {
+                  "name": "float"
+		}
+              }
+            ],
+            "name": "setTargetAtTime",
+            "returnType": {
+              "name": "AudioParam"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "value",
+		"type": {
+                  "name": "float"
+		}
+              },
+              {
+		"name": "startTime",
+		"type": {
+                  "name": "double"
+		}
+              }
+            ],
+            "name": "setValueAtTime",
+            "returnType": {
+              "name": "AudioParam"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "values",
+		"type": {
+                  "name": "Float32Array"
+		}
+              },
+              {
+		"name": "startTime",
+		"type": {
+                  "name": "double"
+		}
+              },
+              {
+		"name": "duration",
+		"type": {
+                  "name": "double"
+		}
+              }
+            ],
+            "name": "setValueCurveAtTime",
+            "returnType": {
+              "name": "AudioParam"
+            }
+          },
+          {
+            "name": "value",
+            "type": {
+              "name": "float"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "AudioParam",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "defaultValue": "0",
+            "name": "defaultValue",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "name": "maxValue",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "name": "minValue",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "name": "name",
+            "type": {
+              "name": "DOMString"
+            }
+          }
+	],
+	"name": "AudioParamDescriptor",
+	"type_": "Dictionary"
+      },
+      {
+	"inheritsFrom": "AudioNode",
+	"members": [
+          {
+            "name": "onended",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"defaultValue": "0",
+		"name": "when",
+		"optional": true,
+		"type": {
+                  "name": "double"
+		}
+              }
+            ],
+            "name": "start",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"defaultValue": "0",
+		"name": "when",
+		"optional": true,
+		"type": {
+                  "name": "double"
+		}
+              }
+            ],
+            "name": "stop",
+            "returnType": {
+              "name": "void"
+            }
+          }
+	],
+	"name": "AudioScheduledSourceNode",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "name": "contextTime",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "name": "performanceTime",
+            "type": {
+              "name": "DOMHighResTimeStamp"
+            }
+          }
+	],
+	"name": "AudioTimestamp",
+	"type_": "Dictionary"
+      },
+      {
+	"attrs": [
+          {
+            "name": "Exposed",
+            "type_": "ExtendedAttribute",
+            "value": "AudioWorklet"
+          },
+          {
+            "identifiers": [
+              "Worklet",
+              "AudioWorklet"
+            ],
+            "name": "Global",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "WorkletGlobalScope",
+	"members": [
+          {
+            "args": [
+              {
+		"name": "name",
+		"type": {
+                  "name": "DOMString"
+		}
+              },
+              {
+		"name": "processorCtor",
+		"type": {
+                  "name": "VoidFunction"
+		}
+              }
+            ],
+            "name": "registerProcessor",
+            "returnType": {
+              "name": "void"
+            }
+          }
+	],
+	"name": "AudioWorkletGlobalScope",
+	"type_": "Interface"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "name",
+		"type": {
+                  "name": "DOMString"
+		}
+              },
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "AudioWorkletNodeOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+          {
+            "name": "onmessage",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "message",
+		"type": {
+                  "name": "any"
+		}
+              },
+              {
+		"name": "transfer",
+		"optional": true,
+		"type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "object"
+                    }
+                  ]
+		}
+              }
+            ],
+            "name": "postMessage",
+            "returnType": {
+              "name": "void"
+            }
+          }
+	],
+	"name": "AudioWorkletNode",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "AudioNodeOptions",
+	"members": [
+          {
+            "name": "numberOfInputs",
+            "type": {
+              "name": "unsigned long"
+            }
+          },
+          {
+            "name": "numberOfOutputs",
+            "type": {
+              "name": "unsigned long"
+            }
+          }
+	],
+	"name": "AudioWorkletNodeOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"inheritsFrom": "EventTarget",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "contextInfo",
+            "type": {
+              "name": "AudioContextInfo"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onmessage",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "message",
+		"type": {
+                  "name": "any"
+		}
+              }
+            ],
+            "name": "postMessage",
+            "returnType": {
+              "name": "void"
+            }
+          }
+	],
+	"name": "AudioWorkletProcessor",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "EventTarget",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "baseLatency",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "createAnalyser",
+            "returnType": {
+              "name": "AnalyserNode"
+            }
+          },
+          {
+            "name": "createBiquadFilter",
+            "returnType": {
+              "name": "BiquadFilterNode"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "numberOfChannels",
+		"type": {
+                  "name": "unsigned long"
+		}
+              },
+              {
+		"name": "length",
+		"type": {
+                  "name": "unsigned long"
+		}
+              },
+              {
+		"name": "sampleRate",
+		"type": {
+                  "name": "float"
+		}
+              }
+            ],
+            "name": "createBuffer",
+            "returnType": {
+              "name": "AudioBuffer"
+            }
+          },
+          {
+            "name": "createBufferSource",
+            "returnType": {
+              "name": "AudioBufferSourceNode"
+            }
+          },
+          {
+            "args": [
+              {
+		"defaultValue": "6",
+		"name": "numberOfInputs",
+		"optional": true,
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "createChannelMerger",
+            "returnType": {
+              "name": "ChannelMergerNode"
+            }
+          },
+          {
+            "args": [
+              {
+		"defaultValue": "6",
+		"name": "numberOfOutputs",
+		"optional": true,
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "createChannelSplitter",
+            "returnType": {
+              "name": "ChannelSplitterNode"
+            }
+          },
+          {
+            "name": "createConstantSource",
+            "returnType": {
+              "name": "ConstantSourceNode"
+            }
+          },
+          {
+            "name": "createConvolver",
+            "returnType": {
+              "name": "ConvolverNode"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "maxDelayTime",
+		"optional": true,
+		"type": {
+                  "name": "double"
+		}
+              }
+            ],
+            "name": "createDelay",
+            "returnType": {
+              "name": "DelayNode"
+            }
+          },
+          {
+            "name": "createDynamicsCompressor",
+            "returnType": {
+              "name": "DynamicsCompressorNode"
+            }
+          },
+          {
+            "name": "createGain",
+            "returnType": {
+              "name": "GainNode"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "feedforward",
+		"type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "double"
+                    }
+                  ]
+		}
+              },
+              {
+		"name": "feedback",
+		"type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "double"
+                    }
+                  ]
+		}
+              }
+            ],
+            "name": "createIIRFilter",
+            "returnType": {
+              "name": "IIRFilterNode"
+            }
+          },
+          {
+            "name": "createOscillator",
+            "returnType": {
+              "name": "OscillatorNode"
+            }
+          },
+          {
+            "name": "createPanner",
+            "returnType": {
+              "name": "PannerNode"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "real",
+		"type": {
+                  "name": "Float32Array"
+		}
+              },
+              {
+		"name": "imag",
+		"type": {
+                  "name": "Float32Array"
+		}
+              },
+              {
+		"name": "constraints",
+		"optional": true,
+		"type": {
+                  "name": "PeriodicWaveConstraints"
+		}
+              }
+            ],
+            "name": "createPeriodicWave",
+            "returnType": {
+              "name": "PeriodicWave"
+            }
+          },
+          {
+            "args": [
+              {
+		"defaultValue": "0",
+		"name": "bufferSize",
+		"optional": true,
+		"type": {
+                  "name": "unsigned long"
+		}
+              },
+              {
+		"defaultValue": "2",
+		"name": "numberOfInputChannels",
+		"optional": true,
+		"type": {
+                  "name": "unsigned long"
+		}
+              },
+              {
+		"defaultValue": "2",
+		"name": "numberOfOutputChannels",
+		"optional": true,
+		"type": {
+                  "name": "unsigned long"
+		}
+              }
+            ],
+            "name": "createScriptProcessor",
+            "returnType": {
+              "name": "ScriptProcessorNode"
+            }
+          },
+          {
+            "name": "createStereoPanner",
+            "returnType": {
+              "name": "StereoPannerNode"
+            }
+          },
+          {
+            "name": "createWaveShaper",
+            "returnType": {
+              "name": "WaveShaperNode"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "currentTime",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "audioData",
+		"type": {
+                  "name": "ArrayBuffer"
+		}
+              },
+              {
+		"name": "successCallback",
+		"optional": true,
+		"type": {
+                  "name": "DecodeSuccessCallback"
+		}
+              },
+              {
+		"name": "errorCallback",
+		"optional": true,
+		"type": {
+                  "name": "DecodeErrorCallback"
+		}
+              }
+            ],
+            "name": "decodeAudioData",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+		{
+                  "name": "AudioBuffer"
+		}
+              ]
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "destination",
+            "type": {
+              "name": "AudioDestinationNode"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "listener",
+            "type": {
+              "name": "AudioListener"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onstatechange",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "resume",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+		{
+                  "name": "void"
+		}
+              ]
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "sampleRate",
+            "type": {
+              "name": "float"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "state",
+            "type": {
+              "name": "AudioContextState"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "BaseAudioContext",
+	"type_": "Interface"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "BiquadFilterOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "Q",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "detune",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "frequency",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "gain",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "frequencyHz",
+		"type": {
+                  "name": "Float32Array"
+		}
+              },
+              {
+		"name": "magResponse",
+		"type": {
+                  "name": "Float32Array"
+		}
+              },
+              {
+		"name": "phaseResponse",
+		"type": {
+                  "name": "Float32Array"
+		}
+              }
+            ],
+            "name": "getFrequencyResponse",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "name": "type",
+            "type": {
+              "name": "BiquadFilterType"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "BiquadFilterNode",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "AudioNodeOptions",
+	"members": [
+          {
+            "defaultValue": "1",
+            "name": "Q",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "detune",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "350",
+            "name": "frequency",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "gain",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "lowpass",
+            "name": "type",
+            "type": {
+              "name": "BiquadFilterType"
+            }
+          }
+	],
+	"name": "BiquadFilterOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"name": "BiquadFilterType",
+	"type_": "Enum",
+	"value": [
+          "lowpass",
+          "highpass",
+          "bandpass",
+          "lowshelf",
+          "highshelf",
+          "peaking",
+          "notch",
+          "allpass"
+	]
+      },
+      {
+	"name": "ChannelCountMode",
+	"type_": "Enum",
+	"value": [
+          "max",
+          "clamped-max",
+          "explicit"
+	]
+      },
+      {
+	"name": "ChannelInterpretation",
+	"type_": "Enum",
+	"value": [
+          "speakers",
+          "discrete"
+	]
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "ChannelSplitterOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+	],
+	"name": "ChannelMergerNode",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "AudioNodeOptions",
+	"members": [
+          {
+            "defaultValue": "6",
+            "name": "numberOfInputs",
+            "type": {
+              "name": "unsigned long"
+            }
+          }
+	],
+	"name": "ChannelMergerOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "ChannelSplitterOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+	],
+	"name": "ChannelSplitterNode",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "AudioNodeOptions",
+	"members": [
+          {
+            "defaultValue": "6",
+            "name": "numberOfOutputs",
+            "type": {
+              "name": "unsigned long"
+            }
+          }
+	],
+	"name": "ChannelSplitterOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "ConstantSourceOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioScheduledSourceNode",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "offset",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "ConstantSourceNode",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "defaultValue": "1",
+            "name": "offset",
+            "type": {
+              "name": "float"
+            }
+          }
+	],
+	"name": "ConstantSourceOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "ConvolverOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+          {
+            "name": "buffer",
+            "type": {
+              "name": "AudioBuffer",
+              "params": [
+		"nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "normalize",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "ConvolverNode",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "AudioNodeOptions",
+	"members": [
+          {
+            "name": "buffer",
+            "type": {
+              "name": "AudioBuffer",
+              "params": [
+		"nullable"
+              ]
+            }
+          },
+          {
+            "defaultValue": "false",
+            "name": "disableNormalization",
+            "type": {
+              "name": "boolean"
+            }
+          }
+	],
+	"name": "ConvolverOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"args": [
+          {
+            "name": "error",
+            "type": {
+              "name": "DOMException"
+            }
+          }
+	],
+	"name": "DecodeErrorCallback",
+	"returnType": {
+          "name": "void"
+	},
+	"type_": "Callback"
+      },
+      {
+	"args": [
+          {
+            "name": "decodedData",
+            "type": {
+              "name": "AudioBuffer"
+            }
+          }
+	],
+	"name": "DecodeSuccessCallback",
+	"returnType": {
+          "name": "void"
+	},
+	"type_": "Callback"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "DelayOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "delayTime",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "DelayNode",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "AudioNodeOptions",
+	"members": [
+          {
+            "defaultValue": "0",
+            "name": "delayTime",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "defaultValue": "1",
+            "name": "maxDelayTime",
+            "type": {
+              "name": "double"
+            }
+          }
+	],
+	"name": "DelayOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"name": "DistanceModelType",
+	"type_": "Enum",
+	"value": [
+          "linear",
+          "inverse",
+          "exponential"
+	]
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "DynamicsCompressorOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "attack",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "knee",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "ratio",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "reduction",
+            "type": {
+              "name": "float"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "release",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "threshold",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "DynamicsCompressorNode",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "AudioNodeOptions",
+	"members": [
+          {
+            "defaultValue": "0.003",
+            "name": "attack",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "30",
+            "name": "knee",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "12",
+            "name": "ratio",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "0.25",
+            "name": "release",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "-24",
+            "name": "threshold",
+            "type": {
+              "name": "float"
+            }
+          }
+	],
+	"name": "DynamicsCompressorOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "GainOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "gain",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "GainNode",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "AudioNodeOptions",
+	"members": [
+          {
+            "defaultValue": "1.0",
+            "name": "gain",
+            "type": {
+              "name": "float"
+            }
+          }
+	],
+	"name": "GainOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"type": {
+                  "name": "IIRFilterOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+          {
+            "args": [
+              {
+		"name": "frequencyHz",
+		"type": {
+                  "name": "Float32Array"
+		}
+              },
+              {
+		"name": "magResponse",
+		"type": {
+                  "name": "Float32Array"
+		}
+              },
+              {
+		"name": "phaseResponse",
+		"type": {
+                  "name": "Float32Array"
+		}
+              }
+            ],
+            "name": "getFrequencyResponse",
+            "returnType": {
+              "name": "void"
+            }
+          }
+	],
+	"name": "IIRFilterNode",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "AudioNodeOptions",
+	"members": [
+          {
+            "isRequired": true,
+            "name": "feedback",
+            "type": {
+              "name": "sequence",
+              "params": [
+		{
+                  "name": "double"
+		}
+              ]
+            }
+          },
+          {
+            "isRequired": true,
+            "name": "feedforward",
+            "type": {
+              "name": "sequence",
+              "params": [
+		{
+                  "name": "double"
+		}
+              ]
+            }
+          }
+	],
+	"name": "IIRFilterOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "AudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"type": {
+                  "name": "MediaElementAudioSourceOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+	],
+	"name": "MediaElementAudioSourceNode",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "isRequired": true,
+            "name": "mediaElement",
+            "type": {
+              "name": "HTMLMediaElement"
+            }
+          }
+	],
+	"name": "MediaElementAudioSourceOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "AudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "AudioNodeOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "stream",
+            "type": {
+              "name": "MediaStream"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "MediaStreamAudioDestinationNode",
+	"type_": "Interface"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "AudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"type": {
+                  "name": "MediaStreamAudioSourceOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+	],
+	"name": "MediaStreamAudioSourceNode",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "isRequired": true,
+            "name": "mediaStream",
+            "type": {
+              "name": "MediaStream"
+            }
+          }
+	],
+	"name": "MediaStreamAudioSourceOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "AudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"type": {
+                  "name": "MediaStreamTrackAudioSourceOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+	],
+	"name": "MediaStreamTrackAudioSourceNode",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "isRequired": true,
+            "name": "mediaStreamTrack",
+            "type": {
+              "name": "AudioMediaStreamTrack"
+            }
+          }
+	],
+	"name": "MediaStreamTrackAudioSourceOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "type",
+		"type": {
+                  "name": "DOMString"
+		}
+              },
+              {
+		"name": "eventInitDict",
+		"type": {
+                  "name": "OfflineAudioCompletionEventInit"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "Event",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "renderedBuffer",
+            "type": {
+              "name": "AudioBuffer"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "OfflineAudioCompletionEvent",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "EventInit",
+	"members": [
+          {
+            "isRequired": true,
+            "name": "renderedBuffer",
+            "type": {
+              "name": "AudioBuffer"
+            }
+          }
+	],
+	"name": "OfflineAudioCompletionEventInit",
+	"type_": "Dictionary"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "numberOfChannels",
+		"type": {
+                  "name": "unsigned long"
+		}
+              },
+              {
+		"name": "length",
+		"type": {
+                  "name": "unsigned long"
+		}
+              },
+              {
+		"name": "sampleRate",
+		"type": {
+                  "name": "float"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "BaseAudioContext",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "length",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "oncomplete",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "startRendering",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+		{
+                  "name": "AudioBuffer"
+		}
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "suspendTime",
+		"type": {
+                  "name": "double"
+		}
+              }
+            ],
+            "name": "suspend",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+		{
+                  "name": "void"
+		}
+              ]
+            }
+          }
+	],
+	"name": "OfflineAudioContext",
+	"type_": "Interface"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "OscillatorOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioScheduledSourceNode",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "detune",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "frequency",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "periodicWave",
+		"type": {
+                  "name": "PeriodicWave"
+		}
+              }
+            ],
+            "name": "setPeriodicWave",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "name": "type",
+            "type": {
+              "name": "OscillatorType"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "OscillatorNode",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "AudioNodeOptions",
+	"members": [
+          {
+            "defaultValue": "0",
+            "name": "detune",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "440",
+            "name": "frequency",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "name": "periodicWave",
+            "type": {
+              "name": "PeriodicWave"
+            }
+          },
+          {
+            "defaultValue": "sine",
+            "name": "type",
+            "type": {
+              "name": "OscillatorType"
+            }
+          }
+	],
+	"name": "OscillatorOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"name": "OscillatorType",
+	"type_": "Enum",
+	"value": [
+          "sine",
+          "square",
+          "sawtooth",
+          "triangle",
+          "custom"
+	]
+      },
+      {
+	"name": "OverSampleType",
+	"type_": "Enum",
+	"value": [
+          "none",
+          "2x",
+          "4x"
+	]
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "PannerOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+          {
+            "name": "coneInnerAngle",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "coneOuterAngle",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "coneOuterGain",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "distanceModel",
+            "type": {
+              "name": "DistanceModelType"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "maxDistance",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "orientationX",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "orientationY",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "orientationZ",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "panningModel",
+            "type": {
+              "name": "PanningModelType"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "positionX",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "positionY",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "positionZ",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "refDistance",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "rolloffFactor",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+		"name": "x",
+		"type": {
+                  "name": "float"
+		}
+              },
+              {
+		"name": "y",
+		"type": {
+                  "name": "float"
+		}
+              },
+              {
+		"name": "z",
+		"type": {
+                  "name": "float"
+		}
+              }
+            ],
+            "name": "setOrientation",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "x",
+		"type": {
+                  "name": "float"
+		}
+              },
+              {
+		"name": "y",
+		"type": {
+                  "name": "float"
+		}
+              },
+              {
+		"name": "z",
+		"type": {
+                  "name": "float"
+		}
+              }
+            ],
+            "name": "setPosition",
+            "returnType": {
+              "name": "void"
+            }
+          }
+	],
+	"name": "PannerNode",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "AudioNodeOptions",
+	"members": [
+          {
+            "defaultValue": "360",
+            "name": "coneInnerAngle",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "defaultValue": "360",
+            "name": "coneOuterAngle",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "coneOuterGain",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "defaultValue": "inverse",
+            "name": "distanceModel",
+            "type": {
+              "name": "DistanceModelType"
+            }
+          },
+          {
+            "defaultValue": "10000",
+            "name": "maxDistance",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "defaultValue": "1",
+            "name": "orientationX",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "orientationY",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "orientationZ",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "equalpower",
+            "name": "panningModel",
+            "type": {
+              "name": "PanningModelType"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "positionX",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "positionY",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "0",
+            "name": "positionZ",
+            "type": {
+              "name": "float"
+            }
+          },
+          {
+            "defaultValue": "1",
+            "name": "refDistance",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "defaultValue": "1",
+            "name": "rolloffFactor",
+            "type": {
+              "name": "double"
+            }
+          }
+	],
+	"name": "PannerOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"name": "PanningModelType",
+	"type_": "Enum",
+	"value": [
+          "equalpower",
+          "HRTF"
+	]
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"type": {
+                  "name": "PeriodicWaveOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"members": [
+	],
+	"name": "PeriodicWave",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "defaultValue": "false",
+            "name": "disableNormalization",
+            "type": {
+              "name": "boolean"
+            }
+          }
+	],
+	"name": "PeriodicWaveConstraints",
+	"type_": "Dictionary"
+      },
+      {
+	"inheritsFrom": "PeriodicWaveConstraints",
+	"members": [
+          {
+            "name": "imag",
+            "type": {
+              "name": "sequence",
+              "params": [
+		{
+                  "name": "float"
+		}
+              ]
+            }
+          },
+          {
+            "name": "real",
+            "type": {
+              "name": "sequence",
+              "params": [
+		{
+                  "name": "float"
+		}
+              ]
+            }
+          }
+	],
+	"name": "PeriodicWaveOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"inheritsFrom": "AudioNode",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "bufferSize",
+            "type": {
+              "name": "long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onaudioprocess",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "ScriptProcessorNode",
+	"type_": "Interface"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "StereoPannerOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "pan",
+            "type": {
+              "name": "AudioParam"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "StereoPannerNode",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "AudioNodeOptions",
+	"members": [
+          {
+            "defaultValue": "0",
+            "name": "pan",
+            "type": {
+              "name": "float"
+            }
+          }
+	],
+	"name": "StereoPannerOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"name": "VoidFunction",
+	"returnType": {
+          "name": "void"
+	},
+	"type_": "Callback"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "context",
+		"type": {
+                  "name": "BaseAudioContext"
+		}
+              },
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "WaveShaperOptions"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "AudioNode",
+	"members": [
+          {
+            "name": "curve",
+            "type": {
+              "name": "Float32Array",
+              "params": [
+		"nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "oversample",
+            "type": {
+              "name": "OverSampleType"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "WaveShaperNode",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "AudioNodeOptions",
+	"members": [
+          {
+            "name": "curve",
+            "type": {
+              "name": "sequence",
+              "params": [
+		{
+                  "name": "float"
+		}
+              ]
+            }
+          },
+          {
+            "defaultValue": "none",
+            "name": "oversample",
+            "type": {
+              "name": "OverSampleType"
+            }
+          }
+	],
+	"name": "WaveShaperOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"isPartial": true,
+	"members": [
+          {
+            "attrs": [
+              {
+		"name": "SameObject",
+		"type_": "ExtendedAttribute"
+              }
+            ],
+            "isReadOnly": true,
+            "name": "audioWorklet",
+            "type": {
+              "name": "Worklet"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "Window",
+	"type_": "PartialInterface"
+      }
+    ],
+    "url": "https://webaudio.github.io/web-audio-api/"
+  },
+  {
+    "parses": [
+      {
+	"inheritsFrom": "EventTarget",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "inputs",
+            "type": {
+              "name": "MIDIInputMap"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onstatechange",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "outputs",
+            "type": {
+              "name": "MIDIOutputMap"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "sysexEnabled",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "MIDIAccess",
+	"type_": "Interface"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "type",
+		"type": {
+                  "name": "DOMString"
+		}
+              },
+              {
+		"name": "eventInitDict",
+		"optional": true,
+		"type": {
+                  "name": "MIDIConnectionEventInit"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "Event",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "port",
+            "type": {
+              "name": "MIDIPort"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "MIDIConnectionEvent",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "EventInit",
+	"members": [
+          {
+            "name": "port",
+            "type": {
+              "name": "MIDIPort"
+            }
+          }
+	],
+	"name": "MIDIConnectionEventInit",
+	"type_": "Dictionary"
+      },
+      {
+	"inheritsFrom": "MIDIPort",
+	"members": [
+          {
+            "name": "onmidimessage",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "MIDIInput",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "isReadOnly": true,
+            "keyType": {
+              "name": "DOMString"
+            },
+            "type_": "MapLike",
+            "valueType": {
+              "name": "MIDIInput"
+            }
+          }
+	],
+	"name": "MIDIInputMap",
+	"type_": "Interface"
+      },
+      {
+	"attrs": [
+          {
+            "args": [
+              {
+		"name": "type",
+		"type": {
+                  "name": "DOMString"
+		}
+              },
+              {
+		"name": "eventInitDict",
+		"optional": true,
+		"type": {
+                  "name": "MIDIMessageEventInit"
+		}
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+	],
+	"inheritsFrom": "Event",
+	"members": [
+          {
+            "isReadOnly": true,
+            "name": "data",
+            "type": {
+              "name": "Uint8Array"
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "MIDIMessageEvent",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "EventInit",
+	"members": [
+          {
+            "name": "data",
+            "type": {
+              "name": "Uint8Array"
+            }
+          }
+	],
+	"name": "MIDIMessageEventInit",
+	"type_": "Dictionary"
+      },
+      {
+	"members": [
+          {
+            "name": "software",
+            "type": {
+              "name": "boolean"
+            }
+          },
+          {
+            "name": "sysex",
+            "type": {
+              "name": "boolean"
+            }
+          }
+	],
+	"name": "MIDIOptions",
+	"type_": "Dictionary"
+      },
+      {
+	"inheritsFrom": "MIDIPort",
+	"members": [
+          {
+            "name": "clear",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+		"name": "data",
+		"type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "octet"
+                    }
+                  ]
+		}
+              },
+              {
+		"name": "timestamp",
+		"optional": true,
+		"type": {
+                  "name": "DOMHighResTimeStamp"
+		}
+              }
+            ],
+            "name": "send",
+            "returnType": {
+              "name": "void"
+            }
+          }
+	],
+	"name": "MIDIOutput",
+	"type_": "Interface"
+      },
+      {
+	"members": [
+          {
+            "isReadOnly": true,
+            "keyType": {
+              "name": "DOMString"
+            },
+            "type_": "MapLike",
+            "valueType": {
+              "name": "MIDIOutput"
+            }
+          }
+	],
+	"name": "MIDIOutputMap",
+	"type_": "Interface"
+      },
+      {
+	"inheritsFrom": "EventTarget",
+	"members": [
+          {
+            "name": "close",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+		{
+                  "name": "MIDIPort"
+		}
+              ]
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "connection",
+            "type": {
+              "name": "MIDIPortConnectionState"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "id",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "manufacturer",
+            "type": {
+              "name": "DOMString",
+              "params": [
+		"nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "name",
+            "type": {
+              "name": "DOMString",
+              "params": [
+		"nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "onstatechange",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "state",
+            "type": {
+              "name": "MIDIPortDeviceState"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "type",
+            "type": {
+              "name": "MIDIPortType"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "version",
+            "type": {
+              "name": "DOMString",
+              "params": [
+		"nullable"
+              ]
+            },
+            "type_": "Attribute"
+          }
+	],
+	"name": "MIDIPort",
+	"type_": "Interface"
+      },
+      {
+	"name": "MIDIPortConnectionState",
+	"type_": "Enum",
+	"value": [
+          "open",
+          "closed",
+          "pending"
+	]
+      },
+      {
+	"name": "MIDIPortDeviceState",
+	"type_": "Enum",
+	"value": [
+          "disconnected",
+          "connected"
+	]
+      },
+      {
+	"name": "MIDIPortType",
+	"type_": "Enum",
+	"value": [
+          "input",
+          "output"
+	]
+      },
+      {
+	"isPartial": true,
+	"members": [
+          {
+            "args": [
+              {
+		"name": "options",
+		"optional": true,
+		"type": {
+                  "name": "MIDIOptions"
+		}
+              }
+            ],
+            "name": "requestMIDIAccess",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+		{
+                  "name": "MIDIAccess"
+		}
+              ]
+            }
+          }
+	],
+	"name": "Navigator",
+	"type_": "PartialInterface"
+      }
+    ],
+    "url": "https://webaudio.github.io/web-midi-api/"
+  }
+]

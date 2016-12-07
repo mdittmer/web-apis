@@ -1,0 +1,4 @@
+instrumentation:
+  root: ./lib/
+  include-all-sources: true
+  default-excludes: true
