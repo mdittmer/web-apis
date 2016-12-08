@@ -3,131 +3,153 @@
     <meta name="viewport" content="width=500, initial-scale=1">
     <title>Analyze Web IDL fragments</title>
     <style>
-    /* From https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/: */
-    pre {
-      /* These are technically the same, but use both */
-      overflow-wrap: break-word;
-      word-wrap: break-word;
+      /* From https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/: */
+      pre {
+        /* These are technically the same, but use both */
+        overflow-wrap: break-word;
+        word-wrap: break-word;
 
-      -ms-word-break: break-all;
-      /* This is the dangerous one in WebKit, as it breaks things wherever */
-      word-break: break-all;
-      /* Instead use this non-standard one: */
-      word-break: break-word;
+        -ms-word-break: break-all;
+        /* This is the dangerous one in WebKit, as it breaks things wherever */
+        word-break: break-all;
+        /* Instead use this non-standard one: */
+        word-break: break-word;
 
-      /* Adds a hyphen where the word breaks, if supported (No Blink) */
-      -ms-hyphens: auto;
-      -moz-hyphens: auto;
-      -webkit-hyphens: auto;
-      hyphens: auto;
-    }
-    pre {
-      white-space: pre-wrap;
-      flex-grow: 100;
-      flex-shrink: 1;
-      min-height: 5em;
-      overflow: auto;
-      border: 1px solid grey;
-      margin: 2px 24px;
-      color: white;
-      background-color: black;
-    }
+        /* Adds a hyphen where the word breaks, if supported (No Blink) */
+        -ms-hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+      }
+      pre {
+        white-space: pre-wrap;
+        flex-grow: 100;
+        flex-shrink: 1;
+        min-height: 5em;
+        overflow: auto;
+        border: 1px solid grey;
+        margin: 2px 24px;
+        color: white;
+        background-color: black;
+      }
 
-    textarea {
-      height: 5em;
-      font-family: Menlo, Consolas, "DejaVu Sans Mono", monospace;
-    }
-    /* Very simple alternating flex layout. ">" selectors are expensive, but
-    ** this page is small enough for it to not matter. */
-    body {
-      display: flex;
-      flex-direction: column;
-      max-height: 100%;
-      padding: 0;
-      margin: 0;
-    }
-    * {
-      flex-grow: 1;
-    }
-   span {
-       font-weight: bold;
-       flex-grow: 0;
-   }
-    div {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    div > div {
-      flex-direction: column;
-    }
-    div > div > div {
-      flex-direction: row;
-    }
-    div > div > div > div {
-      flex-direction: column;
-    }
-    div > div > div > div > div {
-      flex-direction: row;
-    }
-    div > div > div > div > div > div {
-      flex-direction: column;
-    }
+      textarea {
+        height: 5em;
+        font-family: Menlo, Consolas, "DejaVu Sans Mono", monospace;
+      }
+      /* Very simple alternating flex layout. ">" selectors are expensive, but
+       ** this page is small enough for it to not matter. */
+      body {
+        display: flex;
+        flex-direction: column;
+        max-height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+      * {
+        flex-grow: 1;
+      }
+      span {
+        font-weight: bold;
+        flex-grow: 0;
+      }
+      .flex-div div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .flex-div div > div {
+        flex-direction: column;
+      }
+      .flex-div div > div > div {
+        flex-direction: row;
+      }
+      .flex-div div > div > div > div {
+        flex-direction: column;
+      }
+      .flex-div div > div > div > div > div {
+        flex-direction: row;
+      }
+      .flex-div div > div > div > div > div > div {
+        flex-direction: column;
+      }
 
-    #status {
-      padding: 20px;
-    }
+      #top {
+        max-height: 40vh;
+        overflow: auto;
+      }
+
+      #bottom {
+        max-height: 60vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #status {
+        padding: 20px;
+      }
     </style>
+    <style id="log-filter"></style>
   </head>
   <body>
 
-    <span>Configuration</span>
-    <datalist id="sources">
-      <option value="ANY">
-    </datalist>
-    <datalist id="interfaces">
-    </datalist>
-    <span style="display: block">
-      <div>
-        <div id="left">
-          <span>Left</span>
-          <div><div id="left-inputs">
-	    <input id="left-input" list="sources">
-	  </div></div>
+    <div id="top" class="flex-div">
+
+      <span>Configuration</span>
+      <datalist id="sources">
+        <option value="ANY"></option>
+      </datalist>
+      <datalist id="interfaces">
+      </datalist>
+      <span style="display: block">
+        <div>
+          <div id="left">
+            <span>Left</span>
+            <div><div id="left-inputs">
+	      <input id="left-input" list="sources">
+	    </div></div>
+          </div>
+          <div id="interface">
+            <span>Choose interface</span>
+            <input id="interface-input" list="interfaces">
+          </div>
+          <div id="right">
+            <span>Right</span>
+            <div><div id="right-inputs">
+	      <input id="right-input" list="sources">
+	    </div></div>
+          </div>
         </div>
-        <div id="interface">
-          <span>Choose interface</span>
-          <input id="interface-input" list="interfaces">
-        </div>
-        <div id="right">
-          <span>Right</span>
-          <div><div id="right-inputs">
-	    <input id="right-input" list="sources">
-	  </div></div>
-        </div>
+      </span>
+
+      <span>Log levels</span>
+      <div id="log-levels">
       </div>
-    </span>
 
-    <span>Checkers</span>
-    <div id="checkers">
-      <span><input type="checkbox" id="checker-custom"> <label for="checker-custom">custom</label></span>
-    </div>
+      <span>Checkers</span>
+      <div id="checkers">
+        <span><input type="checkbox" id="checker-custom"> <label for="checker-custom">custom</label></span>
+      </div>
 
-    <div>
-      <span>Custom checker</span>
-      <textarea id="custom-checker-code">function custom(logger, left, right) {
+      <div>
+        <span>Custom checker</span>
+        <textarea id="custom-checker-code">function custom(logger, left, right) {
   logger.info('Invoking custom checker');
 }</textarea>
+      </div>
+
+      <div id="status">
+        <div><label for="status-value">Status</label> <span id="status-value">Idle</span></div>
+      </div>
+
     </div>
 
-    <div id="status">
-      <div><label for="status-value">Status</label> <span id="status-value">Idle</span></div>
+    <div id="bottom">
+
+      <span>Report</span>
+      <pre id="output"></pre>
+
     </div>
-
-    <span>Report</span>
-
-    <pre id="output"></pre>
-
 
     <script language="javascript"  src="bundle/vendors.bundle.js"></script>
     <script language="javascript"  src="bundle/analyze_idl.es6.bundle.js"></script>
