@@ -49,6 +49,9 @@
       * {
         flex-grow: 1;
       }
+      button {
+        flex-grow: 0;
+      }
       span {
         font-weight: bold;
         flex-grow: 0;
@@ -146,7 +149,10 @@
 
     <div id="bottom">
 
-      <span>Report</span>
+      <div><div style="display: flex; justify-content: space-between">
+        <span>Report</span>
+        <button id="copy-report">Copy</button>
+      </div></div>
       <pre id="output"></pre>
 
     </div>
