@@ -51,9 +51,13 @@ const argv = yargs
       .describe('blink-dir', 'Chromium Blink source directory for IDL/URL scraping')
       .coerce('blink-dir', dir => path.resolve(dir))
 
-      .default('spec-reg-exp', '(dev[.]w3[.]org|[.]github[.]io|spec[.]whatwg[.]org|css-houdini[.]org|csswg[.]org|khronos[.]org|dvcs.w3.org/hg/speech-api/raw-file/tip/webspeechapi[.]html)')
-      .describe('spec-reg-exp', 'Regular expression for identifying URLs as current web specification documents')
-      .coerce('spec-reg-exp', re => new RegExp(re, 'g'))
+      .default('spec-include-reg-exp', '(dev[.]w3[.]org|[.]github[.]io|spec[.]whatwg[.]org|css-houdini[.]org|csswg[.]org|www[.]khronos[.]org/(registry/webgl/specs/latest/2[.]0|registry/typedarray/specs/latest)|dvcs.w3.org/hg/speech-api/raw-file/tip/webspeechapi[.]html)')
+      .describe('spec-include-reg-exp', 'Regular expression for identifying URLs as current web specification documents')
+      .coerce('spec-include-reg-exp', re => new RegExp(re, 'g'))
+
+      .default('spec-exclude-reg-exp', 'web[.]archive[.]org')
+      .describe('spec-exclude-reg-exp', 'Regular expression for blacklisting URLs that otherwise appear to be current web specification documents')
+      .coerce('spec-exclude-reg-exp', re => new RegExp(re, 'g'))
   )
   .command(
     'scrape-urls [urls..]',
