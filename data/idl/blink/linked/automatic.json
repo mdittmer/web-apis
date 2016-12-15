@@ -1,6 +1,340 @@
 [
   {
     "files": [
+      "Source/modules/geolocation/Geolocation.idl"
+    ],
+    "parses": [
+      {
+        "attrs": [
+          {
+            "name": "NoInterfaceObject",
+            "type_": "ExtendedAttribute"
+          }
+        ],
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "accuracy",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "altitude",
+            "type": {
+              "name": "double",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "altitudeAccuracy",
+            "type": {
+              "name": "double",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "heading",
+            "type": {
+              "name": "double",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "itude",
+            "type": {
+              "name": "double long"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "latitude",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "speed",
+            "type": {
+              "name": "double",
+              "params": [
+                "nullable"
+              ]
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "Coordinates",
+        "type_": "Interface"
+      },
+      {
+        "attrs": [
+          {
+            "name": "NoInterfaceObject",
+            "type_": "ExtendedAttribute"
+          }
+        ],
+        "members": [
+          {
+            "args": [
+              {
+                "name": "watchId",
+                "type": {
+                  "name": "long"
+                }
+              }
+            ],
+            "name": "clearWatch",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "successCallback",
+                "type": {
+                  "name": "PositionCallback"
+                }
+              },
+              {
+                "name": "errorCallback",
+                "optional": true,
+                "type": {
+                  "name": "PositionErrorCallback"
+                }
+              },
+              {
+                "name": "options",
+                "optional": true,
+                "type": {
+                  "name": "PositionOptions"
+                }
+              }
+            ],
+            "name": "getCurrentPosition",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "successCallback",
+                "type": {
+                  "name": "PositionCallback"
+                }
+              },
+              {
+                "name": "errorCallback",
+                "optional": true,
+                "type": {
+                  "name": "PositionErrorCallback"
+                }
+              },
+              {
+                "name": "options",
+                "optional": true,
+                "type": {
+                  "name": "PositionOptions"
+                }
+              }
+            ],
+            "name": "watchPosition",
+            "returnType": {
+              "name": "long"
+            }
+          }
+        ],
+        "name": "Geolocation",
+        "type_": "Interface"
+      },
+      {
+        "isPartial": true,
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "geolocation",
+            "type": {
+              "name": "Geolocation"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "Navigator",
+        "type_": "PartialInterface"
+      },
+      {
+        "attrs": [
+          {
+            "name": "NoInterfaceObject",
+            "type_": "ExtendedAttribute"
+          }
+        ],
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "coords",
+            "type": {
+              "name": "Coordinates"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "timestamp",
+            "type": {
+              "name": "DOMTimeStamp"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "Position",
+        "type_": "Interface"
+      },
+      {
+        "args": [
+          {
+            "name": "position",
+            "type": {
+              "name": "Position"
+            }
+          }
+        ],
+        "name": "PositionCallback",
+        "returnType": {
+          "name": "void"
+        },
+        "type_": "Callback"
+      },
+      {
+        "attrs": [
+          {
+            "name": "NoInterfaceObject",
+            "type_": "ExtendedAttribute"
+          }
+        ],
+        "members": [
+          {
+            "isConst": true,
+            "name": "PERMISSION_DENIED",
+            "type": {
+              "name": "unsigned short"
+            },
+            "value": "1"
+          },
+          {
+            "isConst": true,
+            "name": "POSITION_UNAVAILABLE",
+            "type": {
+              "name": "unsigned short"
+            },
+            "value": "2"
+          },
+          {
+            "isConst": true,
+            "name": "TIMEOUT",
+            "type": {
+              "name": "unsigned short"
+            },
+            "value": "3"
+          },
+          {
+            "isReadOnly": true,
+            "name": "code",
+            "type": {
+              "name": "unsigned short"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "message",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "PositionError",
+        "type_": "Interface"
+      },
+      {
+        "args": [
+          {
+            "name": "positionError",
+            "type": {
+              "name": "PositionError"
+            }
+          }
+        ],
+        "name": "PositionErrorCallback",
+        "returnType": {
+          "name": "void"
+        },
+        "type_": "Callback"
+      },
+      {
+        "members": [
+          {
+            "defaultValue": "false",
+            "name": "enableHighAccuracy",
+            "type": {
+              "name": "boolean"
+            }
+          },
+          {
+            "attrs": [
+              {
+                "name": "Clamp",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "defaultValue": "0",
+            "name": "maximumAge",
+            "type": {
+              "name": "unsigned long"
+            }
+          },
+          {
+            "attrs": [
+              {
+                "name": "Clamp",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "defaultValue": "0xFFFFFFFF",
+            "name": "timeout",
+            "type": {
+              "name": "unsigned long"
+            }
+          }
+        ],
+        "name": "PositionOptions",
+        "type_": "Dictionary"
+      }
+    ],
+    "url": "http://www.w3.org/TR/geolocation-API/"
+  },
+  {
+    "files": [
       "Source/core/frame/Window.idl",
       "Source/core/workers/WorkerGlobalScope.idl",
       "Source/core/workers/WorkletGlobalScope.idl"
@@ -50654,30 +50988,21 @@
           {
             "name": "selectionDirection",
             "type": {
-              "name": "DOMString",
-              "params": [
-                "nullable"
-              ]
+              "name": "DOMString"
             },
             "type_": "Attribute"
           },
           {
             "name": "selectionEnd",
             "type": {
-              "name": "unsigned long",
-              "params": [
-                "nullable"
-              ]
+              "name": "unsigned long"
             },
             "type_": "Attribute"
           },
           {
             "name": "selectionStart",
             "type": {
-              "name": "unsigned long",
-              "params": [
-                "nullable"
-              ]
+              "name": "unsigned long"
             },
             "type_": "Attribute"
           },
@@ -64185,7 +64510,9 @@
       "Source/core/events/ErrorEvent.idl",
       "Source/core/events/ErrorEventInit.idl",
       "Source/core/frame/WindowEventHandlers.idl",
-      "Source/modules/plugins/NavigatorPlugins.idl"
+      "Source/modules/plugins/NavigatorPlugins.idl",
+      "Source/modules/plugins/Plugin.idl",
+      "Source/modules/plugins/PluginArray.idl"
     ],
     "parses": [
       {
@@ -83252,6 +83579,17 @@
               "params": [
                 {
                   "name": "void"
+                }
+              ]
+            }
+          },
+          {
+            "name": "canMakePayment",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "boolean"
                 }
               ]
             }
@@ -117346,6 +117684,28 @@
       }
     ],
     "url": "https://wicg.github.io/mediasession/"
+  },
+  {
+    "files": [
+      "Source/modules/mediastream/MediaStreamTrackContentHint.idl"
+    ],
+    "parses": [
+      {
+        "isPartial": true,
+        "members": [
+          {
+            "name": "contentHint",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "MediaStreamTrack",
+        "type_": "PartialInterface"
+      }
+    ],
+    "url": "https://wicg.github.io/mst-content-hint/"
   },
   {
     "files": [
