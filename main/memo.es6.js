@@ -51,7 +51,7 @@ const argv = yargs
       .describe('blink-dir', 'Chromium Blink source directory for IDL/URL scraping')
       .coerce('blink-dir', dir => path.resolve(dir))
 
-      .default('spec-include-reg-exp', '(dev[.]w3[.]org|[.]github[.]io|spec[.]whatwg[.]org|css-houdini[.]org|csswg[.]org|svgwg[.]org|drafts[.]fxtf[.]org|www[.]khronos[.]org/(registry/webgl/specs/latest/2[.]0|registry/typedarray/specs/latest)|dvcs.w3.org/hg/speech-api/raw-file/tip/webspeechapi[.]html)')
+      .default('spec-include-reg-exp', '(dev[.]w3[.]org|[.]github[.]io|spec[.]whatwg[.]org|css-houdini[.]org|csswg[.]org|svgwg[.]org|drafts[.]fxtf[.]org|www[.]khronos[.]org/(registry/webgl/specs/latest/2[.]0|registry/typedarray/specs/latest)|www[.]w3[.]org/TR/geolocation-API/|dvcs.w3.org/hg/speech-api/raw-file/tip/webspeechapi[.]html)')
       .describe('spec-include-reg-exp', 'Regular expression for identifying URLs as current web specification documents')
       .coerce('spec-include-reg-exp', re => new RegExp(re, 'g'))
 
