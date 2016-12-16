@@ -66850,14 +66850,6 @@
   },
   {
     "files": [
-      "Source/core/dom/GlobalEventHandlers.idl"
-    ],
-    "parses": [
-    ],
-    "url": "https://navidz.github.io/auxclick/"
-  },
-  {
-    "files": [
       "Source/core/html/HTMLIFrameElement.idl"
     ],
     "parses": [
@@ -86638,6 +86630,409 @@
       }
     ],
     "url": "https://w3c.github.io/mediacapture-fromelement/"
+  },
+  {
+    "files": [
+      "Source/modules/imagecapture/ImageCapture.idl"
+    ],
+    "parses": [
+      {
+        "name": "FillLightMode",
+        "type_": "Enum",
+        "value": [
+          "unavailable",
+          "auto",
+          "off",
+          "flash",
+          "torch"
+        ]
+      },
+      {
+        "attrs": [
+          {
+            "args": [
+              {
+                "name": "track",
+                "type": {
+                  "name": "MediaStreamTrack"
+                }
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+        ],
+        "members": [
+          {
+            "name": "getPhotoCapabilities",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "PhotoCapabilities"
+                }
+              ]
+            }
+          },
+          {
+            "name": "grabFrame",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "ImageBitmap"
+                }
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "photoSettings",
+                "type": {
+                  "name": "PhotoSettings",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "name": "setOptions",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "void"
+                }
+              ]
+            }
+          },
+          {
+            "name": "takePhoto",
+            "returnType": {
+              "name": "Promise",
+              "params": [
+                {
+                  "name": "Blob"
+                }
+              ]
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "videoStreamTrack",
+            "type": {
+              "name": "MediaStreamTrack"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "ImageCapture",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "current",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "max",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "min",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "step",
+            "type": {
+              "name": "double"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "MediaSettingsRange",
+        "type_": "Interface"
+      },
+      {
+        "name": "MeteringMode",
+        "type_": "Enum",
+        "value": [
+          "none",
+          "manual",
+          "single-shot",
+          "continuous"
+        ]
+      },
+      {
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "brightness",
+            "type": {
+              "name": "MediaSettingsRange"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "colorTemperature",
+            "type": {
+              "name": "MediaSettingsRange"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "contrast",
+            "type": {
+              "name": "MediaSettingsRange"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "exposureCompensation",
+            "type": {
+              "name": "MediaSettingsRange"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "exposureMode",
+            "type": {
+              "name": "MeteringMode"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "fillLightMode",
+            "type": {
+              "name": "FillLightMode"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "focusMode",
+            "type": {
+              "name": "MeteringMode"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "imageHeight",
+            "type": {
+              "name": "MediaSettingsRange"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "imageWidth",
+            "type": {
+              "name": "MediaSettingsRange"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "iso",
+            "type": {
+              "name": "MediaSettingsRange"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "redEyeReduction",
+            "type": {
+              "name": "boolean"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "saturation",
+            "type": {
+              "name": "MediaSettingsRange"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "sharpness",
+            "type": {
+              "name": "MediaSettingsRange"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "whiteBalanceMode",
+            "type": {
+              "name": "MeteringMode"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "zoom",
+            "type": {
+              "name": "MediaSettingsRange"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "PhotoCapabilities",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+          {
+            "name": "brightness",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "name": "colorTemperature",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "name": "contrast",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "name": "exposureCompensation",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "name": "exposureMode",
+            "type": {
+              "name": "MeteringMode"
+            }
+          },
+          {
+            "name": "fillLightMode",
+            "type": {
+              "name": "FillLightMode"
+            }
+          },
+          {
+            "name": "focusMode",
+            "type": {
+              "name": "MeteringMode"
+            }
+          },
+          {
+            "name": "imageHeight",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "name": "imageWidth",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "name": "iso",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "name": "pointsOfInterest",
+            "type": {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "Point2D"
+                }
+              ]
+            }
+          },
+          {
+            "name": "redEyeReduction",
+            "type": {
+              "name": "boolean"
+            }
+          },
+          {
+            "name": "saturation",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "name": "sharpness",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "name": "whiteBalanceMode",
+            "type": {
+              "name": "MeteringMode"
+            }
+          },
+          {
+            "name": "zoom",
+            "type": {
+              "name": "double"
+            }
+          }
+        ],
+        "name": "PhotoSettings",
+        "type_": "Dictionary"
+      },
+      {
+        "members": [
+          {
+            "defaultValue": "0.0",
+            "name": "x",
+            "type": {
+              "name": "double"
+            }
+          },
+          {
+            "defaultValue": "0.0",
+            "name": "y",
+            "type": {
+              "name": "double"
+            }
+          }
+        ],
+        "name": "Point2D",
+        "type_": "Dictionary"
+      }
+    ],
+    "url": "https://w3c.github.io/mediacapture-image/"
   },
   {
     "files": [
@@ -115927,6 +116322,28 @@
   },
   {
     "files": [
+      "Source/core/dom/GlobalEventHandlers.idl"
+    ],
+    "parses": [
+      {
+        "isPartial": true,
+        "members": [
+          {
+            "name": "onauxclick",
+            "type": {
+              "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "GlobalEventHandlers",
+        "type_": "PartialInterface"
+      }
+    ],
+    "url": "https://wicg.github.io/auxclick/"
+  },
+  {
+    "files": [
       "Source/modules/budget/BudgetService.idl",
       "Source/modules/budget/BudgetState.idl",
       "Source/modules/budget/NavigatorBudget.idl",
@@ -117530,13 +117947,6 @@
             "type_": "Attribute"
           },
           {
-            "name": "onplaypause",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
             "name": "onprevioustrack",
             "type": {
               "name": "EventHandler"
@@ -117554,6 +117964,13 @@
             "name": "onseekforward",
             "type": {
               "name": "EventHandler"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "name": "playbackState",
+            "type": {
+              "name": "MediaSessionPlaybackState"
             },
             "type_": "Attribute"
           }
@@ -117603,13 +118020,6 @@
             "type_": "Attribute"
           },
           {
-            "name": "onplaypause",
-            "type": {
-              "name": "EventHandler"
-            },
-            "type_": "Attribute"
-          },
-          {
             "name": "onprevioustrack",
             "type": {
               "name": "EventHandler"
@@ -117629,10 +118039,35 @@
               "name": "EventHandler"
             },
             "type_": "Attribute"
+          },
+          {
+            "name": "playbackState",
+            "type": {
+              "name": "MediaSessionPlaybackState"
+            },
+            "type_": "Attribute"
           }
         ],
         "name": "MediaSession",
         "type_": "Interface"
+      },
+      {
+        "name": "MediaSessionPlaybackState",
+        "type_": "Enum",
+        "value": [
+          "none",
+          "paused",
+          "playing"
+        ]
+      },
+      {
+        "name": "MediaSessionPlaybackState",
+        "type_": "Enum",
+        "value": [
+          "none",
+          "paused",
+          "playing"
+        ]
       },
       {
         "attrs": [
@@ -118325,6 +118760,12 @@
         "isPartial": true,
         "members": [
           {
+            "attrs": [
+              {
+                "name": "SameObject",
+                "type_": "ExtendedAttribute"
+              }
+            ],
             "isReadOnly": true,
             "name": "usb",
             "type": {
@@ -118340,6 +118781,12 @@
         "isPartial": true,
         "members": [
           {
+            "attrs": [
+              {
+                "name": "SameObject",
+                "type_": "ExtendedAttribute"
+              }
+            ],
             "isReadOnly": true,
             "name": "usb",
             "type": {
@@ -118358,6 +118805,7 @@
             "type_": "ExtendedAttribute"
           }
         ],
+        "inheritsFrom": "EventTarget",
         "members": [
           {
             "name": "getDevices",
@@ -118419,6 +118867,7 @@
             "type_": "ExtendedAttribute"
           }
         ],
+        "inheritsFrom": "EventTarget",
         "members": [
           {
             "name": "getDevices",
@@ -120146,16 +120595,6 @@
           "interrupt",
           "isochronous"
         ]
-      },
-      {
-        "implemented": "EventTarget",
-        "implementer": "USB",
-        "type_": "Implements"
-      },
-      {
-        "implemented": "EventTarget",
-        "implementer": "USB",
-        "type_": "Implements"
       },
       {
         "members": [
@@ -120752,6 +121191,6485 @@
     "parses": [
     ],
     "url": "https://www.khronos.org/registry/typedarray/specs/latest/"
+  },
+  {
+    "files": [
+      "Source/modules/webgl/WebGLContextAttributes.idl",
+      "Source/modules/webgl/WebGLRenderingContext.idl",
+      "Source/modules/webgl/WebGLRenderingContextBase.idl"
+    ],
+    "parses": [
+      {
+        "implemented": "WebGLRenderingContextBase",
+        "implementer": "WebGLRenderingContext",
+        "type_": "Implements"
+      },
+      {
+        "name": "BufferDataSource",
+        "type": {
+          "type_": "UnionType",
+          "types": [
+            {
+              "name": "ArrayBuffer"
+            },
+            {
+              "name": "ArrayBufferView"
+            }
+          ]
+        },
+        "type_": "Typedef"
+      },
+      {
+        "name": "GLbitfield",
+        "type": {
+          "name": "unsigned long"
+        },
+        "type_": "Typedef"
+      },
+      {
+        "name": "GLboolean",
+        "type": {
+          "name": "boolean"
+        },
+        "type_": "Typedef"
+      },
+      {
+        "name": "GLbyte",
+        "type": {
+          "name": "byte"
+        },
+        "type_": "Typedef"
+      },
+      {
+        "name": "GLclampf",
+        "type": {
+          "name": "unrestricted float"
+        },
+        "type_": "Typedef"
+      },
+      {
+        "name": "GLenum",
+        "type": {
+          "name": "unsigned long"
+        },
+        "type_": "Typedef"
+      },
+      {
+        "name": "GLfloat",
+        "type": {
+          "name": "unrestricted float"
+        },
+        "type_": "Typedef"
+      },
+      {
+        "name": "GLint",
+        "type": {
+          "name": "long"
+        },
+        "type_": "Typedef"
+      },
+      {
+        "name": "GLintptr",
+        "type": {
+          "name": "long long"
+        },
+        "type_": "Typedef"
+      },
+      {
+        "name": "GLshort",
+        "type": {
+          "name": "short"
+        },
+        "type_": "Typedef"
+      },
+      {
+        "name": "GLsizei",
+        "type": {
+          "name": "long"
+        },
+        "type_": "Typedef"
+      },
+      {
+        "name": "GLsizeiptr",
+        "type": {
+          "name": "long long"
+        },
+        "type_": "Typedef"
+      },
+      {
+        "name": "GLubyte",
+        "type": {
+          "name": "octet"
+        },
+        "type_": "Typedef"
+      },
+      {
+        "name": "GLuint",
+        "type": {
+          "name": "unsigned long"
+        },
+        "type_": "Typedef"
+      },
+      {
+        "name": "GLushort",
+        "type": {
+          "name": "unsigned short"
+        },
+        "type_": "Typedef"
+      },
+      {
+        "name": "TexImageSource",
+        "type": {
+          "type_": "UnionType",
+          "types": [
+            {
+              "name": "ImageBitmap"
+            },
+            {
+              "name": "ImageData"
+            },
+            {
+              "name": "HTMLImageElement"
+            },
+            {
+              "name": "HTMLCanvasElement"
+            },
+            {
+              "name": "HTMLVideoElement"
+            }
+          ]
+        },
+        "type_": "Typedef"
+      },
+      {
+        "name": "VertexAttribFVSource",
+        "type": {
+          "type_": "UnionType",
+          "types": [
+            {
+              "name": "Float32Array"
+            },
+            {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "GLfloat"
+                }
+              ]
+            }
+          ]
+        },
+        "type_": "Typedef"
+      },
+      {
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "name",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "size",
+            "type": {
+              "name": "GLint"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "type",
+            "type": {
+              "name": "GLenum"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "WebGLActiveInfo",
+        "type_": "Interface"
+      },
+      {
+        "inheritsFrom": "WebGLObject",
+        "members": [
+        ],
+        "name": "WebGLBuffer",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+          {
+            "defaultValue": "true",
+            "name": "alpha",
+            "type": {
+              "name": "GLboolean"
+            }
+          },
+          {
+            "defaultValue": "true",
+            "name": "antialias",
+            "type": {
+              "name": "GLboolean"
+            }
+          },
+          {
+            "defaultValue": "true",
+            "name": "depth",
+            "type": {
+              "name": "GLboolean"
+            }
+          },
+          {
+            "defaultValue": "false",
+            "name": "failIfMajorPerformanceCaveat",
+            "type": {
+              "name": "GLboolean"
+            }
+          },
+          {
+            "defaultValue": "false",
+            "name": "preferLowPowerToHighPerformance",
+            "type": {
+              "name": "GLboolean"
+            }
+          },
+          {
+            "defaultValue": "true",
+            "name": "premultipliedAlpha",
+            "type": {
+              "name": "GLboolean"
+            }
+          },
+          {
+            "defaultValue": "false",
+            "name": "preserveDrawingBuffer",
+            "type": {
+              "name": "GLboolean"
+            }
+          },
+          {
+            "defaultValue": "false",
+            "name": "stencil",
+            "type": {
+              "name": "GLboolean"
+            }
+          }
+        ],
+        "name": "WebGLContextAttributes",
+        "type_": "Dictionary"
+      },
+      {
+        "attrs": [
+          {
+            "args": [
+              {
+                "name": "type",
+                "type": {
+                  "name": "DOMString"
+                }
+              },
+              {
+                "name": "eventInit",
+                "optional": true,
+                "type": {
+                  "name": "WebGLContextEventInit"
+                }
+              }
+            ],
+            "name": "Constructor",
+            "type_": "ExtendedAttribute"
+          }
+        ],
+        "inheritsFrom": "Event",
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "statusMessage",
+            "type": {
+              "name": "DOMString"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "WebGLContextEvent",
+        "type_": "Interface"
+      },
+      {
+        "inheritsFrom": "EventInit",
+        "members": [
+          {
+            "defaultValue": "",
+            "name": "statusMessage",
+            "type": {
+              "name": "DOMString"
+            }
+          }
+        ],
+        "name": "WebGLContextEventInit",
+        "type_": "Dictionary"
+      },
+      {
+        "inheritsFrom": "WebGLObject",
+        "members": [
+        ],
+        "name": "WebGLFramebuffer",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+        ],
+        "name": "WebGLObject",
+        "type_": "Interface"
+      },
+      {
+        "inheritsFrom": "WebGLObject",
+        "members": [
+        ],
+        "name": "WebGLProgram",
+        "type_": "Interface"
+      },
+      {
+        "inheritsFrom": "WebGLObject",
+        "members": [
+        ],
+        "name": "WebGLRenderbuffer",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+        ],
+        "name": "WebGLRenderingContext",
+        "type_": "Interface"
+      },
+      {
+        "attrs": [
+          {
+            "name": "NoInterfaceObject",
+            "type_": "ExtendedAttribute"
+          }
+        ],
+        "members": [
+          {
+            "isConst": true,
+            "name": "ACTIVE_ATTRIBUTES",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B89"
+          },
+          {
+            "isConst": true,
+            "name": "ACTIVE_TEXTURE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84E0"
+          },
+          {
+            "isConst": true,
+            "name": "ACTIVE_UNIFORMS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B86"
+          },
+          {
+            "isConst": true,
+            "name": "ALIASED_LINE_WIDTH_RANGE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x846E"
+          },
+          {
+            "isConst": true,
+            "name": "ALIASED_POINT_SIZE_RANGE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x846D"
+          },
+          {
+            "isConst": true,
+            "name": "ALPHA",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1906"
+          },
+          {
+            "isConst": true,
+            "name": "ALPHA_BITS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0D55"
+          },
+          {
+            "isConst": true,
+            "name": "ALWAYS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0207"
+          },
+          {
+            "isConst": true,
+            "name": "ARRAY_BUFFER",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8892"
+          },
+          {
+            "isConst": true,
+            "name": "ARRAY_BUFFER_BINDING",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8894"
+          },
+          {
+            "isConst": true,
+            "name": "ATTACHED_SHADERS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B85"
+          },
+          {
+            "isConst": true,
+            "name": "BACK",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0405"
+          },
+          {
+            "isConst": true,
+            "name": "BLEND",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0BE2"
+          },
+          {
+            "isConst": true,
+            "name": "BLEND_COLOR",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8005"
+          },
+          {
+            "isConst": true,
+            "name": "BLEND_DST_ALPHA",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x80CA"
+          },
+          {
+            "isConst": true,
+            "name": "BLEND_DST_RGB",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x80C8"
+          },
+          {
+            "isConst": true,
+            "name": "BLEND_EQUATION",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8009"
+          },
+          {
+            "isConst": true,
+            "name": "BLEND_EQUATION_ALPHA",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x883D"
+          },
+          {
+            "isConst": true,
+            "name": "BLEND_EQUATION_RGB",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8009"
+          },
+          {
+            "isConst": true,
+            "name": "BLEND_SRC_ALPHA",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x80CB"
+          },
+          {
+            "isConst": true,
+            "name": "BLEND_SRC_RGB",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x80C9"
+          },
+          {
+            "isConst": true,
+            "name": "BLUE_BITS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0D54"
+          },
+          {
+            "isConst": true,
+            "name": "BOOL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B56"
+          },
+          {
+            "isConst": true,
+            "name": "BOOL_VEC2",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B57"
+          },
+          {
+            "isConst": true,
+            "name": "BOOL_VEC3",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B58"
+          },
+          {
+            "isConst": true,
+            "name": "BOOL_VEC4",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B59"
+          },
+          {
+            "isConst": true,
+            "name": "BROWSER_DEFAULT_WEBGL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x9244"
+          },
+          {
+            "isConst": true,
+            "name": "BUFFER_SIZE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8764"
+          },
+          {
+            "isConst": true,
+            "name": "BUFFER_USAGE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8765"
+          },
+          {
+            "isConst": true,
+            "name": "BYTE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1400"
+          },
+          {
+            "isConst": true,
+            "name": "CCW",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0901"
+          },
+          {
+            "isConst": true,
+            "name": "CLAMP_TO_EDGE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x812F"
+          },
+          {
+            "isConst": true,
+            "name": "COLOR_ATTACHMENT0",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8CE0"
+          },
+          {
+            "isConst": true,
+            "name": "COLOR_BUFFER_BIT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x00004000"
+          },
+          {
+            "isConst": true,
+            "name": "COLOR_CLEAR_VALUE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0C22"
+          },
+          {
+            "isConst": true,
+            "name": "COLOR_WRITEMASK",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0C23"
+          },
+          {
+            "isConst": true,
+            "name": "COMPILE_STATUS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B81"
+          },
+          {
+            "isConst": true,
+            "name": "COMPRESSED_TEXTURE_FORMATS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x86A3"
+          },
+          {
+            "isConst": true,
+            "name": "CONSTANT_ALPHA",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8003"
+          },
+          {
+            "isConst": true,
+            "name": "CONSTANT_COLOR",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8001"
+          },
+          {
+            "isConst": true,
+            "name": "CONTEXT_LOST_WEBGL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x9242"
+          },
+          {
+            "isConst": true,
+            "name": "CULL_FACE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B44"
+          },
+          {
+            "isConst": true,
+            "name": "CULL_FACE_MODE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B45"
+          },
+          {
+            "isConst": true,
+            "name": "CURRENT_PROGRAM",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B8D"
+          },
+          {
+            "isConst": true,
+            "name": "CURRENT_VERTEX_ATTRIB",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8626"
+          },
+          {
+            "isConst": true,
+            "name": "CW",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0900"
+          },
+          {
+            "isConst": true,
+            "name": "DECR",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1E03"
+          },
+          {
+            "isConst": true,
+            "name": "DECR_WRAP",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8508"
+          },
+          {
+            "isConst": true,
+            "name": "DELETE_STATUS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B80"
+          },
+          {
+            "isConst": true,
+            "name": "DEPTH_ATTACHMENT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8D00"
+          },
+          {
+            "isConst": true,
+            "name": "DEPTH_BITS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0D56"
+          },
+          {
+            "isConst": true,
+            "name": "DEPTH_BUFFER_BIT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x00000100"
+          },
+          {
+            "isConst": true,
+            "name": "DEPTH_CLEAR_VALUE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B73"
+          },
+          {
+            "isConst": true,
+            "name": "DEPTH_COMPONENT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1902"
+          },
+          {
+            "isConst": true,
+            "name": "DEPTH_COMPONENT16",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x81A5"
+          },
+          {
+            "isConst": true,
+            "name": "DEPTH_FUNC",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B74"
+          },
+          {
+            "isConst": true,
+            "name": "DEPTH_RANGE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B70"
+          },
+          {
+            "isConst": true,
+            "name": "DEPTH_STENCIL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84F9"
+          },
+          {
+            "isConst": true,
+            "name": "DEPTH_STENCIL_ATTACHMENT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x821A"
+          },
+          {
+            "isConst": true,
+            "name": "DEPTH_TEST",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B71"
+          },
+          {
+            "isConst": true,
+            "name": "DEPTH_WRITEMASK",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B72"
+          },
+          {
+            "isConst": true,
+            "name": "DITHER",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0BD0"
+          },
+          {
+            "isConst": true,
+            "name": "DONT_CARE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1100"
+          },
+          {
+            "isConst": true,
+            "name": "DST_ALPHA",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0304"
+          },
+          {
+            "isConst": true,
+            "name": "DST_COLOR",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0306"
+          },
+          {
+            "isConst": true,
+            "name": "DYNAMIC_DRAW",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x88E8"
+          },
+          {
+            "isConst": true,
+            "name": "ELEMENT_ARRAY_BUFFER",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8893"
+          },
+          {
+            "isConst": true,
+            "name": "ELEMENT_ARRAY_BUFFER_BINDING",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8895"
+          },
+          {
+            "isConst": true,
+            "name": "EQUAL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0202"
+          },
+          {
+            "isConst": true,
+            "name": "FASTEST",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1101"
+          },
+          {
+            "isConst": true,
+            "name": "FLOAT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1406"
+          },
+          {
+            "isConst": true,
+            "name": "FLOAT_MAT2",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B5A"
+          },
+          {
+            "isConst": true,
+            "name": "FLOAT_MAT3",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B5B"
+          },
+          {
+            "isConst": true,
+            "name": "FLOAT_MAT4",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B5C"
+          },
+          {
+            "isConst": true,
+            "name": "FLOAT_VEC2",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B50"
+          },
+          {
+            "isConst": true,
+            "name": "FLOAT_VEC3",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B51"
+          },
+          {
+            "isConst": true,
+            "name": "FLOAT_VEC4",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B52"
+          },
+          {
+            "isConst": true,
+            "name": "FRAGMENT_SHADER",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B30"
+          },
+          {
+            "isConst": true,
+            "name": "FRAMEBUFFER",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8D40"
+          },
+          {
+            "isConst": true,
+            "name": "FRAMEBUFFER_ATTACHMENT_OBJECT_NAME",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8CD1"
+          },
+          {
+            "isConst": true,
+            "name": "FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8CD0"
+          },
+          {
+            "isConst": true,
+            "name": "FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8CD3"
+          },
+          {
+            "isConst": true,
+            "name": "FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8CD2"
+          },
+          {
+            "isConst": true,
+            "name": "FRAMEBUFFER_BINDING",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8CA6"
+          },
+          {
+            "isConst": true,
+            "name": "FRAMEBUFFER_COMPLETE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8CD5"
+          },
+          {
+            "isConst": true,
+            "name": "FRAMEBUFFER_INCOMPLETE_ATTACHMENT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8CD6"
+          },
+          {
+            "isConst": true,
+            "name": "FRAMEBUFFER_INCOMPLETE_DIMENSIONS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8CD9"
+          },
+          {
+            "isConst": true,
+            "name": "FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8CD7"
+          },
+          {
+            "isConst": true,
+            "name": "FRAMEBUFFER_UNSUPPORTED",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8CDD"
+          },
+          {
+            "isConst": true,
+            "name": "FRONT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0404"
+          },
+          {
+            "isConst": true,
+            "name": "FRONT_AND_BACK",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0408"
+          },
+          {
+            "isConst": true,
+            "name": "FRONT_FACE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B46"
+          },
+          {
+            "isConst": true,
+            "name": "FUNC_ADD",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8006"
+          },
+          {
+            "isConst": true,
+            "name": "FUNC_REVERSE_SUBTRACT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x800B"
+          },
+          {
+            "isConst": true,
+            "name": "FUNC_SUBTRACT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x800A"
+          },
+          {
+            "isConst": true,
+            "name": "GENERATE_MIPMAP_HINT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8192"
+          },
+          {
+            "isConst": true,
+            "name": "GEQUAL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0206"
+          },
+          {
+            "isConst": true,
+            "name": "GREATER",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0204"
+          },
+          {
+            "isConst": true,
+            "name": "GREEN_BITS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0D53"
+          },
+          {
+            "isConst": true,
+            "name": "HIGH_FLOAT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8DF2"
+          },
+          {
+            "isConst": true,
+            "name": "HIGH_INT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8DF5"
+          },
+          {
+            "isConst": true,
+            "name": "IMPLEMENTATION_COLOR_READ_FORMAT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B9B"
+          },
+          {
+            "isConst": true,
+            "name": "IMPLEMENTATION_COLOR_READ_TYPE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B9A"
+          },
+          {
+            "isConst": true,
+            "name": "INCR",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1E02"
+          },
+          {
+            "isConst": true,
+            "name": "INCR_WRAP",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8507"
+          },
+          {
+            "isConst": true,
+            "name": "INT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1404"
+          },
+          {
+            "isConst": true,
+            "name": "INT_VEC2",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B53"
+          },
+          {
+            "isConst": true,
+            "name": "INT_VEC3",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B54"
+          },
+          {
+            "isConst": true,
+            "name": "INT_VEC4",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B55"
+          },
+          {
+            "isConst": true,
+            "name": "INVALID_ENUM",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0500"
+          },
+          {
+            "isConst": true,
+            "name": "INVALID_FRAMEBUFFER_OPERATION",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0506"
+          },
+          {
+            "isConst": true,
+            "name": "INVALID_OPERATION",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0502"
+          },
+          {
+            "isConst": true,
+            "name": "INVALID_VALUE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0501"
+          },
+          {
+            "isConst": true,
+            "name": "INVERT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x150A"
+          },
+          {
+            "isConst": true,
+            "name": "KEEP",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1E00"
+          },
+          {
+            "isConst": true,
+            "name": "LEQUAL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0203"
+          },
+          {
+            "isConst": true,
+            "name": "LESS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0201"
+          },
+          {
+            "isConst": true,
+            "name": "LINEAR",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x2601"
+          },
+          {
+            "isConst": true,
+            "name": "LINEAR_MIPMAP_LINEAR",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x2703"
+          },
+          {
+            "isConst": true,
+            "name": "LINEAR_MIPMAP_NEAREST",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x2701"
+          },
+          {
+            "isConst": true,
+            "name": "LINES",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0001"
+          },
+          {
+            "isConst": true,
+            "name": "LINE_LOOP",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0002"
+          },
+          {
+            "isConst": true,
+            "name": "LINE_STRIP",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0003"
+          },
+          {
+            "isConst": true,
+            "name": "LINE_WIDTH",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B21"
+          },
+          {
+            "isConst": true,
+            "name": "LINK_STATUS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B82"
+          },
+          {
+            "isConst": true,
+            "name": "LOW_FLOAT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8DF0"
+          },
+          {
+            "isConst": true,
+            "name": "LOW_INT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8DF3"
+          },
+          {
+            "isConst": true,
+            "name": "LUMINANCE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1909"
+          },
+          {
+            "isConst": true,
+            "name": "LUMINANCE_ALPHA",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x190A"
+          },
+          {
+            "isConst": true,
+            "name": "MAX_COMBINED_TEXTURE_IMAGE_UNITS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B4D"
+          },
+          {
+            "isConst": true,
+            "name": "MAX_CUBE_MAP_TEXTURE_SIZE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x851C"
+          },
+          {
+            "isConst": true,
+            "name": "MAX_FRAGMENT_UNIFORM_VECTORS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8DFD"
+          },
+          {
+            "isConst": true,
+            "name": "MAX_RENDERBUFFER_SIZE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84E8"
+          },
+          {
+            "isConst": true,
+            "name": "MAX_TEXTURE_IMAGE_UNITS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8872"
+          },
+          {
+            "isConst": true,
+            "name": "MAX_TEXTURE_SIZE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0D33"
+          },
+          {
+            "isConst": true,
+            "name": "MAX_VARYING_VECTORS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8DFC"
+          },
+          {
+            "isConst": true,
+            "name": "MAX_VERTEX_ATTRIBS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8869"
+          },
+          {
+            "isConst": true,
+            "name": "MAX_VERTEX_TEXTURE_IMAGE_UNITS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B4C"
+          },
+          {
+            "isConst": true,
+            "name": "MAX_VERTEX_UNIFORM_VECTORS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8DFB"
+          },
+          {
+            "isConst": true,
+            "name": "MAX_VIEWPORT_DIMS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0D3A"
+          },
+          {
+            "isConst": true,
+            "name": "MEDIUM_FLOAT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8DF1"
+          },
+          {
+            "isConst": true,
+            "name": "MEDIUM_INT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8DF4"
+          },
+          {
+            "isConst": true,
+            "name": "MIRRORED_REPEAT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8370"
+          },
+          {
+            "isConst": true,
+            "name": "NEAREST",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x2600"
+          },
+          {
+            "isConst": true,
+            "name": "NEAREST_MIPMAP_LINEAR",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x2702"
+          },
+          {
+            "isConst": true,
+            "name": "NEAREST_MIPMAP_NEAREST",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x2700"
+          },
+          {
+            "isConst": true,
+            "name": "NEVER",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0200"
+          },
+          {
+            "isConst": true,
+            "name": "NICEST",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1102"
+          },
+          {
+            "isConst": true,
+            "name": "NONE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0"
+          },
+          {
+            "isConst": true,
+            "name": "NOTEQUAL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0205"
+          },
+          {
+            "isConst": true,
+            "name": "NO_ERROR",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0"
+          },
+          {
+            "isConst": true,
+            "name": "ONE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "1"
+          },
+          {
+            "isConst": true,
+            "name": "ONE_MINUS_CONSTANT_ALPHA",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8004"
+          },
+          {
+            "isConst": true,
+            "name": "ONE_MINUS_CONSTANT_COLOR",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8002"
+          },
+          {
+            "isConst": true,
+            "name": "ONE_MINUS_DST_ALPHA",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0305"
+          },
+          {
+            "isConst": true,
+            "name": "ONE_MINUS_DST_COLOR",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0307"
+          },
+          {
+            "isConst": true,
+            "name": "ONE_MINUS_SRC_ALPHA",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0303"
+          },
+          {
+            "isConst": true,
+            "name": "ONE_MINUS_SRC_COLOR",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0301"
+          },
+          {
+            "isConst": true,
+            "name": "OUT_OF_MEMORY",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0505"
+          },
+          {
+            "isConst": true,
+            "name": "PACK_ALIGNMENT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0D05"
+          },
+          {
+            "isConst": true,
+            "name": "POINTS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0000"
+          },
+          {
+            "isConst": true,
+            "name": "POLYGON_OFFSET_FACTOR",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8038"
+          },
+          {
+            "isConst": true,
+            "name": "POLYGON_OFFSET_FILL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8037"
+          },
+          {
+            "isConst": true,
+            "name": "POLYGON_OFFSET_UNITS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x2A00"
+          },
+          {
+            "isConst": true,
+            "name": "RED_BITS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0D52"
+          },
+          {
+            "isConst": true,
+            "name": "RENDERBUFFER",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8D41"
+          },
+          {
+            "isConst": true,
+            "name": "RENDERBUFFER_ALPHA_SIZE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8D53"
+          },
+          {
+            "isConst": true,
+            "name": "RENDERBUFFER_BINDING",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8CA7"
+          },
+          {
+            "isConst": true,
+            "name": "RENDERBUFFER_BLUE_SIZE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8D52"
+          },
+          {
+            "isConst": true,
+            "name": "RENDERBUFFER_DEPTH_SIZE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8D54"
+          },
+          {
+            "isConst": true,
+            "name": "RENDERBUFFER_GREEN_SIZE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8D51"
+          },
+          {
+            "isConst": true,
+            "name": "RENDERBUFFER_HEIGHT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8D43"
+          },
+          {
+            "isConst": true,
+            "name": "RENDERBUFFER_INTERNAL_FORMAT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8D44"
+          },
+          {
+            "isConst": true,
+            "name": "RENDERBUFFER_RED_SIZE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8D50"
+          },
+          {
+            "isConst": true,
+            "name": "RENDERBUFFER_STENCIL_SIZE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8D55"
+          },
+          {
+            "isConst": true,
+            "name": "RENDERBUFFER_WIDTH",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8D42"
+          },
+          {
+            "isConst": true,
+            "name": "RENDERER",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1F01"
+          },
+          {
+            "isConst": true,
+            "name": "REPEAT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x2901"
+          },
+          {
+            "isConst": true,
+            "name": "REPLACE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1E01"
+          },
+          {
+            "isConst": true,
+            "name": "RGB",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1907"
+          },
+          {
+            "isConst": true,
+            "name": "RGB565",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8D62"
+          },
+          {
+            "isConst": true,
+            "name": "RGB5_A1",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8057"
+          },
+          {
+            "isConst": true,
+            "name": "RGBA",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1908"
+          },
+          {
+            "isConst": true,
+            "name": "RGBA4",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8056"
+          },
+          {
+            "isConst": true,
+            "name": "SAMPLER_2D",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B5E"
+          },
+          {
+            "isConst": true,
+            "name": "SAMPLER_CUBE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B60"
+          },
+          {
+            "isConst": true,
+            "name": "SAMPLES",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x80A9"
+          },
+          {
+            "isConst": true,
+            "name": "SAMPLE_ALPHA_TO_COVERAGE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x809E"
+          },
+          {
+            "isConst": true,
+            "name": "SAMPLE_BUFFERS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x80A8"
+          },
+          {
+            "isConst": true,
+            "name": "SAMPLE_COVERAGE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x80A0"
+          },
+          {
+            "isConst": true,
+            "name": "SAMPLE_COVERAGE_INVERT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x80AB"
+          },
+          {
+            "isConst": true,
+            "name": "SAMPLE_COVERAGE_VALUE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x80AA"
+          },
+          {
+            "isConst": true,
+            "name": "SCISSOR_BOX",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0C10"
+          },
+          {
+            "isConst": true,
+            "name": "SCISSOR_TEST",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0C11"
+          },
+          {
+            "isConst": true,
+            "name": "SHADER_TYPE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B4F"
+          },
+          {
+            "isConst": true,
+            "name": "SHADING_LANGUAGE_VERSION",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B8C"
+          },
+          {
+            "isConst": true,
+            "name": "SHORT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1402"
+          },
+          {
+            "isConst": true,
+            "name": "SRC_ALPHA",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0302"
+          },
+          {
+            "isConst": true,
+            "name": "SRC_ALPHA_SATURATE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0308"
+          },
+          {
+            "isConst": true,
+            "name": "SRC_COLOR",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0300"
+          },
+          {
+            "isConst": true,
+            "name": "STATIC_DRAW",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x88E4"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_ATTACHMENT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8D20"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_BACK_FAIL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8801"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_BACK_FUNC",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8800"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_BACK_PASS_DEPTH_FAIL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8802"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_BACK_PASS_DEPTH_PASS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8803"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_BACK_REF",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8CA3"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_BACK_VALUE_MASK",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8CA4"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_BACK_WRITEMASK",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8CA5"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_BITS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0D57"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_BUFFER_BIT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x00000400"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_CLEAR_VALUE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B91"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_FAIL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B94"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_FUNC",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B92"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_INDEX",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1901"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_INDEX8",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8D48"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_PASS_DEPTH_FAIL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B95"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_PASS_DEPTH_PASS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B96"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_REF",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B97"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_TEST",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B90"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_VALUE_MASK",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B93"
+          },
+          {
+            "isConst": true,
+            "name": "STENCIL_WRITEMASK",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0B98"
+          },
+          {
+            "isConst": true,
+            "name": "STREAM_DRAW",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x88E0"
+          },
+          {
+            "isConst": true,
+            "name": "SUBPIXEL_BITS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0D50"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1702"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE0",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84C0"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE1",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84C1"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE10",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84CA"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE11",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84CB"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE12",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84CC"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE13",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84CD"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE14",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84CE"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE15",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84CF"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE16",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84D0"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE17",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84D1"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE18",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84D2"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE19",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84D3"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE2",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84C2"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE20",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84D4"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE21",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84D5"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE22",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84D6"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE23",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84D7"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE24",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84D8"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE25",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84D9"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE26",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84DA"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE27",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84DB"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE28",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84DC"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE29",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84DD"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE3",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84C3"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE30",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84DE"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE31",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84DF"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE4",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84C4"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE5",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84C5"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE6",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84C6"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE7",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84C7"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE8",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84C8"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE9",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x84C9"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE_2D",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0DE1"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE_BINDING_2D",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8069"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE_BINDING_CUBE_MAP",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8514"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE_CUBE_MAP",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8513"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE_CUBE_MAP_NEGATIVE_X",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8516"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE_CUBE_MAP_NEGATIVE_Y",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8518"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE_CUBE_MAP_NEGATIVE_Z",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x851A"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE_CUBE_MAP_POSITIVE_X",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8515"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE_CUBE_MAP_POSITIVE_Y",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8517"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE_CUBE_MAP_POSITIVE_Z",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8519"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE_MAG_FILTER",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x2800"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE_MIN_FILTER",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x2801"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE_WRAP_S",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x2802"
+          },
+          {
+            "isConst": true,
+            "name": "TEXTURE_WRAP_T",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x2803"
+          },
+          {
+            "isConst": true,
+            "name": "TRIANGLES",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0004"
+          },
+          {
+            "isConst": true,
+            "name": "TRIANGLE_FAN",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0006"
+          },
+          {
+            "isConst": true,
+            "name": "TRIANGLE_STRIP",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0005"
+          },
+          {
+            "isConst": true,
+            "name": "UNPACK_ALIGNMENT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0CF5"
+          },
+          {
+            "isConst": true,
+            "name": "UNPACK_COLORSPACE_CONVERSION_WEBGL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x9243"
+          },
+          {
+            "isConst": true,
+            "name": "UNPACK_FLIP_Y_WEBGL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x9240"
+          },
+          {
+            "isConst": true,
+            "name": "UNPACK_PREMULTIPLY_ALPHA_WEBGL",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x9241"
+          },
+          {
+            "isConst": true,
+            "name": "UNSIGNED_BYTE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1401"
+          },
+          {
+            "isConst": true,
+            "name": "UNSIGNED_INT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1405"
+          },
+          {
+            "isConst": true,
+            "name": "UNSIGNED_SHORT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1403"
+          },
+          {
+            "isConst": true,
+            "name": "UNSIGNED_SHORT_4_4_4_4",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8033"
+          },
+          {
+            "isConst": true,
+            "name": "UNSIGNED_SHORT_5_5_5_1",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8034"
+          },
+          {
+            "isConst": true,
+            "name": "UNSIGNED_SHORT_5_6_5",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8363"
+          },
+          {
+            "isConst": true,
+            "name": "VALIDATE_STATUS",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B83"
+          },
+          {
+            "isConst": true,
+            "name": "VENDOR",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1F00"
+          },
+          {
+            "isConst": true,
+            "name": "VERSION",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x1F02"
+          },
+          {
+            "isConst": true,
+            "name": "VERTEX_ATTRIB_ARRAY_BUFFER_BINDING",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x889F"
+          },
+          {
+            "isConst": true,
+            "name": "VERTEX_ATTRIB_ARRAY_ENABLED",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8622"
+          },
+          {
+            "isConst": true,
+            "name": "VERTEX_ATTRIB_ARRAY_NORMALIZED",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x886A"
+          },
+          {
+            "isConst": true,
+            "name": "VERTEX_ATTRIB_ARRAY_POINTER",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8645"
+          },
+          {
+            "isConst": true,
+            "name": "VERTEX_ATTRIB_ARRAY_SIZE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8623"
+          },
+          {
+            "isConst": true,
+            "name": "VERTEX_ATTRIB_ARRAY_STRIDE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8624"
+          },
+          {
+            "isConst": true,
+            "name": "VERTEX_ATTRIB_ARRAY_TYPE",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8625"
+          },
+          {
+            "isConst": true,
+            "name": "VERTEX_SHADER",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x8B31"
+          },
+          {
+            "isConst": true,
+            "name": "VIEWPORT",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0x0BA2"
+          },
+          {
+            "isConst": true,
+            "name": "ZERO",
+            "type": {
+              "name": "GLenum"
+            },
+            "value": "0"
+          },
+          {
+            "args": [
+              {
+                "name": "texture",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "activeTexture",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "program",
+                "type": {
+                  "name": "WebGLProgram"
+                }
+              },
+              {
+                "name": "shader",
+                "type": {
+                  "name": "WebGLShader"
+                }
+              }
+            ],
+            "name": "attachShader",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "program",
+                "type": {
+                  "name": "WebGLProgram"
+                }
+              },
+              {
+                "name": "index",
+                "type": {
+                  "name": "GLuint"
+                }
+              },
+              {
+                "name": "name",
+                "type": {
+                  "name": "DOMString"
+                }
+              }
+            ],
+            "name": "bindAttribLocation",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "buffer",
+                "type": {
+                  "name": "WebGLBuffer",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "name": "bindBuffer",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "framebuffer",
+                "type": {
+                  "name": "WebGLFramebuffer",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "name": "bindFramebuffer",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "renderbuffer",
+                "type": {
+                  "name": "WebGLRenderbuffer",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "name": "bindRenderbuffer",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "texture",
+                "type": {
+                  "name": "WebGLTexture",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "name": "bindTexture",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "red",
+                "type": {
+                  "name": "GLclampf"
+                }
+              },
+              {
+                "name": "green",
+                "type": {
+                  "name": "GLclampf"
+                }
+              },
+              {
+                "name": "blue",
+                "type": {
+                  "name": "GLclampf"
+                }
+              },
+              {
+                "name": "alpha",
+                "type": {
+                  "name": "GLclampf"
+                }
+              }
+            ],
+            "name": "blendColor",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "mode",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "blendEquation",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "modeRGB",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "modeAlpha",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "blendEquationSeparate",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "sfactor",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "dfactor",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "blendFunc",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "srcRGB",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "dstRGB",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "srcAlpha",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "dstAlpha",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "blendFuncSeparate",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "data",
+                "type": {
+                  "name": "ArrayBuffer",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "usage",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "bufferData",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "data",
+                "type": {
+                  "name": "ArrayBufferView"
+                }
+              },
+              {
+                "name": "usage",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "bufferData",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "size",
+                "type": {
+                  "name": "GLsizeiptr"
+                }
+              },
+              {
+                "name": "usage",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "bufferData",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "offset",
+                "type": {
+                  "name": "GLintptr"
+                }
+              },
+              {
+                "name": "data",
+                "type": {
+                  "name": "BufferDataSource"
+                }
+              }
+            ],
+            "name": "bufferSubData",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "canvas",
+            "type": {
+              "name": "HTMLCanvasElement"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "attrs": [
+              {
+                "name": "WebGLHandlesContextLoss",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "name": "checkFramebufferStatus",
+            "returnType": {
+              "name": "GLenum"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "mask",
+                "type": {
+                  "name": "GLbitfield"
+                }
+              }
+            ],
+            "name": "clear",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "red",
+                "type": {
+                  "name": "GLclampf"
+                }
+              },
+              {
+                "name": "green",
+                "type": {
+                  "name": "GLclampf"
+                }
+              },
+              {
+                "name": "blue",
+                "type": {
+                  "name": "GLclampf"
+                }
+              },
+              {
+                "name": "alpha",
+                "type": {
+                  "name": "GLclampf"
+                }
+              }
+            ],
+            "name": "clearColor",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "depth",
+                "type": {
+                  "name": "GLclampf"
+                }
+              }
+            ],
+            "name": "clearDepth",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "s",
+                "type": {
+                  "name": "GLint"
+                }
+              }
+            ],
+            "name": "clearStencil",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "red",
+                "type": {
+                  "name": "GLboolean"
+                }
+              },
+              {
+                "name": "green",
+                "type": {
+                  "name": "GLboolean"
+                }
+              },
+              {
+                "name": "blue",
+                "type": {
+                  "name": "GLboolean"
+                }
+              },
+              {
+                "name": "alpha",
+                "type": {
+                  "name": "GLboolean"
+                }
+              }
+            ],
+            "name": "colorMask",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "shader",
+                "type": {
+                  "name": "WebGLShader"
+                }
+              }
+            ],
+            "name": "compileShader",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "level",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "internalformat",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "width",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "height",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "border",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "data",
+                "type": {
+                  "name": "ArrayBufferView"
+                }
+              }
+            ],
+            "name": "compressedTexImage2D",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "level",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "xoffset",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "yoffset",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "width",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "height",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "format",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "data",
+                "type": {
+                  "name": "ArrayBufferView"
+                }
+              }
+            ],
+            "name": "compressedTexSubImage2D",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "level",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "internalformat",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "y",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "width",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "height",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "border",
+                "type": {
+                  "name": "GLint"
+                }
+              }
+            ],
+            "name": "copyTexImage2D",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "level",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "xoffset",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "yoffset",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "y",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "width",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "height",
+                "type": {
+                  "name": "GLsizei"
+                }
+              }
+            ],
+            "name": "copyTexSubImage2D",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "name": "createBuffer",
+            "returnType": {
+              "name": "WebGLBuffer",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "name": "createFramebuffer",
+            "returnType": {
+              "name": "WebGLFramebuffer",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "name": "createProgram",
+            "returnType": {
+              "name": "WebGLProgram",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "name": "createRenderbuffer",
+            "returnType": {
+              "name": "WebGLRenderbuffer",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "type",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "createShader",
+            "returnType": {
+              "name": "WebGLShader",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "name": "createTexture",
+            "returnType": {
+              "name": "WebGLTexture",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "mode",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "cullFace",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "buffer",
+                "type": {
+                  "name": "WebGLBuffer",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "name": "deleteBuffer",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "framebuffer",
+                "type": {
+                  "name": "WebGLFramebuffer",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "name": "deleteFramebuffer",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "program",
+                "type": {
+                  "name": "WebGLProgram",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "name": "deleteProgram",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "renderbuffer",
+                "type": {
+                  "name": "WebGLRenderbuffer",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "name": "deleteRenderbuffer",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "shader",
+                "type": {
+                  "name": "WebGLShader",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "name": "deleteShader",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "texture",
+                "type": {
+                  "name": "WebGLTexture",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "name": "deleteTexture",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "func",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "depthFunc",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "flag",
+                "type": {
+                  "name": "GLboolean"
+                }
+              }
+            ],
+            "name": "depthMask",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "zNear",
+                "type": {
+                  "name": "GLclampf"
+                }
+              },
+              {
+                "name": "zFar",
+                "type": {
+                  "name": "GLclampf"
+                }
+              }
+            ],
+            "name": "depthRange",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "program",
+                "type": {
+                  "name": "WebGLProgram"
+                }
+              },
+              {
+                "name": "shader",
+                "type": {
+                  "name": "WebGLShader"
+                }
+              }
+            ],
+            "name": "detachShader",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "cap",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "disable",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "index",
+                "type": {
+                  "name": "GLuint"
+                }
+              }
+            ],
+            "name": "disableVertexAttribArray",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "mode",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "first",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "count",
+                "type": {
+                  "name": "GLsizei"
+                }
+              }
+            ],
+            "name": "drawArrays",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "mode",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "count",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "type",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "offset",
+                "type": {
+                  "name": "GLintptr"
+                }
+              }
+            ],
+            "name": "drawElements",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "drawingBufferHeight",
+            "type": {
+              "name": "GLsizei"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "drawingBufferWidth",
+            "type": {
+              "name": "GLsizei"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "args": [
+              {
+                "name": "cap",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "enable",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "index",
+                "type": {
+                  "name": "GLuint"
+                }
+              }
+            ],
+            "name": "enableVertexAttribArray",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "name": "finish",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "name": "flush",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "attachment",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "renderbuffertarget",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "renderbuffer",
+                "type": {
+                  "name": "WebGLRenderbuffer",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "name": "framebufferRenderbuffer",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "attachment",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "textarget",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "texture",
+                "type": {
+                  "name": "WebGLTexture",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "level",
+                "type": {
+                  "name": "GLint"
+                }
+              }
+            ],
+            "name": "framebufferTexture2D",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "mode",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "frontFace",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "generateMipmap",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "program",
+                "type": {
+                  "name": "WebGLProgram"
+                }
+              },
+              {
+                "name": "index",
+                "type": {
+                  "name": "GLuint"
+                }
+              }
+            ],
+            "name": "getActiveAttrib",
+            "returnType": {
+              "name": "WebGLActiveInfo",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "program",
+                "type": {
+                  "name": "WebGLProgram"
+                }
+              },
+              {
+                "name": "index",
+                "type": {
+                  "name": "GLuint"
+                }
+              }
+            ],
+            "name": "getActiveUniform",
+            "returnType": {
+              "name": "WebGLActiveInfo",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "program",
+                "type": {
+                  "name": "WebGLProgram"
+                }
+              }
+            ],
+            "name": "getAttachedShaders",
+            "returnType": {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "WebGLShader"
+                },
+                [
+                  "nullable"
+                ]
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "program",
+                "type": {
+                  "name": "WebGLProgram"
+                }
+              },
+              {
+                "name": "name",
+                "type": {
+                  "name": "DOMString"
+                }
+              }
+            ],
+            "attrs": [
+              {
+                "name": "WebGLHandlesContextLoss",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "name": "getAttribLocation",
+            "returnType": {
+              "name": "GLint"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "pname",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "getBufferParameter",
+            "returnType": {
+              "name": "any"
+            }
+          },
+          {
+            "attrs": [
+              {
+                "name": "WebGLHandlesContextLoss",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "name": "getContextAttributes",
+            "returnType": {
+              "name": "WebGLContextAttributes",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "attrs": [
+              {
+                "name": "WebGLHandlesContextLoss",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "name": "getError",
+            "returnType": {
+              "name": "GLenum"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "name",
+                "type": {
+                  "name": "DOMString"
+                }
+              }
+            ],
+            "name": "getExtension",
+            "returnType": {
+              "name": "object",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "attachment",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "pname",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "getFramebufferAttachmentParameter",
+            "returnType": {
+              "name": "any"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "pname",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "getParameter",
+            "returnType": {
+              "name": "any"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "program",
+                "type": {
+                  "name": "WebGLProgram"
+                }
+              }
+            ],
+            "name": "getProgramInfoLog",
+            "returnType": {
+              "name": "DOMString",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "program",
+                "type": {
+                  "name": "WebGLProgram"
+                }
+              },
+              {
+                "name": "pname",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "getProgramParameter",
+            "returnType": {
+              "name": "any"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "pname",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "getRenderbufferParameter",
+            "returnType": {
+              "name": "any"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "shader",
+                "type": {
+                  "name": "WebGLShader"
+                }
+              }
+            ],
+            "name": "getShaderInfoLog",
+            "returnType": {
+              "name": "DOMString",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "shader",
+                "type": {
+                  "name": "WebGLShader"
+                }
+              },
+              {
+                "name": "pname",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "getShaderParameter",
+            "returnType": {
+              "name": "any"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "shadertype",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "precisiontype",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "getShaderPrecisionFormat",
+            "returnType": {
+              "name": "WebGLShaderPrecisionFormat",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "shader",
+                "type": {
+                  "name": "WebGLShader"
+                }
+              }
+            ],
+            "name": "getShaderSource",
+            "returnType": {
+              "name": "DOMString",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "name": "getSupportedExtensions",
+            "returnType": {
+              "name": "sequence",
+              "params": [
+                {
+                  "name": "DOMString"
+                },
+                [
+                  "nullable"
+                ]
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "pname",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "getTexParameter",
+            "returnType": {
+              "name": "any"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "program",
+                "type": {
+                  "name": "WebGLProgram"
+                }
+              },
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation"
+                }
+              }
+            ],
+            "name": "getUniform",
+            "returnType": {
+              "name": "any"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "program",
+                "type": {
+                  "name": "WebGLProgram"
+                }
+              },
+              {
+                "name": "name",
+                "type": {
+                  "name": "DOMString"
+                }
+              }
+            ],
+            "name": "getUniformLocation",
+            "returnType": {
+              "name": "WebGLUniformLocation",
+              "params": [
+                "nullable"
+              ]
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "index",
+                "type": {
+                  "name": "GLuint"
+                }
+              },
+              {
+                "name": "pname",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "getVertexAttrib",
+            "returnType": {
+              "name": "any"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "index",
+                "type": {
+                  "name": "GLuint"
+                }
+              },
+              {
+                "name": "pname",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "attrs": [
+              {
+                "name": "WebGLHandlesContextLoss",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "name": "getVertexAttribOffset",
+            "returnType": {
+              "name": "GLintptr"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "mode",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "hint",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "buffer",
+                "type": {
+                  "name": "WebGLBuffer",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "attrs": [
+              {
+                "name": "WebGLHandlesContextLoss",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "name": "isBuffer",
+            "returnType": {
+              "name": "GLboolean"
+            }
+          },
+          {
+            "attrs": [
+              {
+                "name": "WebGLHandlesContextLoss",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "name": "isContextLost",
+            "returnType": {
+              "name": "boolean"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "cap",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "attrs": [
+              {
+                "name": "WebGLHandlesContextLoss",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "name": "isEnabled",
+            "returnType": {
+              "name": "GLboolean"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "framebuffer",
+                "type": {
+                  "name": "WebGLFramebuffer",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "attrs": [
+              {
+                "name": "WebGLHandlesContextLoss",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "name": "isFramebuffer",
+            "returnType": {
+              "name": "GLboolean"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "program",
+                "type": {
+                  "name": "WebGLProgram",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "attrs": [
+              {
+                "name": "WebGLHandlesContextLoss",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "name": "isProgram",
+            "returnType": {
+              "name": "GLboolean"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "renderbuffer",
+                "type": {
+                  "name": "WebGLRenderbuffer",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "attrs": [
+              {
+                "name": "WebGLHandlesContextLoss",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "name": "isRenderbuffer",
+            "returnType": {
+              "name": "GLboolean"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "shader",
+                "type": {
+                  "name": "WebGLShader",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "attrs": [
+              {
+                "name": "WebGLHandlesContextLoss",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "name": "isShader",
+            "returnType": {
+              "name": "GLboolean"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "texture",
+                "type": {
+                  "name": "WebGLTexture",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "attrs": [
+              {
+                "name": "WebGLHandlesContextLoss",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "name": "isTexture",
+            "returnType": {
+              "name": "GLboolean"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "width",
+                "type": {
+                  "name": "GLfloat"
+                }
+              }
+            ],
+            "name": "lineWidth",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "program",
+                "type": {
+                  "name": "WebGLProgram"
+                }
+              }
+            ],
+            "name": "linkProgram",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "pname",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "param",
+                "type": {
+                  "name": "GLint"
+                }
+              }
+            ],
+            "name": "pixelStorei",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "factor",
+                "type": {
+                  "name": "GLfloat"
+                }
+              },
+              {
+                "name": "units",
+                "type": {
+                  "name": "GLfloat"
+                }
+              }
+            ],
+            "name": "polygonOffset",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "y",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "width",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "height",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "format",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "type",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "pixels",
+                "type": {
+                  "name": "ArrayBufferView",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "name": "readPixels",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "internalformat",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "width",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "height",
+                "type": {
+                  "name": "GLsizei"
+                }
+              }
+            ],
+            "name": "renderbufferStorage",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "value",
+                "type": {
+                  "name": "GLclampf"
+                }
+              },
+              {
+                "name": "invert",
+                "type": {
+                  "name": "GLboolean"
+                }
+              }
+            ],
+            "name": "sampleCoverage",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "y",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "width",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "height",
+                "type": {
+                  "name": "GLsizei"
+                }
+              }
+            ],
+            "name": "scissor",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "shader",
+                "type": {
+                  "name": "WebGLShader"
+                }
+              },
+              {
+                "name": "source",
+                "type": {
+                  "name": "DOMString"
+                }
+              }
+            ],
+            "name": "shaderSource",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "func",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "ref",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "mask",
+                "type": {
+                  "name": "GLuint"
+                }
+              }
+            ],
+            "name": "stencilFunc",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "face",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "func",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "ref",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "mask",
+                "type": {
+                  "name": "GLuint"
+                }
+              }
+            ],
+            "name": "stencilFuncSeparate",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "mask",
+                "type": {
+                  "name": "GLuint"
+                }
+              }
+            ],
+            "name": "stencilMask",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "face",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "mask",
+                "type": {
+                  "name": "GLuint"
+                }
+              }
+            ],
+            "name": "stencilMaskSeparate",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "fail",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "zfail",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "zpass",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "stencilOp",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "face",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "fail",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "zfail",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "zpass",
+                "type": {
+                  "name": "GLenum"
+                }
+              }
+            ],
+            "name": "stencilOpSeparate",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "level",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "internalformat",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "width",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "height",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "border",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "format",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "type",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "pixels",
+                "type": {
+                  "name": "ArrayBufferView",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "name": "texImage2D",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "level",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "internalformat",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "format",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "type",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "source",
+                "type": {
+                  "name": "TexImageSource"
+                }
+              }
+            ],
+            "name": "texImage2D",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "pname",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "param",
+                "type": {
+                  "name": "GLfloat"
+                }
+              }
+            ],
+            "name": "texParameterf",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "pname",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "param",
+                "type": {
+                  "name": "GLint"
+                }
+              }
+            ],
+            "name": "texParameteri",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "level",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "xoffset",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "yoffset",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "width",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "height",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "format",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "type",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "pixels",
+                "type": {
+                  "name": "ArrayBufferView",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "name": "texSubImage2D",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "target",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "level",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "xoffset",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "yoffset",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "format",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "type",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "source",
+                "type": {
+                  "name": "TexImageSource"
+                }
+              }
+            ],
+            "name": "texSubImage2D",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLfloat"
+                }
+              }
+            ],
+            "name": "uniform1f",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "v",
+                "type": {
+                  "name": "Float32Array"
+                }
+              }
+            ],
+            "name": "uniform1fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "v",
+                "type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "GLfloat"
+                    }
+                  ]
+                }
+              }
+            ],
+            "name": "uniform1fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLint"
+                }
+              }
+            ],
+            "name": "uniform1i",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "v",
+                "type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "long"
+                    }
+                  ]
+                }
+              }
+            ],
+            "name": "uniform1iv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "v",
+                "type": {
+                  "name": "Int32Array"
+                }
+              }
+            ],
+            "name": "uniform1iv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLfloat"
+                }
+              },
+              {
+                "name": "y",
+                "type": {
+                  "name": "GLfloat"
+                }
+              }
+            ],
+            "name": "uniform2f",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "v",
+                "type": {
+                  "name": "Float32Array"
+                }
+              }
+            ],
+            "name": "uniform2fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "v",
+                "type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "GLfloat"
+                    }
+                  ]
+                }
+              }
+            ],
+            "name": "uniform2fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "y",
+                "type": {
+                  "name": "GLint"
+                }
+              }
+            ],
+            "name": "uniform2i",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "v",
+                "type": {
+                  "name": "Int32Array"
+                }
+              }
+            ],
+            "name": "uniform2iv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "v",
+                "type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "long"
+                    }
+                  ]
+                }
+              }
+            ],
+            "name": "uniform2iv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLfloat"
+                }
+              },
+              {
+                "name": "y",
+                "type": {
+                  "name": "GLfloat"
+                }
+              },
+              {
+                "name": "z",
+                "type": {
+                  "name": "GLfloat"
+                }
+              }
+            ],
+            "name": "uniform3f",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "v",
+                "type": {
+                  "name": "Float32Array"
+                }
+              }
+            ],
+            "name": "uniform3fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "v",
+                "type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "GLfloat"
+                    }
+                  ]
+                }
+              }
+            ],
+            "name": "uniform3fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "y",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "z",
+                "type": {
+                  "name": "GLint"
+                }
+              }
+            ],
+            "name": "uniform3i",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "v",
+                "type": {
+                  "name": "Int32Array"
+                }
+              }
+            ],
+            "name": "uniform3iv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "v",
+                "type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "long"
+                    }
+                  ]
+                }
+              }
+            ],
+            "name": "uniform3iv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLfloat"
+                }
+              },
+              {
+                "name": "y",
+                "type": {
+                  "name": "GLfloat"
+                }
+              },
+              {
+                "name": "z",
+                "type": {
+                  "name": "GLfloat"
+                }
+              },
+              {
+                "name": "w",
+                "type": {
+                  "name": "GLfloat"
+                }
+              }
+            ],
+            "name": "uniform4f",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "v",
+                "type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "GLfloat"
+                    }
+                  ]
+                }
+              }
+            ],
+            "name": "uniform4fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "v",
+                "type": {
+                  "name": "Float32Array"
+                }
+              }
+            ],
+            "name": "uniform4fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "y",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "z",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "w",
+                "type": {
+                  "name": "GLint"
+                }
+              }
+            ],
+            "name": "uniform4i",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "v",
+                "type": {
+                  "name": "Int32Array"
+                }
+              }
+            ],
+            "name": "uniform4iv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "v",
+                "type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "long"
+                    }
+                  ]
+                }
+              }
+            ],
+            "name": "uniform4iv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "transpose",
+                "type": {
+                  "name": "GLboolean"
+                }
+              },
+              {
+                "name": "value",
+                "type": {
+                  "name": "Float32Array"
+                }
+              }
+            ],
+            "name": "uniformMatrix2fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "transpose",
+                "type": {
+                  "name": "GLboolean"
+                }
+              },
+              {
+                "name": "value",
+                "type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "GLfloat"
+                    }
+                  ]
+                }
+              }
+            ],
+            "name": "uniformMatrix2fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "transpose",
+                "type": {
+                  "name": "GLboolean"
+                }
+              },
+              {
+                "name": "value",
+                "type": {
+                  "name": "Float32Array"
+                }
+              }
+            ],
+            "name": "uniformMatrix3fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "transpose",
+                "type": {
+                  "name": "GLboolean"
+                }
+              },
+              {
+                "name": "value",
+                "type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "GLfloat"
+                    }
+                  ]
+                }
+              }
+            ],
+            "name": "uniformMatrix3fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "transpose",
+                "type": {
+                  "name": "GLboolean"
+                }
+              },
+              {
+                "name": "value",
+                "type": {
+                  "name": "Float32Array"
+                }
+              }
+            ],
+            "name": "uniformMatrix4fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "location",
+                "type": {
+                  "name": "WebGLUniformLocation",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              },
+              {
+                "name": "transpose",
+                "type": {
+                  "name": "GLboolean"
+                }
+              },
+              {
+                "name": "value",
+                "type": {
+                  "name": "sequence",
+                  "params": [
+                    {
+                      "name": "GLfloat"
+                    }
+                  ]
+                }
+              }
+            ],
+            "name": "uniformMatrix4fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "program",
+                "type": {
+                  "name": "WebGLProgram",
+                  "params": [
+                    "nullable"
+                  ]
+                }
+              }
+            ],
+            "name": "useProgram",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "program",
+                "type": {
+                  "name": "WebGLProgram"
+                }
+              }
+            ],
+            "name": "validateProgram",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "index",
+                "type": {
+                  "name": "GLuint"
+                }
+              },
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLfloat"
+                }
+              }
+            ],
+            "name": "vertexAttrib1f",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "index",
+                "type": {
+                  "name": "GLuint"
+                }
+              },
+              {
+                "name": "values",
+                "type": {
+                  "name": "VertexAttribFVSource"
+                }
+              }
+            ],
+            "name": "vertexAttrib1fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "index",
+                "type": {
+                  "name": "GLuint"
+                }
+              },
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLfloat"
+                }
+              },
+              {
+                "name": "y",
+                "type": {
+                  "name": "GLfloat"
+                }
+              }
+            ],
+            "name": "vertexAttrib2f",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "index",
+                "type": {
+                  "name": "GLuint"
+                }
+              },
+              {
+                "name": "values",
+                "type": {
+                  "name": "VertexAttribFVSource"
+                }
+              }
+            ],
+            "name": "vertexAttrib2fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "index",
+                "type": {
+                  "name": "GLuint"
+                }
+              },
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLfloat"
+                }
+              },
+              {
+                "name": "y",
+                "type": {
+                  "name": "GLfloat"
+                }
+              },
+              {
+                "name": "z",
+                "type": {
+                  "name": "GLfloat"
+                }
+              }
+            ],
+            "name": "vertexAttrib3f",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "index",
+                "type": {
+                  "name": "GLuint"
+                }
+              },
+              {
+                "name": "values",
+                "type": {
+                  "name": "VertexAttribFVSource"
+                }
+              }
+            ],
+            "name": "vertexAttrib3fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "index",
+                "type": {
+                  "name": "GLuint"
+                }
+              },
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLfloat"
+                }
+              },
+              {
+                "name": "y",
+                "type": {
+                  "name": "GLfloat"
+                }
+              },
+              {
+                "name": "z",
+                "type": {
+                  "name": "GLfloat"
+                }
+              },
+              {
+                "name": "w",
+                "type": {
+                  "name": "GLfloat"
+                }
+              }
+            ],
+            "name": "vertexAttrib4f",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "index",
+                "type": {
+                  "name": "GLuint"
+                }
+              },
+              {
+                "name": "values",
+                "type": {
+                  "name": "VertexAttribFVSource"
+                }
+              }
+            ],
+            "name": "vertexAttrib4fv",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "index",
+                "type": {
+                  "name": "GLuint"
+                }
+              },
+              {
+                "name": "size",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "type",
+                "type": {
+                  "name": "GLenum"
+                }
+              },
+              {
+                "name": "normalized",
+                "type": {
+                  "name": "GLboolean"
+                }
+              },
+              {
+                "name": "stride",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "offset",
+                "type": {
+                  "name": "GLintptr"
+                }
+              }
+            ],
+            "name": "vertexAttribPointer",
+            "returnType": {
+              "name": "void"
+            }
+          },
+          {
+            "args": [
+              {
+                "name": "x",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "y",
+                "type": {
+                  "name": "GLint"
+                }
+              },
+              {
+                "name": "width",
+                "type": {
+                  "name": "GLsizei"
+                }
+              },
+              {
+                "name": "height",
+                "type": {
+                  "name": "GLsizei"
+                }
+              }
+            ],
+            "name": "viewport",
+            "returnType": {
+              "name": "void"
+            }
+          }
+        ],
+        "name": "WebGLRenderingContextBase",
+        "type_": "Interface"
+      },
+      {
+        "inheritsFrom": "WebGLObject",
+        "members": [
+        ],
+        "name": "WebGLShader",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+          {
+            "isReadOnly": true,
+            "name": "precision",
+            "type": {
+              "name": "GLint"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "rangeMax",
+            "type": {
+              "name": "GLint"
+            },
+            "type_": "Attribute"
+          },
+          {
+            "isReadOnly": true,
+            "name": "rangeMin",
+            "type": {
+              "name": "GLint"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "WebGLShaderPrecisionFormat",
+        "type_": "Interface"
+      },
+      {
+        "inheritsFrom": "WebGLObject",
+        "members": [
+        ],
+        "name": "WebGLTexture",
+        "type_": "Interface"
+      },
+      {
+        "members": [
+        ],
+        "name": "WebGLUniformLocation",
+        "type_": "Interface"
+      }
+    ],
+    "url": "https://www.khronos.org/registry/webgl/specs/latest/1.0/"
   },
   {
     "files": [
