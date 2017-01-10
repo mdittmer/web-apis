@@ -22,8 +22,8 @@ const process = require('process');
 const env = process.env;
 
 const BlinkLinkedRunner = require('../lib/idl/BlinkLinkedRunner.es6.js');
-const BlinkRunner = require('../lib/idl/BlinkRunner.es6.js');
 const IDLProcessRunner = require('../lib/idl/IDLProcessRunner.es6.js');
+const LocalSourceRunner = require('../lib/idl/LocalSourceRunner.es6.js');
 const URLScrapeRunner = require('../lib/idl/URLScrapeRunner.es6.js');
 // const debug = require('../lib/debug.es6.js');
 
@@ -37,11 +37,19 @@ const yargs = require('yargs');
 const argv = yargs
   .command(
     'parse-blink [options]',
-    'Scrape WebIDL from web specs linked to by Blink IDL files',
+    'Scrape WebIDL from Blink IDL files',
     () => yargs
-      .default('blink-dir', `${env.HOME}/src/chromium/src/third_party/WebKit`)
+      .default('blink-dir', `${env.HOME}/src/chromium/src/third_party/WebKit/Source`)
       .describe('blink-dir', 'Chromium Blink source directory for IDL/URL scraping')
       .coerce('blink-dir', dir => path.resolve(dir))
+  )
+  .command(
+    'parse-webkit [options]',
+    'Scrape WebIDL from WebKit IDL files',
+    () => yargs
+      .default('webkit-dir', `${env.HOME}/src/webkit/Source`)
+      .describe('webkit-dir', 'Webkit source directory for IDL/URL scraping')
+      .coerce('webkit-dir', dir => path.resolve(dir))
   )
   .command(
     'scrape-blink-linked [options]',
@@ -115,7 +123,26 @@ console.log(argv);
 
 let runner;
 if (command === 'parse-blink') {
-  runner = new BlinkRunner();
+  runner = new LocalSourceRunner({
+    name: 'blink',
+    gitRepo: 'https://chromium.googlesource.com/chromium/src.git/+',
+    repoPathRegExp: /(third_party\/WebKit.*)$/,
+    ignoreGlobs: [
+      '**/Source/core/testing/**',
+      '**/Source/modules/**/testing/**',
+      '**/bindings/tests/**',
+    ],
+  });
+} else if (command === 'parse-webkit') {
+  runner = new LocalSourceRunner({
+    name: 'webkit',
+    gitRepo: 'https://github.com/WebKit/webkit/blob',
+    repoPathRegExp: /(Source\/.*)$/,
+    ignoreGlobs: [
+      '**/testing/**',
+      '**/test/**',
+    ],
+  });
 } else if (command === 'scrape-blink-linked') {
   runner = new BlinkLinkedRunner();
 } else if (command === 'scrape-urls') {
