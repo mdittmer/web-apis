@@ -23,7 +23,9 @@ const env = process.env;
 
 const BlinkLinkedRunner = require('../lib/idl/BlinkLinkedRunner.es6.js');
 const IDLProcessRunner = require('../lib/idl/IDLProcessRunner.es6.js');
+const LocalFilesRunner = require('../lib/idl/LocalFilesRunner.es6.js');
 const LocalSourceRunner = require('../lib/idl/LocalSourceRunner.es6.js');
+const Memo = require('../lib/memo/Memo.es6.js');
 const URLScrapeRunner = require('../lib/idl/URLScrapeRunner.es6.js');
 // const debug = require('../lib/debug.es6.js');
 
@@ -36,6 +38,14 @@ process.on('unhandledRejection', (reason, promise) => {
 const yargs = require('yargs');
 const argv = yargs
   .command(
+    'parse-idl [files...]',
+    'Parse specific local IDL files',
+    () => yargs
+      .describe('files', 'IDL files to parse')
+      .demand(1, 'files', 'At least one file is required')
+      .coerce('files', files => files.map(file => path.resolve(file)))
+  )
+  .command(
     'parse-blink [options]',
     'Scrape WebIDL from Blink IDL files',
     () => yargs
@@ -47,7 +57,7 @@ const argv = yargs
     'parse-webkit [options]',
     'Scrape WebIDL from WebKit IDL files',
     () => yargs
-      .default('webkit-dir', `${env.HOME}/src/webkit/Source`)
+      .default('webkit-dir', `${env.HOME}/src/webkit/Source/WebCore`)
       .describe('webkit-dir', 'Webkit source directory for IDL/URL scraping')
       .coerce('webkit-dir', dir => path.resolve(dir))
   )
@@ -119,10 +129,10 @@ const argv = yargs
 
 const command = argv._[0];
 
-console.log(argv);
-
 let runner;
-if (command === 'parse-blink') {
+if (command === 'parse-idl') {
+  runner = new LocalFilesRunner();
+} else if (command === 'parse-blink') {
   runner = new LocalSourceRunner({
     name: 'blink',
     gitRepo: 'https://chromium.googlesource.com/chromium/src.git/+',
@@ -142,6 +152,17 @@ if (command === 'parse-blink') {
       '**/testing/**',
       '**/test/**',
     ],
+    preprocessorMemo: new Memo({
+      f: function(idlStr) {
+        return idlStr
+          // Drop C-preprocessor directives.
+          .replace(/\n[ \t]*#[^\n]*/mg, '')
+          // TODO(markdittmer): This is a hack against WebKit's extended
+          // attributes of the form "Foo=bar&baz", "Foo=bar|baz" or
+          // "Foo  =  bar  &  baz".
+          .replace(/[ ]*[|&][ ]*/g, '');
+      },
+    }),
   });
 } else if (command === 'scrape-blink-linked') {
   runner = new BlinkLinkedRunner();
