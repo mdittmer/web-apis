@@ -62,6 +62,14 @@ const argv = yargs
       .coerce('webkit-dir', dir => path.resolve(dir))
   )
   .command(
+    'parse-gecko [options]',
+    'Scrape WebIDL from Gecko IDL files',
+    () => yargs
+      .default('gecko-dir', `${env.HOME}/src/gecko-dev`)
+      .describe('gecko-dir', 'Firefox Gecko source directory for IDL/URL scraping')
+      .coerce('gecko-dir', dir => path.resolve(dir))
+  )
+  .command(
     'scrape-blink-linked [options]',
     'Scrape WebIDL from web specs linked to by Blink IDL files',
     () => yargs
@@ -163,6 +171,16 @@ if (command === 'parse-idl') {
           .replace(/[ ]*[|&][ ]*/g, '');
       },
     }),
+  });
+} else if (command === 'parse-gecko') {
+  runner = new LocalSourceRunner({
+    name: 'gecko',
+    gitRepo: 'https://github.com/mozilla/gecko-dev/blob',
+    extension: 'webidl',
+    repoPathRegExp: /(dom\/.*)$/,
+    ignoreGlobs: [
+      '**/test/**',
+    ],
   });
 } else if (command === 'scrape-blink-linked') {
   runner = new BlinkLinkedRunner();
