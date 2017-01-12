@@ -73,7 +73,7 @@ const argv = yargs
     'scrape-blink-linked [options]',
     'Scrape WebIDL from web specs linked to by Blink IDL files',
     () => yargs
-      .default('blink-dir', `${env.HOME}/src/chromium/src/third_party/WebKit`)
+      .default('blink-dir', `${env.HOME}/src/chromium/src/third_party/WebKit/Source`)
       .describe('blink-dir', 'Chromium Blink source directory for IDL/URL scraping')
       .coerce('blink-dir', dir => path.resolve(dir))
 
@@ -96,7 +96,7 @@ const argv = yargs
         urls => urls.map(
           url => {
             url = url.match(/^[a-zA-Z0-9_-]+:\/\//) ? url : `https://${url}`;
-            if (!url.match(/^https?:\/\/[^/]+(\/[^?#, \n]*)?(\?[^#, \n]*)?$/))
+            if (!url.match(/^https?:\/\/[^/]+(\/[^?#, \r\n]*)?(\?[^#, \r\n]*)?$/))
               throw new Error(`Invalid anchorless URL: ${url}`);
             return url;
           }
@@ -164,7 +164,7 @@ if (command === 'parse-idl') {
       f: function(idlStr) {
         return idlStr
           // Drop C-preprocessor directives.
-          .replace(/\n[ \t]*#[^\n]*/mg, '')
+          .replace(/\r?\n[ \t]*#[^\r\n]*/mg, '')
           // TODO(markdittmer): This is a hack against WebKit's extended
           // attributes of the form "Foo=bar&baz", "Foo=bar|baz" or
           // "Foo  =  bar  &  baz".
@@ -181,6 +181,17 @@ if (command === 'parse-idl') {
     ignoreGlobs: [
       '**/test/**',
     ],
+    preprocessorMemo: new Memo({
+      f: function(idlStr) {
+        return idlStr
+          // Drop C-preprocessor directives.
+          .replace(/\r?\n[ \t]*#[^\r\n]*/mg, '')
+          // Drop interface fwd decl.
+          .replace(/[ \t]*interface[ \t]+[a-zA-Z0-9_]+;\r?\n/mg, '')
+          // Drop custom Gecko member syntax "jsonifier;".
+          .replace(/[ \t]*jsonifier;/mg, '');
+      },
+    }),
   });
 } else if (command === 'scrape-blink-linked') {
   runner = new BlinkLinkedRunner();
