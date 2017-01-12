@@ -17266,6 +17266,76 @@
     "url": "https://github.com/WebKit/webkit/blob/d0dd8e1f927a09b018fd270216cf9c7f144909ef/Source/WebCore/Modules/webdatabase/SQLResultSet.idl"
   },
   {
+    "name": "SQLValue",
+    "type": {
+      "type_": "UnionType",
+      "types": [
+        {
+          "name": "DOMString",
+          "params": [
+            "nullable"
+          ]
+        },
+        {
+          "name": "unrestricted double"
+        }
+      ]
+    },
+    "type_": "Typedef",
+    "url": "https://github.com/WebKit/webkit/blob/d0dd8e1f927a09b018fd270216cf9c7f144909ef/Source/WebCore/Modules/webdatabase/SQLResultSetRowList.idl"
+  },
+  {
+    "attrs": [
+      {
+        "name": "ImplementationLacksVTable",
+        "type_": "ExtendedAttribute"
+      }
+    ],
+    "members": [
+      {
+        "args": [
+          {
+            "name": "index",
+            "type": {
+              "name": "unsigned long"
+            }
+          }
+        ],
+        "attrs": [
+          {
+            "name": "MayThrowException",
+            "type_": "ExtendedAttribute"
+          }
+        ],
+        "from": "SQLResultSetRowList",
+        "name": "item",
+        "returnType": {
+          "name": "record",
+          "params": [
+            {
+              "name": "DOMString"
+            },
+            {
+              "name": "SQLValue"
+            }
+          ]
+        }
+      },
+      {
+        "from": "SQLResultSetRowList",
+        "isReadOnly": true,
+        "name": "length",
+        "type": {
+          "name": "unsigned long"
+        },
+        "type_": "Attribute"
+      }
+    ],
+    "name": "SQLResultSetRowList",
+    "type_": "Interface",
+    "url": "https://github.com/WebKit/webkit/blob/d0dd8e1f927a09b018fd270216cf9c7f144909ef/Source/WebCore/Modules/webdatabase/SQLResultSetRowList.idl"
+  },
+  {
     "args": [
       {
         "name": "transaction",
@@ -17344,9 +17414,7 @@
                 {
                   "name": "SQLValue"
                 },
-                [
-                  "nullable"
-                ]
+                "nullable"
               ]
             }
           },
@@ -17386,25 +17454,6 @@
     ],
     "name": "SQLTransaction",
     "type_": "Interface",
-    "url": "https://github.com/WebKit/webkit/blob/d0dd8e1f927a09b018fd270216cf9c7f144909ef/Source/WebCore/Modules/webdatabase/SQLTransaction.idl"
-  },
-  {
-    "name": "SQLValue",
-    "type": {
-      "type_": "UnionType",
-      "types": [
-        {
-          "name": "DOMString",
-          "params": [
-            "nullable"
-          ]
-        },
-        {
-          "name": "unrestricted double"
-        }
-      ]
-    },
-    "type_": "Typedef",
     "url": "https://github.com/WebKit/webkit/blob/d0dd8e1f927a09b018fd270216cf9c7f144909ef/Source/WebCore/Modules/webdatabase/SQLTransaction.idl"
   },
   {
@@ -18471,6 +18520,17 @@
     "url": "https://github.com/WebKit/webkit/blob/d0dd8e1f927a09b018fd270216cf9c7f144909ef/Source/WebCore/crypto/RsaOtherPrimesInfo.idl"
   },
   {
+    "name": "KeyFormat",
+    "type_": "Enum",
+    "url": "https://github.com/WebKit/webkit/blob/d0dd8e1f927a09b018fd270216cf9c7f144909ef/Source/WebCore/crypto/SubtleCrypto.idl",
+    "value": [
+      "raw",
+      "spki",
+      "pkcs8",
+      "jwk"
+    ]
+  },
+  {
     "attrs": [
       {
         "name": "Conditional",
@@ -19028,17 +19088,6 @@
     "name": "SubtleCrypto",
     "type_": "Interface",
     "url": "https://github.com/WebKit/webkit/blob/d0dd8e1f927a09b018fd270216cf9c7f144909ef/Source/WebCore/crypto/SubtleCrypto.idl"
-  },
-  {
-    "name": "KeyFormat",
-    "type_": "Enum",
-    "url": "https://github.com/WebKit/webkit/blob/d0dd8e1f927a09b018fd270216cf9c7f144909ef/Source/WebCore/crypto/SubtleCrypto.idl",
-    "value": [
-      "raw",
-      "spki",
-      "pkcs8",
-      "jwk"
-    ]
   },
   {
     "attrs": [

@@ -18010,6 +18010,72 @@
   },
   {
     "parses": [
+      {
+        "attrs": [
+          {
+            "name": "ImplementationLacksVTable",
+            "type_": "ExtendedAttribute"
+          }
+        ],
+        "members": [
+          {
+            "args": [
+              {
+                "name": "index",
+                "type": {
+                  "name": "unsigned long"
+                }
+              }
+            ],
+            "attrs": [
+              {
+                "name": "MayThrowException",
+                "type_": "ExtendedAttribute"
+              }
+            ],
+            "name": "item",
+            "returnType": {
+              "name": "record",
+              "params": [
+                {
+                  "name": "DOMString"
+                },
+                {
+                  "name": "SQLValue"
+                }
+              ]
+            }
+          },
+          {
+            "isReadOnly": true,
+            "name": "length",
+            "type": {
+              "name": "unsigned long"
+            },
+            "type_": "Attribute"
+          }
+        ],
+        "name": "SQLResultSetRowList",
+        "type_": "Interface"
+      },
+      {
+        "name": "SQLValue",
+        "type": {
+          "type_": "UnionType",
+          "types": [
+            {
+              "name": "DOMString",
+              "params": [
+                "nullable"
+              ]
+            },
+            {
+              "name": "unrestricted double"
+            }
+          ]
+        },
+        "type_": "Typedef"
+      }
     ],
     "url": "https://github.com/WebKit/webkit/blob/d0dd8e1f927a09b018fd270216cf9c7f144909ef/Source/WebCore/Modules/webdatabase/SQLResultSetRowList.idl"
   },
@@ -18102,9 +18168,7 @@
                     {
                       "name": "SQLValue"
                     },
-                    [
-                      "nullable"
-                    ]
+                    "nullable"
                   ]
                 }
               },
