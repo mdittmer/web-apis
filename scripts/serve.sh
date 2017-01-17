@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-WD=$(readlink -f $(dirname "$0"))
+WD=$(greadlink -f $(dirname "$0"))
 
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'

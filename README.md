@@ -126,7 +126,7 @@ export SELENIUM_HOST
 ```
 
 Install
-[sauce-connect](https://wiki.saucelabs.com/display/DOCS/Setting+Up+Sauce+Connect)
+[sauce-connect](https://wiki.saucelabs.com/display/DOCS/Basic+Sauce+Connect+Setup)
 for local URL proxying. Now run it; e.g.:
 
     $ sc

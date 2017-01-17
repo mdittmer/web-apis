@@ -2,7 +2,7 @@
 
 # Source this file to setup development environment
 
-WD=$(readlink -f $(dirname "$0"))
+WD=$(greadlink -f $(dirname "$0"))
 
 NODE_PATH=$WD/..
 NODEJS_BIN=$WD/../node_modules/.bin
