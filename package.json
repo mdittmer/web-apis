@@ -47,6 +47,7 @@
     "connect-timeout": "^1.7.0",
     "expect": "^1.20.2",
     "express": "^4.14.0",
+    "git-rev": "^0.2.1",
     "glob": "^7.1.1",
     "glob-stream": "^5.3.5",
     "id-js": "git://github.com/mdittmer/id-js.git",

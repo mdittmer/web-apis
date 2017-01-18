@@ -23,7 +23,7 @@ const fs = require('fs');
 const webdriver = require('selenium-webdriver');
 const hostModule = require(`../lib/remote/selenium/selenium-host.js`);
 const browsers = JSON.parse(
-  fs.readFileSync(`../data/selenium/${hostModule.name}_envs.json`)
+  fs.readFileSync(`${__dirname}/../${hostModule.name}_envs.json`)
 );
 const loggerModule = require('../lib/logger.es6.js');
 const throttle = require('../lib/throttle.es6.js');
