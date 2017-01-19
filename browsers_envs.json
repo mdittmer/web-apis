@@ -1,0 +1,58 @@
+[
+	{
+    "browserName" : "Chrome",
+    "min_browser_version" : "40.0",
+    "os" : [
+      {
+        "os" : "Windows",
+        "os_version" : "10"
+      },
+      {
+        "os" : "OS X",
+        "os_version" : "El Capitan"
+      }
+    ],
+    "resolution" : "1024x768"
+	},
+  {
+    "browserName" : "Firefox",
+    "min_browser_version" : "45.0",
+    "os" : [
+      {
+        "os" : "Windows",
+        "os_version" : "10"
+      },
+      {
+        "os" : "OS X",
+        "os_version" : "El Capitan"
+      }
+    ],
+    "resolution" : "1024x768"
+  },
+  {
+    "browserName" : "Safari",
+    "min_browser_version" : "9.1",
+    "os" : [
+      {
+        "os":"OS X",
+        "os_version":"El Capitan"
+      },
+      {
+        "os":"OS X",
+        "os_version":"Sierra"
+      }
+    ],
+    "resolution" : "1024x768"
+  },
+  {
+    "browserName" : "Edge",
+    "min_browser_version" : "13",
+    "os" : [
+      {
+        "os" : "Windows",
+        "os_version" : "10"
+      }
+    ],
+    "resolution" : "1024x768"
+  }
+]
