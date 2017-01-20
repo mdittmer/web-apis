@@ -23,23 +23,21 @@ const fs = require('fs');
 const webdriver = require('selenium-webdriver');
 const hostModule = require(`../lib/remote/selenium/selenium-host.js`);
 
-
 const loggerModule = require('../lib/logger.es6.js');
 const throttle = require('../lib/throttle.es6.js');
 const NameRewriter = require('object-graph-js').NameRewriter;
 const stringify = require('ya-stdlib-js').stringify;
 const getBrowsers = require('../lib/get_browsers.es6.js');
 
-
 const By = webdriver.By;
-getBrowsers.then( browsers => {
+getBrowsers.then(browsers => {
   throttle(5, browsers.map(browser => {
     return _ => {
       const logger = loggerModule.getLogger(browser);
       const timeout = 720000;
       const url = 'http://localhost:8000/';
       const config = Object.assign({
-        name: 'JS Object Graph Data Collection (window...)',
+        name: 'JS Object Graph Data Collection (window...)'
       }, browser);
 
       logger.log('Creating driver');
@@ -53,12 +51,12 @@ getBrowsers.then( browsers => {
           //   _ => { ... })
           logger.log('get', url);
           return driver.get(url).then(
-            // open the url provided in webdriver
+            // Open the url provided in webdriver.
             _ => {
               const id = 'collect';
               logger.log('Find element by id:', id);
               return driver.findElement(By.id(id));
-              // find the DOM element by id
+              // Find the button by id.
             }
           ).then(
             // Found the element, simulate to click button.

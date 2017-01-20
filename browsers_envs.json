@@ -54,5 +54,28 @@
       }
     ],
     "resolution" : "1024x768"
+  },
+  {
+    "browserName" : "IE",
+    "min_browser_version" : "10",
+    "os" : [
+      {
+        "os" : "Windows",
+        "os_version" : "10"
+      },
+      {
+        "os" : "Windows",
+        "os_version" : "8"
+      },
+      {
+        "os" : "Windows",
+        "os_version" : "8.1"
+      },
+      {
+        "os" : "Windows",
+        "os_version" : "7"
+      }
+    ],
+    "resolution" : "1024x768"
   }
 ]
