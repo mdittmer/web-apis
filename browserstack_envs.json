@@ -7,6 +7,20 @@
     "resolution" : "1024x768"
   },
   {
+    "browserName" : "Chrome",
+    "browser_version" : "40.0",
+    "os" : "Windows",
+    "os_version" : "10",
+    "resolution" : "1024x768"
+  },
+  {
+    "browserName" : "Chrome",
+    "browser_version" : "41.0",
+    "os" : "Windows",
+    "os_version" : "10",
+    "resolution" : "1024x768"
+  },
+  {
     "browserName" : "Firefox",
     "browser_version" : "49.0",
     "os" : "Windows",
