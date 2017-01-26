@@ -62,7 +62,8 @@
     "webidl2": "^2.0.11",
     "webidl2-js": "git://github.com/mdittmer/webidl2-js.git",
     "ya-stdlib-js": "git://github.com/mdittmer/ya-stdlib-js.git",
-    "yargs": "^6.4.0"
+    "yargs": "^6.4.0",
+    "foam2-experimental": "git://github.com/foam-framework/foam2-experimental.git"
   },
   "devDependencies": {
     "babel-core": "^6.14.0",
