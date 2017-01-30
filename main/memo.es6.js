@@ -16,6 +16,8 @@
  */
 'use strict';
 
+require('foam2-experimental');
+
 const path = require('path');
 const process = require('process');
 
