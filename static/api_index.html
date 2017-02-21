@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=500, initial-scale=1">
+    <title>Web API Catalog</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+
+  </head>
+  <body ng-app="webCatalog">
+    <nav>
+      <div class="nav-wrapper blue darken-3">
+        <a class="brand-logo">Web API Catalog</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#/">Catalog</a></li>
+          <li><a href="#!/history">History</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div ng-view></div>
+  </body>
+    <script language="javascript"  src="bundle/vendors.bundle.js"></script>
+
+    <script type="text/javascript" src="bundle/api_catalog_main.es6.bundle.js"></script>
+</html>

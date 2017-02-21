@@ -1,10 +1,19 @@
 const _ = require('lodash');
 const webpack = require('webpack');
 
+const FOAM_DIR = `${__dirname}/../node_modules/foam2`;
+
+const execSync = require('child_process').execSync;
+
+execSync(`node ${FOAM_DIR}/tools/build.js web`);
+
+
 const entries = [
   {inDir: 'og', name: 'main'},
   {inDir: 'og', name: 'analyze_og'},
-  {inDir: 'idl', name: 'analyze_idl.es6'}
+  {inDir: 'idl', name: 'analyze_idl.es6'},
+  {inDir: 'web_catalog', name: 'api_catalog_main.es6'},
+  {inDir: '../node_modules/foam2', name: 'foam-bin'}
 ];
 
 const isExternal = (module) => {
@@ -49,4 +58,8 @@ module.exports = {
       }
     }),
   ],
+  node: {
+    fs: "empty",
+    dns: "empty"
+  }
 };

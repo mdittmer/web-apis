@@ -1,76 +1,130 @@
-<html >
-  <head>
-    <meta name="viewport" content="width=500, initial-scale=1">
-    <title>Web API Catalog</title>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<style>
+  .colhead {
+    position: absolute;
+    left: auto;
+    top: auto;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+.axis text {
+  font: 10px sans-serif;
+}
 
-    <!-- Bootstrap requires jquery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+ </style>
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Dropdown Structure -->
+<ul id='browserList' class='dropdown-content'>
+  <li ng-repeat="browser in allBrowsers"  value="{{browser}}"><a ng-click=addToCompare(browser)>{{browser}}</a></li>
+</ul>
+<nav>
+  <div class="nav-wrapper blue darken-3">
+    <ul class="right">
+    <li>
+      <form>
+        <div class="input-field">
+          <input id="search" id="search" type="search" ng-model="searchKey" ng-keyup="$event.keyCode == 13 && search($event)">
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+    </li>
+      <!-- Dropdown Trigger -->
+      <li><a class='dropdown-button col' data-activates='browserList' ng-click="$('.dropdown-button').dropdown('open'); console.log('s');">Add Browser<i class="material-icons right">arrow_drop_down</i></a></li>
+      <!-- Pagination -->
+        <li class="waves-effect" ng-click="setPage(currentPage-1)" ng-class="{disabled: currentPage === 0}" ng-disabled="currentPage === 0"><i class="material-icons">chevron_left</i></li>
+        <li class="waves-effect"
+          ng-repeat="n in range(pageLength, currentPage)" ng-class="{active: n === currentPage}"> <a ng-click="setPage(n)">{{n + 1}}</a></li>
+        <li class="waves-effect" ng-click="setPage(currentPage+1)" ng-class="{disabled: (currentPage) === pageLength - 1}" ng-disabled="currentPage === pageLength - 1"><i class="material-icons">chevron_right</i></li>
+      <!-- Download CSV button -->
+      <li><a type="waves-effect waves-light btn col s3" role="group" ng-click="downloadCSV()"><span class="glyphicon glyphicon-download"></span>download CSV</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <style>
-    </style>
-  </head>
-  <body ng-app="webCatalog" ng-controller="mainController">
-    <div class="page-header">
-      <h1>Web API Catalog</h1>
-    </div>
-    <div class="alert alert-danger" ng-if="error">
-      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-      {{error}}
-    </div>
-    <div class="btn-toolbar" role="toolbar">
-      <div class="dropdown" role="group">
-        <button class="btn btn-default dropdown-toggle" type="button" id="addBrowser" data-toggle="dropdown">
-          Add Browser
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="browserList">
-          <li ng-repeat="browser in allBrowsers"  value="{{browser}}"><a ng-click=addToCompare(browser)>{{browser}}</a></li>
-        </ul>
-      </div>
-      <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default" ng-click="setPage(currentPage-1)" ng-class="{disabled: currentPage === 0}" ng-disabled="currentPage === 0">
-            « Prev
-        </button>
-        <button type="button" class="btn btn-default" ng-click="setPage(n)"
-          ng-repeat="n in range(pageLength, currentPage) "  ng-class="{active: n === currentPage}"> {{n + 1}}
-        </button>
-        <button type="button" class="btn btn-default" ng-click="setPage(currentPage+1)" ng-class="{disabled: (currentPage) === pageLength - 1}" ng-disabled="currentPage === pageLength - 1">
-          Next »
-        </button>
-      </div>
-      <button type="button" class="btn btn-default" role="group" ng-click="downloadCSV()"><span class="glyphicon glyphicon-download"></span>download CSV</button>
-    </div>
-    <div class="input-group col-xs-6 col-md-3">
-      <input type="text" class="form-control" ng-model="searchKey">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button" ng-click="search()"><span class="glyphicon glyphicon-search"></span>Search</button>
-      </span>
-    </div>
-    <table class="table">
+<ul id="tabs" class="tabs ">
+  <li class="tab col s3"><a href="#interfaceTable" class="blue-text text-darken-2">Interface</a></li>
+  <li class="tab col s3"><a href="#analysisResult" class="blue-text text-darken-2">Analysis</a></li>
+  <li class="tab col s3" ng-repeat="view in views track by $index"><a href="{{'#view'+$index}}">{{'#view'+$index}}</a></li>
+</ul>
+<div id="interfaceTable" class="col s12">
+  <div class="container" style="overflow: scroll;">
+    <table class="bordered highlight" >
       <tr>
         <th>Interface</th>
-        <th ng-repeat='browser in apiCatalog._header'>{{browser}}<button ng-click= type="button" class="btn btn-default btn-sm"><span ng-click="removeBrowser(browser)" class="glyphicon glyphicon-remove"></span></button></th>
+        <th ng-repeat='browser in apiCatalogMap._header'> <div class="chip">{{browser}}<span ng-click="removeBrowser(browser)"> <i class="close material-icons">close</i></span></div></th>
       </tr>
-      <tr ng-repeat-start="interface in getInterfaceRange()" ng-if="interface!='_header'" ng-click="showCatalog(interface)">
-        <td ng-style="{'background': showRows[interface]?'#c6c6c6':'ffffff', cursor:'pointer'}">{{interface}}</td>
+      <tr ng-repeat-start="interface in getInterfaceRange()" ng-if="interface!=='_header'" ng-click="showCatalog(interface)">
+        <td class="waves-effect" ng-class="{'grey lighten-1': showRows[interface]}" ng-style="{cursor:'pointer', width:'100%'}">{{interface}}</td>
       </tr>
-      <tr ng-repeat-end ng-repeat="(api, results) in apiCatalog[interface]" ng-if="interface!='_header' && showRows[interface]">
-        <td ng-style="{'background':'#ededed'}">{{api}}</td>
-        <td ng-repeat="result in results track by $index" ng-style="{'background': result?'#c9fcb5':'#faf2ea'}">{{result}}</td>
+      <tr ng-repeat-end ng-repeat="(api, results) in apiCatalogMap[interface]" ng-if="interface!=='_header' && showRows[interface]">
+        <td class='colhead'>{{api}}</td>
+        <td ng-repeat="result in results track by $index" ng-class="{'red accent-1
+  ': !result, 'green accent-1': result}">{{result}}</td>
       </tr>
     </table>
-  </body>
-    <script language="javascript"  src="bundle/vendors.bundle.js"></script>
+  </div>
+</div>
 
-    <script type="text/javascript" src="bundle/api_catalog_main.es6.bundle.js"></script>
-</html>
+<!-- Analytics tab. -->
+<div id="analysisResult" class="col s12 ">
+  <table ng-if="analyticsResult" class="bordered" >
+    <tr>
+      <th></th>
+      <th ng-repeat='browser in apiCatalogMap._header' colspan="2">{{browser}}</th>
+    </tr>
+    <tr>
+      <th>#overlap</th>
+      <th ng-repeat-start='browser in apiCatalogMap._header'>true</th>
+      <th ng-repeat-end>false</th>
+    </tr>
+    <tr ng-repeat='row in analyticsResult track by $index' ng-if="$index>0">
+      <td>{{$index}}</td>
+      <td ng-repeat-start='browser in apiCatalogMap._header track by $index'>
+        {{analyticsResult[$parent.$index][$index][0]}}
+        ({{Math.floor(analyticsResult[$parent.$index][$index][0]/ totalAPI * 10000)/100}}%)
+        <i class="tiny material-icons" ng-style="{cursor:'pointer'}" ng-click='newView($parent.$index, $index, true)'>open_in_new</i>
+      </td>
+      <td ng-repeat-end class="grey lighten-3">
+        {{analyticsResult[$parent.$index][$index][1]}}
+        ({{Math.floor(analyticsResult[$parent.$index][$index][1]/ totalAPI * 10000)/100}}%)
+        <i class="tiny material-icons" ng-style="{cursor:'pointer'}" ng-click='newView($parent.$index, $index, false)'>open_in_new</i>
+      </td>
+    </tr>
+  </table>
+
+
+
+  <!--####### D3 TEST###### -->
+  <svg class="chart" width="720" height="360">
+  </svg>
+
+  <!-- #################### -->
+
+
+
+</div>
+
+<!-- Filtered view. -->
+<div ng-repeat="view in views track by $index" id="{{'view'+$index}}" ng-controller="filteredViewController">
+  <table class="bordered highlight" >
+    <tr>
+      <th>Interface</th>
+      <th ng-repeat='browser in view._header'> <div class="chip">{{browser}}</div></th>
+    </tr>
+    <tr ng-repeat-start="interface in Object.keys(view)" ng-if="interface!=='_header'" ng-click="showCatalog(interface)">
+      <td class="waves-effect" ng-class="{'grey lighten-1': showRows[interface]}" ng-style="{cursor:'pointer', width:'100%'}">{{interface}}</td>
+    </tr>
+    <tr ng-repeat-end ng-repeat="(api, results) in view[interface]" ng-if="interface!=='_header' && showRows[interface]">
+      <td class='colhead'>{{api}}</td>
+      <td ng-repeat="result in results track by $index" ng-class="{'red accent-1
+': !result, 'green accent-1': result}">{{result}}</td>
+    </tr>
+  </table>
+</div>
