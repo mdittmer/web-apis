@@ -23,6 +23,7 @@ var glob = require('glob');
 var jsonStableStringify = require('json-stable-stringify');
 var timeout = require('connect-timeout');
 var yargs = require('yargs');
+var getApiCatalog = require('../lib/web_catalog/api_catalog.es6.js');
 
 var argv = yargs
     .default('port', 8000)
@@ -53,6 +54,7 @@ app.use(express.static('static'));
 var DATA_DIR = './data';
 var OG_DATA_DIR = './data/og';
 var IDL_DATA_DIR = './data/idl';
+
 var HTML_HEAD = '<html><head>' +
       '<meta name="viewport" content="width=500, initial-scale=1">' +
       '</head><body>';
@@ -261,6 +263,15 @@ app.get(
     });
   }
 );
+
+app.get('/web-api-catalog/:file', function(req, res) {
+  var fileName = 'window_' + req.params.file.replace(/ /g, '_') + '.json';
+  sendJSON(getApiCatalog(fileName), res);
+});
+
+app.get('/browser-version-history', function(req, res) {
+  sendJSON(fs.readFileSync(`${__dirname}/../${DATA_DIR}/browser_histroy.json`), res);
+});
 
 app.listen(argv.port, function() {
   console.log('Listening on port ' + argv.port.toString() + '...');

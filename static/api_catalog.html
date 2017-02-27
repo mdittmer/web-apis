@@ -36,7 +36,7 @@
       </form>
     </li>
       <!-- Dropdown Trigger -->
-      <li><a class='dropdown-button col' data-activates='browserList' ng-click="$('.dropdown-button').dropdown('open'); console.log('s');">Add Browser<i class="material-icons right">arrow_drop_down</i></a></li>
+      <li><a class='dropdown-button col' data-activates='browserList' ng-click="$('.dropdown-button').dropdown('open');">Add Browser<i class="material-icons right">arrow_drop_down</i></a></li>
       <!-- Pagination -->
         <li class="waves-effect" ng-click="setPage(currentPage-1)" ng-class="{disabled: currentPage === 0}" ng-disabled="currentPage === 0"><i class="material-icons">chevron_left</i></li>
         <li class="waves-effect"
@@ -48,22 +48,24 @@
   </div>
 </nav>
 
-<ul id="tabs" class="tabs ">
-  <li class="tab col s3"><a href="#interfaceTable" class="blue-text text-darken-2">Interface</a></li>
-  <li class="tab col s3"><a href="#analysisResult" class="blue-text text-darken-2">Analysis</a></li>
-  <li class="tab col s3" ng-repeat="view in views track by $index"><a href="{{'#view'+$index}}">{{'#view'+$index}}</a></li>
+<ul id="tabs" class="tabs" ng-init="showTab={id:0}">
+  <li class="tab col s3"><a ng-click="showTab.id=0" class="blue-text text-darken-2">Interface</a></li>
+  <li class="tab col s3"><a ng-click="showTab.id=1" class="blue-text text-darken-2">Analysis</a></li>
+  <li class="tab col s3" ng-repeat="view in views track by $index"><a ng-click="showTab.id=2+$index">{{'#view'+$index}}</a></li>
 </ul>
-<div id="interfaceTable" class="col s12">
+
+<!-- Interface/API Tab -->
+<div id="interfaceTable" class="col s12" ng-show="showTab.id===0">
   <div class="container" style="overflow: scroll;">
     <table class="bordered highlight" >
       <tr>
         <th>Interface</th>
-        <th ng-repeat='browser in apiCatalogMap._header'> <div class="chip">{{browser}}<span ng-click="removeBrowser(browser)"> <i class="close material-icons">close</i></span></div></th>
+        <th ng-repeat='browser in searchResult._header'> <div class="chip">{{browser}}<i class="close material-icons" ng-click="removeBrowser(browser)">close</i></div></th>
       </tr>
       <tr ng-repeat-start="interface in getInterfaceRange()" ng-if="interface!=='_header'" ng-click="showCatalog(interface)">
         <td class="waves-effect" ng-class="{'grey lighten-1': showRows[interface]}" ng-style="{cursor:'pointer', width:'100%'}">{{interface}}</td>
       </tr>
-      <tr ng-repeat-end ng-repeat="(api, results) in apiCatalogMap[interface]" ng-if="interface!=='_header' && showRows[interface]">
+      <tr ng-repeat-end ng-repeat="(api, results) in searchResult[interface]" ng-if="interface!=='_header' && showRows[interface]">
         <td class='colhead'>{{api}}</td>
         <td ng-repeat="result in results track by $index" ng-class="{'red accent-1
   ': !result, 'green accent-1': result}">{{result}}</td>
@@ -73,27 +75,27 @@
 </div>
 
 <!-- Analytics tab. -->
-<div id="analysisResult" class="col s12 ">
+<div id="analysisResult" class="col s12" ng-show="showTab.id===1">
   <table ng-if="analyticsResult" class="bordered" >
     <tr>
       <th></th>
-      <th ng-repeat='browser in apiCatalogMap._header' colspan="2">{{browser}}</th>
+      <th ng-repeat='browser in analyticsResult.header' colspan="2">{{browser}}</th>
     </tr>
     <tr>
       <th>#overlap</th>
-      <th ng-repeat-start='browser in apiCatalogMap._header'>true</th>
+      <th ng-repeat-start='browser in analyticsResult.header'>true</th>
       <th ng-repeat-end>false</th>
     </tr>
-    <tr ng-repeat='row in analyticsResult track by $index' ng-if="$index>0">
+    <tr ng-repeat='row in analyticsResult.table track by $index' ng-if="$index>0">
       <td>{{$index}}</td>
-      <td ng-repeat-start='browser in apiCatalogMap._header track by $index'>
-        {{analyticsResult[$parent.$index][$index][0]}}
-        ({{Math.floor(analyticsResult[$parent.$index][$index][0]/ totalAPI * 10000)/100}}%)
+      <td ng-repeat-start='browser in analyticsResult.header track by $index'>
+        {{analyticsResult.table[$parent.$index][$index][0]}}
+        ({{Math.floor(analyticsResult.table[$parent.$index][$index][0]/ totalAPI * 10000)/100}}%)
         <i class="tiny material-icons" ng-style="{cursor:'pointer'}" ng-click='newView($parent.$index, $index, true)'>open_in_new</i>
       </td>
       <td ng-repeat-end class="grey lighten-3">
-        {{analyticsResult[$parent.$index][$index][1]}}
-        ({{Math.floor(analyticsResult[$parent.$index][$index][1]/ totalAPI * 10000)/100}}%)
+        {{analyticsResult.table[$parent.$index][$index][1]}}
+        ({{Math.floor(analyticsResult.table[$parent.$index][$index][1]/ totalAPI * 10000)/100}}%)
         <i class="tiny material-icons" ng-style="{cursor:'pointer'}" ng-click='newView($parent.$index, $index, false)'>open_in_new</i>
       </td>
     </tr>
@@ -104,7 +106,6 @@
   <!--####### D3 TEST###### -->
   <svg class="chart" width="720" height="360">
   </svg>
-
   <!-- #################### -->
 
 
@@ -112,8 +113,8 @@
 </div>
 
 <!-- Filtered view. -->
-<div ng-repeat="view in views track by $index" id="{{'view'+$index}}" ng-controller="filteredViewController">
-  <table class="bordered highlight" >
+<div ng-repeat="view in views track by $index" ng-show="showTab.id===2+$index">
+  <table class="bordered highlight" ng-controller="filteredViewController">
     <tr>
       <th>Interface</th>
       <th ng-repeat='browser in view._header'> <div class="chip">{{browser}}</div></th>

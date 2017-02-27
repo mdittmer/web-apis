@@ -1,3 +1,31 @@
-  <div class="progress" ng-if="progress!=='100%'">
-      <div class="determinate" ng-style="{width: progress}"></div>
+<style type="text/css">
+	div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: auto;
+    height: auto;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;    border-radius: 8px;
+    pointer-events: none;
+	}
+</style>
+
+<!-- Progress bar. -->
+<div class="progress" ng-if="progress!=='100%'">
+  <div class="indeterminate" ng-style="{width: progress}"></div>
+</div>
+
+<ul id="tabs" class="tabs" ng-init="showTab={id:0}">
+  <li class="tab col s3"><a ng-click="showTab.id=0" class="blue-text text-darken-2">API Diffs</a></li>
+  <li class="tab col s3"><a ng-click="showTab.id=2" class="blue-text text-darken-2">Proprietary API</a></li>
+  <li class="tab col s3" ng-repeat="view in views track by $index"><a href="{{'#view'+$index}}">{{'#view'+$index}}</a></li>
+</ul>
+<div class="container">
+  <div id="apiDiffHistory" ng-show="showTab.id===0">
+    <div class="APIDiffCharts"></div>
   </div>
+
+  <div id="proprietaryAPIHistory" ng-show="showTab.id===0"></div>
+</div>
