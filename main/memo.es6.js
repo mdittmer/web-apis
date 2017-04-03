@@ -146,6 +146,7 @@ if (command === 'parse-idl') {
     gitRepo: 'https://chromium.googlesource.com/chromium/src.git/+',
     repoPathRegExp: /(third_party\/WebKit.*)$/,
     ignoreGlobs: [
+      '**/Source/core/mojo/**',
       '**/Source/core/testing/**',
       '**/Source/modules/**/testing/**',
       '**/bindings/tests/**',
