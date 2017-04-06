@@ -150,6 +150,9 @@ if (command === 'parse-idl') {
       '**/Source/core/testing/**',
       '**/Source/modules/**/testing/**',
       '**/bindings/tests/**',
+      // TODO(markdittmer): Figure out a cleaner way to exclude individual
+      // non-standard files.
+      '**/UnderlyingSourceBase.idl',
     ],
   });
 } else if (command === 'parse-webkit') {
