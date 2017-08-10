@@ -1,81 +1,101 @@
 [
-	{
-    "browserName" : "Chrome",
-    "min_browser_version" : "40.0",
-    "os" : [
+  {
+    "browserName": "Chrome",
+    "min_browser_version": "40.0",
+    "os": [
       {
-        "os" : "Windows",
-        "os_version" : "10"
+        "os": "Windows",
+        "os_version": "10"
       },
       {
-        "os" : "OS X",
-        "os_version" : "El Capitan"
+        "os": "OS X",
+        "os_version": "El Capitan"
       }
     ],
-    "resolution" : "1024x768"
+    "resolution": "1024x768"
 	},
   {
-    "browserName" : "Firefox",
-    "min_browser_version" : "45.0",
-    "os" : [
+    "browserName": "Firefox",
+    "min_browser_version": "45.0",
+    "os": [
       {
-        "os" : "Windows",
-        "os_version" : "10"
+        "os": "Windows",
+        "os_version": "10"
       },
       {
-        "os" : "OS X",
-        "os_version" : "El Capitan"
+        "os": "OS X",
+        "os_version": "El Capitan"
       }
     ],
-    "resolution" : "1024x768"
+    "resolution": "1024x768"
   },
   {
-    "browserName" : "Safari",
-    "min_browser_version" : "9.1",
-    "os" : [
+    "browserName": "Safari",
+    "min_browser_version": "5.1",
+    "os": [
       {
-        "os":"OS X",
-        "os_version":"El Capitan"
+        "os": "OS X",
+        "os_version": "Snow Leopard"
       },
       {
-        "os":"OS X",
-        "os_version":"Sierra"
+        "os": "OS X",
+        "os_version": "Lion"
+      },
+      {
+        "os": "OS X",
+        "os_version": "Mountain Lion"
+      },
+      {
+        "os": "OS X",
+        "os_version": "Mavericks"
+      },
+      {
+        "os": "OS X",
+        "os_version": "Yosemite"
+      },
+      {
+        "os": "OS X",
+        "os_version": "El Capitan"
+      },
+      {
+        "os": "OS X",
+        "os_version": "Sierra"
       }
     ],
-    "resolution" : "1024x768"
+    "resolution": "1024x768"
   },
   {
-    "browserName" : "Edge",
-    "min_browser_version" : "13",
-    "os" : [
+    "browserName": "Edge",
+    "min_browser_version": "13",
+    "os": [
       {
-        "os" : "Windows",
-        "os_version" : "10"
+        "os": "Windows",
+        "os_version": "10"
       }
     ],
-    "resolution" : "1024x768"
+    "resolution": "1024x768"
   },
   {
-    "browserName" : "IE",
-    "min_browser_version" : "10",
-    "os" : [
+    "browserName": "IE",
+    "min_browser_version": "10",
+    "os": [
       {
-        "os" : "Windows",
-        "os_version" : "10"
+        "os": "Windows",
+        "os_version": "10"
       },
       {
-        "os" : "Windows",
-        "os_version" : "8"
+        "os": "Windows",
+        "os_version": "8"
       },
       {
-        "os" : "Windows",
-        "os_version" : "8.1"
+        "os": "Windows",
+        "os_version": "8.1"
       },
       {
-        "os" : "Windows",
-        "os_version" : "7"
+        "os": "Windows",
+        "os_version": "7"
       }
     ],
-    "resolution" : "1024x768"
+    "resolution": "1024x768"
   }
 ]
