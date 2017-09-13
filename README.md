@@ -156,11 +156,17 @@ Skip to *Gathering the data* below.
 
 ##### Gathering the data
 
-Make sure your development environment is up-to-date, then run the data
-gathering script:
+If you wish to gather data from browsers listed in `[SELENIUM_HOST]_envs.json`
+then run:
 
     $ . ./scripts/dev_env.sh
-    $ node selenium_og.js
+    $ node ./main/selenium_og.js
+
+If you, *instead*, wish to gather broad historical data from browsers described
+by `browsers_envs.json` then run:
+
+    $ . ./scripts/dev_env.sh
+    $ node node --max_old_space_size=4096 ./main/selenium_og.es6.js --historical
 
 *NOTE*: You can override `SELENIUM_HOST` with one of `browserstack`, `sauce`,
  or `selenium_custom` by passing it to `selenium_og.js`. E.g., run `node
