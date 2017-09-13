@@ -166,7 +166,7 @@ If you, *instead*, wish to gather broad historical data from browsers described
 by `browsers_envs.json` then run:
 
     $ . ./scripts/dev_env.sh
-    $ node node --max_old_space_size=4096 ./main/selenium_og.es6.js --historical
+    $ node --max_old_space_size=4096 ./main/selenium_og.es6.js --historical
 
 *NOTE*: You can override `SELENIUM_HOST` with one of `browserstack`, `sauce`,
  or `selenium_custom` by passing it to `selenium_og.js`. E.g., run `node
