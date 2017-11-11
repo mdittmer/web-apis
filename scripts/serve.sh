@@ -1,22 +1,27 @@
 #!/bin/zsh
 
-WD=$(readlink -f $(dirname "$0"))
+export SH_DIR=$(readlink -f $(dirname "$0"))
 
+GRAY='\033[0;47m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m'
 
-function win() {
-    printf "\n${GREEN}$1${NC}\n"
+function verbose() {
+    printf "\n${GREEN}[  $(date)  INFO  ]  $1${NC}\n"
+}
+
+function info() {
+    printf "\n${GREEN}[  $(date)  INFO  ]  $1${NC}\n"
 }
 
 function warn() {
-    printf "\n${YELLOW}$1${NC}\n"
+    printf "\n${YELLOW}[  $(date)  WARN  ]  $1${NC}\n"
 }
 
 function error() {
-    printf "\n${RED}$1${NC}\n"
+    printf "\n${RED}[  $(date)  ERRR  ]  $1${NC}\n"
 }
 
 WP_PID=""
@@ -25,24 +30,24 @@ WS_PID=""
 function stop() {
     warn "STOPPING WEBPACK (PID=${WP_PID})"
     if [ "${WP_PID}" != "" ]; then kill ${WP_PID}; fi
-    win "WEBPACK STOPPED"
+    info "WEBPACK STOPPED"
     warn "STOPPING WEB SERVER (PID=${WS_PID})"
     if [ "${WS_PID}" != "" ]; then kill ${WP_PID}; fi
-    win "WEB SERVER STOPPED"
+    info "WEB SERVER STOPPED"
     exit 0
 }
 
 trap stop INT
 
 warn "STARTING WEBPACK"
-webpack --watch --progress --config $WD/../config/webpack.dev.config.es6.js &
+webpack --watch --progress --config $SH_DIR/../config/webpack.dev.config.es6.js &
 WP_PID=$!
-win "WEBPACK STARTED (PID=${WP_PID})"
+info "WEBPACK STARTED (PID=${WP_PID})"
 
 warn "STARTING WEB SERVER"
-node $WD/../main/serve.js &
+node $SH_DIR/../main/serve.js &
 WS_PID=$!
-win "WEB SERVER STARTED (PID=${WS_PID})"
+info "WEB SERVER STARTED (PID=${WS_PID})"
 
 while [ true ]; do
     sleep 1000
