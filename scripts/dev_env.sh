@@ -1,8 +1,10 @@
-#!/bin/zsh
-
 # Source this file to setup development environment
 
-WD=$(readlink -f $(dirname "$0"))
+if [ "$(basename $SHELL)" == "bash" ]; then
+  WD=$(readlink -f $(dirname "$BASH_SOURCE"))
+else
+  WD=$(readlink -f $(dirname "$0"))
+fi
 
 NODE_PATH=$WD/..
 NODEJS_BIN=$WD/../node_modules/.bin
