@@ -102,8 +102,11 @@ Environment.prototype.toArray = function() {
 };
 
 Environment.prototype.getJSONFileName = function() {
-  return 'window_' + this.browser.name + '_' + this.browser.version +
-    '_' + this.platform.name + '_' + this.platform.version + '.json';
+  return 'window_' +
+      this.browser.name.replace(/[^0-9A-Za-z.]/g, '-') + '_' +
+      this.browser.version.replace(/[^0-9A-Za-z.]/g, '-') + '_' +
+      this.platform.name.replace(/[^0-9A-Za-z.]/g, '-') + '_' +
+      this.platform.version.replace(/[^0-9A-Za-z.]/g, '-') + '.json';
 };
 
 function declFromJSON(ctor) {
@@ -171,8 +174,16 @@ app.post('/save', timeout('30s'), function(req, res) {
     return;
   }
 
+  var data;
+  try {
+    data = JSON.parse(req.body.data);
+  } catch (err) {
+    sendHTML('Error: ' + err.toString(), res);
+    return;
+  }
+
   var ua = req.headers['user-agent'];
-  var env = new Environment(nameRewriter.userAgentAsPlatformInfo(ua));
+  var env = new Environment(data.environment);
   var jsonFileName = env.getJSONFileName();
   var path = OG_DATA_DIR + '/' + jsonFileName;
 
@@ -181,7 +192,7 @@ app.post('/save', timeout('30s'), function(req, res) {
       console.error(err);
       sendHTML('Error: ' + err.toString(), res);
     } else if (err) {
-      var dataStr = stringify(JSON.parse(req.body.data));
+      var dataStr = stringify(data);
       fs.writeFileSync(path, dataStr);
       sendHTML('Saved data (' + dataStr.length + ' characters of JSON)',
                res);
