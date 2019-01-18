@@ -160,7 +160,7 @@ If you wish to gather data from browsers listed in `[SELENIUM_HOST]_envs.json`
 then run:
 
     $ . ./scripts/dev_env.sh
-    $ node ./main/selenium_og.js
+    $ node ./main/selenium_og.es6.js
 
 If you, *instead*, wish to gather broad historical data from browsers described
 by `browsers_envs.json` then run:
@@ -169,8 +169,8 @@ by `browsers_envs.json` then run:
     $ node --max_old_space_size=4096 ./main/selenium_og.es6.js --historical
 
 *NOTE*: You can override `SELENIUM_HOST` with one of `browserstack`, `sauce`,
- or `selenium_custom` by passing it to `selenium_og.js`. E.g., run `node
- selenium_og.js browserstack`.
+ or `selenium_custom` by passing it to `selenium_og.es6.js`. E.g., run `node
+ selenium_og.es6.js browserstack`.
 
 ## Web IDL
 
