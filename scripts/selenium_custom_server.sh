@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # Required local configuration:
 # SELENIUM_JAR=/path/to/selenium.jar

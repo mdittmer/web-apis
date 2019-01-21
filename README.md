@@ -82,7 +82,7 @@ interface is also implemented [SauceLabs](https://saucelabs.com), and custom
 
 Add the following to `scripts/dev_env.local.sh` in your local checkout:
 
-```zsh
+```bash
 BROWSERSTACK_USERNAME="your_browserstack_username"
 BROWSERSTACK_ACCESS_KEY="your_browserstack_access_key"
 BROWSERSTACK_VIDEO="true" # "false" or unset saves time by recording no video
@@ -111,7 +111,7 @@ Skip to *Gathering the data* below.
 
 Add the following to `scripts/dev_env.local.sh` in your local checkout:
 
-```zsh
+```bash
 SAUCE_USERNAME="your_sauce_username"
 SAUCE_ACCESS_KEY="your_sauce_access_key"
 SAUCE_PATH="/wd/hub"
@@ -140,7 +140,7 @@ Skip to *Gathering the data* below.
 
 Add the following to `scripts/dev_env.local.sh` in your local checkout:
 
-```zsh
+```bash
 SELENIUM_HOST="selenium_custom"
 
 export SELENIUM_HOST

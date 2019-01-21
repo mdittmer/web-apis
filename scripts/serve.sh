@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 export SH_DIR=$(readlink -f $(dirname "$0"))
 

@@ -17,7 +17,7 @@
     "postinstall": "npm run deps",
     "rebuild": "npm run deps && webpack --config ./config/webpack.dev.config.es6.js",
     "repl": "node",
-    "serve": "zsh scripts/serve.sh",
+    "serve": "bash scripts/serve.sh",
     "test": "JASMINE_CONFIG_PATH=./jasmine_all.json jasmine",
     "unit": "JASMINE_CONFIG_PATH=./jasmine_unit.json jasmine"
   },
