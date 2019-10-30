@@ -72,7 +72,7 @@
     "babel-preset-es2015": "^6.14.0",
     "connect-timeout": "^1.7.0",
     "doctoc": "^1.3.1",
-    "eslint": "^3.5.0",
+    "eslint": "^4.19.1",
     "eslint-config-google": "^0.6.0",
     "eslint-loader": "^1.6.1",
     "hyperquest": "^2.1.3",
