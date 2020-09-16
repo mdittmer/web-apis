@@ -54,7 +54,7 @@
     "json-prune": "^1.0.1",
     "json-stable-stringify": "^1.0.1",
     "node-glob": "^1.2.0",
-    "object-graph-js": "git://github.com/mdittmer/object-graph-js.git",
+    "object-graph-js": "git://github.com/foolip/object-graph-js.git#edgium",
     "request": "^2.87.0",
     "request-promise": "^4.1.1",
     "request-promise-native": "^1.0.3",
